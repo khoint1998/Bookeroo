@@ -12,31 +12,29 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Header />
-            {
-              //Public Routes
-            }
-           
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-
-            {
-              //Private Routes
-            }
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/addPerson" component={AddPerson} />
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Header />
+          {
+            //Public Routes
+          }
           
-          </div>
-        </Router>
-      </Provider>
-    );
-  }
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+
+          {
+            //Private Routes
+          }
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/addPerson" component={AddPerson} />
+        
+        </div>
+      </Router>
+    </Provider>
+  );
 }
 export default App;

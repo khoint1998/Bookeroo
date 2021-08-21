@@ -27,7 +27,7 @@ import static com.rmit.sept.bk_loginservices.security.SecurityConstant.TOKEN_PRE
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/bookeroo/users")
 public class UserController {
 
     @Autowired
@@ -77,7 +77,7 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
 
-        return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
+        return ResponseEntity.ok(new JWTLoginSucessReponse(authentication, jwt));
     }
 
 }

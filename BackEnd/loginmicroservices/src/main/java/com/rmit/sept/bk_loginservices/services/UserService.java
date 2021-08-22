@@ -37,7 +37,7 @@ public class UserService {
             newUser.setConfirmPassword("");
             return userRepository.save(newUser);
 
-        }catch (Exception e){
+        } catch (Exception e){
             throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
         }
 

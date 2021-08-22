@@ -1,24 +1,18 @@
-import React, { Component } from "react";
-import { createNewUser } from "../../../actions/securityActions";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import classnames from "classnames";
+import React, { useState } from "react";
+// import { createNewUser } from "../../../actions/securityActions";
 import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Register.css';
+import axios from "axios";
 
-const Register = () => {
+const Register = (props) => {
 
-  // Error Checking
-  // const[error, setError] = null;
-  // componentWillReceiveProps(nextProps){
-  //     if (nextProps.errors){
-  //         this.setState ({
-  //             errors: nextProps.errors
-  //         });
-
-  //     }
-  // }
+  const creatUser = async (newUser) => {
+    let req = await axios.post('http://localhost:8080/bookeroo/users/register', newUser)
+        .catch(error => error.response.data);
+        console.log(req.data);
+    return req.data;
+  }
 
   const onSubmit = (values) => {
     const newUser = {
@@ -29,12 +23,7 @@ const Register = () => {
       confirmPassword: values.confirmPassword,
       role: values.role
     };
-    alert("sub " + JSON.stringify(newUser, null, 2));
-    this.props.createNewUser(newUser, this.props.history);
-  }
-
-  const onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    creatUser(newUser, props.history);
   }
 
   return (
@@ -49,8 +38,6 @@ const Register = () => {
     }}
     onSubmit = {
       async (values) => {
-        // await new Promise((r) => setTimeout(r, 500));
-        
         onSubmit(values);
       }
     }

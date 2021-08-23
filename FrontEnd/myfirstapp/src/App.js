@@ -11,7 +11,7 @@ import store from "./store";
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
-import about_us from "./components/About_us/about_us";
+import AboutUs from "./components/AboutUs/AboutUs";
 
 const App = () => {
   return (
@@ -26,7 +26,7 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/about" component={about_us} />
+          <Route exact path="/about" component={AboutUs} />
           {
             //Private Routes
           }

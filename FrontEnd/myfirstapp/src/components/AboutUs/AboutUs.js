@@ -1,4 +1,4 @@
-import '../About_us/about_us.css'
+import './about_us.css'
 import book_1 from "../../pics/book-1.jpg";
 import book_2 from "../../pics/book-2.jpg";
 import book_3 from "../../pics/book-3.jpg";
@@ -10,7 +10,7 @@ import green_line from "../../pics/green_line.png";
 
 import React from 'react';
 
-function about_us() {
+function AboutUs() {
     return (
         <div className="page">
             <div className="row">
@@ -105,4 +105,4 @@ function about_us() {
     )
 }
 
-export default about_us;
+export default AboutUs;

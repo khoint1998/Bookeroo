@@ -1,36 +1,51 @@
 import React from "react";
+import { Formik, Field, Form } from 'formik';
+import Button from '@material-ui/core/Button';
+import './Login.css';
+import axios from "axios";
 
 const Login = () => {
-  return (
-    <div className="login">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 m-auto">
-            <h1 className="display-4 text-center">Log In</h1>
-            <form action="dashboard.html">
-              <div className="form-group">
-                <input
-                  type="email"
-                  className="form-control form-control-lg"
-                  placeholder="Email Address"
-                  name="email"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  className="form-control form-control-lg"
-                  placeholder="Password"
-                  name="password"
-                />
-              </div>
-              <input type="submit" className="btn btn-info btn-block mt-4" />
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+
+  const loginAsUser = async (user) => {
+    let req = await axios.post('http://localhost:8080/bookeroo/users/login', user)
+        .catch(error => error.response.data);
+        console.log(req.data);
+    return req.data;
+  }
+
+  const onSubmit = (values) => {
+    const newUser = {
+      username: values.username,
+      password: values.password,
+    };
+    loginAsUser(newUser);
+  }
+
+  return(
+    <Formik
+      initialValues={{
+        username: '',
+        password: '',
+      }}
+      onSubmit = {
+        async (values) => {
+          onSubmit(values);
+        }
+      }
+    >
+      <Form>
+        <label>User Name</label>
+        <Field id="username" name="username" placeholder="Jane" />
+
+        <label>Password:</label>
+        <Field id="password" name="password" />
+        
+        <Button className="loginBtn" type="submit">Login</Button>
+
+      </Form>
+    </Formik>
   );
+               
 }
 
 export default Login;

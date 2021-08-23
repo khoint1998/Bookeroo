@@ -21,11 +21,12 @@ public class UserService {
 
     public User saveUser (User newUser){
 
-      /*  newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        //Username has to be unique (exception)
-        // Make sure that password and confirmPassword match
-        // We don't persist or show the confirmPassword
-        return userRepository.save(newUser);
+        /*
+         *newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+         *Username has to be unique (exception)
+         *Make sure that password and confirmPassword match
+         *We don't persist or show the confirmPassword
+         *Return userRepository.save(newUser);
        */
         try{
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
@@ -36,7 +37,7 @@ public class UserService {
             newUser.setConfirmPassword("");
             return userRepository.save(newUser);
 
-        }catch (Exception e){
+        } catch (Exception e){
             throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
         }
 

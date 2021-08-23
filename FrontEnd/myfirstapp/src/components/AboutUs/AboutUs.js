@@ -1,4 +1,4 @@
-import './about_us.css'
+import './AboutUs.css'
 import book_1 from "../../pics/book-1.jpg";
 import book_2 from "../../pics/book-2.jpg";
 import book_3 from "../../pics/book-3.jpg";

@@ -27,14 +27,14 @@ const Register = () => {
   }
 
   return (
-    <div className="background">
-      <div className="form">
-        <div className="picture-slogan">
-          <p className="slogan">Your best bookstore in the <span className="catchy-word">town</span></p>
-          <div className="logo-align"><img className="bookstore-logo" src={bookstore} alt="bookstore"/></div>
+    <div className="register--background">
+      <div className="register--form">
+        <div className="register--picture-slogan">
+          <p className="register--slogan">Your best bookstore in the <span className="register--catchy-word">town</span></p>
+          <div className="register--logo-align"><img className="register--bookstore-logo" src={bookstore} alt="register--bookstore"/></div>
         </div>
-        <div className="registration-form">
-          <div className="logo-align"><img className="logo" src={logo} alt="logo"/></div>
+        <div className="register--registration-form">
+          <div className="register--logo-align"><img className="register--logo" src={logo} alt="logo"/></div>
           <Formik
             initialValues={{
               username: '',
@@ -51,17 +51,17 @@ const Register = () => {
             }
           >
             <Form>
-              <div className="inputFields">
+              <div className="register--inputFields">
                 <div>
-                  <div className="align-label-and-field">
-                    <label className="label">User Name:</label>
-                    <Field className="fields" id="username" name="username" placeholder="Jane" />
+                  <div className="register--align-label-and-field">
+                    <label className="register--label">User Name:</label>
+                    <Field className="register--fields" id="username" name="username" placeholder="Jane" />
                   </div>
 
-                  <div className="align-label-and-field">
-                    <label className="label">Email:</label>
+                  <div className="register--align-label-and-field">
+                    <label className="register--label">Email:</label>
                     <Field
-                      className="fields"
+                      className="register--fields"
                       id="email"
                       name="email"
                       placeholder="jane@bookeroo.com"
@@ -69,33 +69,33 @@ const Register = () => {
                     />
                   </div>
 
-                  <div className="align-label-and-field">
-                    <label className="label">Full Name:</label>
-                    <Field className="fields" id="fullName" name="fullName" placeholder="Jane Doe" />
+                  <div className="register--align-label-and-field">
+                    <label className="register--label">Full Name:</label>
+                    <Field className="register--fields" id="fullName" name="fullName" placeholder="Jane Doe" />
                   </div>
 
-                  <div className="align-label-and-field">
-                    <label className="label">Password:</label>
-                    <Field className="fields" id="password" name="password" />
+                  <div className="register--align-label-and-field">
+                    <label className="register--label">Password:</label>
+                    <Field className="register--fields" id="password" name="password" />
                   </div>
 
-                  <div className="align-label-and-field">
-                    <label className="label">Confirm Password:</label>
-                    <Field className="fields" id="confirmPassword" name="confirmPassword" />
+                  <div className="register--align-label-and-field">
+                    <label className="register--label">Confirm Password:</label>
+                    <Field className="register--fields" id="confirmPassword" name="confirmPassword" />
                   </div>
 
-                  <div className="align-label-and-field">
-                    <div id="my-radio-group" className="label">I am a:</div>
+                  <div className="register--align-label-and-field">
+                    <div id="my-radio-group" className="register--label">I am a:</div>
                     <div role="group" aria-labelledby="my-radio-group">
-                      <label className="label-radio">
+                      <label className="register--label-radio">
                         <Field type="radio" name="role" value="PU" />
                         Public User
                       </label>
-                      <label className="label-radio">
+                      <label className="register--label-radio">
                         <Field type="radio" name="role" value="P" />
                         Publisher
                       </label>
-                      <label className="label-radio">
+                      <label className="register--label-radio">
                         <Field type="radio" name="role" value="SO" />
                         Shop owner
                       </label>
@@ -103,9 +103,9 @@ const Register = () => {
                   </div>
                 </div>
       
-                <div className="alignBtn">
+                <div className="register--alignBtn">
                   <Button 
-                    className="submitBtn" 
+                    className="register--submitBtn" 
                     style={{ 
                       border: '1px solid #06f', 
                       borderRadius:'3%',
@@ -113,10 +113,10 @@ const Register = () => {
                     }} 
                     type="submit"
                   >
-                    <span className="btn-text">Signup</span>
+                    <span className="register--btn-text">Signup</span>
                   </Button>
                 </div>
-                <div className="end-quote">Shop your favourite books, all in one place</div>
+                <div className="register--end-quote">Shop your favourite books, all in one place</div>
               </div>
 
             </Form>

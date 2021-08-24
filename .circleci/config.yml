@@ -8,10 +8,11 @@ jobs:
   build-and-test-for-node:
     docker:
       - image: cimg/node:12.19.0
-    - checkout
+    
     working_directory: ~/FrontEnd/myfirstapp/
 
     steps:
+      - checkout
       - run: npm install
       - run: npm start
 
@@ -22,9 +23,8 @@ jobs:
     working_directory: ~/BackEnd/loginmicroservices
 
     steps:
-      - run:
-          name: Build
-          command: mvn clean install
+      - checkout
+      - run: mvn clean install
       - run: mvn test
 
 workflows:

@@ -12,10 +12,9 @@ jobs:
     working_directory: ~/FrontEnd/myfirstapp/
 
     steps:
-      - checkout
       - run: npm install
       - run:
-          name: Run node Tests
+          name: Run Node Tests
           command: npm test
 
   build-and-test-for-maven:
@@ -25,7 +24,6 @@ jobs:
     working_directory: ~/BackEnd/loginmicroservices
 
     steps:
-      - checkout
       - run:
           name: Build
           command: mvn clean install

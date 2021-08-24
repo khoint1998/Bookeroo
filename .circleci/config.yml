@@ -8,8 +8,8 @@ jobs:
   build-and-test-for-node:
     docker:
       - image: cimg/node:12.19.0
-
-    working_directory: /FrontEnd/myfirstapp/
+    - checkout
+    working_directory: ~/FrontEnd/myfirstapp/
 
     steps:
       - run: npm install
@@ -18,8 +18,8 @@ jobs:
   build-and-test-for-maven:
     docker:
       - image: cimg/openjdk:1.8
-
-    working_directory: /BackEnd/loginmicroservices
+    - checkout
+    working_directory: ~/BackEnd/loginmicroservices
 
     steps:
       - run:

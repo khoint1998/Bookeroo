@@ -23,13 +23,13 @@ jobs:
       - checkout
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
-      - ./FrontEnd/myfirstapp/node/install-packages
+      - /FrontEnd/myfirstapp/node/install-packages
       # If you are using yarn instead npm, remove the line above and uncomment the two lines below.
       # - node/install-packages:
       #     pkg-manager: yarn
       - run:
           name: Run node Tests
-          command: FrontEnd/myfirstapp/npm test
+          command: ./FrontEnd/myfirstapp/npm test
 
   build-and-test-for-maven:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
@@ -44,11 +44,11 @@ jobs:
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
-          command: ./BackEnd/loginmicroservices/mvn -B -DskipTests clean package
+          command: /BackEnd/loginmicroservices/mvn -B -DskipTests clean package
       # Then run your tests
       - run:
           name: Run Maven Test
-          command: BackEnd/loginmicroservices/mvn test
+          command: ./BackEnd/loginmicroservices/mvn test
 
 workflows:
   # Below is the definition of your workflow.

@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Register.css';
 import axios from "axios";
 import logo from "../../../pics/logo.png";
 import bookstore from "../../../pics/bookstore.png";
+import { Redirect } from "react-router-dom";
 
 const Register = () => {
 
+  const[toRoute,setToRoute] = useState(null);
+
   const creatUser = async (newUser) => {
-    let req = await axios.post('http://localhost:8080/bookeroo/users/register', newUser)
-        .catch(error => error.response.data);
-    return req.data;
+    const req = await axios.post('http://localhost:8080/bookeroo/users/register', newUser)
+        .then(res => res.data)
+        .catch(error => error.message);
+    return req;
   }
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     const newUser = {
       username: values.username,
       email: values.email,
@@ -23,10 +27,20 @@ const Register = () => {
       confirmPassword: values.confirmPassword,
       role: values.role
     };
-    creatUser(newUser);
+    const returnedData = await creatUser(newUser);
+    console.log(returnedData);
+    setToRoute("/login");
   }
 
-  return (
+  if (toRoute) {
+    return (
+      <div>
+        <Redirect to={toRoute} />
+      </div>
+    );
+  }
+
+  return ( 
     <div className="register--background">
       <div className="register--form">
         <div className="register--picture-slogan">
@@ -122,7 +136,7 @@ const Register = () => {
             </Form>
           </Formik>
         </div>
-      </div>
+      </div>   
     </div>
   );
 }

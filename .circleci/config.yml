@@ -7,7 +7,7 @@ orbs:
 jobs:
   build-and-test-for-node:
     docker:
-      - image: cimg/node:15.1
+      - image: cimg/node:12.19.0
 
     working_directory: ~/FrontEnd/myfirstapp/
 
@@ -15,19 +15,17 @@ jobs:
       - run: npm install
       - run: npm start
 
-  # build-and-test-for-maven:
-  #   docker:
-  #     - image: cimg/openjdk:11.0
+  build-and-test-for-maven:
+    docker:
+      - image: cimg/openjdk:1.8
 
-  #   working_directory: ~/BackEnd/loginmicroservices
+    working_directory: ~/BackEnd/loginmicroservices
 
-  #   steps:
-  #     - run:
-  #         name: Build
-  #         command: mvn clean install
-  #     - run:
-  #         name: Run Maven Test
-  #         command: mvn test
+    steps:
+      - run:
+          name: Build
+          command: mvn clean install
+      - run: mvn test
 
 workflows:
   sample:

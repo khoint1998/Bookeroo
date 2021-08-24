@@ -9,11 +9,10 @@ jobs:
     docker:
       - image: cimg/node:12.19.0
 
-    # working_directory: ~/FrontEnd/myfirstapp/
+    working_directory: ./FrontEnd/myfirstapp/
 
     steps:
       - checkout
-      - run: cd FrontEnd/myfirstapp/
       - run: ls
       # - run: npm start
 

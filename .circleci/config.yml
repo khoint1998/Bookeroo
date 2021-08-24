@@ -16,7 +16,7 @@ jobs:
       - run: npm install
       - run:
           name: Run node Tests
-          command: ./FrontEnd/myfirstapp/npm test
+          command: npm test
 
   build-and-test-for-maven:
     docker:
@@ -31,7 +31,7 @@ jobs:
           command: mvn clean install
       - run:
           name: Run Maven Test
-          command: ./BackEnd/loginmicroservices/mvn test
+          command: mvn test
 
 workflows:
   sample:

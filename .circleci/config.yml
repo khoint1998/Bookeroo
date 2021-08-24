@@ -13,9 +13,7 @@ jobs:
 
     steps:
       - run: npm install
-      - run:
-          name: Run Node Tests
-          command: npm test
+      - run: npm test
 
   # build-and-test-for-maven:
   #   docker:

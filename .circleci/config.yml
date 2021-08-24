@@ -23,7 +23,7 @@ jobs:
       - checkout
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
-      - node/install-packages
+      - ./FrontEnd/myfirstapp/node/install-packages
       # If you are using yarn instead npm, remove the line above and uncomment the two lines below.
       # - node/install-packages:
       #     pkg-manager: yarn
@@ -44,7 +44,7 @@ jobs:
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
-          command: mvn -B -DskipTests clean package
+          command: ./BackEnd/loginmicroservices/mvn -B -DskipTests clean package
       # Then run your tests
       - run:
           name: Run Maven Test

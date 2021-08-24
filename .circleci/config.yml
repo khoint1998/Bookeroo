@@ -7,6 +7,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.1
+  maven: circleci/maven@1.2.0
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
@@ -16,11 +17,13 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
     docker:
       - image: cimg/node:15.1
+
+    working_directory: ~/FrontEnd/myfirstapp/
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
     steps:
       # Checkout the code as the first step.
-      - checkout FrontEnd/myfirstapp/
+      - checkout
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages
@@ -38,9 +41,12 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0
+
+    working_directory: ~/BackEnd/loginmicroservices
+
     steps:
       # Checkout the code as the first step.
-      - checkout BackEnd/loginmicroservices
+      - checkout
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build

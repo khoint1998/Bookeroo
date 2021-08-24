@@ -20,7 +20,7 @@ jobs:
     # CircleCI will report the results back to your VCS provider.
     steps:
       # Checkout the code as the first step.
-      - checkout
+      - checkout FrontEnd/myfirstapp/
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages
@@ -40,7 +40,7 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       # Checkout the code as the first step.
-      - checkout
+      - checkout BackEnd/loginmicroservices
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build

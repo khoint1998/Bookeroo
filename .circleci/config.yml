@@ -9,7 +9,7 @@ jobs:
     docker:
       - image: cimg/node:12.19.0
 
-    working_directory: ~/FrontEnd/myfirstapp/
+    working_directory: ./FrontEnd/myfirstapp/
 
     steps:
       - run: npm install
@@ -19,7 +19,7 @@ jobs:
     docker:
       - image: cimg/openjdk:1.8
 
-    working_directory: ~/BackEnd/loginmicroservices
+    working_directory: ./BackEnd/loginmicroservices
 
     steps:
       - run:

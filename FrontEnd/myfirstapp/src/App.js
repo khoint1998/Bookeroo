@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
-import Header from "./components/Layout/Header";
+import Header from "./components/Layout/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";

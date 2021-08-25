@@ -112,6 +112,7 @@ div {
   color: white;
 }
 
-.background {
+.register--background {
   background-image: url("/pics/greek-vase.png");
+  padding: 0.05vh 0 0.05vh 0;
 }

@@ -94,7 +94,7 @@
 
 .login--bookstore-logo {
   width: 75%;
-  margin: 10%;
+  margin-bottom: 12vh;
 }
 
 .login--slogan {
@@ -109,8 +109,9 @@
   color: white;
 }
 
-.background {
+.login--background {
   background-image: url("/pics/greek-vase.png");
+  padding: 0.05vh 0 0.05vh 0;
 }
 
 .login--login-form {

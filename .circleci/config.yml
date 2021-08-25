@@ -13,8 +13,9 @@ jobs:
 
     steps:
       - checkout
-      - run: cd /FrontEnd/myfirstapp && npm install
-      - run: cd /FrontEnd/myfirstapp && npm test
+      # - run: ls
+      - run: cd FrontEnd/myfirstapp && npm install
+      - run: cd FrontEnd/myfirstapp && npm test
 
   # build-and-test-for-maven:
   #   docker:

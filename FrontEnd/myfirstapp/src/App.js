@@ -11,6 +11,7 @@ import store from "./store";
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           }
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/addPerson" component={AddPerson} />
+          <Route exact path="/profile" component={Profile} />
         
         </div>
       </Router>

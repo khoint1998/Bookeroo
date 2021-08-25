@@ -9,7 +9,7 @@ jobs:
     docker:
       - image: cimg/node:12.19.0
 
-    working_directory: ~/project/FrontEnd
+    working_directory: ~/project/FrontEnd/myfirstapp
 
     steps:
       - checkout

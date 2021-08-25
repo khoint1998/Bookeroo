@@ -9,27 +9,23 @@ jobs:
     docker:
       - image: cimg/node:12.19.0
 
-    working_directory: ~/project/FrontEnd/myfirstapp
+    steps:
+      - checkout
+      - run: cd /FrontEnd/myfirstapp && npm install
+      - run: cd /FrontEnd/myfirstapp && npm test
+
+  build-and-test-for-maven:
+    docker:
+      - image: cimg/openjdk:1.8
 
     steps:
       - checkout
-      - run: ls
-      # - run: npm start
-
-  # build-and-test-for-maven:
-  #   docker:
-  #     - image: cimg/openjdk:1.8
-
-  #   working_directory: ~/BackEnd/loginmicroservices
-
-  #   steps:
-  #     - checkout
-  #     - run: mvn clean install
-  #     - run: mvn test
+      - run: cd BackEnd/loginmicrosevices && mvn clean install
+      - run: cd BackEnd/loginmicrosevices && mvn test
 
 workflows:
   sample:
     jobs:
       - build-and-test-for-node
 
-      # - build-and-test-for-maven
+      - build-and-test-for-maven

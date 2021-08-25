@@ -14,6 +14,8 @@ import Login from "./components/UserManagement/Login/Login";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 
+import DevCard from "./components/DevCard/DevCard";
+
 const App = () => {
   return (
     <Provider store={store}>
@@ -29,6 +31,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/about" component={AboutUs} />
           <Route exact path="/contact" component={ContactUs} />
+          <Route exact path="/check" component={DevCard} />
           {
             //Private Routes
           }

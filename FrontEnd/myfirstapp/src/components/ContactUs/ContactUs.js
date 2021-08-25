@@ -5,6 +5,7 @@ import book_3 from "../../pics/book-3.jpg";
 import book_4 from "../../pics/book-4.jpg";
 import book_5 from "../../pics/book-5.jpg";
 import green_line from "../../pics/green_line.png";
+import DevCard from '../DevCard/DevCard';
 
 import React from 'react';
 
@@ -26,13 +27,18 @@ function AboutUs() {
                 <div className="vertical_line"></div>
                 <div className="col">
                     <div className="devCards_col">
-                        <h1>TEST</h1>
+                        <DevCard name="Derren" role="Scrum Master" id="s7726728" profile="/profile_sarthak.png"></DevCard>
+                        <DevCard name="Sarthak" role="Frontend Dev" id="s3816605" profile="../../pics/profile_sarthak.png"></DevCard>
                     </div>
                     <div className="devCards_col">
-                        <h1>INGS</h1>
+                        <div id="single_card">
+                            <DevCard name="Khoi" role="Lead Dev" id="s3824293" profile="../../pics/profile_sarthak.png"></DevCard>
+                        </div>
+                        
                     </div>
                     <div className="devCards_col">
-                        <h1>STUFF</h1>
+                        <DevCard name="Liam" role="Product Manager" id="s3678755" profile="../../pics/profile_sarthak.png"></DevCard>
+                        <DevCard name="Chen Wang" role="Backend Dev" id="s3678755" profile="../../pics/profile_sarthak.png"></DevCard>
                     </div>
                     
                 </div>

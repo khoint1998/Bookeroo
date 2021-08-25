@@ -58,6 +58,10 @@ h4 {
     float: left;
 }
 
+#single_card{
+    transform: translateY(50%);
+}
+
 .vertical_line {
     border-left: 1px solid black;
     height: 300px;

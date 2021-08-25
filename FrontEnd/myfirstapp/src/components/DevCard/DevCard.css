@@ -1,0 +1,35 @@
+.devCard{
+    max-width: 288px;
+    max-height: 128px;
+    border-style: solid;
+    border-radius: 1;
+    border-color: #0066FF;
+    display: flex;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    background-color: #FFFAFA;
+}
+
+.col{
+    margin: -25px;
+    float: left;
+    width: 50%;
+}
+
+.devName{
+    font-family: "Poppins";
+    font-weight: bold;
+    font-size: 0.95em;
+    color: #0066FF;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.devDetails{
+    font-weight: bold;
+    font-size: 0.85em;
+    color: black;
+    margin-left: -20px;
+    margin-right: -20px;
+}

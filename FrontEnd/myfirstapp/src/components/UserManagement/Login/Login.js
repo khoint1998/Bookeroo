@@ -3,8 +3,6 @@ import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Login.css';
 import axios from "axios";
-import logo from "../../../pics/logo.png";
-import bookstore from "../../../pics/bookstore.png";
 
 const Login = () => {
 
@@ -27,10 +25,10 @@ const Login = () => {
       <div className="form">
         <div className="picture-slogan">
           <p className="slogan">Your best bookstore in the <span className="catchy-word">town</span></p>
-          <div className="logo-align"><img className="bookstore-logo" src={bookstore} alt="bookstore"/></div>
+          <div className="logo-align"><img className="bookstore-logo" src="/pics/logo.png" alt="bookstore"/></div>
         </div>
         <div className="registration-form">
-          <div className="logo-align"><img className="logo" src={logo} alt="logo"/></div>
+          <div className="logo-align"><img className="logo" src="/pics/logo.png" alt="logo"/></div>
           <div className="login-form">
             <Formik
               initialValues={{

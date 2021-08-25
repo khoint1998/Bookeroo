@@ -114,7 +114,7 @@ div {
 }
 
 .background {
-  background-image: url("../../../pics/greek-vase.png");
+  background-image: url("/pics/greek-vase.png");
 }
 
 .login-form {

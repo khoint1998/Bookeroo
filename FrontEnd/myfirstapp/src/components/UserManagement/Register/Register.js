@@ -3,8 +3,6 @@ import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Register.css';
 import axios from "axios";
-import logo from "../../../pics/logo.png";
-import bookstore from "../../../pics/bookstore.png";
 import { Redirect } from "react-router-dom";
 
 const Register = () => {
@@ -45,10 +43,10 @@ const Register = () => {
       <div className="register--form">
         <div className="register--picture-slogan">
           <p className="register--slogan">Your best bookstore in the <span className="register--catchy-word">town</span></p>
-          <div className="register--logo-align"><img className="register--bookstore-logo" src={bookstore} alt="register--bookstore"/></div>
+          <div className="register--logo-align"><img className="register--bookstore-logo" src="/pics/bookstore.png" alt="register--bookstore"/></div>
         </div>
         <div className="register--registration-form">
-          <div className="register--logo-align"><img className="register--logo" src={logo} alt="logo"/></div>
+          <div className="register--logo-align"><img className="register--logo" src="/pics/logo.png" alt="logo"/></div>
           <Formik
             initialValues={{
               username: '',

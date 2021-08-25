@@ -3,8 +3,6 @@ import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Login.css';
 import axios from "axios";
-import logo from "../../../pics/logo.png";
-import bookstore from "../../../pics/bookstore.png";
 import { Redirect } from "react-router-dom";
 
 const Login = () => {
@@ -43,10 +41,10 @@ const Login = () => {
       <div className="login--form">
         <div className="login--picture-slogan">
           <p className="login--slogan">Your best bookstore in the <span className="login--catchy-word">town</span></p>
-          <div className="login--logo-align"><img className="login--bookstore-logo" src={bookstore} alt="bookstore"/></div>
+          <div className="login--logo-align"><img className="login--bookstore-logo" src="/pics/bookstore.png" alt="bookstore"/></div>
         </div>
         <div className="login--registration-form">
-          <div className="login--logo-align"><img className="login--logo" src={logo} alt="logo"/></div>
+          <div className="login--logo-align"><img className="login--logo" src="/pics/logo.png" alt="logo"/></div>
           <div className="login--login-form">
             <Formik
               initialValues={{

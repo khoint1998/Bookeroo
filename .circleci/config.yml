@@ -16,7 +16,7 @@ jobs:
       - run: cd FrontEnd/myfirstapp && npm install
       - run: cd FrontEnd/myfirstapp && npm test
 
-  build-and-test-for-maven:
+  build-and-test-for-maven-login:
     docker:
       - image: cimg/openjdk:11.0
 
@@ -32,4 +32,4 @@ workflows:
     jobs:
       - build-and-test-for-node
 
-      - build-and-test-for-maven
+      - build-and-test-for-maven-login

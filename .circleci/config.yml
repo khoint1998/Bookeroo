@@ -18,13 +18,13 @@ jobs:
 
   build-and-test-for-maven:
     docker:
-      - image: cimg/openjdk:1.8
+      - image: cimg/openjdk:11.0
 
     working_directory: ~/project
 
     steps:
       - checkout
-      - run: cd BackEnd/loginmicrosevices && mvn clean install
+      - run: cd BackEnd/loginmicrosevices && mvn -B -DskipTests clean package
       - run: cd BackEnd/loginmicrosevices && mvn test
 
 workflows:

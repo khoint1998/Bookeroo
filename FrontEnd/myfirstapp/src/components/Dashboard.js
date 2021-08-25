@@ -9,7 +9,7 @@ const Dashboard = (props) => {
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
-                    <h1 className="display-4 text-center">Hi, {props.location.state.data.authentication.name}</h1>
+                    <h1 className="display-4 text-center">Hi, {props.location.state.data.authentication.name}, testing as well</h1>
                     <br />
                     <CreatePersonButton />
                     <br />

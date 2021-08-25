@@ -1,0 +1,35 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+  maven: circleci/maven@1.2.0
+
+jobs:
+  build-and-test-for-node:
+    docker:
+      - image: cimg/node:12.19.0
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+      - run: cd FrontEnd/myfirstapp && npm install
+      - run: cd FrontEnd/myfirstapp && npm test
+
+  build-and-test-for-maven-login:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+      - run: cd BackEnd/loginmicroservices && mvn -B -DskipTests clean package
+      - run: cd BackEnd/loginmicroservices && mvn test
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test-for-node
+
+      - build-and-test-for-maven-login

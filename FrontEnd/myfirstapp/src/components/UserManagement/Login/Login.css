@@ -109,8 +109,8 @@
   color: white;
 }
 
-.login--background {
-  background-image: url("../../../pics/greek-vase.png");
+.background {
+  background-image: url("/pics/greek-vase.png");
 }
 
 .login--login-form {

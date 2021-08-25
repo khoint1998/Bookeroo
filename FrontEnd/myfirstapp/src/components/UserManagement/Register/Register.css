@@ -112,6 +112,6 @@ div {
   color: white;
 }
 
-.register--background {
-  background-image: url("../../../pics/greek-vase.png");
+.background {
+  background-image: url("/pics/greek-vase.png");
 }

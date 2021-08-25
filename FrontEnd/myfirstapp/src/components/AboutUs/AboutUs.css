@@ -20,7 +20,7 @@
 .col_1 {
   width: 40%;
   align-self: center;
-  padding-left: 20%;
+  padding-left: 6%;
 }
 
 h4 {
@@ -28,7 +28,7 @@ h4 {
   font-weight: bold;
   font-size: 24px;
   color: #0066ff;
-  margin-bottom: 10px;
+  margin-bottom: -10px;
 }
 
 .image_set h4 {
@@ -54,7 +54,6 @@ h4 {
 .col p {
   font-weight: bold;
   font-family: "Poppins";
-  width: 50%;
 }
 .vertical_line {
   border-left: 1px solid black;

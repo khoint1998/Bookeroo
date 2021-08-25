@@ -12,6 +12,7 @@ import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register/Register";
 import Login from "./components/UserManagement/Login/Login";
 import AboutUs from "./components/AboutUs/AboutUs";
+import ContactUs from "./components/ContactUs/ContactUs";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/about" component={AboutUs} />
+          <Route exact path="/contact" component={ContactUs} />
           {
             //Private Routes
           }

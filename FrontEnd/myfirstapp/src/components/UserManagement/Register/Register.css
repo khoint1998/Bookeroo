@@ -2,30 +2,30 @@ div {
   font-family: "Poppins";
 }
 
-.submitBtn {
+.register--submitBtn {
   color: #06f;
   width: 20%;
   padding: 0 3%;
   box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
 }
 
-.form {
+.register--form {
   display: flex;
   justify-content: center;
   margin: 2% 16% 2% 13%;
 }
 
-.picture-slogan {
-  width: 35%;
+.register--picture-slogan {
+  width: 35vw;
   background-color: rgba(0, 102, 255, 0.5);
 }
 
-.registration-form {
+.register--registration-form {
   padding: 3%;
   background-color: #edf0f1;
 }
 
-.fields {
+.register--fields {
   width: 50%;
   background-color: #edf0f1;
   padding: 5px 5px;
@@ -39,7 +39,7 @@ div {
   box-sizing: border-box;
 }
 
-.label {
+.register--label {
   font-weight: bolder;
   padding: 10px 0 0 0;
   width: 35%;
@@ -48,31 +48,31 @@ div {
   text-align: right;
 }
 
-.inputFields {
+.register--inputFields {
   align-items: center;
 }
 
-.alignBtn {
+.register--alignBtn {
   margin: 5% 0 3% 0;
   text-align: center;
 }
 
-.btn-text {
+.register--btn-text {
   font-size: 125%;
   font-weight: bolder;
   color: #06f;
 }
 
-.logo {
+.register--logo {
   width: 40%;
 }
 
-.logo-align {
+.register--logo-align {
   margin: 1% 5% 1% 5%;
   text-align: center;
 }
 
-.end-quote {
+.register--end-quote {
   text-align: center;
   margin: 5% 0 0 0;
   font-weight: bolder;
@@ -82,12 +82,12 @@ div {
   color: #06f;
 }
 
-.align-label-and-field {
+.register--align-label-and-field {
   display: flex;
   margin: 4% 0;
 }
 
-.label-radio {
+.register--label-radio {
   font-weight: bolder;
   padding: 10px 0 0 10%;
   width: 100%;
@@ -96,19 +96,19 @@ div {
   text-align: left;
 }
 
-.bookstore-logo {
+.register--bookstore-logo {
   width: 75%;
 }
 
-.slogan {
-  padding: 15% 15% 20% 10%;
-  font-size: 450%;
+.register--slogan {
+  padding: 15% 15% 1vw 10%;
+  font-size: 4vw;
   text-align: left;
   font-weight: bolder;
   line-height: 120%;
 }
 
-.catchy-word {
+.register--catchy-word {
   color: white;
 }
 

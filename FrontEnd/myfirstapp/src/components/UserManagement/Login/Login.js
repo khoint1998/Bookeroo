@@ -41,7 +41,7 @@ const Login = () => {
       <div className="login--form">
         <div className="login--picture-slogan">
           <p className="login--slogan">Your best bookstore in the <span className="login--catchy-word">town</span></p>
-          <div className="login--logo-align"><img className="login--bookstore-logo" src="/pics/logo.png" alt="bookstore"/></div>
+          <div className="login--logo-align"><img className="login--bookstore-logo" src="/pics/bookstore.png" alt="bookstore"/></div>
         </div>
         <div className="login--registration-form">
           <div className="login--logo-align"><img className="login--logo" src="/pics/logo.png" alt="logo"/></div>

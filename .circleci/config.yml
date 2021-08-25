@@ -13,22 +13,23 @@ jobs:
 
     steps:
       - checkout
-      # - run: ls
       - run: cd FrontEnd/myfirstapp && npm install
       - run: cd FrontEnd/myfirstapp && npm test
 
-  # build-and-test-for-maven:
-  #   docker:
-  #     - image: cimg/openjdk:1.8
+  build-and-test-for-maven:
+    docker:
+      - image: cimg/openjdk:1.8
 
-  #   steps:
-  #     - checkout
-  #     - run: cd BackEnd/loginmicrosevices && mvn clean install
-  #     - run: cd BackEnd/loginmicrosevices && mvn test
+    working_directory: ~/project
+
+    steps:
+      - checkout
+      - run: cd BackEnd/loginmicrosevices && mvn clean install
+      - run: cd BackEnd/loginmicrosevices && mvn test
 
 workflows:
   sample:
     jobs:
       - build-and-test-for-node
 
-      # - build-and-test-for-maven
+      - build-and-test-for-maven

@@ -24,8 +24,8 @@ jobs:
 
     steps:
       - checkout
-      - run: cd BackEnd/loginmicrosevices && mvn -B -DskipTests clean package
-      - run: cd BackEnd/loginmicrosevices && mvn test
+      - run: cd BackEnd/loginmicroservices && mvn -B -DskipTests clean package
+      - run: cd BackEnd/loginmicroservices && mvn test
 
 workflows:
   sample:

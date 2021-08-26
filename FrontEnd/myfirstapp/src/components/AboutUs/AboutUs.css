@@ -1,6 +1,6 @@
 .page {
   background-image: url("/pics/greek-vase.png");
-  padding: 0;
+  padding: 0.05vh 0.05vh 0;
   margin: 0;
   top: 0;
   left: 0;

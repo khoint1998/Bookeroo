@@ -27,7 +27,7 @@ const App = () => {
             //Public Routes
           }
           
-          <Route exact path="/" component={Landing} />
+          <Route exact path="/" component={Homepage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           

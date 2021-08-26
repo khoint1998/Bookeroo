@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./ProfilePictureCrop.css";
 
-class Profile extends Component {
+class ProfileEdit extends Component {
     render() {
         return (
             <div className="profile">
@@ -41,10 +41,12 @@ class Profile extends Component {
                                 </h4>
                             </div>
                         </div>
-                        <div className="col-sm row mb-auto">
-                            <a className="btn btn-light btn-lg" type="button" href="/profileedit"><span>&#9881;</span>Request to change account type</a>
-                            <button className="btn btn-light btn-lg" type="button" href=""><span>&#8634;</span>Transaction History</button>
+                        <div className="col-sm">
+                            <a className="btn btn-light btn-lg" type="button" href="/profile"><span>&#9587;</span>Cancel</a>
+                            <br></br>
+                            <button className="btn btn-light btn-lg" type="button" href=""><span>&#10515;&#160;&#160;</span>Save</button>
 
+                            <br></br>
                             <img src="bookstore-clipart-lg.png" alt="..." ></img>
 
                         </div>
@@ -55,4 +57,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default ProfileEdit;

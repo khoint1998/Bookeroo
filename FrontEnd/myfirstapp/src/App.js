@@ -13,6 +13,7 @@ import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
 import Profile from "./components/Profile/Profile";
 import ProfileEdit from "./components/Profile/ProfileEdit";
+import ProfileAdmin from "./components/Profile/ProfileAdmin";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path="/addPerson" component={AddPerson} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/profileedit" component={ProfileEdit} />
+          <Route exact path="/profileadmin" component={ProfileAdmin} />
         
         </div>
       </Router>

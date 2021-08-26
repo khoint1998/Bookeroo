@@ -1,10 +1,12 @@
 package com.rmit.sept.bk_loginservices.web;
 
 
+import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.payload.JWTLoginSucessReponse;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
+import com.rmit.sept.bk_loginservices.services.CustomUserDetailsService;
 import com.rmit.sept.bk_loginservices.services.MapValidationErrorService;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.validator.UserValidator;
@@ -17,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -74,7 +77,22 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
 
-        return ResponseEntity.ok(new JWTLoginSucessReponse(authentication, jwt));
+        return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
+    }
+
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/get-user/{id}")
+    public User getUserByUserId(@PathVariable Long id){
+            return userDetailsService.loadUserById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/get-user")
+    public User getUserByUserUserName(@RequestParam String username){
+            return userDetailsService.loadUserByUsername(username);
     }
 
 }

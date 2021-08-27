@@ -20,7 +20,6 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User saveUser (User newUser){
-
         /*
          *newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
          *Username has to be unique (exception)
@@ -40,8 +39,5 @@ public class UserService {
         } catch (Exception e){
             throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
         }
-
     }
-
-
 }

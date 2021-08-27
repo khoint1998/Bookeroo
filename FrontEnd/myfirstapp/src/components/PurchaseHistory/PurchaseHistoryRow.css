@@ -1,0 +1,48 @@
+.PurchaseRow{
+    display: flex;
+    height: 80px;
+    width: 100%;
+    background-color: #EDF0F1;
+}
+
+.PurchaseCol{
+    align-self: center;
+    text-align: left;
+    font-size: 18px;
+}
+
+#purchase_id{
+    width: 9%;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#book_name{
+    width: 27%;
+}
+
+#seller_name{
+    width: 19%;
+}
+
+#price{
+    width: 15%;
+}
+
+#date{
+    width: 15%;
+}
+
+#button{
+    width: 15%;
+}
+
+.purchaseRowBtn{
+    background-color: #0066FF;
+    color: #FFF;
+    border-style: hidden;
+    border-radius: 15px;
+    width: fit-content;
+    padding: 10px 30px 10px 30px;
+}

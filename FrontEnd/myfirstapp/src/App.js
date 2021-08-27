@@ -14,6 +14,8 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import Homepage from "./components/Homepage/Homepage";
 import Profile from "./components/Profile/Profile";
 import DevCard from "./components/DevCard/DevCard";
+import PurchaseHistoryRow from "./components/PurchaseHistory/PurchaseHistoryRow";
+import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 import jwt_decode from "jwt-decode";
 import setJWTToken from "./securityUtils/setJWTToken";
@@ -47,13 +49,13 @@ const App = () => {
           {
             //Public Routes
           }
-          
           <Route exact path="/" component={Homepage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           
           <Route exact path="/about" component={AboutUs} />
           <Route exact path="/contact" component={ContactUs} />
+          <Route exact path="/purchaseHistory" component={PurchaseHistory}/>
           <Route exact path="/check" component={DevCard} />
           <Route exact path="/profile" component={Profile} />
           {

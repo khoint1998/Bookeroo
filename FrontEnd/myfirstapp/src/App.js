@@ -13,7 +13,7 @@ import Register from "./components/UserManagement/Register/Register";
 import Login from "./components/UserManagement/Login/Login";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
-
+import Profile from "./components/Profile/Profile";
 import DevCard from "./components/DevCard/DevCard";
 
 const App = () => {
@@ -33,6 +33,7 @@ const App = () => {
           <Route exact path="/about" component={AboutUs} />
           <Route exact path="/contact" component={ContactUs} />
           <Route exact path="/check" component={DevCard} />
+            <Route exact path="/profile" component={Profile} />
           {
             //Private Routes
           }
@@ -44,4 +45,5 @@ const App = () => {
     </Provider>
   );
 }
+
 export default App;

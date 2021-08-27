@@ -2,7 +2,6 @@ import React from 'react';
 import './DevCard.css';
 
 function DevCard(props){
-    console.log(props)
     return(
         <div className="devCard">
             <div className="col">
@@ -11,7 +10,7 @@ function DevCard(props){
                 <div className="devDetails">{props.id}</div>
             </div>
             <div className="col">
-                <img src={props.profile}></img>
+                <img src={props.profile} alt="avt"></img>
                 
             </div>
         </div>

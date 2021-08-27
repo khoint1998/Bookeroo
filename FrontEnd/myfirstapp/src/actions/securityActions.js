@@ -6,9 +6,8 @@ import jwt_decode from "jwt-decode";
 
 export const createNewUser = (newUser, history) => async dispatch => {
 
-    try{
-
-        await axios.post("/api/users/register", newUser);
+    try {
+        await axios.post("/bookeroo/users/register", newUser);
         history.push("/login");
         dispatch({
             type: GET_ERRORS,
@@ -20,9 +19,6 @@ export const createNewUser = (newUser, history) => async dispatch => {
             type: GET_ERRORS,
             payload: err.response.data
         });
-
-
-
     }
 
 };

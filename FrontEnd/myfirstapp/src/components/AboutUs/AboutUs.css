@@ -1,0 +1,120 @@
+.page {
+  background-image: url("/pics/greek-vase.png");
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.book_1 {
+  width: 344px;
+  height: 323px;
+}
+.row {
+  width: 100%;
+  margin: 0;
+  height: 350px;
+  margin: 3% 0 3% 0;
+}
+.col_1 {
+  width: 40%;
+  align-self: center;
+  padding-left: 6%;
+}
+
+h4 {
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 24px;
+  color: #0066ff;
+  margin-bottom: -10px;
+}
+
+.image_set h4 {
+  padding-top: 20px;
+  padding-left: 6px;
+}
+
+#h2_blue {
+  color: #0066ff;
+}
+
+.col_1 h2 {
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 72px;
+}
+.col {
+  padding: 50px;
+  text-align: center;
+  align-self: center;
+}
+
+.col p {
+  font-weight: bold;
+  font-family: "Poppins";
+}
+.vertical_line {
+  border-left: 1px solid black;
+  height: 300px;
+  align-self: center;
+}
+.image_container {
+  display: flex;
+  height: auto;
+  padding-left: 17%;
+}
+
+.image_set {
+  width: 232px;
+  height: 323px;
+}
+
+.image_row_small {
+  display: flex;
+  height: 30%;
+}
+
+.image_row_large {
+  height: 70%;
+  padding: 3px;
+}
+
+.image_box_small {
+  width: 50%;
+  padding: 3px;
+}
+
+.image_box_huge {
+  width: 344px;
+  height: 323px;
+  padding: 3px;
+}
+
+.image_box_small img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.image_box_huge img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.image_row_large img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+#green_line_container {
+  padding-left: 8px;
+  width: 280px;
+  height: 16px;
+}
+#green_line_container_small {
+  width: 110px;
+  padding-left: 7px;
+}

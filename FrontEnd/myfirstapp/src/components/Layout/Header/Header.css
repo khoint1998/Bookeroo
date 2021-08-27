@@ -1,0 +1,57 @@
+.header--header {
+  display: flex;
+  background-image: url("/pics/blue-snow.png");
+}
+
+.header--logo {
+  padding: 1vh;
+  width: 10vw;
+}
+
+.header--logo-space {
+  margin: 1vh 7vw 0 3vw;
+}
+
+.header--pages {
+  margin: 2vh 0 1vh 2vw;
+}
+
+.header--searchBar-space {
+  margin: 1.5vh 2vw 1vh 2vw;
+}
+
+.header--link {
+  margin: 0 2.5vw 0 0;
+  font-size: 2.5vh;
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.header--link:hover {
+  color: rgba(0, 102, 255, 0.5);
+  text-decoration: none;
+}
+
+.header--btn {
+  color: rgba(0, 102, 255, 0.5);
+  text-align: center;
+  border: 2px solid rgba(0, 102, 255, 0.5);
+  font-size: 2.5vh;
+  font-weight: bolder;
+  color: rgba(0, 102, 255, 0.5);
+  border-radius: 30px;
+  outline: none;
+  margin-right: 1vw;
+  padding: 0.5vh 2vw 1vh 2vw;
+  box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}
+
+.header--btn:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(0, 102, 255, 0.5);
+}
+
+.header--btns {
+  margin-top: 2vh;
+}

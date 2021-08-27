@@ -1,0 +1,118 @@
+div {
+  font-family: "Poppins";
+}
+
+.register--submitBtn {
+  color: #06f;
+  width: 20%;
+  padding: 0 3%;
+  box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}
+
+.register--form {
+  display: flex;
+  justify-content: center;
+  margin: 2% 16% 2% 13%;
+}
+
+.register--picture-slogan {
+  width: 35vw;
+  background-color: rgba(0, 102, 255, 0.5);
+}
+
+.register--registration-form {
+  padding: 3%;
+  background-color: #edf0f1;
+}
+
+.register--fields {
+  width: 50%;
+  background-color: #edf0f1;
+  padding: 5px 5px;
+  margin: 5px 0 5px 15px;
+  display: inline-block;
+  border-bottom: 2px solid #06f;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.register--label {
+  font-weight: bolder;
+  padding: 10px 0 0 0;
+  width: 35%;
+  margin-bottom: 0;
+  font-size: 125%;
+  text-align: right;
+}
+
+.register--inputFields {
+  align-items: center;
+}
+
+.register--alignBtn {
+  margin: 5% 0 3% 0;
+  text-align: center;
+}
+
+.register--btn-text {
+  font-size: 125%;
+  font-weight: bolder;
+  color: #06f;
+}
+
+.register--logo {
+  width: 40%;
+}
+
+.register--logo-align {
+  margin: 1% 5% 1% 5%;
+  text-align: center;
+}
+
+.register--end-quote {
+  text-align: center;
+  margin: 5% 0 0 0;
+  font-weight: bolder;
+  letter-spacing: 4px;
+  font-size: 120%;
+  font-weight: bolder;
+  color: #06f;
+}
+
+.register--align-label-and-field {
+  display: flex;
+  margin: 4% 0;
+}
+
+.register--label-radio {
+  font-weight: bolder;
+  padding: 10px 0 0 10%;
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 125%;
+  text-align: left;
+}
+
+.register--bookstore-logo {
+  width: 75%;
+}
+
+.register--slogan {
+  padding: 15% 15% 1vw 10%;
+  font-size: 4vw;
+  text-align: left;
+  font-weight: bolder;
+  line-height: 120%;
+}
+
+.register--catchy-word {
+  color: white;
+}
+
+.register--background {
+  background-image: url("/pics/greek-vase.png");
+  padding: 0.05vh 0 0.05vh 0;
+}

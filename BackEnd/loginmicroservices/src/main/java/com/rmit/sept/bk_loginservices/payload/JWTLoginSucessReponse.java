@@ -1,34 +1,23 @@
 package com.rmit.sept.bk_loginservices.payload;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.Authentication;
+
+@Getter @Setter
 public class JWTLoginSucessReponse {
-    private boolean success;
+    private final Authentication authentication;
     private String token;
 
-    public JWTLoginSucessReponse(boolean success, String token) {
-        this.success = success;
-        this.token = token;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
+    public JWTLoginSucessReponse(Authentication authentication, String token) {
+        this.authentication = authentication;
         this.token = token;
     }
 
     @Override
     public String toString() {
-        return "JWTLoginSucessReponse{" +
-                "success=" + success +
+        return "{" +
+                authentication.getPrincipal() +
                 ", token='" + token + '\'' +
                 '}';
     }

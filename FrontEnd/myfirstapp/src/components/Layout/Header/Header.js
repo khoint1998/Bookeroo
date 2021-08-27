@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
-import Button from '@material-ui/core/Button';
 import './Header.css'
 
  const Header = () => {

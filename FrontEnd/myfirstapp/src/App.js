@@ -8,14 +8,12 @@ import AddPerson from "./components/Persons/AddPerson";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register/Register";
 import Login from "./components/UserManagement/Login/Login";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Homepage from "./components/Homepage/Homepage";
 
-import DevCard from "./components/DevCard/DevCard";
 
 const App = () => {
   return (
@@ -33,8 +31,6 @@ const App = () => {
           
           <Route exact path="/about" component={AboutUs} />
           <Route exact path="/contact" component={ContactUs} />
-          <Route exact path="/check" component={DevCard} />
-          <Route exact path="/homepage" component={Homepage} />
           {
             //Private Routes
           }

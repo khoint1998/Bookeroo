@@ -59,7 +59,6 @@ const App = () => {
           {
             //Private Routes
           }
-          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/addPerson" component={AddPerson} />
         
         </div>

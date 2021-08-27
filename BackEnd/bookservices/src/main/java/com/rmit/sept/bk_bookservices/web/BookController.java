@@ -22,9 +22,7 @@ public class BookController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-
-
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
     public ResponseEntity<?> createBook(@Valid @RequestBody Book book, BindingResult result) {
 
@@ -36,7 +34,8 @@ public class BookController {
         return new ResponseEntity<Book>(newBook, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/get/book/id/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }

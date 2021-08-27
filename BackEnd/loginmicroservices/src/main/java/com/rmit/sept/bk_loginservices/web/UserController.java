@@ -84,13 +84,13 @@ public class UserController {
     private CustomUserDetailsService userDetailsService;
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/get-user/{id}")
+    @GetMapping("/get/user/id/{id}")
     public User getUserByUserId(@PathVariable Long id){
             return userDetailsService.loadUserById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/get-user")
+    @GetMapping("/get/user/username")
     public User getUserByUserUserName(@RequestParam String username){
             return userDetailsService.loadUserByUsername(username);
     }

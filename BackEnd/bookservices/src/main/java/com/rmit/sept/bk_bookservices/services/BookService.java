@@ -1,7 +1,7 @@
 package com.rmit.sept.bk_bookservices.services;
 
-import com.rmit.sept.bk_bookservices.bookexceptions.BookNotFoundException;
-import com.rmit.sept.bk_bookservices.bookexceptions.ISBNAlreadyExistsException;
+import com.rmit.sept.bk_bookservices.exceptions.BookNotFoundException;
+import com.rmit.sept.bk_bookservices.exceptions.ISBNAlreadyExistsException;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class BookService {
 
     public Book getBookById (Long id) {
         try {
-            return bookRepository.getById(id);
+            return bookRepository.getByBookId(id);
         } catch (Exception e) {
             throw new BookNotFoundException("Book does not exist");
         }

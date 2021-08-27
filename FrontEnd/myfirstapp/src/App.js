@@ -15,6 +15,8 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 
 import DevCard from "./components/DevCard/DevCard";
+import PurchaseHistoryRow from "./components/PurchaseHistory/PurchaseHistoryRow";
+import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 const App = () => {
   return (
@@ -32,7 +34,9 @@ const App = () => {
           
           <Route exact path="/about" component={AboutUs} />
           <Route exact path="/contact" component={ContactUs} />
-          <Route exact path="/check" component={DevCard} />
+          <Route exact path="/check" component={PurchaseHistoryRow} />
+          <Route exact path="/purchaseHistory" component={PurchaseHistory}/>
+          
           {
             //Private Routes
           }

@@ -7,12 +7,12 @@ function PurchaseHistory() {
     return (
         <div className="purchase_history--page">
 
-            <div className="purchase_history--header">
+            <div className="purchase_history--title">
                 My Purchase History
             </div>
 
             <div className="purchase_history--table">
-                <div className="purchase_history==table_head">
+                <div className="purchase_history--table_head">
                     <div className="PurchaseRow--header">
                         <div className="PurchaseCol--header" id="purchase_id--header">
                             ID
@@ -34,11 +34,6 @@ function PurchaseHistory() {
                             Date
                         </div>
 
-                        <div className="PurchaseCol" id="button">
-                            <div className="purchaseRowBtn">
-
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <PurchaseHistoryRow></PurchaseHistoryRow>

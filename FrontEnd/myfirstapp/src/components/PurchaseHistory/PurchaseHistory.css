@@ -5,6 +5,15 @@
     background-color: #FFF;
 }
 
+.purchase_history--title{
+    font-size: 36px;
+    font-weight: bold;
+    color: #0066ff;
+    text-align: center;
+    margin: 20px;
+}
+
+
 .PurchaseCol--header{
     align-self: center;
     text-align: left;

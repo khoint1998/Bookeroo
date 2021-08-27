@@ -37,3 +37,12 @@
 #button{
     width: 15%;
 }
+
+.purchaseRowBtn{
+    background-color: #0066FF;
+    color: #FFF;
+    border-style: hidden;
+    border-radius: 15px;
+    width: fit-content;
+    padding: 10px 30px 10px 30px;
+}

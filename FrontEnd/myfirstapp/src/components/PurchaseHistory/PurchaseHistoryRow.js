@@ -26,7 +26,7 @@ function PurchaseHistoryRow(props) {
 
             <div className="PurchaseCol" id="button">
                 <div className="purchaseRowBtn">
-                        
+                        Details
                 </div>
             </div>
         </div>

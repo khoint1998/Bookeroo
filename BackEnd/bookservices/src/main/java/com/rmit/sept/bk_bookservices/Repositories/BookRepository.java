@@ -1,4 +1,4 @@
-package com.rmit.sept.bk_bookservices.repositories;
+package com.rmit.sept.bk_bookservices.Repositories;
 
 import com.rmit.sept.bk_bookservices.model.Book;
 import org.springframework.data.repository.CrudRepository;

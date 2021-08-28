@@ -12,8 +12,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-
-
     @ExceptionHandler
     public final ResponseEntity<Object> handleUsernameAlreadyExists(BookNotFoundException ex, WebRequest request){
         ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
@@ -22,6 +20,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
     @ExceptionHandler
     public final ResponseEntity<Object> handleUserNotFound(ISBNAlreadyExistsException ex, WebRequest request){
+        ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleCreateCopyFailed(CreateCopyFailedException ex, WebRequest request){
+        ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleCopyNotFoundException(CopyNotFoundException ex, WebRequest request){
         ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }

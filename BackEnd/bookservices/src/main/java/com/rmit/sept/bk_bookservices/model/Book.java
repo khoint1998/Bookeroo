@@ -1,14 +1,15 @@
 package com.rmit.sept.bk_bookservices.model;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.awt.*;
+import java.util.Collection;
 import java.util.Date;
+
 
 
 @Entity
@@ -42,4 +43,10 @@ public class Book {
     private String publisher;
 
 //    private Image cover_Page;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Collection<Copy> copies;
+
+
 }

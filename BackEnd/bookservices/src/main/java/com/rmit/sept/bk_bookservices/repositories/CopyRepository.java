@@ -1,0 +1,12 @@
+package com.rmit.sept.bk_bookservices.repositories;
+
+import com.rmit.sept.bk_bookservices.model.Copy;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface CopyRepository extends CrudRepository <Copy, Long> {
+
+    Copy getByCopyId(Long id);
+}

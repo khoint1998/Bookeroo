@@ -1,0 +1,48 @@
+.PurchaseRow--header{
+    display: flex;
+    height: 80px;
+    width: 100%;
+    background-color: #FFF;
+}
+
+.purchase_history--title{
+    font-size: 36px;
+    font-weight: bold;
+    color: #0066ff;
+    text-align: center;
+    margin: 20px;
+}
+
+
+.PurchaseCol--header{
+    align-self: center;
+    text-align: left;
+    font-size: 36px;
+    font-weight: bold;
+    color: #0066ff;
+}
+
+#purchase_id--header{
+    width: 9%;
+    text-align: center;
+}
+
+#book_name--header{
+    width: 27%;
+}
+
+#seller_name--header{
+    width: 19%;
+}
+
+#price--header{
+    width: 15%;
+}
+
+#date--header{
+    width: 15%;
+}
+
+#button--header{
+    width: 15%;
+}

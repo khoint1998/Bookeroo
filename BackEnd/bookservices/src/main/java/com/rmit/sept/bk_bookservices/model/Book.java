@@ -1,9 +1,8 @@
 package com.rmit.sept.bk_bookservices.model;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -46,7 +45,8 @@ public class Book {
 //    private Image cover_Page;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private Collection<Copy> copy;
+    @JsonIgnore
+    private Collection<Copy> copies;
 
 
 }

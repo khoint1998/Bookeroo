@@ -4,9 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class SaveCopyFailedException extends RuntimeException {
-
-    public SaveCopyFailedException(String message) {
+public class CopyNotFoundException extends RuntimeException{
+    public CopyNotFoundException(String message) {
         super(message);
     }
 }

@@ -1,13 +1,10 @@
 package com.rmit.sept.bk_bookservices.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.awt.*;
-import java.util.Date;
 
 @Entity
 @Getter @Setter
@@ -17,17 +14,18 @@ public class Copy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long copyId;
 
-    @NotBlank(message = "Please")
-    private String owner;
+    @NotBlank(message = "OwnerId (userId - id) is missing")
+    private String ownerId;
 
-    @NotBlank(message = "Please input the booktype: brand new or second hand")
-    private String booktype;
+    @Column(columnDefinition = "boolean default true")
+    private boolean newBook;
 
-    @NotBlank(message = "Please enter a price")
+    @Column(columnDefinition = "float default 0.0")
     private float price;
 
     @ManyToOne
     @JoinColumn(name ="bookId", nullable = false)
+    @JsonIgnore
     private Book book;
 
 }

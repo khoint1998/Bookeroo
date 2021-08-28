@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_bookservices.web;
 
 import com.rmit.sept.bk_bookservices.model.Copy;
+import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import com.rmit.sept.bk_bookservices.services.CopyService;
 import com.rmit.sept.bk_bookservices.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ public class CopyController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
-    public ResponseEntity<?> createBook(@Valid @RequestBody Copy copy, BindingResult result) {
+    public ResponseEntity<?> createBook(@Valid @RequestBody CopyDTO copyDto, BindingResult result) {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null)return errorMap;
 
-        Copy newCopy = copyService.createCopy(copy);
+        Copy newCopy = copyService.createCopy(copyDto);
 
         return new ResponseEntity<Copy>(newCopy, HttpStatus.CREATED);
     }

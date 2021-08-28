@@ -42,7 +42,7 @@
   border-radius: 30px;
   outline: none;
   margin-right: 1vw;
-  padding: 0.5vh 2vw 1vh 2vw;
+  padding: 0.5vh 2vw 0.5vh 2vw;
   box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
 }
 
@@ -54,4 +54,24 @@
 
 .header--btns {
   margin-top: 2vh;
+}
+
+.header--hiMsg-box {
+  display: flex;
+  align-items: center;
+  margin: 1vh 0 1vh 2vw;
+}
+
+.header--hiMsg {
+  margin: 0 2.5vw 0 0;
+  font-size: 2.5vh;
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.header--avt {
+  width: 2.5vw;
+  vertical-align: middle;
+  border-radius: 50vw;
+  height: 2.5vw;
 }

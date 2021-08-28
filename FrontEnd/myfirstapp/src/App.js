@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Layout/Header/Header";
@@ -22,50 +22,72 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 
-const jwtToken = localStorage.jwtToken;
-
-if (jwtToken) {
-  setJWTToken(jwtToken);
-  const decoded_jwtToken = jwt_decode(jwtToken);
-  store.dispatch({
-    type: SET_CURRENT_USER,
-    payload: decoded_jwtToken
-  });
-
-  const currentTime = Date.now() / 1000;
-  if (decoded_jwtToken.exp < currentTime) {
-    store.dispatch(logout());
-    window.location.href = "/";
+const guestValue = {};
+const loginReducer = (currentUser, action) => {
+  switch(action.type) {
+    case 'login':
+      return action.userInput;
+    case 'logout':
+      return guestValue;
+    default:
+      throw new Error()
   }
 }
 
+export const UserContext = React.createContext();
+
 const App = () => {
+
+  const [user, dispatch] = useReducer(loginReducer, guestValue);
+
+  const jwtToken = localStorage.jwtToken;
+
+  //Homy Code: dont't touch
+  if (jwtToken) {
+    // setJWTToken(jwtToken);
+    const decoded_jwtToken = jwt_decode(jwtToken);
+    // store.dispatch({
+    //   type: SET_CURRENT_USER,
+    //   payload: decoded_jwtToken
+    // });
+
+    const currentTime = Date.now() / 1000;
+    if (decoded_jwtToken.exp < currentTime) {
+      localStorage.removeItem("jwtToken");
+      dispatch({ userInput: guestValue, type: 'logout' });
+      // store.dispatch(logout());
+      window.location.href = "/";
+    }
+  }
+
   return (
-    <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Header />
-          {
-            //Public Routes
-          }
-          
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          
-          <Route exact path="/about" component={AboutUs} />
-          <Route exact path="/contact" component={ContactUs} />
-          <Route exact path="/check" component={DevCard} />
+    <UserContext.Provider value={{userState: user, userDispatch: dispatch}}>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Header />
+            {
+              //Public Routes
+            }
+            
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            
+            <Route exact path="/about" component={AboutUs} />
+            <Route exact path="/contact" component={ContactUs} />
+            <Route exact path="/check" component={DevCard} />
             <Route exact path="/profile" component={Profile} />
-          {
-            //Private Routes
-          }
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/addPerson" component={AddPerson} />
-        
-        </div>
-      </Router>
-    </Provider>
+            {
+              //Private Routes
+            }
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/addPerson" component={AddPerson} />
+          
+          </div>
+        </Router>
+      </Provider>
+    </UserContext.Provider>
   );
 }
 

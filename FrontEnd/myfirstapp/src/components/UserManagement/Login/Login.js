@@ -1,39 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Login.css';
-import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { UserContext } from "../../../App";
+import { loginAsUser } from "../../../axios/UserAPI";
 
 const Login = () => {
 
   const[toRoute,setToRoute] = useState(null);
-  const[data,setData] = useState(null);
-
-  const loginAsUser = async (user) => {
-    const req = await axios.post('http://localhost:8080/bookeroo/users/login', user)
-        .then(res => res.data)
-        .catch(error => error.response);
-    return req;
-  }
+  const userDispatch = useContext(UserContext);
 
   const onSubmit = async (values) => {
     const user = {
       username: values.username,
       password: values.password,
     };
-    const returnedData = await loginAsUser(user);
-    console.log(returnedData);
-    setData(returnedData);
-    setToRoute("/dashboard");
+    const returnedResult = await loginAsUser(user);
+    if(returnedResult && returnedResult.currentUser) {
+      const {currentUser} = returnedResult;
+      userDispatch.userDispatch({ userInput: currentUser, type: 'login' });
+      setToRoute("/");
+    }
   }
 
   if (toRoute) {
-    return <Redirect to={{
-      pathname: "/dashboard",
-      state: {data}
-    }} 
-    />
+    return <Redirect to="/"/>
   }
 
   return (

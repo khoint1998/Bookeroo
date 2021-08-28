@@ -1,11 +1,15 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
-import './Header.css'
+import './Header.css';
+import { UserContext } from "../../../App";
+import { GetUser } from "../../../axios/UserAPI";
 
- const Header = () => {
+const Header = () => {
 
-    const [results, setResults] = useState("");
+    const [searchResults, setSearchResults] = useState("");
+    const currentUser = useContext(UserContext);
+    const { user } = GetUser(currentUser.userState.id);
 
     return (
         <div className="header--header">
@@ -18,23 +22,30 @@ import './Header.css'
             <div className="header--searchBar-space">
                 <SearchBar
                     className="header--searchBar"
-                    value={results}
+                    value={searchResults}
                     style={{ 
                         height: '5vh',
                     }} 
-                    onChange={(value) => setResults(value)}
+                    onChange={(value) => setSearchResults(value)}
                     placeholder="Book title, Author, etc."
-                    onCancelSearch={() => setResults("")}
+                    onCancelSearch={() => setSearchResults("")}
                 />
             </div>
-            <div className="header--btns">
-                <Link to="/login" className="header--btn" >
-                    Login
-                </Link>
-                <Link to="/register" className="header--btn" >
-                    Signup
-                </Link>
-            </div>
+            
+            {
+                !user ? <div className="header--btns">
+                    <Link to="/login" className="header--btn" >
+                        Login
+                    </Link>
+                    <Link to="/register" className="header--btn" >
+                        Signup
+                    </Link>
+                </div> : <div className="header--hiMsg-box">
+                    <span className="header--hiMsg">Hello {user.fullName}!</span>
+                    <img className="header--avt" src="/pics/avt-2.jpg" alt="avatar"/>
+                </div>
+            }
+            
         </div>
     )
 }

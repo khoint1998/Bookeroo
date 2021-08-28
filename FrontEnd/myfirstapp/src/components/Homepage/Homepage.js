@@ -17,7 +17,7 @@ function Homepage() {
                 </div>
                 <div className="homepage--col_1_2">
                     <div className="homepage--image_container">
-                        <img src="/pics/bookstore.png"></img>
+                        <img src="/pics/bookstore.png" alt="bookstore"></img>
                     </div>
                 </div>
             </div>

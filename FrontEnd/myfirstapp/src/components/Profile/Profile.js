@@ -53,7 +53,7 @@ class Profile extends Component {
 
                         <div className="profile_button">
                             <div className="profile_button_image">
-                                <img src="/pics/icon_setting.png"></img>
+                                <img src="/pics/icon_setting.png" alt="setting-icon"></img>
                             </div>
 
                             <a>Request to change account type</a>
@@ -61,7 +61,7 @@ class Profile extends Component {
 
                         <div className="profile_button">
                             <div className="profile_button_image">
-                                <img src="/pics/icon_history.png"></img>
+                                <img src="/pics/icon_history.png" alt="history-icon"></img>
                             </div>
                             <a>Transaction History</a>
                         </div>

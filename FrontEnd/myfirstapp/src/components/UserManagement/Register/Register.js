@@ -2,19 +2,12 @@ import React, { useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Register.css';
-import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { createUser } from "../../../axios/UserAPI";
 
 const Register = () => {
 
   const[toRoute,setToRoute] = useState(null);
-
-  const creatUser = async (newUser) => {
-    const req = await axios.post('http://localhost:8080/bookeroo/users/register', newUser)
-        .then(res => res.data)
-        .catch(error => error.message);
-    return req;
-  }
 
   const onSubmit = async (values) => {
     const newUser = {
@@ -25,9 +18,10 @@ const Register = () => {
       confirmPassword: values.confirmPassword,
       role: values.role
     };
-    const returnedData = await creatUser(newUser);
-    console.log(returnedData);
-    setToRoute("/login");
+    const returnedData = await createUser(newUser);
+    if (returnedData !== "Network Error") {
+      setToRoute("/login")
+    }
   }
 
   if (toRoute) {

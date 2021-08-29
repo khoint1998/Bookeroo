@@ -36,7 +36,7 @@ public class BookController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/book/id/{id}")
-    public Book getBookById(@PathVariable Long id) {
+    public Book getBookById(@PathVariable(value="id") Long id) {
         return bookService.getBookById(id);
     }
 

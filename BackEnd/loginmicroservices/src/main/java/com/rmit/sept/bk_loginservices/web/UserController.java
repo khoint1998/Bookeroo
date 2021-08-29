@@ -1,8 +1,8 @@
 package com.rmit.sept.bk_loginservices.web;
 
-
-import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
+import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
 import com.rmit.sept.bk_loginservices.model.User;
+import com.rmit.sept.bk_loginservices.model.UserDTO;
 import com.rmit.sept.bk_loginservices.payload.JWTLoginSucessReponse;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
@@ -85,7 +85,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/user/id/{id}")
-    public User getUserByUserId(@PathVariable Long id){
+    public User getUserByUserId(@PathVariable(value="id") Long id){
             return userDetailsService.loadUserById(id);
     }
 
@@ -94,5 +94,33 @@ public class UserController {
     public User getUserByUserUserName(@RequestParam String username){
             return userDetailsService.loadUserByUsername(username);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PatchMapping("/update/user/details/{id}")
+    public void updateUserDetails(@PathVariable(value="id") Long id, @Valid @RequestBody UserDTO user){
+        userDetailsService.updateUserDetails(id,user);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PatchMapping("/update/user/history/{id}")
+    public void updateUserPurchaseHistory(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetailsDTO purchaseDetails){
+        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+    }
+
+//    public void addAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
+//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+//    }
+//
+//    public void deleteAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
+//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+//    }
+//
+//    public void applyForSellingRegistration(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
+//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+//    }
+//
+//    public void removeAppliedSellingRegistration(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
+//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+//    }
 
 }

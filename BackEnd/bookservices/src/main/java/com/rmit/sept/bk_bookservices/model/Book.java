@@ -1,7 +1,6 @@
 package com.rmit.sept.bk_bookservices.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -43,9 +42,8 @@ public class Book {
     private String publisher;
 
 //    private Image cover_Page;
-
+    @JsonManagedReference(value="book-copy")
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Collection<Copy> copies;
 
 

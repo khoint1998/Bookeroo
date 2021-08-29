@@ -36,7 +36,7 @@ public class CopyController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/copy/id/{id}")
-    public Copy getCopyById(@PathVariable Long id) {
+    public Copy getCopyById(@PathVariable(value="id") Long id) {
         return copyService.getCopyById(id);
     }
 

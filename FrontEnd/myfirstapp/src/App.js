@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import "./App.css";
 import Header from "./components/Layout/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import AddPerson from "./components/Persons/AddPerson";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -16,12 +16,9 @@ import Profile from "./components/Profile/Profile";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 import jwt_decode from "jwt-decode";
-import setJWTToken from "./securityUtils/setJWTToken";
-import { SET_CURRENT_USER } from "./actions/types";
-import { logout } from "./actions/securityActions";
-import SecuredRoute from "./securityUtils/SecureRoute";
 
 const guestValue = {};
+
 const loginReducer = (currentUser, action) => {
   switch(action.type) {
     case 'login':
@@ -41,20 +38,16 @@ const App = () => {
 
   const jwtToken = localStorage.jwtToken;
 
-  //Homy Code: dont't touch
   if (jwtToken) {
-    // setJWTToken(jwtToken);
     const decoded_jwtToken = jwt_decode(jwtToken);
-    // store.dispatch({
-    //   type: SET_CURRENT_USER,
-    //   payload: decoded_jwtToken
-    // });
+    if(JSON.stringify(user) === JSON.stringify({})) {
+      dispatch({ userInput: decoded_jwtToken, type: 'login' });
+    }
 
     const currentTime = Date.now() / 1000;
     if (decoded_jwtToken.exp < currentTime) {
       localStorage.removeItem("jwtToken");
-      dispatch({ userInput: guestValue, type: 'logout' });
-      // store.dispatch(logout());
+      dispatch({ type: 'logout' });
       window.location.href = "/";
     }
   }

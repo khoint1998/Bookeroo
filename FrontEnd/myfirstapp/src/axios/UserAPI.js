@@ -17,9 +17,9 @@ export const loginAsUser = async (user) => {
         // store the token in the localStorage
         localStorage.setItem("jwtToken", token);
         // decode token on React
-        const userInput = jwt_decode(token);
+        const user = jwt_decode(token);
         
-        return {currentUser: userInput};
+        return {currentUser: user};
       })
       .catch(error => error.response);
     return req;
@@ -28,7 +28,12 @@ export const loginAsUser = async (user) => {
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export const GetUser = (id) => {
-    const { data, error } = useSWR(`http://localhost:8080/bookeroo/users/get/user/id/${id}`, fetcher)
+    const { data, error } = useSWR(() => {
+    //Check if id is there first, then do the request
+    if(id) {
+      return'http://localhost:8080/bookeroo/users/get/user/id/' + id
+    }}
+    , fetcher)
   
     return {
       user: data,

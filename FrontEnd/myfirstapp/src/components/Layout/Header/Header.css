@@ -75,3 +75,7 @@
   border-radius: 50vw;
   height: 2.5vw;
 }
+
+.header--avt:hover {
+  cursor: pointer;
+}

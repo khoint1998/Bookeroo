@@ -8,7 +8,7 @@ import { loginAsUser } from "../../../axios/UserAPI";
 
 const Login = () => {
 
-  const[toRoute,setToRoute] = useState(null);
+  const [toRoute,setToRoute] = useState(null);
   const userDispatch = useContext(UserContext);
 
   const onSubmit = async (values) => {
@@ -25,7 +25,7 @@ const Login = () => {
   }
 
   if (toRoute) {
-    return <Redirect to="/"/>
+    return <Redirect to={toRoute}/>
   }
 
   return (

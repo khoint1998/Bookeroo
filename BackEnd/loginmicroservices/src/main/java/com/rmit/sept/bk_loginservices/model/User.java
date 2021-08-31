@@ -60,11 +60,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Shop> shops;
 
-    //list of registration, null for admin
-    @JsonManagedReference(value="user-reg")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<RegistrationDetails> myRegistrationList;
-
     private Date create_At;
     private Date update_At;
 

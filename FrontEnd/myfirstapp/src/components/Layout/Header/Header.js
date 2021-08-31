@@ -98,26 +98,28 @@ const Header = () => {
                         </MenuItem >
                         { user.role === "PU" || user.role === "P" ?
                             <MenuItem>
-                            <ListItemIcon style={{
-                                minWidth: '25px'
-                            }}>
-                                <ListIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="My Selling Registration" /></MenuItem> : user.role === "SO" ?
+                                <ListItemIcon style={{
+                                    minWidth: '25px'
+                                }}>
+                                    <ListIcon fontSize="small" />
+                                </ListItemIcon>
+                                <ListItemText primary="My Selling Registration" onClick={() => setToRoute("/my-registration")}/>
+                            </MenuItem> : user.role === "SO" ?
                             <MenuItem>
-                            <ListItemIcon style={{
-                                minWidth: '25px'
-                            }}>
-                                <StoreOutlinedIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="My Shop" /></MenuItem> : 
+                                <ListItemIcon style={{
+                                    minWidth: '25px'
+                                }}>
+                                    <StoreOutlinedIcon fontSize="small" />
+                                </ListItemIcon>
+                                <ListItemText primary="My Shop" /></MenuItem> : 
                             <MenuItem>
-                            <ListItemIcon style={{
-                                minWidth: '25px'
-                            }}>
-                                <NotificationsActiveOutlinedIcon fontSize="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Incoming Selling Registrations" /></MenuItem>
+                                <ListItemIcon style={{
+                                    minWidth: '25px'
+                                }}>
+                                    <NotificationsActiveOutlinedIcon fontSize="small" />
+                                </ListItemIcon>
+                                <ListItemText primary="Incoming Selling Registrations" />
+                            </MenuItem>
                         }
                         <MenuItem>
                             <ListItemIcon style={{

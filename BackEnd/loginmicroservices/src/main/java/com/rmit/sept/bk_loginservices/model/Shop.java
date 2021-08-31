@@ -1,7 +1,6 @@
 package com.rmit.sept.bk_loginservices.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,10 +22,13 @@ public class Shop {
     @NotBlank(message = "Shop needs a name")
     private String shopName;
 
+    @Column(columnDefinition = "boolean default true")
+    private boolean shopOpen;
+
     //A shop contains a list of on sell copy (holds copyId type String)
-    @JsonManagedReference(value="shop-copy")
+    @JsonManagedReference(value="shop-reg")
     @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
-    private List<CopyDetails> onSellCopyList = new ArrayList<CopyDetails>();
+    private List<RegistrationDetails> onSellCopyList = new ArrayList<RegistrationDetails>();
 
     @JsonBackReference(value="user-shop")
     @ManyToOne

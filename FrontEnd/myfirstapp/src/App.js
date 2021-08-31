@@ -16,6 +16,7 @@ import Profile from "./components/Profile/Profile";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 import jwt_decode from "jwt-decode";
+import MyRegistration from "./components/MyRegistration/MyRegistration";
 
 const guestValue = {};
 
@@ -73,6 +74,7 @@ const App = () => {
             {
               //Private Routes
             }
+            <Route exact path="/my-registration" component={MyRegistration} />
             <Route exact path="/addPerson" component={AddPerson} />
           
           </div>

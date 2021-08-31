@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bookeroo/copys")
@@ -38,6 +39,12 @@ public class CopyController {
     @GetMapping("/get/copy/id/{id}")
     public Copy getCopyById(@PathVariable(value="id") Long id) {
         return copyService.getCopyById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("get/copy/copyIdList/{copyIdList}")
+    public List<Copy> getCopiesById(@PathVariable List<Long> copyIdList) {
+        return copyService.getCopiesById(copyIdList);
     }
 
 }

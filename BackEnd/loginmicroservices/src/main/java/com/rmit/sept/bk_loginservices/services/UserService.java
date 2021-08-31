@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
+
 @Service
 public class UserService {
 
@@ -33,14 +35,17 @@ public class UserService {
             // We don't persist or show the confirmPassword
             newUser.setConfirmPassword("");
 
-//            Shop defaultShop = new Shop();
-//            defaultShop.setShopName("default");
-//            newUser.getShops().add(defaultShop);
+            Shop defaultShop = new Shop();
+            defaultShop.setShopName("default");
+            defaultShop.setUser(newUser);
+
+            newUser.setShops(new ArrayList<Shop>());
+            newUser.getShops().add(defaultShop);
 
             return userRepository.save(newUser);
 
         } catch (Exception e){
-            throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
+            throw new UsernameAlreadyExistsException("Something is wrong. Cannot create the user DEV_ERR:001");
         }
     }
 }

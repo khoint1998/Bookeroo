@@ -49,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(selectedUser==null) throw new UserNotFoundException("User name not found");
 
         PurchaseDetails purchaseDetails = new PurchaseDetails();
-        purchaseDetails.setCopyId(purchaseDetailsDto.getCopyId());
+        purchaseDetails.setCopyId(Long.parseLong(purchaseDetailsDto.getCopyId()));
         purchaseDetails.setTitle(purchaseDetailsDto.getTitle());
         purchaseDetails.setPrice(purchaseDetailsDto.getPrice());
         purchaseDetails.setSellerFullName(purchaseDetailsDto.getSellerFullName());

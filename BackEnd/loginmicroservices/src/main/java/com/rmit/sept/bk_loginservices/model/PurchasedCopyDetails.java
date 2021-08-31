@@ -15,8 +15,7 @@ public class PurchasedCopyDetails {
     @Id
     private Long purchasedCopyId;
 
-    @NotBlank(message = "OwnerId (userId - id) is missing")
-    private String ownerId;
+    private Long userId;
 
     @Column(columnDefinition = "boolean default true")
     private boolean newBook;

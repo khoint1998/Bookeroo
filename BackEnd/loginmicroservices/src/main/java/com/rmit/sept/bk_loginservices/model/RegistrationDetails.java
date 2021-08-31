@@ -18,11 +18,12 @@ public class RegistrationDetails {
     private Long registrationId;
 
     //Will change to false when registration is approved
-    @Column(columnDefinition = "boolean default true")
-    private boolean pending;
+    @Column(columnDefinition = "boolean default false")
+    private boolean alreadyApproved;
 
     //Currently null, will hav this once this registration is approved and create a copy in DB
-    private String copyId;
+    @Column(columnDefinition = "Long default 0")
+    private Long copyId;
 
     ///////These values will be sent as CopyDTO to create a copy once the registration is approved//////
     @Column(columnDefinition = "boolean default true")
@@ -31,7 +32,8 @@ public class RegistrationDetails {
     @Column(columnDefinition = "float default 0.0")
     private float price;
 
-    private String bookId;
+    //Frontend have bookId when user apply a copy for a book. For Testing: random string
+    private Long bookId;
 
     //Taking userId is enough
     @JsonBackReference(value="shop-reg")

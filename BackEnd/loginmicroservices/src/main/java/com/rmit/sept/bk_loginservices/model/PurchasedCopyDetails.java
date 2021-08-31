@@ -9,13 +9,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-public class CopyDetails {
+@Getter @Setter @NoArgsConstructor
+public class PurchasedCopyDetails {
 
     @Id
-    private Long copyId;
+    private Long purchasedCopyId;
 
     @NotBlank(message = "OwnerId (userId - id) is missing")
     private String ownerId;
@@ -23,11 +21,8 @@ public class CopyDetails {
     @Column(columnDefinition = "boolean default true")
     private boolean newBook;
 
-    @Column(columnDefinition = "float default 0.0")
-    private float price;
-
-    @JsonBackReference(value="shop-copy")
+    @JsonBackReference(value="user-purchasedCopy")
     @ManyToOne
-    @JoinColumn(name ="shopId", nullable = false)
-    private Shop shop;
+    @JoinColumn(name ="id", nullable = false)
+    private User user;
 }

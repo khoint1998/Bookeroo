@@ -51,9 +51,9 @@ public class User implements UserDetails {
     private List<PurchaseDetails> purchaseDetailsList = new ArrayList<PurchaseDetails>();
 
     //Store all copyIds of all pruchased copyies
-    @JsonManagedReference(value="user-copy")
+    @JsonManagedReference(value="user-purchasedCopy")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CopyDetails> myLibrary = new ArrayList<CopyDetails>();
+    private List<PurchasedCopyDetails> myLibrary = new ArrayList<PurchasedCopyDetails>();
 
     //list of owned shop, cannot be expanded for other roles except Shop Owner
     @JsonManagedReference(value="user-shop")

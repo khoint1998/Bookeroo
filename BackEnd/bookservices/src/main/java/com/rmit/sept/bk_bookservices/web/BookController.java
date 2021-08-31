@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/bookeroo/books")
 public class BookController {
 
@@ -22,7 +23,6 @@ public class BookController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
     public ResponseEntity<?> createBook(@Valid @RequestBody Book book, BindingResult result) {
 
@@ -34,7 +34,6 @@ public class BookController {
         return new ResponseEntity<Book>(newBook, HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/book/id/{id}")
     public Book getBookById(@PathVariable(value="id") Long id) {
         return bookService.getBookById(id);

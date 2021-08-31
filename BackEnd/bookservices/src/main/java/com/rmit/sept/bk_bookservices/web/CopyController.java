@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/bookeroo/copys")
 public class CopyController {
 
@@ -22,7 +23,6 @@ public class CopyController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
     public ResponseEntity<?> createBook(@Valid @RequestBody CopyDTO copyDto, BindingResult result) {
 
@@ -34,7 +34,6 @@ public class CopyController {
         return new ResponseEntity<Copy>(newCopy, HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/copy/id/{id}")
     public Copy getCopyById(@PathVariable(value="id") Long id) {
         return copyService.getCopyById(id);

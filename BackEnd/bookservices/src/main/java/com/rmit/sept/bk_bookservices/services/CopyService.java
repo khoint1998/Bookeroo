@@ -10,6 +10,9 @@ import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CopyService {
 
@@ -39,6 +42,19 @@ public class CopyService {
             return copyRepository.getByCopyId(id);
         } catch (Exception e) {
             throw new CopyNotFoundException("Copy does not exist");
+        }
+    }
+
+    public List<Copy> getCopiesById (List<Long> copyIdList) {
+        try {
+            List<Copy> copyList = new ArrayList<Copy>();
+            for (Long copyId : copyIdList) {
+                Copy copy = copyRepository.getByCopyId(copyId);
+                copyList.add(copy);
+            }
+            return copyList;
+        } catch (Exception e) {
+            throw new CopyNotFoundException("Something wrong. Cannot retrieve the copies requested");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_loginservices.web;
 
 import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
+import com.rmit.sept.bk_loginservices.model.RegistrationDetailsDTO;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.model.UserDTO;
 import com.rmit.sept.bk_loginservices.payload.JWTLoginSucessReponse;
@@ -27,6 +28,7 @@ import static com.rmit.sept.bk_loginservices.security.SecurityConstant.TOKEN_PRE
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/bookeroo/users")
 public class UserController {
 
@@ -39,7 +41,6 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
         // Validate passwords match
@@ -60,8 +61,6 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
@@ -83,25 +82,21 @@ public class UserController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/user/id/{id}")
-    public User getUserByUserId(@PathVariable(value="id") Long id){
-            return userDetailsService.loadUserById(id);
+    public User getUserByUserId(@PathVariable(value="id") Long id) {
+        return userDetailsService.loadUserById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/user/username")
     public User getUserByUserUserName(@RequestParam String username){
             return userDetailsService.loadUserByUsername(username);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PatchMapping("/update/user/details/{id}")
     public void updateUserDetails(@PathVariable(value="id") Long id, @Valid @RequestBody UserDTO user){
         userDetailsService.updateUserDetails(id,user);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PatchMapping("/update/user/history/{id}")
     public void updateUserPurchaseHistory(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetailsDTO purchaseDetails){
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
@@ -114,11 +109,7 @@ public class UserController {
 //    public void deleteAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
 //        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
 //    }
-//
-//    public void applyForSellingRegistration(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
-//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
-//    }
-//
+
 //    public void removeAppliedSellingRegistration(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
 //        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
 //    }

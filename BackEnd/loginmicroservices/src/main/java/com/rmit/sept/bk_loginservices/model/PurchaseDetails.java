@@ -18,8 +18,7 @@ public class PurchaseDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long purchaseId;
 
-    @NotBlank(message = "BookId is required")
-    private String copyId;
+    private Long copyId;
 
     @NotBlank(message = "Book title is required")
     private String title;

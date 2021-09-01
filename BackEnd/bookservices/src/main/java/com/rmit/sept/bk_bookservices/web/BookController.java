@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -37,6 +38,12 @@ public class BookController {
     @GetMapping("/get/book/id/{id}")
     public Book getBookById(@PathVariable(value="id") Long id) {
         return bookService.getBookById(id);
+    }
+
+    @CrossOrigin(origins = "http//localhost:3000")
+    @GetMapping("get/book/bookIdList/{bookIdList}")
+    public List<Book> getBooksById(@PathVariable List<Long> bookIdList) {
+        return bookService.getBooksById(bookIdList);
     }
 
 }

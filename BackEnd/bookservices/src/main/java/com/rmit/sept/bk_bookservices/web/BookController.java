@@ -40,10 +40,9 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @CrossOrigin(origins = "http//localhost:3000")
-    @GetMapping("get/book/bookIdList/{bookIdList}")
-    public List<Book> getBooksById(@PathVariable List<Long> bookIdList) {
-        return bookService.getBooksById(bookIdList);
+    @GetMapping("get/book/bookIdList")
+    public List<Book> getBooksByIdList(@RequestBody List<Long> bookIdList) {
+        return bookService.getBooksByIdList(bookIdList);
     }
 
 }

@@ -1,20 +1,20 @@
-.myreg--header {
+.myshop--header {
   display: flex;
-  justify-content: flex-end;
-  margin: 2vh 0 3vh 0;
+  justify-content: center;
+  margin: 2vh 0 3vh 30vw;
 }
 
-.myreg--btns {
+.myshop--btns {
   display: flex;
   margin-right: 8vw;
   align-items: center;
 }
 
-.myreg--btn {
+.myshop--btn {
   box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
 }
 
-.myreg--header-name {
+.myshop--header-name {
   padding: 0.5vh 0 0.5vh 0;
   font-size: 2vw;
   font-weight: bolder;
@@ -22,26 +22,26 @@
   margin-right: 14vw;
 }
 
-.myreg--table {
+.myshop--table {
   margin: 0 3vw;
   height: 75vh;
   overflow: auto;
 }
 
-.myreg--approved-text {
+.myshop--open-text {
   color: #9df656;
   font-weight: bolder;
 }
 
-.myreg--pending-text {
-  color: #ebda42;
+.myshop--close-text {
+  color: #fd0707;
   font-weight: bolder;
 }
 
-.myreg--cover {
+.myshop--cover {
   width: 5vw;
 }
 
-.myreg--page {
+.myshop--page {
   overflow: hidden;
 }

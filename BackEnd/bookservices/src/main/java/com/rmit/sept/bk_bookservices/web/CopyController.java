@@ -40,9 +40,8 @@ public class CopyController {
         return copyService.getCopyById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("get/copy/copyIdList/{copyIdList}")
-    public List<Copy> getCopiesById(@PathVariable List<Long> copyIdList) {
+    @GetMapping("get/copy/copyIdList")
+    public List<Copy> getCopiesById(@RequestBody List<Long> copyIdList) {
         return copyService.getCopiesById(copyIdList);
     }
 

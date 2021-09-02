@@ -69,13 +69,6 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-.header--avt {
-  width: 2.5vw;
-  vertical-align: middle;
-  border-radius: 50vw;
-  height: 2.5vw;
-}
-
 .header--avt:hover {
   cursor: pointer;
 }

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import './Header.css';
 import { UserContext } from "../../../App";
-import { GetUser } from "../../../axios/UserAPI";
+import { GetUserInfo } from "../../../axios/UserAPI";
+import Avatar from '@material-ui/core/Avatar';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -23,7 +24,7 @@ const Header = () => {
     const [toRoute,setToRoute] = useState(null);
 
     const currentUser = useContext(UserContext);
-    const { user } = GetUser(currentUser.userState.id);
+    const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
 
     const openMenu = (e) => {
         setAnchorEl(e.currentTarget);
@@ -75,7 +76,7 @@ const Header = () => {
                 </div> : 
                 <div className="header--hiMsg-box">
                     <span className="header--hiMsg">Hello {user.fullName}</span>
-                    <img className="header--avt" src="/pics/avt-2.jpg" alt="avatar" aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu}/>
+                    <Avatar className="header--avt" alt="avatar" aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
                     <Menu
                         id="customized-menu"
                         anchorEl={anchorEl}

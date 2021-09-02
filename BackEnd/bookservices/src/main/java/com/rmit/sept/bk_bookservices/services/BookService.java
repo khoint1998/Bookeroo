@@ -32,7 +32,7 @@ public class BookService {
         }
     }
 
-    public List<Book> getBooksById (List<Long> bookIdList) {
+    public List<Book> getBooksByIdList (List<Long> bookIdList) {
         try {
             List<Book> bookList = new ArrayList<Book>();
             for (Long bookId : bookIdList) {

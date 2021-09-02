@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Entity
 @Setter @Getter @NoArgsConstructor
@@ -18,12 +19,20 @@ public class RegistrationDetails {
     private Long registrationId;
 
     //Will change to false when registration is approved
-    @Column(columnDefinition = "boolean default false")
-    private boolean alreadyApproved;
+    @Column(columnDefinition = "varchar(255) default 'pending'")
+    private boolean status;
 
     //Currently null, will hav this once this registration is approved and create a copy in DB
     @Column(columnDefinition = "Long default 0")
     private Long copyId;
+
+    @NotBlank(message = "Book title is required")
+    private String bookTitle;
+
+//    Will implement later
+//    private String bookCover;
+
+    private Date create_At;
 
     ///////These values will be sent as CopyDTO to create a copy once the registration is approved//////
     @Column(columnDefinition = "boolean default true")
@@ -41,4 +50,9 @@ public class RegistrationDetails {
     @JoinColumn(name ="id", nullable = false)
     private Shop shop;
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @PrePersist
+    protected void onCreate(){
+        this.create_At = new Date();
+    }
 }

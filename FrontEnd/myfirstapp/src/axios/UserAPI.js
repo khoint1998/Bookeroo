@@ -27,7 +27,7 @@ export const loginAsUser = async (user) => {
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export const GetUser = (id) => {
+export const GetUserInfo = (id) => {
     const { data, error } = useSWR(() => {
     //Check if id is there first, then do the request
     if(id) {

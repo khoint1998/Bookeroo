@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -16,11 +16,26 @@ import "./MyRegistration.css";
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-const MyRegistration = (props) => {
+const MyRegistration = () => {
 
     const currentUser = useContext(UserContext);
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
     
     //HOC
     const StyledTableCell = withStyles(() => ({
@@ -82,8 +97,9 @@ const MyRegistration = (props) => {
                             color: '#06f',
                             fontWeight: 'bolder',
                             outline: 'none'
-                        }} 
-                    >New Registration</Button>
+                        }}
+                        onClick={handleOpenDialog}
+                    >Create New Registration</Button>
                 </div>
             </div>
             <div className="myreg--table">
@@ -143,6 +159,30 @@ const MyRegistration = (props) => {
                     </Table>
                 </TableContainer>
             </div>
+            <Dialog open={openDialog} onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">New Registration</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    To apply for registration, please enter associate book information first. We will proceed once the book has been found and ready to handle incoming applications.
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Book Title"
+                    type="email"
+                    fullWidth
+                />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleCloseDialog} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleCloseDialog} color="primary">
+                    Subscribe
+                </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const DeleteRegistration = async (regId) => {
-    const req = await axios.delete('http://localhost:8080/bookeroo/shops/shop/registration/delete/' + regId,
+export const DeleteShop = async (shopId) => {
+    const req = await axios.delete('http://localhost:8080/bookeroo/shops/shop/delete/' + shopId,
             {
                 headers: {
                 'Authorization': `${localStorage.jwtToken}` 

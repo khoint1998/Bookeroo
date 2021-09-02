@@ -112,7 +112,7 @@ const Header = () => {
                                 }}>
                                     <StoreOutlinedIcon fontSize="small" />
                                 </ListItemIcon>
-                                <ListItemText primary="My Shop" /></MenuItem> : 
+                                <ListItemText primary="My Shop" onClick={() => setToRoute("/my-shops")}/></MenuItem> : 
                             <MenuItem>
                                 <ListItemIcon style={{
                                     minWidth: '25px'

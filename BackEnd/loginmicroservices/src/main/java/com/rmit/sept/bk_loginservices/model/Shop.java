@@ -22,7 +22,7 @@ public class Shop {
     @NotBlank(message = "Shop needs a name")
     private String shopName;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition="tinyint(1) default 1")
     private boolean shopOpen;
 
     //A shop contains a list of on sell copy (holds copyId type String)

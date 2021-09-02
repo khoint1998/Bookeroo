@@ -1,11 +1,9 @@
 package com.rmit.sept.bk_loginservices.services;
 
+import com.rmit.sept.bk_loginservices.Repositories.ShopRepository;
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
-import com.rmit.sept.bk_loginservices.model.PurchaseDetails;
-import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.User;
-import com.rmit.sept.bk_loginservices.model.UserDTO;
+import com.rmit.sept.bk_loginservices.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -59,6 +57,26 @@ public class CustomUserDetailsService implements UserDetailsService {
         userRepository.save(selectedUser);
 
         return selectedUser;
+    }
+
+    @Autowired
+    private ShopRepository shopRepository;
+
+    public void addAShopForUser(Long userId, String shopName) {
+        User selectedUser = userRepository.getById(userId);
+        if(selectedUser==null) throw new UserNotFoundException("User name not found");
+
+        Shop newShop = new Shop();
+        newShop.setShopName(shopName);
+        newShop.setUser(selectedUser);
+        newShop.setShopOpen(true);
+
+        shopRepository.save(newShop);
+    }
+
+    public void deleteAShop(Long shopId) {
+        Shop selectedShop = shopRepository.getByShopId(shopId);
+        shopRepository.delete(selectedShop);
     }
 
 }

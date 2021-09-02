@@ -38,6 +38,7 @@ public class UserService {
             Shop defaultShop = new Shop();
             defaultShop.setShopName("First Shop");
             defaultShop.setUser(newUser);
+            defaultShop.setShopOpen(true);
 
             newUser.setShops(new ArrayList<Shop>());
             newUser.getShops().add(defaultShop);

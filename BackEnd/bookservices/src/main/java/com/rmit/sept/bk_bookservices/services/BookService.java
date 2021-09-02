@@ -7,6 +7,9 @@ import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -26,6 +29,19 @@ public class BookService {
             return bookRepository.getByBookId(id);
         } catch (Exception e) {
             throw new BookNotFoundException("Book does not exist");
+        }
+    }
+
+    public List<Book> getBooksByIdList (List<Long> bookIdList) {
+        try {
+            List<Book> bookList = new ArrayList<Book>();
+            for (Long bookId : bookIdList) {
+                Book book = bookRepository.getByBookId(bookId);
+                bookList.add(book);
+            }
+            return bookList;
+        } catch (Exception e) {
+            throw new BookNotFoundException("Cannot retrieve book");
         }
     }
 }

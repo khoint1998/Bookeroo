@@ -102,16 +102,4 @@ public class UserController {
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
     }
 
-//    public void addAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
-//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
-//    }
-//
-//    public void deleteAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
-//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
-//    }
-
-//    public void removeAppliedSellingRegistration(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
-//        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
-//    }
-
 }

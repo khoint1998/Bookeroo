@@ -19,4 +19,17 @@ public class ShopController {
     public void applyForSellingRegistration(@Valid @RequestBody RegistrationDetailsDTO registrationDetailsDTO){
         shopService.applyForSellingRegistration(registrationDetailsDTO);
     }
+
+    @DeleteMapping("/shop/registration/delete/{regId}")
+    public void deleteASellingRegistration(@PathVariable Long regId){
+        shopService.deleteASellingRegistration(regId);
+    }
+
+    //    public void addAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
+    //        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+    //    }
+    //
+    //    public void deleteAShop(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetails purchaseDetails){
+    //        userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+    //    }
 }

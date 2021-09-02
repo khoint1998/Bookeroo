@@ -36,7 +36,7 @@ public class UserService {
             newUser.setConfirmPassword("");
 
             Shop defaultShop = new Shop();
-            defaultShop.setShopName("default");
+            defaultShop.setShopName("First Shop");
             defaultShop.setUser(newUser);
 
             newUser.setShops(new ArrayList<Shop>());

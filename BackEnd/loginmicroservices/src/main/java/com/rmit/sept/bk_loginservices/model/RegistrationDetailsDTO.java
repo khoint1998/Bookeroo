@@ -15,4 +15,6 @@ public class RegistrationDetailsDTO {
     private float price;
 
     private String bookId;
+
+    private String bookTitle;
 }

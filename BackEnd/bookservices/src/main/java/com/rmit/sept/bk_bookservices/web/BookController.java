@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -37,6 +38,11 @@ public class BookController {
     @GetMapping("/get/book/id/{id}")
     public Book getBookById(@PathVariable(value="id") Long id) {
         return bookService.getBookById(id);
+    }
+
+    @GetMapping("get/book/bookIdList")
+    public List<Book> getBooksByIdList(@RequestBody List<Long> bookIdList) {
+        return bookService.getBooksByIdList(bookIdList);
     }
 
 }

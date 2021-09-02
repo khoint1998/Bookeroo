@@ -17,13 +17,16 @@ import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 import jwt_decode from "jwt-decode";
 import MyRegistration from "./components/MyRegistration/MyRegistration";
+import MyShops from "./components/MyShops/MyShops";
 
 const guestValue = {};
 
 const loginReducer = (currentUser, action) => {
   switch(action.type) {
     case 'login':
-      return action.userInput;
+      return {
+        user: action.userInput,
+      };
     case 'logout':
       return guestValue;
     default:
@@ -59,21 +62,15 @@ const App = () => {
         <Router>
           <div className="App">
             <Header />
-            {
-              //Public Routes
-            }
             
             <Route exact path="/" component={Homepage} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            
             <Route exact path="/about" component={AboutUs} />
             <Route exact path="/contact" component={ContactUs} />
             <Route exact path="/purchaseHistory" component={PurchaseHistory}/>
             <Route exact path="/profile" component={Profile} />
-            {
-              //Private Routes
-            }
+            <Route exact path="/my-shops" component={MyShops} />
             <Route exact path="/my-registration" component={MyRegistration} />
             <Route exact path="/addPerson" component={AddPerson} />
           

@@ -7,18 +7,16 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import { UserContext } from "../../App";
 import { GetUserInfo } from "../../axios/UserAPI";
-import { DeleteRegistration } from "../../axios/RegistrationAPI";
-import "./MyRegistration.css";
+import "./MyShops.css";
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 
-const MyRegistration = (props) => {
+const MyShops = (props) => {
 
     const currentUser = useContext(UserContext);
     
@@ -45,34 +43,24 @@ const MyRegistration = (props) => {
       }))(TableRow);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
+    console.log(user && user.shops);
 
-    const {onSellCopyList} = user ? user.shops[0] : '';
-
-    const removeRegistration = (regId) => {
-        DeleteRegistration(regId);
+    const removeShop = (regId) => {
+        //Do something
         window.location.reload();
+    }
+
+    const visitShop = () => {
+
     }
     
     return (
-        <div className="myreg--page">
-            <div className="myreg--header">
-                <div className="myreg--header-name">My Registration</div>
-                <div className="myreg--btns">
+        <div className="myshop--page">
+            <div className="myshop--header">
+                <div className="myshop--header-name">My Shops</div>
+                <div className="myshop--btns">
                     <Button
-                        className="myreg--btn"
-                        startIcon={<HistoryOutlinedIcon/>}
-                        style={{ 
-                            border: '2px solid #06f', 
-                            borderRadius:'1vh',
-                            height: '5vh',
-                            marginRight: '2vw',
-                            color: '#06f',
-                            fontWeight: 'bolder',
-                            outline: 'none'
-                        }} 
-                    >Sale History</Button>
-                    <Button
-                        className="myreg--btn"
+                        className="myshop--btn"
                         startIcon={<AddOutlinedIcon/>}
                         style={{ 
                             border: '2px solid #06f', 
@@ -83,32 +71,30 @@ const MyRegistration = (props) => {
                             fontWeight: 'bolder',
                             outline: 'none'
                         }} 
-                    >New Registration</Button>
+                    >Create a New Shop</Button>
                 </div>
             </div>
-            <div className="myreg--table">
+            <div className="myshop--table">
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>ID</StyledTableCell>
-                                <StyledTableCell>Cover</StyledTableCell>
+                                <StyledTableCell>Logo</StyledTableCell>
                                 <StyledTableCell>Name</StyledTableCell>
-                                <StyledTableCell>Price</StyledTableCell>
                                 <StyledTableCell>Status</StyledTableCell>
                                 <StyledTableCell>Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody> 
-                            {onSellCopyList && onSellCopyList.map(row => (
-                                <StyledTableRow key={row.registrationId}>
+                            {user && user.shops.map(row => (
+                                <StyledTableRow key={row.shopId}>
                                     <StyledTableCell component="th" scope="row">
-                                        {row.registrationId}
+                                        {row.shopId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="myreg--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
-                                    <StyledTableCell>{row.bookTitle}</StyledTableCell>
-                                    <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="myreg--approved-text">Approved</span> : <span className="myreg--pending-text">Awaiting Approval</span>}</StyledTableCell>
+                                    <StyledTableCell><img className="myshop--cover" src="/pics/brand-2.jpg" alt="logo"/></StyledTableCell>
+                                    <StyledTableCell>{row.shopName}</StyledTableCell>
+                                    <StyledTableCell>{row.status ? <span className="myshop--open-text">Open</span> : <span className="myshop--close-text">Closed</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -122,20 +108,23 @@ const MyRegistration = (props) => {
                                                 fontWeight: 'bolder',
                                                 outline: 'none'
                                             }}
-                                        >Details</Button>
-                                        <Button 
-                                            variant="contained" 
-                                            endIcon={<HighlightOffIcon/>}
-                                            style={{ 
-                                                backgroundColor: '#fd0707',
-                                                borderRadius:'2vh',
-                                                height: '5vh',
-                                                color: 'white',
-                                                fontWeight: 'bolder',
-                                                outline: 'none'
-                                            }}
-                                            onClick={() => removeRegistration(row.registrationId)}
-                                        >Delete</Button>
+                                            onClick={() => visitShop(row.shopId)}
+                                        >Visit</Button>
+                                        {user.shops.length !== 1 ?
+                                            <Button 
+                                                variant="contained" 
+                                                endIcon={<HighlightOffIcon/>}
+                                                style={{ 
+                                                    backgroundColor: '#fd0707',
+                                                    borderRadius:'2vh',
+                                                    height: '5vh',
+                                                    color: 'white',
+                                                    fontWeight: 'bolder',
+                                                    outline: 'none'
+                                                }}
+                                                onClick={() => removeShop(row.registrationId)}
+                                            >Delete</Button>:<></>
+                                        }
                                     </StyledTableCell>
                                 </StyledTableRow>))
                             }
@@ -147,4 +136,4 @@ const MyRegistration = (props) => {
     );
 }
 
-export default MyRegistration;
+export default MyShops;

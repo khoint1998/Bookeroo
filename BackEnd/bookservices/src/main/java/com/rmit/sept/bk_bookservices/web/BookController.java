@@ -40,6 +40,11 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
+    @GetMapping("/get/book/title-isbn")
+    public Book getBookByTitleAndISBN(@RequestParam String title, @RequestParam String isbn) {
+        return bookService.getBookByTitleAndISBN(title,isbn);
+    }
+
     @GetMapping("get/book/bookIdList")
     public List<Book> getBooksByIdList(@RequestBody List<Long> bookIdList) {
         return bookService.getBooksByIdList(bookIdList);

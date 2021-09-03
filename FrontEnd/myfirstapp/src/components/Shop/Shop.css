@@ -1,0 +1,175 @@
+.shop--header {
+  display: flex;
+  justify-content: space-between;
+  margin: 2vh 0 3vh 0;
+}
+
+.shop--btns {
+  display: flex;
+  margin-right: 8vw;
+  align-items: center;
+}
+
+.shop--btn {
+  box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}
+
+.shop--header-name {
+  padding: 0.5vh 0 0.5vh 0;
+  font-size: 2vw;
+  font-weight: bolder;
+  color: #0066ff;
+  margin-right: 14vw;
+  margin-left: 4vw;
+}
+
+.shop--table {
+  margin: 0 3vw;
+  height: 75vh;
+  overflow: auto;
+}
+
+.shop--approved-text {
+  color: #9df656;
+  font-weight: bolder;
+}
+
+.shop--pending-text {
+  color: #ebda42;
+  font-weight: bolder;
+}
+
+.shop--cover {
+  width: 5vw;
+}
+
+.shop--logo-pic {
+  width: 5vw;
+  height: 5vw;
+  margin: 0 3vw 0 0;
+  border-radius: 50px;
+}
+
+.shop--page {
+  overflow: hidden;
+}
+
+.shop--search-book-dialog-title {
+  font-size: 1.5vw;
+  font-weight: bolder;
+  color: #0066ff;
+}
+
+.shop--highlight {
+  font-weight: bolder;
+  color: #0066ff;
+}
+
+.shop--dialog-2-content {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.shop--dialog-2-content-part {
+  flex: 1;
+}
+
+.shop--dialog-2-content-pic {
+  width: 35vw;
+  display: flex;
+}
+
+.shop--book-cover {
+  width: 15vw;
+  margin: 0 2vw 1vw 0;
+}
+
+.shop--book-details {
+  color: #0066ff;
+  font-size: 1.25vw;
+  margin: 0 0 1vw 0;
+}
+
+.shop--book-info {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 1vw 0;
+}
+
+.shop--book {
+  flex: 1;
+  margin: 0 2vw 1vw 0;
+}
+
+.shop--inputFields {
+  align-items: center;
+}
+
+.shop--align-label-and-field {
+  display: flex;
+  width: 21vw;
+  justify-content: flex-start;
+}
+
+.shop--align-label-and-field-term {
+  margin: 1vh 0 3vh 0;
+  width: 20vw;
+}
+
+.shop--label {
+  font-weight: bolder;
+  padding: 10px 0 0 0;
+}
+
+.shop--label-term {
+  font-weight: bolder;
+  color: #0066ff;
+}
+
+.shop--fields {
+  padding: 5px 5px;
+  margin: 5px 0 5px 15px;
+  display: inline-block;
+  border-bottom: 2px solid #06f;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.shop--label-radio {
+  font-weight: bolder;
+  padding: 10px 0 0 10px;
+  width: 5vw;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.shop--radios {
+  display: flex;
+}
+
+.shop--TnC {
+  margin: 10vh 0 5vh 0;
+}
+
+.shop--dialog-form {
+  margin-top: 5vh;
+}
+
+.shop--alignBtn {
+  text-align: end;
+  margin-right: 5vw;
+}
+
+.shop--btn-text {
+  font-size: 125%;
+  font-weight: bolder;
+  color: #06f;
+}
+
+.shop--submitBtn {
+  color: #06f;
+  padding: 0 3%;
+  box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}

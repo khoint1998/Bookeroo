@@ -18,6 +18,7 @@ import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import jwt_decode from "jwt-decode";
 import MyRegistration from "./components/MyRegistration/MyRegistration";
 import MyShops from "./components/MyShops/MyShops";
+import Shop from "./components/Shop/Shop";
 
 const guestValue = {};
 
@@ -71,6 +72,7 @@ const App = () => {
             <Route exact path="/purchaseHistory" component={PurchaseHistory}/>
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/my-shops" component={MyShops} />
+            <Route exact path="/shop" component={Shop} />
             <Route exact path="/my-registration" component={MyRegistration} />
             <Route exact path="/addPerson" component={AddPerson} />
           

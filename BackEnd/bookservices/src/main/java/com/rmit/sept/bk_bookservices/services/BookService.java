@@ -44,4 +44,17 @@ public class BookService {
             throw new BookNotFoundException("Cannot retrieve book");
         }
     }
+
+    public Book getBookByTitleAndISBN(String title, String isbn) {
+        try {
+            Book selectedBook = bookRepository.getByIsbn(isbn);
+            if(selectedBook.getTitle().equals(title)) {
+                return selectedBook;
+            } else {
+                throw new BookNotFoundException("");
+            }
+        } catch (Exception e) {
+            throw new BookNotFoundException("Something wrong. Book not found or Book name does not match the ISBN provided");
+        }
+    }
 }

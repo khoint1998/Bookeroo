@@ -14,19 +14,23 @@ import "./MyShops.css";
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { DeleteShop } from "../../axios/ShopAPI";
+import { DeleteShop, CreateShop } from "../../axios/ShopAPI";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Redirect } from "react-router-dom";
 
 
 const MyShops = () => {
 
     const currentUser = useContext(UserContext);
     const [openDialog, setOpenDialog] = useState(false);
+    const [shopName, setShopName] = useState('');
+    const [toRoute,setToRoute] = useState(null);
+    const [selectedShopId,setSelectedShopId] = useState(0);
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -59,19 +63,28 @@ const MyShops = () => {
       }))(TableRow);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
-    console.log(user && user.shops);
 
     const removeShop = (shopId) => {
         DeleteShop(shopId);
         window.location.reload();
     }
 
-    const createAShop = () => {
-        //Do the form then send the data
+    const createAShop = (shopName) => {
+        CreateShop(user && user.id,shopName);
+        window.location.reload();
     }
 
-    const visitShop = () => {
+    const visitShop = (shopId) => {
         //Go to Shop.js
+        setToRoute("/shop");
+        setSelectedShopId(shopId);
+    }
+
+    if (toRoute) {
+        return <Redirect to={{
+            pathname: '/shop',
+            state: { selectedShopId: selectedShopId }
+        }}/>
     }
     
     return (
@@ -164,16 +177,22 @@ const MyShops = () => {
                     margin="dense"
                     id="name"
                     label="New Shop Name"
-                    type="email"
                     fullWidth
+                    onChange={(e) => setShopName(e.target.value)}
                 />
                 </DialogContent>
                 <DialogActions>
                 <Button onClick={handleCloseDialog} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleCloseDialog} color="primary">
-                    Subscribe
+                <Button 
+                    onClick={() => {
+                        createAShop(shopName);
+                        handleCloseDialog();
+                    }} 
+                    color="primary"
+                >
+                    Create
                 </Button>
                 </DialogActions>
             </Dialog>

@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface BookRepository extends CrudRepository <Book, Long> {
 
     Book getByBookId(Long id);
+    Book getByIsbn(String isbn);
 }

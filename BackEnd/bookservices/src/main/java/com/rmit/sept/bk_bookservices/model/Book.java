@@ -42,6 +42,7 @@ public class Book {
     private String publisher;
 
 //    private Image cover_Page;
+
     @JsonManagedReference(value="book-copy")
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Collection<Copy> copies;

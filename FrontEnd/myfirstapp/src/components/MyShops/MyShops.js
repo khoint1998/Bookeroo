@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,11 +14,31 @@ import "./MyShops.css";
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { DeleteShop, CreateShop } from "../../axios/ShopAPI";
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { Redirect } from "react-router-dom";
 
 
-const MyShops = (props) => {
+const MyShops = () => {
 
     const currentUser = useContext(UserContext);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [shopName, setShopName] = useState('');
+    const [toRoute,setToRoute] = useState(null);
+    const [selectedShopId,setSelectedShopId] = useState(0);
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
     
     //HOC
     const StyledTableCell = withStyles(() => ({
@@ -43,15 +63,28 @@ const MyShops = (props) => {
       }))(TableRow);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
-    console.log(user && user.shops);
 
-    const removeShop = (regId) => {
-        //Do something
+    const removeShop = (shopId) => {
+        DeleteShop(shopId);
         window.location.reload();
     }
 
-    const visitShop = () => {
+    const createAShop = (shopName) => {
+        CreateShop(user && user.id,shopName);
+        window.location.reload();
+    }
 
+    const visitShop = (shopId) => {
+        //Go to Shop.js
+        setToRoute("/shop");
+        setSelectedShopId(shopId);
+    }
+
+    if (toRoute) {
+        return <Redirect to={{
+            pathname: '/shop',
+            state: { selectedShopId: selectedShopId }
+        }}/>
     }
     
     return (
@@ -70,7 +103,8 @@ const MyShops = (props) => {
                             color: '#06f',
                             fontWeight: 'bolder',
                             outline: 'none'
-                        }} 
+                        }}
+                        onClick={handleOpenDialog} 
                     >Create a New Shop</Button>
                 </div>
             </div>
@@ -94,7 +128,7 @@ const MyShops = (props) => {
                                     </StyledTableCell>
                                     <StyledTableCell><img className="myshop--cover" src="/pics/brand-2.jpg" alt="logo"/></StyledTableCell>
                                     <StyledTableCell>{row.shopName}</StyledTableCell>
-                                    <StyledTableCell>{row.status ? <span className="myshop--open-text">Open</span> : <span className="myshop--close-text">Closed</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.shopOpen ? <span className="myshop--open-text">Opened</span> : <span className="myshop--close-text">Closed</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -109,7 +143,7 @@ const MyShops = (props) => {
                                                 outline: 'none'
                                             }}
                                             onClick={() => visitShop(row.shopId)}
-                                        >Visit</Button>
+                                        >Visit Shop</Button>
                                         {user.shops.length !== 1 ?
                                             <Button 
                                                 variant="contained" 
@@ -122,7 +156,7 @@ const MyShops = (props) => {
                                                     fontWeight: 'bolder',
                                                     outline: 'none'
                                                 }}
-                                                onClick={() => removeShop(row.registrationId)}
+                                                onClick={() => removeShop(row.shopId)}
                                             >Delete</Button>:<></>
                                         }
                                     </StyledTableCell>
@@ -132,6 +166,36 @@ const MyShops = (props) => {
                     </Table>
                 </TableContainer>
             </div>
+            <Dialog open={openDialog} onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Create New Shop</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Please enter your new shop name below.
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="New Shop Name"
+                    fullWidth
+                    onChange={(e) => setShopName(e.target.value)}
+                />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleCloseDialog} color="primary">
+                    Cancel
+                </Button>
+                <Button 
+                    onClick={() => {
+                        createAShop(shopName);
+                        handleCloseDialog();
+                    }} 
+                    color="primary"
+                >
+                    Create
+                </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

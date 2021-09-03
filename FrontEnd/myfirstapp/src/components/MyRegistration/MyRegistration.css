@@ -45,3 +45,123 @@
 .myreg--page {
   overflow: hidden;
 }
+
+.myreg--search-book-dialog-title {
+  font-size: 1.5vw;
+  font-weight: bolder;
+  color: #0066ff;
+}
+
+.myreg--highlight {
+  font-weight: bolder;
+  color: #0066ff;
+}
+
+.myreg--dialog-2-content {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.myreg--dialog-2-content-part {
+  flex: 1;
+}
+
+.myreg--dialog-2-content-pic {
+  width: 35vw;
+  display: flex;
+}
+
+.myreg--book-cover {
+  width: 15vw;
+  margin: 0 2vw 1vw 0;
+}
+
+.myreg--book-details {
+  color: #0066ff;
+  font-size: 1.25vw;
+  margin: 0 0 1vw 0;
+}
+
+.myreg--book-info {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 1vw 0;
+}
+
+.myreg--book {
+  flex: 1;
+  margin: 0 2vw 1vw 0;
+}
+
+.myreg--inputFields {
+  align-items: center;
+}
+
+.myreg--align-label-and-field {
+  display: flex;
+  width: 21vw;
+  justify-content: flex-start;
+}
+
+.myreg--align-label-and-field-term {
+  margin: 1vh 0 3vh 0;
+  width: 20vw;
+}
+
+.myreg--label {
+  font-weight: bolder;
+  padding: 10px 0 0 0;
+}
+
+.myreg--label-term {
+  font-weight: bolder;
+  color: #0066ff;
+}
+
+.myreg--fields {
+  padding: 5px 5px;
+  margin: 5px 0 5px 15px;
+  display: inline-block;
+  border-bottom: 2px solid #06f;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.myreg--label-radio {
+  font-weight: bolder;
+  padding: 10px 0 0 10px;
+  width: 5vw;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.myreg--radios {
+  display: flex;
+}
+
+.myreg--TnC {
+  margin: 10vh 0 5vh 0;
+}
+
+.myreg--dialog-form {
+  margin-top: 5vh;
+}
+
+.myreg--alignBtn {
+  text-align: end;
+  margin-right: 5vw;
+}
+
+.myreg--btn-text {
+  font-size: 125%;
+  font-weight: bolder;
+  color: #06f;
+}
+
+.myreg--submitBtn {
+  color: #06f;
+  padding: 0 3%;
+  box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}

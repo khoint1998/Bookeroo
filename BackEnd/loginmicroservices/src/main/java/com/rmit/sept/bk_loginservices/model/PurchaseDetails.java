@@ -27,7 +27,7 @@ public class PurchaseDetails {
     private String sellerFullName;
 
     @Column(columnDefinition = "float default 0.0")
-    private Float price;
+    private float price;
 
     private Date create_At;
 

@@ -12,7 +12,5 @@ public class CopyDTO {
 
     private boolean newBook;
 
-    private float price;
-
     private String bookId;
 }

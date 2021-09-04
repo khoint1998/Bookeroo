@@ -25,12 +25,12 @@ public class CopyService {
     public Copy createCopy(CopyDTO copyDto) {
         try {
             Book book = bookRepository.getByBookId(Long.parseLong(copyDto.getBookId()));
+
             Copy copy = new Copy();
 
             copy.setBook(book);
             copy.setNewBook(copyDto.isNewBook());
-            copy.setPrice(copyDto.getPrice());
-            copy.setOwnerId(copyDto.getOwnerId());
+            copy.setOwnerId(Long.parseLong(copyDto.getOwnerId()));
 
             return copyRepository.save(copy);
         } catch (Exception e) {
@@ -38,11 +38,9 @@ public class CopyService {
         }
     }
     public Copy getCopyById(Long id) {
-        try {
-            return copyRepository.getByCopyId(id);
-        } catch (Exception e) {
-            throw new CopyNotFoundException("Copy does not exist");
-        }
+        Copy selectedCopy = copyRepository.getByCopyId(id);
+        if(selectedCopy==null) throw new CopyNotFoundException("Copy not found");
+        return selectedCopy;
     }
 
     public List<Copy> getCopiesById (List<Long> copyIdList) {

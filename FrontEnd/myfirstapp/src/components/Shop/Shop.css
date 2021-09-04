@@ -39,6 +39,11 @@
   font-weight: bolder;
 }
 
+.shop--sold-text {
+  color: #ec5a41;
+  font-weight: bolder;
+}
+
 .shop--cover {
   width: 5vw;
 }

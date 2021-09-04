@@ -31,7 +31,6 @@ import { Redirect } from "react-router-dom";
 const Shop = (props) => {
 
     const {selectedShopId} = props.location.state;
-    console.log(selectedShopId)
 
     const currentUser = useContext(UserContext);
     const [openDialog, setOpenDialog] = useState(false);
@@ -40,6 +39,8 @@ const Shop = (props) => {
     const [selectedISBN, setSelectedISBN] = useState('');
     const [prefetchedBook,setPrefetchedBook] = useState({});
     const [toRoute,setToRoute] = useState(null);
+    const [selectedReg, setSelectedReg] = useState(null);
+    const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -51,6 +52,14 @@ const Shop = (props) => {
 
     const handleCloseCreateRegDialog = () => {
         setOpenCreateRegDialog(false);
+    };
+
+    const handleCloseDetailsDialog = () => {
+        setOpenDetailsDialog(false);
+    };
+
+    const handleOpenDetailsDialog = () => {
+        setOpenDetailsDialog(true);
     };
     
     //HOC
@@ -101,6 +110,7 @@ const Shop = (props) => {
         const registrationDetails = {
             shopId: filterShopList && filterShopList[0].shopId,
             newBook: values.secondHand === "true" ? false : true,
+            status: "pending",
             bookTitle: prefetchedBook.title,
             price: values.price,
             bookId: prefetchedBook && prefetchedBook.bookId,
@@ -118,7 +128,7 @@ const Shop = (props) => {
     return (
         <div className="shop--page">
             <div className="shop--header">
-                <div className="shop--header-name"><img className="shop--logo-pic" src="/pics/brand-2.jpg" alt="logo"/>{filterShopList && filterShopList[0].shopName}</div>
+                <div className="shop--header-name"><img className="shop--logo-pic" src="/pics/brand-2.jpg" alt="logo"/>My Shop: {filterShopList && filterShopList[0].shopName}</div>
                 <div className="shop--btns">
                     <Button
                         className="shop--btn"
@@ -185,7 +195,7 @@ const Shop = (props) => {
                                     <StyledTableCell><img className="shop--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : <span className="shop--pending-text">Awaiting Approval</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--pending-text">Sold</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -198,6 +208,10 @@ const Shop = (props) => {
                                                 color: 'white',
                                                 fontWeight: 'bolder',
                                                 outline: 'none'
+                                            }}
+                                            onClick={() => {
+                                                setSelectedReg(row);
+                                                handleOpenDetailsDialog();
                                             }}
                                         >Details</Button>
                                         <Button 
@@ -315,7 +329,7 @@ const Shop = (props) => {
 
                                         <div className="shop--TnC">
                                             <div className="shop--align-label-and-field">
-                                                <div id="my-radio-group" className="shop--label">Is this a second hand copy?</div>
+                                                <div id="my-radio-group" className="shop--label">Is this a second hand copy? (No by default)</div>
                                                 <div className="shop--radios" role="group" aria-labelledby="my-radio-group">
                                                     <label className="shop--label-radio">
                                                         <Field type="radio" name="secondHand" value="true" />
@@ -362,6 +376,49 @@ const Shop = (props) => {
                     </div>
                 </div>
                 </DialogContent>
+            </Dialog>
+            
+            {/* Registration details dialog */}
+
+            <Dialog open={openDetailsDialog} onClose={handleCloseDetailsDialog} aria-labelledby="form-dialog-title" maxWidth="xl">
+                <DialogTitle id="form-dialog-title"><span className="inreg--search-book-dialog-title">Registration Details</span></DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Details for Registration ID#{selectedReg && selectedReg && selectedReg.registrationId}
+                </DialogContentText>
+                    <div className="inreg--reg-details-box">
+                        <div className="inreg--reg-column">
+                            <div className="inreg--reg-details">Registration ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.registrationId}</div>
+                            <div className="inreg--reg-details">Status:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.status === "approved" ? <span className="inreg--approved-text">Approved</span> : selectedReg && selectedReg.status === "pending" ? <span className="inreg--pending-text">Awaiting Approval</span> : <span className="inreg--sold-text">Sold</span>}</div>
+                            <div className="inreg--reg-details">Copy ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.copyId === null? <span className="inreg--sold-text">Not yet applied</span> : selectedReg && selectedReg.copyId}</div>
+                            <div className="inreg--reg-details">Book Title:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.bookTitle}</div>
+                        </div>
+                        <div className="inreg--reg-column">
+                        <div className="inreg--reg-details">Book ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.bookId}</div>
+                            <div className="inreg--reg-details">Owner ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.userId}</div>
+                            <div className="inreg--reg-details">Created At:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.create_At}</div>
+                            <div className="inreg--reg-details">Desired Price:</div>
+                            <div className="inreg--reg-info">${selectedReg && selectedReg.price}</div>
+                        </div>
+                    </div>
+                </DialogContent>
+                <DialogActions
+                    style={{
+                        margin: '0 0 1vw 0',
+                        justifyContent: 'center'
+                    }}
+                >
+                <Button onClick={handleCloseDetailsDialog} color="primary">
+                    Close
+                </Button>
+                </DialogActions>
             </Dialog>
         </div>
     );

@@ -1,20 +1,20 @@
-.myreg--header {
+.inreg--header {
   display: flex;
   justify-content: flex-end;
   margin: 2vh 0 3vh 0;
 }
 
-.myreg--btns {
+.inreg--btns {
   display: flex;
   margin-right: 8vw;
   align-items: center;
 }
 
-.myreg--btn {
+.inreg--btn {
   box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
 }
 
-.myreg--header-name {
+.inreg--header-name {
   padding: 0.5vh 0 0.5vh 0;
   font-size: 2vw;
   font-weight: bolder;
@@ -22,107 +22,107 @@
   margin-right: 14vw;
 }
 
-.myreg--table {
+.inreg--table {
   margin: 0 3vw;
   height: 75vh;
   overflow: auto;
 }
 
-.myreg--approved-text {
+.inreg--approved-text {
   color: #9df656;
   font-weight: bolder;
 }
 
-.myreg--pending-text {
+.inreg--pending-text {
   color: #ebda42;
   font-weight: bolder;
 }
 
-.myreg--sold-text {
+.inreg--sold-text {
   color: #ec5a41;
   font-weight: bolder;
 }
 
-.myreg--cover {
+.inreg--cover {
   width: 5vw;
 }
 
-.myreg--page {
+.inreg--page {
   overflow: hidden;
 }
 
-.myreg--search-book-dialog-title {
+.inreg--search-book-dialog-title {
   font-size: 1.5vw;
   font-weight: bolder;
   color: #0066ff;
 }
 
-.myreg--highlight {
+.inreg--highlight {
   font-weight: bolder;
   color: #0066ff;
 }
 
-.myreg--dialog-2-content {
+.inreg--dialog-2-content {
   display: flex;
   /* flex-wrap: wrap; */
 }
 
-.myreg--dialog-2-content-part {
+.inreg--dialog-2-content-part {
   flex: 1;
 }
 
-.myreg--dialog-2-content-pic {
+.inreg--dialog-2-content-pic {
   width: 35vw;
   display: flex;
 }
 
-.myreg--book-cover {
+.inreg--book-cover {
   width: 15vw;
   margin: 0 2vw 1vw 0;
 }
 
-.myreg--book-details {
+.inreg--book-details {
   color: #0066ff;
   font-size: 1.25vw;
   margin: 0 0 1vw 0;
 }
 
-.myreg--book-info {
+.inreg--book-info {
   color: rgba(0, 0, 0, 0.6);
   margin: 0 0 1vw 0;
 }
 
-.myreg--book {
+.inreg--book {
   flex: 1;
   margin: 0 2vw 1vw 0;
 }
 
-.myreg--inputFields {
+.inreg--inputFields {
   align-items: center;
 }
 
-.myreg--align-label-and-field {
+.inreg--align-label-and-field {
   display: flex;
   width: 21vw;
   justify-content: flex-start;
 }
 
-.myreg--align-label-and-field-term {
+.inreg--align-label-and-field-term {
   margin: 1vh 0 3vh 0;
   width: 20vw;
 }
 
-.myreg--label {
+.inreg--label {
   font-weight: bolder;
   padding: 10px 0 0 0;
 }
 
-.myreg--label-term {
+.inreg--label-term {
   font-weight: bolder;
   color: #0066ff;
 }
 
-.myreg--fields {
+.inreg--fields {
   padding: 5px 5px;
   margin: 5px 0 5px 15px;
   display: inline-block;
@@ -134,7 +134,7 @@
   box-sizing: border-box;
 }
 
-.myreg--label-radio {
+.inreg--label-radio {
   font-weight: bolder;
   padding: 10px 0 0 10px;
   width: 5vw;
@@ -142,31 +142,50 @@
   text-align: left;
 }
 
-.myreg--radios {
+.inreg--radios {
   display: flex;
 }
 
-.myreg--TnC {
+.inreg--TnC {
   margin: 10vh 0 5vh 0;
 }
 
-.myreg--dialog-form {
+.inreg--dialog-form {
   margin-top: 5vh;
 }
 
-.myreg--alignBtn {
+.inreg--alignBtn {
   text-align: end;
   margin-right: 5vw;
 }
 
-.myreg--btn-text {
+.inreg--btn-text {
   font-size: 125%;
   font-weight: bolder;
   color: #06f;
 }
 
-.myreg--submitBtn {
+.inreg--submitBtn {
   color: #06f;
   padding: 0 3%;
   box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}
+
+.inreg--reg-details {
+  color: #0066ff;
+  font-size: 1.25vw;
+  margin: 0 0 1vw 0;
+}
+
+.inreg--reg-info {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 1vw 0;
+}
+
+.inreg--reg-details-box {
+  display: flex;
+}
+
+.inreg--reg-column {
+  width: 20vw;
 }

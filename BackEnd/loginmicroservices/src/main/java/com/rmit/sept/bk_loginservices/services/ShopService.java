@@ -8,6 +8,8 @@ import com.rmit.sept.bk_loginservices.model.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShopService {
 
@@ -26,6 +28,8 @@ public class ShopService {
         newReg.setShop(selectedShop);
         newReg.setBookId(Long.parseLong(registrationDetailsDTO.getBookId()));
         newReg.setBookTitle(registrationDetailsDTO.getBookTitle());
+        newReg.setUserId(selectedShop.getUser().getId());
+        newReg.setStatus(registrationDetailsDTO.getStatus());
 
         selectedShop.getOnSellCopyList().add(newReg);
 
@@ -35,5 +39,16 @@ public class ShopService {
     public void deleteASellingRegistration(Long regId) {
         RegistrationDetails selectedReg = registrationRepository.getByRegistrationId(regId);
         registrationRepository.delete(selectedReg);
+    }
+
+    public List<RegistrationDetails> getAllSellingRegistrations() {
+        return registrationRepository.findAll();
+    }
+
+    public void approveRegistration (Long regId, Long copyId) {
+        RegistrationDetails selectedReg = registrationRepository.getByRegistrationId(regId);
+        selectedReg.setCopyId(copyId);
+        selectedReg.setStatus("approved");
+        registrationRepository.save(selectedReg);
     }
 }

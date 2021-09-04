@@ -4,13 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-
 @Getter @Setter @NoArgsConstructor
 public class RegistrationDetailsDTO {
     private String shopId;
 
     private boolean newBook;
+
+    private String status;
 
     private float price;
 

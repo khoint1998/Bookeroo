@@ -16,6 +16,7 @@ import StoreOutlinedIcon from '@material-ui/icons/StoreOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
 import { Redirect } from "react-router-dom";
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
 const Header = () => {
 
@@ -112,16 +113,35 @@ const Header = () => {
                                 }}>
                                     <StoreOutlinedIcon fontSize="small" />
                                 </ListItemIcon>
-                                <ListItemText primary="My Shop" onClick={() => setToRoute("/my-shops")}/></MenuItem> : 
-                            <MenuItem>
-                                <ListItemIcon style={{
-                                    minWidth: '25px'
-                                }}>
-                                    <NotificationsActiveOutlinedIcon fontSize="small" />
-                                </ListItemIcon>
-                                <ListItemText primary="Incoming Selling Registrations" />
-                            </MenuItem>
+                                <ListItemText primary="My Shop" onClick={() => setToRoute("/my-shops")}/>
+                            </MenuItem> : 
+                            <>
+                                <MenuItem>
+                                    <ListItemIcon style={{
+                                        minWidth: '25px'
+                                    }}>
+                                        <NotificationsActiveOutlinedIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Incoming Selling Registrations" onClick={() => setToRoute("/incoming-reg")}/>
+                                </MenuItem>
+                                <MenuItem>
+                                    <ListItemIcon style={{
+                                        minWidth: '25px'
+                                    }}>
+                                        <ListIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="My Selling Registration" onClick={() => setToRoute("/my-registration")}/>
+                                </MenuItem>
+                            </>
                         }
+                        <MenuItem>
+                            <ListItemIcon style={{
+                                minWidth: '25px'
+                            }}>
+                                <NewReleasesIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Notifications"/>
+                        </MenuItem>
                         <MenuItem>
                             <ListItemIcon style={{
                                 minWidth: '25px'

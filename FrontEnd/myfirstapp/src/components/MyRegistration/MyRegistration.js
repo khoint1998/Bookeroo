@@ -34,6 +34,8 @@ const MyRegistration = () => {
     const [selectedTitle, setSelectedTitle] = useState('');
     const [selectedISBN, setSelectedISBN] = useState('');
     const [prefetchedBook,setPrefetchedBook] = useState({});
+    const [selectedReg, setSelectedReg] = useState(null);
+    const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -45,6 +47,14 @@ const MyRegistration = () => {
 
     const handleCloseCreateRegDialog = () => {
         setOpenCreateRegDialog(false);
+    };
+
+    const handleCloseDetailsDialog = () => {
+        setOpenDetailsDialog(false);
+    };
+
+    const handleOpenDetailsDialog = () => {
+        setOpenDetailsDialog(true);
     };
     
     //HOC
@@ -92,6 +102,7 @@ const MyRegistration = () => {
         const registrationDetails = {
             shopId: user && user.shops[0].shopId,
             newBook: values.secondHand === "true" ? false : true,
+            status: "pending",
             bookTitle: prefetchedBook.title,
             price: values.price,
             bookId: prefetchedBook && prefetchedBook.bookId,
@@ -158,7 +169,7 @@ const MyRegistration = () => {
                                     <StyledTableCell><img className="myreg--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="myreg--approved-text">Approved</span> : <span className="myreg--pending-text">Awaiting Approval</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.status === "approved" ? <span className="myreg--approved-text">Approved</span> : row.status === "pending" ? <span className="myreg--pending-text">Awaiting Approval</span> : <span className="myreg--pending-text">Sold</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -171,6 +182,10 @@ const MyRegistration = () => {
                                                 color: 'white',
                                                 fontWeight: 'bolder',
                                                 outline: 'none'
+                                            }}
+                                            onClick={() => {
+                                                setSelectedReg(row);
+                                                handleOpenDetailsDialog();
                                             }}
                                         >Details</Button>
                                         <Button 
@@ -262,7 +277,6 @@ const MyRegistration = () => {
                             <div className="myreg--book-info">{prefetchedBook.publisher}</div>
                             <div className="myreg--book-details">Category:</div>
                             <div className="myreg--book-info">{prefetchedBook.category}</div>
-
                         </div>
                     </div>
                     <div className="myreg--dialog-2-content-part">
@@ -288,7 +302,7 @@ const MyRegistration = () => {
 
                                         <div className="myreg--TnC">
                                             <div className="myreg--align-label-and-field">
-                                                <div id="my-radio-group" className="myreg--label">Is this a second hand copy?</div>
+                                                <div id="my-radio-group" className="myreg--label">Is this a second hand copy? (No by default)</div>
                                                 <div className="myreg--radios" role="group" aria-labelledby="my-radio-group">
                                                     <label className="myreg--label-radio">
                                                         <Field type="radio" name="secondHand" value="true" />
@@ -335,6 +349,49 @@ const MyRegistration = () => {
                     </div>
                 </div>
                 </DialogContent>
+            </Dialog>
+
+            {/* Registration details dialog */}
+
+            <Dialog open={openDetailsDialog} onClose={handleCloseDetailsDialog} aria-labelledby="form-dialog-title" maxWidth="xl">
+                <DialogTitle id="form-dialog-title"><span className="inreg--search-book-dialog-title">Registration Details</span></DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Details for Registration ID#{selectedReg && selectedReg && selectedReg.registrationId}
+                </DialogContentText>
+                    <div className="inreg--reg-details-box">
+                        <div className="inreg--reg-column">
+                            <div className="inreg--reg-details">Registration ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.registrationId}</div>
+                            <div className="inreg--reg-details">Status:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.status === "approved" ? <span className="inreg--approved-text">Approved</span> : selectedReg && selectedReg.status === "pending" ? <span className="inreg--pending-text">Awaiting Approval</span> : <span className="inreg--sold-text">Sold</span>}</div>
+                            <div className="inreg--reg-details">Copy ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.copyId === null? <span className="inreg--sold-text">Not yet applied</span> : selectedReg && selectedReg.copyId}</div>
+                            <div className="inreg--reg-details">Book Title:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.bookTitle}</div>
+                        </div>
+                        <div className="inreg--reg-column">
+                        <div className="inreg--reg-details">Book ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.bookId}</div>
+                            <div className="inreg--reg-details">Owner ID:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.userId}</div>
+                            <div className="inreg--reg-details">Created At:</div>
+                            <div className="inreg--reg-info">{selectedReg && selectedReg.create_At}</div>
+                            <div className="inreg--reg-details">Desired Price:</div>
+                            <div className="inreg--reg-info">${selectedReg && selectedReg.price}</div>
+                        </div>
+                    </div>
+                </DialogContent>
+                <DialogActions
+                    style={{
+                        margin: '0 0 1vw 0',
+                        justifyContent: 'center'
+                    }}
+                >
+                <Button onClick={handleCloseDetailsDialog} color="primary">
+                    Close
+                </Button>
+                </DialogActions>
             </Dialog>
         </div>
     );

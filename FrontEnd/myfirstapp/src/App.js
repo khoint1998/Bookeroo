@@ -19,6 +19,7 @@ import jwt_decode from "jwt-decode";
 import MyRegistration from "./components/MyRegistration/MyRegistration";
 import MyShops from "./components/MyShops/MyShops";
 import Shop from "./components/Shop/Shop";
+import IncomingRegistrations from "./components/IncomingRegistration/IncomingRegistration";
 
 const guestValue = {};
 
@@ -75,7 +76,8 @@ const App = () => {
             <Route exact path="/shop" component={Shop} />
             <Route exact path="/my-registration" component={MyRegistration} />
             <Route exact path="/addPerson" component={AddPerson} />
-          
+            <Route exact path="/incoming-reg" component={IncomingRegistrations} />
+
           </div>
         </Router>
       </Provider>

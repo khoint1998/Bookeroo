@@ -49,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         PurchaseDetails purchaseDetails = new PurchaseDetails();
         purchaseDetails.setCopyId(Long.parseLong(purchaseDetailsDto.getCopyId()));
         purchaseDetails.setTitle(purchaseDetailsDto.getTitle());
-        purchaseDetails.setPrice(purchaseDetailsDto.getPrice());
+        purchaseDetails.setPrice(Long.parseLong(purchaseDetailsDto.getPrice()));
         purchaseDetails.setSellerFullName(purchaseDetailsDto.getSellerFullName());
         purchaseDetails.setUser(selectedUser);
 

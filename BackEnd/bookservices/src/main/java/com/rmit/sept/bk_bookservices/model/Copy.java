@@ -14,14 +14,10 @@ public class Copy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long copyId;
 
-    @NotBlank(message = "OwnerId (userId - id) is missing")
-    private String ownerId;
+    private Long ownerId;
 
     @Column(columnDefinition = "boolean default true")
     private boolean newBook;
-
-    @Column(columnDefinition = "float default 0.0")
-    private float price;
 
     @JsonBackReference(value="book-copy")
     @ManyToOne

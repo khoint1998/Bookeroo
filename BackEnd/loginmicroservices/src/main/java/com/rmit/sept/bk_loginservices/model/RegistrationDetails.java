@@ -18,11 +18,11 @@ public class RegistrationDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long registrationId;
 
-    //Will change to false when registration is approved
-    @Column(columnDefinition = "varchar(255) default 'pending'")
-    private boolean status;
+    //Will change to 'approved' when registration is approved
+    @NotBlank(message = "Status is required")
+    private String status;
 
-    //Currently null, will hav this once this registration is approved and create a copy in DB
+    //Currently null, will have this once this registration is approved and a copy in DB is created
     @Column(columnDefinition = "Long default 0")
     private Long copyId;
 
@@ -32,24 +32,26 @@ public class RegistrationDetails {
 //    Will implement later
 //    private String bookCover;
 
+    @Column(columnDefinition = "float default 0.0")
+    private float price;
+
     private Date create_At;
 
     ///////These values will be sent as CopyDTO to create a copy once the registration is approved//////
     @Column(columnDefinition = "boolean default true")
     private boolean newBook;
 
-    @Column(columnDefinition = "float default 0.0")
-    private float price;
+    //Send as ownerId
+    private Long userId;
 
     //Frontend have bookId when user apply a copy for a book. For Testing: random string
     private Long bookId;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Taking userId is enough
     @JsonBackReference(value="shop-reg")
     @ManyToOne
     @JoinColumn(name ="id", nullable = false)
     private Shop shop;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @PrePersist
     protected void onCreate(){

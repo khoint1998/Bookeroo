@@ -1,9 +1,11 @@
 package com.rmit.sept.bk_bookservices.services;
 
 import com.rmit.sept.bk_bookservices.exceptions.BookNotFoundException;
+import com.rmit.sept.bk_bookservices.exceptions.CopyNotFoundException;
 import com.rmit.sept.bk_bookservices.exceptions.ISBNAlreadyExistsException;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
+import com.rmit.sept.bk_bookservices.model.Copy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +27,9 @@ public class BookService {
     }
 
     public Book getBookById (Long id) {
-        try {
-            return bookRepository.getByBookId(id);
-        } catch (Exception e) {
-            throw new BookNotFoundException("Book does not exist");
-        }
+        Book book = bookRepository.getByBookId(id);
+        if(book==null) throw new BookNotFoundException("Book not found");
+        return book;
     }
 
     public List<Book> getBooksByIdList (List<Long> bookIdList) {

@@ -12,5 +12,5 @@ public class PurchaseDetailsDTO {
 
     private String sellerFullName;
 
-    private Float price;
+    private String price;
 }

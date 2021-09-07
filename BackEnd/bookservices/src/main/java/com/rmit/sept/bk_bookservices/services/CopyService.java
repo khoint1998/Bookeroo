@@ -2,7 +2,7 @@ package com.rmit.sept.bk_bookservices.services;
 
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookservices.exceptions.BookNotFoundException;
-import com.rmit.sept.bk_bookservices.exceptions.CopyNotFound_Exception;
+import com.rmit.sept.bk_bookservices.exceptions.CopyNotFoundException;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.model.Copy;
 import com.rmit.sept.bk_bookservices.exceptions.CreateCopyFailedException;
@@ -41,7 +41,7 @@ public class CopyService {
     }
     public Copy getCopyById(Long id) {
         Copy selectedCopy = copyRepository.getByCopyId(id);
-        if(selectedCopy==null) throw new CopyNotFound_Exception("Copy not found");
+        if(selectedCopy==null) throw new CopyNotFoundException("Copy not found");
         return selectedCopy;
     }
 
@@ -55,10 +55,10 @@ public class CopyService {
             if (!copyList.isEmpty()) {
                 return copyList;
             } else {
-                throw new CopyNotFound_Exception("Something wrong. Cannot retrieve the copies requested");
+                throw new CopyNotFoundException("Something wrong. Cannot retrieve the copies requested");
             }
         } catch (Exception e) {
-            throw new CopyNotFound_Exception("Something wrong. Cannot retrieve the copies requested");
+            throw new CopyNotFoundException("Something wrong. Cannot retrieve the copies requested");
         }
     }
 
@@ -68,10 +68,10 @@ public class CopyService {
             if (!copyList.isEmpty()){
                 return copyList;
             } else {
-                throw new CopyNotFound_Exception("Copies not found. This book id is invalid or the book id is wrong");
+                throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
             }
         } catch (Exception e) {
-            throw new CopyNotFound_Exception("Copies not found. This book id is invalid or the book id is wrong");
+            throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
         }
     }
 

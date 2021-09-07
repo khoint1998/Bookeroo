@@ -45,4 +45,9 @@ public class CopyController {
         return copyService.getCopiesById(copyIdList);
     }
 
+    @GetMapping("get/copy/getCopiesByBookId/{id}")
+    public List<Copy> getCopiesByBookId(@PathVariable(value="id") Long bookId) {
+        return copyService.getCopiesByBookId(bookId);
+    }
+
 }

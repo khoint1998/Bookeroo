@@ -31,7 +31,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleCopyNotFoundException(CopyNotFoundException ex, WebRequest request){
+    public final ResponseEntity<Object> handleCopyNotFoundException(CopyNotFound_Exception ex, WebRequest request){
         ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }

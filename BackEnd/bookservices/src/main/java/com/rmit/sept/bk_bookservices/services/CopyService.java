@@ -1,7 +1,8 @@
 package com.rmit.sept.bk_bookservices.services;
 
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
-import com.rmit.sept.bk_bookservices.exceptions.CopyNotFoundException;
+import com.rmit.sept.bk_bookservices.exceptions.BookNotFoundException;
+import com.rmit.sept.bk_bookservices.exceptions.CopyNotFound_Exception;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.model.Copy;
 import com.rmit.sept.bk_bookservices.exceptions.CreateCopyFailedException;
@@ -9,6 +10,7 @@ import com.rmit.sept.bk_bookservices.Repositories.CopyRepository;
 import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class CopyService {
     }
     public Copy getCopyById(Long id) {
         Copy selectedCopy = copyRepository.getByCopyId(id);
-        if(selectedCopy==null) throw new CopyNotFoundException("Copy not found");
+        if(selectedCopy==null) throw new CopyNotFound_Exception("Copy not found");
         return selectedCopy;
     }
 
@@ -50,10 +52,28 @@ public class CopyService {
                 Copy copy = copyRepository.getByCopyId(copyId);
                 copyList.add(copy);
             }
-            return copyList;
+            if (!copyList.isEmpty()) {
+                return copyList;
+            } else {
+                throw new CopyNotFound_Exception("Something wrong. Cannot retrieve the copies requested");
+            }
         } catch (Exception e) {
-            throw new CopyNotFoundException("Something wrong. Cannot retrieve the copies requested");
+            throw new CopyNotFound_Exception("Something wrong. Cannot retrieve the copies requested");
         }
     }
+
+    public List<Copy> getCopiesByBookId (Long bookId) {
+        try {
+            List<Copy> copyList = copyRepository.getByBook_BookId(bookId);
+            if (!copyList.isEmpty()){
+                return copyList;
+            } else {
+                throw new CopyNotFound_Exception("Copies not found. This book id is invalid or the book id is wrong");
+            }
+        } catch (Exception e) {
+            throw new CopyNotFound_Exception("Copies not found. This book id is invalid or the book id is wrong");
+        }
+    }
+
 
 }

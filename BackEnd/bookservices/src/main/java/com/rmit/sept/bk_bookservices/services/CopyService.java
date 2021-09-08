@@ -43,17 +43,33 @@ public class CopyService {
         return selectedCopy;
     }
 
-    public List<Copy> getCopiesById (List<Long> copyIdList) {
+    public List<Copy> getCopiesByCopyIdList (List<Long> copyIdList) {
         try {
             List<Copy> copyList = new ArrayList<Copy>();
             for (Long copyId : copyIdList) {
                 Copy copy = copyRepository.getByCopyId(copyId);
                 copyList.add(copy);
             }
-            return copyList;
+            if (!copyList.isEmpty()) {
+                return copyList;
+            } else {
+                throw new CopyNotFoundException("Something wrong. Cannot retrieve the copies requested");
+            }
         } catch (Exception e) {
             throw new CopyNotFoundException("Something wrong. Cannot retrieve the copies requested");
         }
     }
 
+    public List<Copy> getCopiesByBookId (Long bookId) {
+        try {
+            List<Copy> copyList = copyRepository.getByBook_BookId(bookId);
+            if (!copyList.isEmpty()){
+                return copyList;
+            } else {
+                throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
+            }
+        } catch (Exception e) {
+            throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
+        }
+    }
 }

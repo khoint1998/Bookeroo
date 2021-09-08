@@ -42,10 +42,10 @@ public class CopyController {
 
     @GetMapping("get/copy/copyIdList")
     public List<Copy> getCopiesById(@RequestBody List<Long> copyIdList) {
-        return copyService.getCopiesById(copyIdList);
+        return copyService.getCopiesByCopyIdList(copyIdList);
     }
 
-    @GetMapping("get/copy/getCopiesByBookId/{id}")
+    @GetMapping("get/copy/bookId/{id}")
     public List<Copy> getCopiesByBookId(@PathVariable(value="id") Long bookId) {
         return copyService.getCopiesByBookId(bookId);
     }

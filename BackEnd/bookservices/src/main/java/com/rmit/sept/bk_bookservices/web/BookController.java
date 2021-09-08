@@ -50,19 +50,19 @@ public class BookController {
         return bookService.getBooksByIdList(bookIdList);
     }
 
-    @GetMapping("get/book/getBooksByTitle")
+    @GetMapping("get/books/title")
     public List<Book> getBooksByTitle(@RequestParam String title) {
         return bookService.getBooksByTitleContain(title);
     }
 
-    @GetMapping("get/book/getBooksByAuthor")
+    @GetMapping("get/books/author")
     public List<Book> getBooksByAuthor(@RequestParam String author) {
         return bookService.getBooksByAuthorContain(author);
     }
 
-    @GetMapping("get/book/getBooksByIsbn")
-    public List<Book> getBooksByIsbn(@RequestParam String isbn) {
-        return bookService.getBooksByIsbn(isbn);
+    @GetMapping("get/book/isbn")
+    public Book getBookByIsbn(@RequestParam String isbn) {
+        return bookService.getBookByIsbn(isbn);
     }
 
 }

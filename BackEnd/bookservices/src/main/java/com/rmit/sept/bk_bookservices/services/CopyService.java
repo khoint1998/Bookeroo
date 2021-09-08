@@ -1,7 +1,6 @@
 package com.rmit.sept.bk_bookservices.services;
 
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
-import com.rmit.sept.bk_bookservices.exceptions.BookNotFoundException;
 import com.rmit.sept.bk_bookservices.exceptions.CopyNotFoundException;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.model.Copy;
@@ -44,7 +43,7 @@ public class CopyService {
         return selectedCopy;
     }
 
-    public List<Copy> getCopiesById (List<Long> copyIdList) {
+    public List<Copy> getCopiesByCopyIdList (List<Long> copyIdList) {
         try {
             List<Copy> copyList = new ArrayList<Copy>();
             for (Long copyId : copyIdList) {
@@ -73,6 +72,4 @@ public class CopyService {
             throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
         }
     }
-
-
 }

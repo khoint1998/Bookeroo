@@ -1,12 +1,9 @@
 package com.rmit.sept.bk_bookservices.services;
 
 import com.rmit.sept.bk_bookservices.exceptions.BookNotFoundException;
-import com.rmit.sept.bk_bookservices.exceptions.CopyNotFoundException;
 import com.rmit.sept.bk_bookservices.exceptions.ISBNAlreadyExistsException;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
-import com.rmit.sept.bk_bookservices.model.Copy;
-import javafx.scene.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +58,6 @@ public class BookService {
 
     public List<Book> getBooksByTitleContain(String title) {
         try {
-            //List<Book> bookList = bookRepository.getByTitleContaining(title);
             List<Book> bookList = bookRepository.getByTitleContainingIgnoreCase(title);
             if(!bookList.isEmpty()){
                 return bookList;
@@ -75,7 +71,6 @@ public class BookService {
 
     public List<Book> getBooksByAuthorContain(String author) {
         try {
-            //List<Book> bookList = bookRepository.getByAuthorContaining(author);
             List<Book> bookList = bookRepository.getByAuthorContainingIgnoreCase(author);
             if(!bookList.isEmpty()){
                 return bookList;
@@ -87,16 +82,9 @@ public class BookService {
         }
     }
 
-    public List<Book> getBooksByIsbn(String isbn) {
-        try {
-            List<Book> bookList = bookRepository.getBooksByIsbn(isbn);
-            if(!bookList.isEmpty()){
-                return bookList;
-            } else {
-                throw new BookNotFoundException("Books not found. Isbn is invalid or the Isbn is wrong");
-            }
-        } catch (Exception e) {
-            throw new BookNotFoundException("Books not found. Isbn is invalid or the Isbn is wrong");
-        }
+    public Book getBookByIsbn(String isbn) {
+        Book selectedBook = bookRepository.getByIsbn(isbn);
+        if(selectedBook==null) throw new BookNotFoundException("Book not found");
+        return selectedBook;
     }
 }

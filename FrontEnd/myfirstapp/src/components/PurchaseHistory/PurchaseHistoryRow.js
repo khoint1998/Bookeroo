@@ -5,23 +5,23 @@ function PurchaseHistoryRow(props) {
     return (
         <div className="PurchaseRow">
             <div className="PurchaseCol" id="purchase_id">
-                1
+                {props.purchase_id}
             </div>
 
             <div className="PurchaseCol" id="book_name">
-                Harry Potter
+                {props.book_name}
             </div>
 
             <div className="PurchaseCol" id="seller_name">
-                Bloomsbury
+                {props.seller_name}
             </div>
 
             <div className="PurchaseCol" id="price">
-                24$
+                {props.price}
             </div>
 
             <div className="PurchaseCol" id="date">
-                20/05/2012
+                {props.date}
             </div>
 
             <div className="PurchaseCol" id="button">

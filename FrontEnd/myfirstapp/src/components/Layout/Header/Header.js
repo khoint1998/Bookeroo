@@ -1,9 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState} from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import './Header.css';
 import { UserContext } from "../../../App";
 import { GetUserInfo } from "../../../axios/UserAPI";
+import { SearchBookAsResult } from "../../../axios/BookAPI";
 import Avatar from '@material-ui/core/Avatar';
 
 import Menu from '@material-ui/core/Menu';
@@ -23,6 +24,7 @@ const Header = () => {
     const [searchResults, setSearchResults] = useState("");
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [toRoute,setToRoute] = useState(null);
+    const [searchedBooks,setSearchedBooks] = useState(null);
 
     const currentUser = useContext(UserContext);
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
@@ -35,11 +37,31 @@ const Header = () => {
         setAnchorEl(null);
     }
 
+    const searchFor = async (searchResults) => {
+        if(searchResults !== '') {
+            await SearchBookAsResult(searchResults).then(data => setSearchedBooks(data));
+            if (searchedBooks !== 'Books not found') {
+                setToRoute("/book-search");
+                window.location.reload();
+            } else {
+                //throw error message for the user
+            }
+        }
+    }
+
     if (toRoute) {
         return (
           <div>
             <Header/>
-            <Redirect to={toRoute} />
+            <Redirect 
+                to={{
+                    pathname: toRoute,
+                    state: { 
+                        searchedBooks: searchedBooks,
+                        searchedTitle: searchResults
+                    }
+                }} 
+            />
           </div>
         );
     }
@@ -62,6 +84,7 @@ const Header = () => {
                     onChange={(value) => setSearchResults(value)}
                     placeholder="Book title, Author, etc."
                     onCancelSearch={() => setSearchResults("")}
+                    onRequestSearch={() => searchFor(searchResults)}
                 />
             </div>
             

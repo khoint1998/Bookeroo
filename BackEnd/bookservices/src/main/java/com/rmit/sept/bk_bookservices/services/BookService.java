@@ -57,6 +57,7 @@ public class BookService {
     }
 
     public List<Book> getBooksByTitleContain(String title) {
+        if(title.equals("")) throw new BookNotFoundException("Books not found. This title is invalid or this title is wrong");
         try {
             List<Book> bookList = bookRepository.getByTitleContainingIgnoreCase(title);
             if(!bookList.isEmpty()){
@@ -70,6 +71,7 @@ public class BookService {
     }
 
     public List<Book> getBooksByAuthorContain(String author) {
+        if(author.equals("")) throw new BookNotFoundException("Books not found. The author is invalid or the author name is wrong");
         try {
             List<Book> bookList = bookRepository.getByAuthorContainingIgnoreCase(author);
             if(!bookList.isEmpty()){
@@ -86,5 +88,25 @@ public class BookService {
         Book selectedBook = bookRepository.getByIsbn(isbn);
         if(selectedBook==null) throw new BookNotFoundException("Book not found");
         return selectedBook;
+    }
+
+    public List<Book> getBooksByTitleAuthorISBN(String searchResult) {
+        if(searchResult.equals("")) throw new BookNotFoundException("Books not found");
+        try {
+            List<Book> bookList = bookRepository.getByTitleContainingIgnoreCase(searchResult);
+            List<Book> bookListFromAuthor = bookRepository.getByAuthorContainingIgnoreCase(searchResult);
+            bookList.addAll(bookListFromAuthor);
+
+            Book selectedBook = bookRepository.getByIsbn(searchResult);
+            if(selectedBook!=null) bookList.add(selectedBook);
+
+            if(!bookList.isEmpty()){
+                return bookList;
+            } else {
+                throw new BookNotFoundException("Books not found");
+            }
+        } catch (Exception e) {
+            throw new BookNotFoundException("Books not found");
+        }
     }
 }

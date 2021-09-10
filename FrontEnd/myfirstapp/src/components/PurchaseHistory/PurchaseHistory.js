@@ -8,7 +8,7 @@ import { UserContext } from "../../App";
 function PurchaseHistory() {
     const currentUser = useContext(UserContext);
 
-    const { user } = GetUserInfo(1); //Change this to current user
+    const { user } = GetUserInfo(currentUser);
 
     return (
         <div className="purchase_history--page">

@@ -51,21 +51,23 @@ const BookSearch = (props) => {
     }))(TableRow);
 
     const SearchFor = async (searchResults) => {
-        setSearchTitle(searchResults);
+        if(searchResults !== '') {
+            setSearchTitle(searchResults);
 
-        const options = {
-            title: true,
-            author: true,
-            isbn: true
-        };
-        
-        await SearchBookWithSelectedOptions(searchResults,options).then(data => setResultList(data));
-        if (resultList !== 'Books not found') {
-            setToRoute("/book-search");
-            window.location.reload();
-        } else {
-            //throw error message for the user
-        }
+            const options = {
+                title: true,
+                author: true,
+                isbn: true
+            };
+            
+            await SearchBookWithSelectedOptions(searchResults,options).then(data => setResultList(data));
+            if (resultList !== 'Books not found') {
+                setToRoute("/book-search");
+                window.location.reload();
+            } else {
+                //throw error message for the user
+            }
+        } 
     }
 
     const seeSellers = (bookId) => {

@@ -82,7 +82,7 @@ const Shop = (props) => {
             backgroundColor: theme.palette.action.hover,
           },
         },
-      }))(TableRow);
+    }))(TableRow);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
 

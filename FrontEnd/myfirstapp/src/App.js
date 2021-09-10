@@ -20,6 +20,8 @@ import MyRegistration from "./components/MyRegistration/MyRegistration";
 import MyShops from "./components/MyShops/MyShops";
 import Shop from "./components/Shop/Shop";
 import IncomingRegistrations from "./components/IncomingRegistration/IncomingRegistration";
+import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
+import BookSearch from "./components/SearchResult/BookSearch/BookSearch";
 
 const guestValue = {};
 
@@ -77,6 +79,8 @@ const App = () => {
             <Route exact path="/my-registration" component={MyRegistration} />
             <Route exact path="/addPerson" component={AddPerson} />
             <Route exact path="/incoming-reg" component={IncomingRegistrations} />
+            <Route exact path="/book-search" component={BookSearch} />
+            <Route exact path="/seller-search" component={SellerSearch} />
 
           </div>
         </Router>

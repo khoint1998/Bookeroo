@@ -65,4 +65,9 @@ public class BookController {
         return bookService.getBookByIsbn(isbn);
     }
 
+    @GetMapping("get/book/title-author-isbn")
+    public List<Book> getBooksByTitleAuthorISBN(@RequestParam String searchResult) {
+        return bookService.getBooksByTitleAuthorISBN(searchResult);
+    }
+
 }

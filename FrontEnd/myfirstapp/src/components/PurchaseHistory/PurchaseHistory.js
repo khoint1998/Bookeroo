@@ -7,8 +7,8 @@ import { UserContext } from "../../App";
 
 function PurchaseHistory() {
     const currentUser = useContext(UserContext);
-
-    const { user } = GetUserInfo(currentUser);
+    
+    const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id); 
 
     return (
         <div className="purchase_history--page">

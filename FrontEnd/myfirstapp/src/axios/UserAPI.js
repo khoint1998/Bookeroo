@@ -1,16 +1,16 @@
-import axios from "axios";
+import { userAxios } from "./axiosClient";
 import jwt_decode from "jwt-decode";
 import useSWR from 'swr';
 
 export const createUser = async (newUser) => {
-    const req = await axios.post('http://localhost:8080/bookeroo/users/register', newUser)
+    const req = await userAxios().post('users/register', newUser)
         .then(res => res.data)
         .catch(error => error.message);
     return req;
 }
 
 export const loginAsUser = async (user) => {
-    const req = await axios.post('http://localhost:8080/bookeroo/users/login', user)
+    const req = await userAxios().post('users/login', user)
       .then(res => {
         // extract token from res.data
         const { token } = res.data;
@@ -25,14 +25,15 @@ export const loginAsUser = async (user) => {
     return req;
 }
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (...args) => userAxios().get(...args).then((res) => res.data)
 
 export const GetUserInfo = (id) => {
     const { data, error } = useSWR(() => {
-    //Check if id is there first, then do the request
-    if(id) {
-      return'http://localhost:8080/bookeroo/users/get/user/id/' + id
-    }}
+      //Check if id is there first, then do the request
+      if(id) {
+        return 'users/get/user/id/' + id
+      }
+    }
     , fetcher)
   
     return {

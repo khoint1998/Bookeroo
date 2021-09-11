@@ -52,7 +52,7 @@ public class BookService {
                 throw new BookNotFoundException("");
             }
         } catch (Exception e) {
-            throw new BookNotFoundException("Something wrong. Book not found or Book name does not match the ISBN provided");
+            throw new BookNotFoundException("Something wrong. Book not found or Book name does not match the ISBN provided (Case sensitive)");
         }
     }
 

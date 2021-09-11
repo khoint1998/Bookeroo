@@ -1,9 +1,9 @@
-import axios from "axios";
+import { userAxios } from "./axiosClient";
 
 export const SearchForABook = async (title,isbn) => {
 
     //GET dont have Body at the middle of the func
-    const req = await axios.get('http://localhost:8081/bookeroo/books/get/book/title-isbn',
+    const req = await userAxios('book').get('books/get/book/title-isbn',
         {
             params: { title: title, isbn: isbn },
             headers: {
@@ -18,7 +18,7 @@ export const SearchForABook = async (title,isbn) => {
 export const SearchBookAsResult = async (searchResult) => {
 
     //GET dont have Body at the middle of the func
-    const req = await axios.get('http://localhost:8081/bookeroo/books/get/book/title-author-isbn',
+    const req = await userAxios('book').get('books/get/book/title-author-isbn',
         {
             params: { searchResult: searchResult },
             headers: {
@@ -39,7 +39,7 @@ export const SearchBookWithSelectedOptions = async (searchResult, options) => {
 
     if(options.title) {
         //GET Books by Title
-        titleReq = await axios.get('http://localhost:8081/bookeroo/books/get/books/title',
+        titleReq = await userAxios('book').get('books/get/books/title',
         {
             params: { title: searchResult },
             headers: {
@@ -56,7 +56,7 @@ export const SearchBookWithSelectedOptions = async (searchResult, options) => {
     
     if(options.author) {
         //GET Books by Author
-        authorReq = await axios.get('http://localhost:8081/bookeroo/books/get/books/author',
+        authorReq = await userAxios('book').get('books/get/books/author',
             {
                 params: { author: searchResult },
                 headers: {
@@ -73,7 +73,7 @@ export const SearchBookWithSelectedOptions = async (searchResult, options) => {
     
     if(options.isbn) {
         //GET Book by ISBN
-        isbnReq = await axios.get('http://localhost:8081/bookeroo/books/get/book/isbn',
+        isbnReq = await userAxios('book').get('books/get/book/isbn',
             {
                 params: { isbn: searchResult },
                 headers: {

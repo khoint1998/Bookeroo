@@ -1,7 +1,7 @@
-import axios from "axios";
+import { userAxios } from "./axiosClient";
 
 export const DeleteShop = async (shopId) => {
-    const req = await axios.delete('http://localhost:8080/bookeroo/shops/shop/delete/' + shopId,
+    const req = await userAxios().delete('shops/shop/delete/' + shopId,
             {
                 headers: {
                 'Authorization': `${localStorage.jwtToken}` 
@@ -14,7 +14,7 @@ export const DeleteShop = async (shopId) => {
 
 //POST/PATCH have body at the middle of the func
 export const CreateShop = async (userId,shopName) => {
-    const req = await axios.patch('http://localhost:8080/bookeroo/shops/shop/create/user/' + userId, null,
+    const req = await userAxios().patch('shops/shop/create/user/' + userId, null,
         {
             params: { shopName: shopName },
             headers: {

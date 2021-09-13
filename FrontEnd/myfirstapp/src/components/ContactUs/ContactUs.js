@@ -43,26 +43,26 @@ function AboutUs() {
             <div className="row">
                 <div className="image_container">
                         <div className="image_box_huge">
-                            <img className="book_1" src="./pics/book-5.jpg" alt="book"></img>
+                            <img className="book_1" src="./pics/book-5.jpg" alt="book_5"></img>
                         </div>
                     <div className="image_set">
                         <div className="image_row_small">
                             <div className="image_box_small">
-                                <img className="book_1" src="./pics/book-3.jpg" alt="book"></img>
+                                <img className="book_1" src="./pics/book-3.jpg" alt="book_3"></img>
                             </div>
                             <div className="image_box_small">
-                                <img className="book_1" src="./pics/book-2.jpg" alt="book"></img>
+                                <img className="book_1" src="./pics/book-2.jpg" alt="book_2"></img>
                             </div>
                         </div>
 
                         <div className="image_row_large">
-                            <img className="book_1" src="./pics/book-4.jpg" alt="book"></img>
+                            <img className="book_1" src="./pics/book-4.jpg" alt="book_4"></img>
                         </div>
 
                     </div>
                     <div className="image_set">
                         <div className="image_row_large">
-                            <img className="book_1" src="./pics/book-1.jpg" alt="book"></img>
+                            <img className="book_1" src="./pics/book-1.jpg" alt="book_1"></img>
                         </div>
                         <div className="image_row_small">
                             <div className="image_box_small">

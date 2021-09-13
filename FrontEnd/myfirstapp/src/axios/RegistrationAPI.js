@@ -1,8 +1,8 @@
-import axios from "axios";
+import { userAxios } from "./axiosClient";
 import useSWR from 'swr';
 
 export const DeleteRegistration = async (regId) => {
-    const req = await axios.delete('http://localhost:8080/bookeroo/shops/shop/registration/delete/' + regId,
+    const req = await userAxios().delete('shops/shop/registration/delete/' + regId,
             {
                 headers: {
                 'Authorization': `${localStorage.jwtToken}` 
@@ -14,7 +14,7 @@ export const DeleteRegistration = async (regId) => {
 }
 
 export const CreateRegistration = async (registrationDetails) => {
-    const req = await axios.patch('http://localhost:8080/bookeroo/shops/shop/registration/apply', registrationDetails,
+    const req = await userAxios().patch('shops/shop/registration/apply', registrationDetails,
             {
                 headers: {
                 'Authorization': `${localStorage.jwtToken}` 
@@ -26,7 +26,7 @@ export const CreateRegistration = async (registrationDetails) => {
 }
 
 export const UpdateCopyIdAndStatusForRegistration = async (regId,copyId) => {
-    const req = await axios.patch('http://localhost:8080/bookeroo/shops/shop/registration/approve/' + regId, null,
+    const req = await userAxios().patch('shops/shop/registration/approve/' + regId, null,
             {
                 params: { copyId: copyId },
                 headers: {
@@ -38,13 +38,13 @@ export const UpdateCopyIdAndStatusForRegistration = async (regId,copyId) => {
     return req;
 }
 
-const fetcher = (url) => axios
+const fetcher = (url) => userAxios()
 .get(url, { headers: { Authorization: `${localStorage.jwtToken}` } })
 .then((res) => res.data);
 
 export const GetAllRegistrations = () => {
     // const header = {headers: {'Authorization': `${localStorage.jwtToken}` }}
-    const { data, error } = useSWR('http://localhost:8080/bookeroo/shops/registration/get-all', fetcher)
+    const { data, error } = useSWR('shops/registration/get-all', fetcher)
   
     return {
       data: data,

@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: front-prod
+    image: front-prod
+    build:
+      context: .
+      target: production

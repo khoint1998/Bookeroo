@@ -3,9 +3,10 @@ version: 2.1
 orbs:
   node: circleci/node@4.1
   maven: circleci/maven@1.2.0
+  docker: circleci/docker@1.7.0
 
 jobs:
-  build-and-test-for-node:
+  test-for-node:
     docker:
       - image: cimg/node:12.19.0
 
@@ -16,7 +17,21 @@ jobs:
       - run: cd FrontEnd/myfirstapp && npm install
       - run: cd FrontEnd/myfirstapp && npm test
 
-  build-and-test-for-maven-login:
+  run-docker-container-node:
+    requires:
+      - test-for-node
+    executor: docker/docker
+    working_directory: ~/project
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Build Frontend Docker Image
+          command: |
+            cd FrontEnd/myfirstapp && docker-compose -f docker-compose.dev.yml up
+
+  test-for-maven-login:
     docker:
       - image: cimg/openjdk:11.0
 
@@ -27,7 +42,21 @@ jobs:
       - run: cd BackEnd/loginmicroservices && mvn -B -DskipTests clean package
       - run: cd BackEnd/loginmicroservices && mvn test
 
-  build-and-test-for-maven-book:
+  run-docker-container-login:
+    requires:
+      - test-for-maven-login
+    executor: docker/docker
+    working_directory: ~/project
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Build Frontend Docker Image
+          command: |
+            cd BackEnd/loginmicroservices && docker build -t loginservices:latest
+
+  test-for-maven-book:
     docker:
       - image: cimg/openjdk:11.0
 
@@ -38,11 +67,31 @@ jobs:
       - run: cd BackEnd/bookservices && mvn -B -DskipTests clean package
       - run: cd BackEnd/bookservices && mvn test
 
+  run-docker-container-book:
+    requires:
+      - test-for-maven-book
+    executor: docker/docker
+    working_directory: ~/project
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Build Frontend Docker Image
+          command: |
+            cd BackEnd/loginmicroservices && docker build -t bookservices:latest
+
 workflows:
   sample:
     jobs:
-      - build-and-test-for-node
+      - test-for-node
 
-      - build-and-test-for-maven-login
+      - test-for-maven-login
 
-      - build-and-test-for-maven-book
+      - test-for-maven-book
+
+      - run-docker-container-node
+
+      - run-docker-container-login
+
+      - run-docker-container-book

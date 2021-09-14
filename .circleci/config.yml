@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Build Frontend Docker Image
           command: |
-            cd FrontEnd/myfirstapp && docker-compose -f docker-compose.dev.yml up
+            cd FrontEnd/myfirstapp && docker-compose -f docker-compose.dev.yml build
 
   test-run-container-login:
     docker:
@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Build Frontend Docker Image
           command: |
-            cd BackEnd/loginmicroservices && docker build -t bookservices:latest .
+            cd BackEnd/bookservices && docker build -t bookservices:latest .
 
 workflows:
   sample:

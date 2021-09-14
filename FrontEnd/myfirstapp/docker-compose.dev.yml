@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app:
-    container_name: front-dev:latest
+    container_name: front-dev
     image: front-dev
     build:
       context: .

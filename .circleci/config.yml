@@ -47,6 +47,7 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - run: cd BackEnd/loginmicroservices && mvn -B -DskipTests clean package
       - run:
           name: Build Frontend Docker Image
           command: |
@@ -70,6 +71,7 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - run: cd BackEnd/loginmicroservices && mvn -B -DskipTests clean package
       - run:
           name: Build Frontend Docker Image
           command: |

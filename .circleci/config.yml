@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/node:12.19.0
 
-    working_directory: ~/project
+    working_directory: ~/app
 
     steps:
       - checkout
@@ -19,7 +19,7 @@ jobs:
 
   run-docker-container-node:
     executor: docker/docker
-    working_directory: ~/project
+    working_directory: ~/app
 
     steps:
       - setup_remote_docker
@@ -33,7 +33,7 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
 
-    working_directory: ~/project
+    working_directory: ~/app
 
     steps:
       - checkout
@@ -44,7 +44,7 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     executor: docker/docker
-    working_directory: ~/project
+    working_directory: ~/app
 
     steps:
       - setup_remote_docker
@@ -59,7 +59,7 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
 
-    working_directory: ~/project
+    working_directory: ~/app
 
     steps:
       - checkout
@@ -70,7 +70,7 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     executor: docker/docker
-    working_directory: ~/project
+    working_directory: ~/app
 
     steps:
       - setup_remote_docker

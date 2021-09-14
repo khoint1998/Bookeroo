@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Build Frontend Docker Image
           command: |
-            cd BackEnd/loginmicroservices && docker build -t loginservices:latest
+            cd BackEnd/loginmicroservices && docker build -t loginservices:latest .
 
   test-for-maven-book:
     docker:
@@ -73,7 +73,7 @@ jobs:
       - run:
           name: Build Frontend Docker Image
           command: |
-            cd BackEnd/loginmicroservices && docker build -t bookservices:latest
+            cd BackEnd/loginmicroservices && docker build -t bookservices:latest .
 
 workflows:
   sample:

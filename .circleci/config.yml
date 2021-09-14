@@ -18,8 +18,6 @@ jobs:
       - run: cd FrontEnd/myfirstapp && npm test
 
   run-docker-container-node:
-    requires:
-      - test-for-node
     executor: docker/docker
     working_directory: ~/project
 
@@ -43,8 +41,6 @@ jobs:
       - run: cd BackEnd/loginmicroservices && mvn test
 
   run-docker-container-login:
-    requires:
-      - test-for-maven-login
     executor: docker/docker
     working_directory: ~/project
 
@@ -68,8 +64,6 @@ jobs:
       - run: cd BackEnd/bookservices && mvn test
 
   run-docker-container-book:
-    requires:
-      - test-for-maven-book
     executor: docker/docker
     working_directory: ~/project
 
@@ -90,8 +84,14 @@ workflows:
 
       - test-for-maven-book
 
-      - run-docker-container-node
+      - run-docker-container-node:
+          requires:
+            - test-for-node
 
-      - run-docker-container-login
+      - run-docker-container-login:
+          requires:
+            - test-for-maven-login
 
-      - run-docker-container-book
+      - run-docker-container-book:
+          requires:
+            - test-for-maven-book

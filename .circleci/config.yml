@@ -86,18 +86,18 @@ workflows:
     jobs:
       - test-for-node
 
-      - test-for-maven-login
+      # - test-for-maven-login
 
-      - test-for-maven-book
+      # - test-for-maven-book
 
       - run-docker-container-node:
           requires:
             - test-for-node
 
-      - run-docker-container-login:
-          requires:
-            - test-for-maven-login
+      # - run-docker-container-login:
+      #     requires:
+      #       - test-for-maven-login
 
-      - run-docker-container-book:
-          requires:
-            - test-for-maven-book
+      # - run-docker-container-book:
+      #     requires:
+      #       - test-for-maven-book

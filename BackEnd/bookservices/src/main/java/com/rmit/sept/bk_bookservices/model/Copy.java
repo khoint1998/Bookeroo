@@ -16,7 +16,6 @@ public class Copy {
 
     private Long ownerId;
 
-    @Column(columnDefinition = "boolean default true")
     private boolean newBook;
 
     @JsonBackReference(value="book-copy")

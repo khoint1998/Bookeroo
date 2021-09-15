@@ -8,7 +8,5 @@ services:
       context: .
       target: development
     stdin_open: true
-    volumes:
-      - ./src:/app/src
     ports:
       - 3000:3000

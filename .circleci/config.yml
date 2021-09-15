@@ -3,46 +3,91 @@ version: 2.1
 orbs:
   node: circleci/node@4.1
   maven: circleci/maven@1.2.0
+  docker: circleci/docker@1.7.0
 
 jobs:
-  build-and-test-for-node:
+  test-run-container-node:
     docker:
       - image: cimg/node:12.19.0
 
-    working_directory: ~/project
+    executor: docker/docker
+    working_directory: ~/app
 
     steps:
+      - setup_remote_docker
       - checkout
       - run: cd FrontEnd/myfirstapp && npm install
-      - run: cd FrontEnd/myfirstapp && npm test
+      - run:
+          name: Test Frontend with Testing Library
+          command: |
+            cd FrontEnd/myfirstapp && npm test
+      - run:
+          name: Build Frontend Docker Image
+          command: |
+            cd FrontEnd/myfirstapp && docker-compose -f docker-compose.dev.yml build
 
-  build-and-test-for-maven-login:
+  test-run-container-login:
     docker:
       - image: cimg/openjdk:11.0
 
-    working_directory: ~/project
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: pass
+          MYSQL_DATABASE: user
+
+    executor: docker/docker
+    working_directory: ~/app
 
     steps:
+      - setup_remote_docker
       - checkout
       - run: cd BackEnd/loginmicroservices && mvn -B -DskipTests clean package
-      - run: cd BackEnd/loginmicroservices && mvn test
+      - run:
+          name: Test Backend - loginservices
+          command: |
+            cd BackEnd/loginmicroservices && mvn test
+      - run:
+          name: Wait for Database service on the tcp protocol
+          command: |
+            dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run:
+          name: Build Backend-Login Docker Image
+          command: |
+            cd BackEnd/loginmicroservices && docker build -t loginservices:latest .
 
-  build-and-test-for-maven-book:
+  test-run-container-book:
     docker:
       - image: cimg/openjdk:11.0
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: pass
+          MYSQL_DATABASE: book
 
-    working_directory: ~/project
+    executor: docker/docker
+    working_directory: ~/app
 
     steps:
+      - setup_remote_docker
       - checkout
       - run: cd BackEnd/bookservices && mvn -B -DskipTests clean package
-      - run: cd BackEnd/bookservices && mvn test
+      - run:
+          name: Test Backend - bookservices
+          command: |
+            cd BackEnd/bookservices && mvn test
+      - run:
+          name: Wait for Database service on the tcp protocol
+          command: |
+            dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run:
+          name: Build Backend-Book Docker Image
+          command: |
+            cd BackEnd/bookservices && docker build -t bookservices:latest .
 
 workflows:
   sample:
     jobs:
-      - build-and-test-for-node
+      - test-run-container-node
 
-      - build-and-test-for-maven-login
+      - test-run-container-login
 
-      - build-and-test-for-maven-book
+      - test-run-container-book

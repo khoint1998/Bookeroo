@@ -23,7 +23,6 @@ public class RegistrationDetails {
     private String status;
 
     //Currently null, will have this once this registration is approved and a copy in DB is created
-    @Column(columnDefinition = "Long default 0")
     private Long copyId;
 
     @NotBlank(message = "Book title is required")
@@ -32,13 +31,11 @@ public class RegistrationDetails {
 //    Will implement later
 //    private String bookCover;
 
-    @Column(columnDefinition = "float default 0.0")
     private float price;
 
     private Date create_At;
 
     ///////These values will be sent as CopyDTO to create a copy once the registration is approved//////
-    @Column(columnDefinition = "boolean default true")
     private boolean newBook;
 
     //Send as ownerId
@@ -50,7 +47,7 @@ public class RegistrationDetails {
 
     @JsonBackReference(value="shop-reg")
     @ManyToOne
-    @JoinColumn(name ="id", nullable = false)
+    @JoinColumn(name ="shopId", nullable = false)
     private Shop shop;
 
     @PrePersist

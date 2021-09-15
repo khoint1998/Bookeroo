@@ -32,7 +32,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.5.Final</version>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -97,6 +101,7 @@
                 <version>2.4.1</version>
             </plugin>
         </plugins>
+        <finalName>loginservices</finalName>
     </build>
 
 </project>

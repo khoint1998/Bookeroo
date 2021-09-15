@@ -34,7 +34,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: pass
           MYSQL_DATABASE: user
-        # port: 3306:3306
 
     executor: docker/docker
     working_directory: ~/app
@@ -47,6 +46,9 @@ jobs:
           name: Test Backend - loginservices
           command: |
             cd BackEnd/loginmicroservices && mvn test
+      - run:
+          name: Wait for database service on the tcp protocol
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: Build Frontend Docker Image
           command: |
@@ -73,6 +75,9 @@ jobs:
           command: |
             cd BackEnd/bookservices && mvn test
       - run:
+          name: Wait for database service on the tcp protocol
+          command: dockerize -wait tcp://localhost:3307 -timeout 1m
+      - run:
           name: Build Frontend Docker Image
           command: |
             cd BackEnd/bookservices && docker build -t bookservices:latest .
@@ -80,8 +85,8 @@ jobs:
 workflows:
   sample:
     jobs:
-      - test-run-container-node
+      # - test-run-container-node
 
-      - test-run-container-login
+      # - test-run-container-login
 
       - test-run-container-book

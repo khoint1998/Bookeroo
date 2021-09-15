@@ -62,7 +62,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: pass
           MYSQL_DATABASE: book
-          DB_URL: jdbc:mysql://localhost:3307/book
 
     executor: docker/docker
     working_directory: ~/app
@@ -78,7 +77,7 @@ jobs:
       - run:
           name: Wait for Database service on the tcp protocol
           command: |
-            dockerize -wait tcp://localhost:3307 -timeout 1m
+            dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: Build Backend-Book Docker Image
           command: |
@@ -89,6 +88,6 @@ workflows:
     jobs:
       # - test-run-container-node
 
-      # - test-run-container-login
+      - test-run-container-login
 
       - test-run-container-book

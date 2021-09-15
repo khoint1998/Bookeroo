@@ -47,10 +47,11 @@ jobs:
           command: |
             cd BackEnd/loginmicroservices && mvn test
       - run:
-          name: Wait for database service on the tcp protocol
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+          name: Wait for Database service on the tcp protocol
+          command: |
+            dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
-          name: Build Frontend Docker Image
+          name: Build Backend-Login Docker Image
           command: |
             cd BackEnd/loginmicroservices && docker build -t loginservices:latest .
 
@@ -75,10 +76,11 @@ jobs:
           command: |
             cd BackEnd/bookservices && mvn test
       - run:
-          name: Wait for database service on the tcp protocol
-          command: dockerize -wait tcp://localhost:3307 -timeout 1m
+          name: Wait for Database service on the tcp protocol
+          command: |
+            dockerize -wait tcp://localhost:3307 -timeout 1m
       - run:
-          name: Build Frontend Docker Image
+          name: Build Backend-Book Docker Image
           command: |
             cd BackEnd/bookservices && docker build -t bookservices:latest .
 

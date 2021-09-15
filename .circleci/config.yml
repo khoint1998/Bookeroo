@@ -62,7 +62,7 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: pass
           MYSQL_DATABASE: book
-          DATABASE_URL: "mysql://localhost:3307/book"
+          DB_URL: jdbc:mysql://localhost:3307/book
 
     executor: docker/docker
     working_directory: ~/app

@@ -34,8 +34,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: pass
           MYSQL_DATABASE: user
-          MYSQL_USER: user
-          MYSQL_PASSWORD: pass
         # port: 3306:3306
 
     executor: docker/docker
@@ -61,9 +59,7 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: pass
           MYSQL_DATABASE: book
-          MYSQL_USER: user
-          MYSQL_PASSWORD: pass
-        # port: 3307:3306
+          DATABASE_URL: "mysql://localhost:3307/book"
 
     executor: docker/docker
     working_directory: ~/app

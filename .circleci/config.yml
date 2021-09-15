@@ -31,9 +31,6 @@ jobs:
       - image: cimg/openjdk:11.0
 
       - image: circleci/mysql:8.0.4
-          auth:
-            username: khoitrinhnguyen1998
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
           environment:
             MYSQL_ROOT_PASSWORD: pass
             MYSQL_DATABASE: user
@@ -62,9 +59,6 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
       - image: circleci/mysql:8.0.4
-          auth:
-            username: khoitrinhnguyen1998
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
           environment:
             MYSQL_ROOT_PASSWORD: pass
             MYSQL_DATABASE: book

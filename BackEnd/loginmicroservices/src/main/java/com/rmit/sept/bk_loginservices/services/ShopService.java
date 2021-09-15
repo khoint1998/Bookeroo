@@ -30,6 +30,7 @@ public class ShopService {
         newReg.setBookTitle(registrationDetailsDTO.getBookTitle());
         newReg.setUserId(selectedShop.getUser().getId());
         newReg.setStatus(registrationDetailsDTO.getStatus());
+        newReg.setCopyId(0L);
 
         selectedShop.getOnSellCopyList().add(newReg);
 

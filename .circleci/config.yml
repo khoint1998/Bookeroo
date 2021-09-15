@@ -30,6 +30,18 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
 
+      - image: circleci/mysql:8.0.4
+          auth:
+            username: khoitrinhnguyen1998
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          environment:
+            MYSQL_ROOT_PASSWORD: pass
+            MYSQL_DATABASE: user
+            MYSQL_USER: user
+            MYSQL_PASSWORD: pass
+          port:
+            3306:3306
+
     executor: docker/docker
     working_directory: ~/app
 
@@ -49,6 +61,17 @@ jobs:
   test-run-container-book:
     docker:
       - image: cimg/openjdk:11.0
+      - image: circleci/mysql:8.0.4
+          auth:
+            username: khoitrinhnguyen1998
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          environment:
+            MYSQL_ROOT_PASSWORD: pass
+            MYSQL_DATABASE: book
+            MYSQL_USER: user
+            MYSQL_PASSWORD: pass
+          port:
+            3307:3306
 
     executor: docker/docker
     working_directory: ~/app

@@ -26,7 +26,6 @@ public class PurchaseDetails {
     @NotBlank(message = "Seller name is required")
     private String sellerFullName;
 
-    @Column(columnDefinition = "float default 0.0")
     private float price;
 
     private Date create_At;

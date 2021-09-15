@@ -17,7 +17,6 @@ public class PurchasedCopyDetails {
 
     private Long userId;
 
-    @Column(columnDefinition = "boolean default true")
     private boolean newBook;
 
     @JsonBackReference(value="user-purchasedCopy")

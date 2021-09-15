@@ -86,7 +86,7 @@ jobs:
 workflows:
   sample:
     jobs:
-      # - test-run-container-node
+      - test-run-container-node
 
       - test-run-container-login
 

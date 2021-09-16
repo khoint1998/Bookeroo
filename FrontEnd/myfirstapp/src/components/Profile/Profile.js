@@ -9,7 +9,7 @@ class Profile extends Component {
                 <div className="profile_row">
                     <div className="profile_col" id="profile_img_col">
                         <div className="profile_display">
-                            <img src="avt-2.jpg" alt="..." ></img>
+                            <img src="avt-2.jpg" alt="profile_image" ></img>
                             <div className="profile_role">
                                 Publisher
                             </div>
@@ -66,7 +66,7 @@ class Profile extends Component {
                             <a>Transaction History</a>
                         </div>
                         <div className="profile_imageContainer">
-                            <img src="bookstore-clipart-lg.png" alt="..." ></img>
+                            <img src="bookstore-clipart-lg.png" alt="footer_image" ></img>
                         </div>
 
 

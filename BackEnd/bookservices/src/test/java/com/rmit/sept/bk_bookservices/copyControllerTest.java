@@ -94,47 +94,45 @@ public class copyControllerTest {
         }
     }
 
-    @Test
-    void getCopiesById() {
-        Book book = new Book();
-        book.setBookId(1L);
-        book.setTitle("java");
-        book.setIsbn("isbn");
-        book.setCategory("category");
-        book.setDescription("description");
-        book.setAuthor("author");
-        book.setPublisher("publisher");
-        bookService.createABook(book);
-
-        CopyDTO copyDTO = new CopyDTO();
-        copyDTO.setOwnerId("1");
-        copyDTO.setNewBook(true);
-        copyDTO.setBookId("1");
-        copyService.createCopy(copyDTO);
-
-        CopyDTO copyDTO2 = new CopyDTO();
-        copyDTO2.setOwnerId("2");
-        copyDTO2.setNewBook(true);
-        copyDTO2.setBookId("1");
-        copyService.createCopy(copyDTO2);
-
-        List<Long> copyIdList = new ArrayList<>();
-        copyIdList.add(1L);
-        copyIdList.add(2L);
-        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        String url = "http://localhost:8081/bookeroo/copys/get/copy/copyIdList";
-        try {
-            String response = mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)
-                            .content(objectWriter.writeValueAsString(copyIdList))).andReturn().getResponse().getContentAsString();
-            String expected = "[{\"copyId\":1,\"ownerId\":1,\"newBook\":true},{\"copyId\":2,\"ownerId\":2,\"newBook\":true}]";
-            System.out.println(response);
-            assertThat(response).isEqualTo(expected);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
+//    @Test
+//    void getCopiesById() {
+//        Book book = new Book();
+//        book.setBookId(1L);
+//        book.setTitle("java");
+//        book.setIsbn("isbn");
+//        book.setCategory("category");
+//        book.setDescription("description");
+//        book.setAuthor("author");
+//        book.setPublisher("publisher");
+//        bookService.createABook(book);
+//
+//        CopyDTO copyDTO = new CopyDTO();
+//        copyDTO.setOwnerId("1");
+//        copyDTO.setNewBook(true);
+//        copyDTO.setBookId("1");
+//        copyService.createCopy(copyDTO);
+//
+//        CopyDTO copyDTO2 = new CopyDTO();
+//        copyDTO2.setOwnerId("2");
+//        copyDTO2.setNewBook(true);
+//        copyDTO2.setBookId("1");
+//        copyService.createCopy(copyDTO2);
+//
+//        List<Long> copyIdList = new ArrayList<>();
+//        copyIdList.add(1L);
+//        copyIdList.add(2L);
+//        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+//        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+//        String url = "http://localhost:8081/bookeroo/copys/get/copy/copyIdList";
+//        try {
+//            String response = mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectWriter.writeValueAsString(copyIdList))).andReturn().getResponse().getContentAsString();
+//            String expected = "[{\"copyId\":1,\"ownerId\":1,\"newBook\":true},{\"copyId\":2,\"ownerId\":2,\"newBook\":true}]";
+//            System.out.println(response);
+//            assertThat(response).isEqualTo(expected);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

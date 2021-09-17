@@ -8,5 +8,12 @@ services:
       context: .
       target: development
     stdin_open: true
+    networks:
+      - sept-network
     ports:
       - 3000:3000
+
+networks:
+  sept-network:
+    external: true
+    name: sept

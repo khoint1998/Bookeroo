@@ -26,7 +26,7 @@ public class Shop {
 
     //A shop contains a list of on sell copy (holds copyId type String)
     @JsonManagedReference(value="shop-reg")
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<RegistrationDetails> onSellCopyList = new ArrayList<RegistrationDetails>();
 
     @JsonBackReference(value="user-shop")

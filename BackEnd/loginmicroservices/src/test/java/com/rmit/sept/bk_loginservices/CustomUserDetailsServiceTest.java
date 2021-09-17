@@ -44,23 +44,23 @@ public class CustomUserDetailsServiceTest {
 //        assertThat(testcase.getUsername()).isEqualTo(expected_username);
 //    }
 
-    @Test
-    @Rollback
-    public void should_match_loadUserById() {
-        User user = new User();
-        Long expected_id = 2L;
-        user.setId(expected_id);
-        user.setUsername("chen wang1");
-        user.setFullName("Chen Wang");
-        user.setPassword("123456");
-        user.setConfirmPassword("123456");
-        user.setCreate_At(new Date());
-        user.setEmail("1353664988@qq.com");
-        user.setRole("Admin");
-        userService.saveUser(user);
-        User testcase = customUserDetailsService.loadUserById(expected_id);
-        assertThat(testcase.getId()).isEqualTo(expected_id);
-    }
+//    @Test
+//    @Rollback
+//    public void should_match_loadUserById() {
+//        User user = new User();
+//        Long expected_id = 2L;
+//        user.setId(expected_id);
+//        user.setUsername("chen wang1");
+//        user.setFullName("Chen Wang");
+//        user.setPassword("123456");
+//        user.setConfirmPassword("123456");
+//        user.setCreate_At(new Date());
+//        user.setEmail("1353664988@qq.com");
+//        user.setRole("Admin");
+//        userService.saveUser(user);
+//        User testcase = customUserDetailsService.loadUserById(expected_id);
+//        assertThat(testcase.getId()).isEqualTo(expected_id);
+//    }
 
 //    @Test
 //    @Rollback

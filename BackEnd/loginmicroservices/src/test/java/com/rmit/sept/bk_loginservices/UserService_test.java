@@ -22,6 +22,7 @@ public class UserService_test {
     @Test
     @Rollback
     public void should_match_saveUser() {
+        userRepository.deleteAll();
         User user = new User();
         String expected_username = "chen wang";
         user.setUsername(expected_username);

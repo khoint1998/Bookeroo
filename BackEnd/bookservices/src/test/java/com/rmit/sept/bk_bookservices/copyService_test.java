@@ -1,11 +1,14 @@
 package com.rmit.sept.bk_bookservices;
 
 
+import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
+import com.rmit.sept.bk_bookservices.Repositories.CopyRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.model.Copy;
 import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import com.rmit.sept.bk_bookservices.services.BookService;
 import com.rmit.sept.bk_bookservices.services.CopyService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +26,16 @@ public class copyService_test {
     private CopyService copyService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private CopyRepository copyRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
+    @BeforeEach
+    void clean_database() {
+        copyRepository.deleteAll();
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void createBook_function_check() throws Exception {
@@ -35,7 +47,7 @@ public class copyService_test {
         book.setDescription("description");
         book.setAuthor("author");
         book.setPublisher("publisher");
-        Book saveBook = bookService.createABook(book);
+        bookService.createABook(book);
 
         CopyDTO copyDto = new CopyDTO();
         copyDto.setBookId("1");
@@ -57,7 +69,7 @@ public class copyService_test {
         book.setDescription("description");
         book.setAuthor("author");
         book.setPublisher("publisher");
-        Book saveBook = bookService.createABook(book);
+        bookService.createABook(book);
 
         CopyDTO copyDto = new CopyDTO();
         copyDto.setBookId("1");

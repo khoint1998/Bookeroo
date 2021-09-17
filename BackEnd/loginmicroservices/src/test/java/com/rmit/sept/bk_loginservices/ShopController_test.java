@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rmit.sept.bk_loginservices.Repositories.RegistrationRepository;
 import com.rmit.sept.bk_loginservices.Repositories.ShopRepository;
+import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.model.RegistrationDetails;
 import com.rmit.sept.bk_loginservices.model.RegistrationDetailsDTO;
 import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.web.UserController;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,12 +37,20 @@ public class ShopController_test {
     @Autowired
     private UserService userService;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private UserController userController;
     @Autowired
     private RegistrationRepository registrationRepository;
     @Autowired
     private ShopRepository shopRepository;
 
+    @BeforeEach
+    void clean_database() {
+        registrationRepository.deleteAll();
+        shopRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     @Test
     void applyForSellingRegistration() {

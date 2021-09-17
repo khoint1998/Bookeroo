@@ -6,6 +6,7 @@ import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.model.RegistrationDetails;
 import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.linesOf;
 
 @SpringBootTest
 public class RegistrationRepository_test {
@@ -26,6 +28,13 @@ public class RegistrationRepository_test {
     @Autowired
     private RegistrationRepository registrationRepository;
 
+
+    @BeforeEach
+    void clean_database() {
+        registrationRepository.deleteAll();
+        shopRepository.deleteAll();
+        userRepository.deleteAll();
+    }
     @Test
     @Rollback
     public void should_match_getByRegistrationId() {

@@ -1,7 +1,9 @@
 package com.rmit.sept.bk_bookservices;
 
+import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.services.BookService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +19,13 @@ public class bookService_test {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private BookRepository bookRepository;
 
+    @BeforeEach
+    void clean_database() {
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void createBook_function_check() {

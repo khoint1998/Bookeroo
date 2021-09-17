@@ -2,8 +2,10 @@ package com.rmit.sept.bk_bookservices;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.services.BookService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +31,13 @@ public class bookController_test {
     private WebApplicationContext wac;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private BookRepository bookRepository;
+
+    @BeforeEach
+    void clean_database() {
+        bookRepository.deleteAll();
+    }
 
     @Test
     void createCopy() {

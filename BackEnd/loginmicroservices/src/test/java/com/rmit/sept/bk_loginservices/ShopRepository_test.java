@@ -24,6 +24,8 @@ public class ShopRepository_test {
     @Test
     @Rollback
     public void should_match_getByShopId() {
+        shopRepository.deleteAll();
+        userRepository.deleteAll();
         User user = new User();
         user.setId(1L);
         user.setUsername("chen wang");

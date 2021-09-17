@@ -4,6 +4,7 @@ import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookservices.Repositories.CopyRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.model.Copy;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,12 @@ public class copyRepository_test {
     private BookRepository bookRepository;
     @Autowired
     private CopyRepository copyRepository;
+
+    @BeforeEach
+    void clean_database() {
+        copyRepository.deleteAll();
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void getByCopyId() throws Exception {

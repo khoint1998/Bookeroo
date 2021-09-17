@@ -9,6 +9,7 @@ import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.services.ShopService;
 import com.rmit.sept.bk_loginservices.services.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,6 +32,14 @@ public class ShopService_test {
     private ShopService shopService;
     @Autowired
     private RegistrationRepository registrationRepository;
+
+
+    @BeforeEach
+    void clean_database() {
+        registrationRepository.deleteAll();
+        shopRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     @Test
     public void should_match_applyForSellingRegistration() {

@@ -3,10 +3,13 @@ package com.rmit.sept.bk_bookservices;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
+import com.rmit.sept.bk_bookservices.Repositories.CopyRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import com.rmit.sept.bk_bookservices.services.BookService;
 import com.rmit.sept.bk_bookservices.services.CopyService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +38,17 @@ public class copyController_test {
     private BookService bookService;
     @Autowired
     private CopyService copyService;
+
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private CopyRepository copyRepository;
+
+    @BeforeEach
+    void clean_database() {
+        copyRepository.deleteAll();
+        bookRepository.deleteAll();
+    }
 
     @Test
     void createCopy() {

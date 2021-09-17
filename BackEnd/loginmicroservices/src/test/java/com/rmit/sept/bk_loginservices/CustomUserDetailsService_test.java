@@ -7,6 +7,7 @@ import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.model.UserDTO;
 import com.rmit.sept.bk_loginservices.services.CustomUserDetailsService;
 import com.rmit.sept.bk_loginservices.services.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,11 @@ public class CustomUserDetailsService_test {
     private UserService userService;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
+    @BeforeEach
+    void clean_database() {
+        userRepository.deleteAll();
+    }
 
     @Test
     @Rollback

@@ -2,6 +2,7 @@ package com.rmit.sept.bk_loginservices;
 
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
 import com.rmit.sept.bk_loginservices.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,10 @@ public class UserRepository_test {
     @Autowired
     private UserRepository userRepository;
 
+    @BeforeEach
+    void clean_database() {
+        userRepository.deleteAll();
+    }
     @Test
     @Rollback
     public void should_match_findByUsername() {

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -47,7 +49,8 @@ public class User implements UserDetails {
 
     //User Purchase History (A concrete record, not for querying)
     @JsonManagedReference(value="user-history")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PurchaseDetails> purchaseDetailsList = new ArrayList<PurchaseDetails>();
 
     //Store all copyIds of all pruchased copyies
@@ -57,7 +60,8 @@ public class User implements UserDetails {
 
     //list of owned shop, cannot be expanded for other roles except Shop Owner
     @JsonManagedReference(value="user-shop")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Shop> shops;
 
     private Date create_At;

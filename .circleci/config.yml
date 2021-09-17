@@ -47,7 +47,7 @@ jobs:
           command: |
             cd BackEnd/loginmicroservices && mvn test
       - run:
-          name: Wait for Database service on the tcp protocol
+          name: Wait for Database service on the TCP protocol
           command: |
             dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
@@ -75,7 +75,7 @@ jobs:
           command: |
             cd BackEnd/bookservices && mvn test
       - run:
-          name: Wait for Database service on the tcp protocol
+          name: Wait for Database service on the TCP protocol
           command: |
             dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:

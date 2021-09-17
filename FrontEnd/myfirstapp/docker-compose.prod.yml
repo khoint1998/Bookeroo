@@ -7,3 +7,10 @@ services:
     build:
       context: .
       target: production
+    networks:
+      - sept-network
+
+networks:
+  sept-network:
+    external: true
+    name: sept

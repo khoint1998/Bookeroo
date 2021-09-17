@@ -8,7 +8,7 @@ import org.springframework.test.annotation.Rollback;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class bookModel_test {
+public class bookModelTest {
 
     @Test
     @Rollback

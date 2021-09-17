@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class bookService_test {
+public class bookServiceTest {
 
     @Autowired
     private BookService bookService;
@@ -110,7 +110,7 @@ public class bookService_test {
         bookService.createABook(book);
 
         List<Book> testcase = bookService.getBooksByAuthorContain("AU");
-        assertThat(testcase).size().isEqualTo(1);
+        assertThat(testcase).size().isEqualTo(2);
 
     }
 

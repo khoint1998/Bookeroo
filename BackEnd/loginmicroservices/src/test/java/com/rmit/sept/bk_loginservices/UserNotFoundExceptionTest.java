@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class UserNotFoundException_test {
+public class UserNotFoundExceptionTest {
     @Test
     public void should_match_BookNotFoundException() {
         UserNotFoundException userNotFoundException = new UserNotFoundException("Not found this user");

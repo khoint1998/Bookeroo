@@ -10,24 +10,21 @@
 * Chen Wang - s3853260
 
 ## Records
-
 * Github repository: https://github.com/s3678755/SEPT-Tue-1830-Group-01
 * Jira Board: https://liamcarnie-s3718562.atlassian.net/jira/software/projects/SP/boards/1
 * Google Docs: https://drive.google.com/drive/u/1/folders/1ZEfl9JwN2qGaZRTaq6omftYSNP_KagGN
-
-	
-## Code documentation - Release 0.1.0 - 29/8/2021
-* feature 1
-* feature 2
-* feature 3
   
-
-To run the application locally : 
-1) cd into each and every microservice (ms_booking, ms_availability, ms_profiles, ms_service) and run :
-2) ./mvnw package && java -jar target/ms_[microservice]-0.0.1-SNAPSHOT.jar
-3) cd into FrontEnd/myfirstapp
-4) run "npm install"
-5) run "npm start"
+## To run the application locally for development:
+1) Pull the MySQL Docker Image and run:
+2) docker run --name septdb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass -d mysql:latest
+3) Open MySQL CLI by type in:
+4) winpty docker exec -it septdb bash (winpty for windows/ -it for MacOS)
+5) Added 2 required schemas: book and user
+6) cd into each and every microservice (loginmicroservices, bookservices) and run:
+7) mvn spring-boot:run
+8) cd into FrontEnd/myfirstapp
+9) run "npm install"
+10) run "npm start"
 
 
 

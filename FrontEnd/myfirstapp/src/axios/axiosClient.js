@@ -3,7 +3,7 @@ import axios from 'axios';
 export const userAxios = (port) => {
 
     const opts = {
-        host: window.location.hostname === 'localhost' ? 'localhost' : port === 'book' ? 'AWS_EC2_HOST_BACK_BOOK' : 'AWS_EC2_HOST_BACK_USER',
+        host: window.location.hostname === 'localhost' ? 'localhost' : port === 'book' ? 'CONTAINER_BACKEND_BOOK' : 'CONTAINER_BACKEND_USER',
         port: port === 'book' ? '8081' : '8080',
     }
 

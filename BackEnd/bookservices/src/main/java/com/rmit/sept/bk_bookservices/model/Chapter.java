@@ -1,24 +1,29 @@
 package com.rmit.sept.bk_bookservices.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
-public class Copy {
+public class Chapter {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long copyId;
+    private Long chapterId;
 
-    private Long ownerId;
+    private String chapterName;
 
-    private boolean newBook;
+    private String texts;
 
-    @JsonBackReference(value="book-copy")
+    private boolean previewable;
+
+    @JsonBackReference(value="book-chapter")
     @ManyToOne
     @JoinColumn(name ="bookId", nullable = false)
     private Book book;

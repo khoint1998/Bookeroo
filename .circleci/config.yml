@@ -4,6 +4,8 @@ orbs:
   node: circleci/node@4.1
   maven: circleci/maven@1.2.0
   docker: circleci/docker@1.7.0
+  # https://circleci.com/developer/orbs/orb/circleci/aws-ecr
+  # aws-ecr: circleci/aws-ecr@7.2.0
 
 jobs:
   test-run-container-node:
@@ -91,3 +93,12 @@ workflows:
       - test-run-container-login
 
       - test-run-container-book
+
+      # Envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
+      # - aws-ecr/build-and-push-image:
+      #     repo: sept
+      #     tag: "latest,v0.1.${CIRCLE_BUILD_NUM}"
+      #     dockerfile: FrontEnd/myfirstapp/Dockerfile
+      #     path: .
+      #     requires:
+      #       - test-run-container-node

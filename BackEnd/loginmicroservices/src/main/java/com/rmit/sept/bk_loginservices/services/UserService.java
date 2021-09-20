@@ -36,9 +36,10 @@ public class UserService {
             newUser.setConfirmPassword("");
 
             Shop defaultShop = new Shop();
-            defaultShop.setShopName("First Shop");
+            defaultShop.setShopName(newUser.getUsername() + "'s First Shop");
             defaultShop.setUser(newUser);
             defaultShop.setShopOpen(true);
+            defaultShop.setHasSold(0);
 
             newUser.setShops(new ArrayList<Shop>());
             newUser.getShops().add(defaultShop);
@@ -46,7 +47,7 @@ public class UserService {
             return userRepository.save(newUser);
 
         } catch (Exception e){
-            throw new UsernameAlreadyExistsException("Something is wrong. Cannot create the user DEV_ERR:001");
+            throw new UsernameAlreadyExistsException("Something is wrong. Cannot create the user");
         }
     }
 }

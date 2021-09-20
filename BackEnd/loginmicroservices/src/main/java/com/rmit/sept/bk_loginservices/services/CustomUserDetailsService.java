@@ -70,6 +70,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         newShop.setShopName(shopName);
         newShop.setUser(selectedUser);
         newShop.setShopOpen(true);
+        newShop.setHasSold(0);
 
         shopRepository.save(newShop);
     }

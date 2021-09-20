@@ -47,5 +47,7 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Collection<Copy> copies;
 
-
+    @JsonManagedReference(value="book-chapter")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private Collection<Chapter> chapters;
 }

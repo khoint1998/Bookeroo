@@ -25,5 +25,11 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleRegistrationNotFound(RegistrationNotFoundException ex, WebRequest request){
+        ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }
 

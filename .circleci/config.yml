@@ -88,11 +88,11 @@ jobs:
 workflows:
   sample:
     jobs:
-      # - test-run-container-node
+      - test-build-container-node
 
-      # - test-run-container-login
+      - test-build-container-login
 
-      # - test-run-container-book
+      - test-build-container-book
 
       # Envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
       - aws-ecr/build-and-push-image:
@@ -100,5 +100,9 @@ workflows:
           tag: "latest,front-prod-v0.1.${CIRCLE_BUILD_NUM}"
           dockerfile: Dockerfile.prod
           path: ./FrontEnd/myfirstapp
-          # requires:
-          #   - test-run-container-node
+          requires:
+            - test-build-container-node
+          filters:
+            branches:
+              only:
+                - master

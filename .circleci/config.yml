@@ -8,7 +8,7 @@ orbs:
   aws-ecr: circleci/aws-ecr@7.2.0
 
 jobs:
-  test-run-container-node:
+  test-build-container-node:
     docker:
       - image: cimg/node:12.19.0
 
@@ -28,7 +28,7 @@ jobs:
           command: |
             cd FrontEnd/myfirstapp && docker-compose -f docker-compose.dev.yml build
 
-  test-run-container-login:
+  test-build-container-login:
     docker:
       - image: cimg/openjdk:11.0
 
@@ -57,7 +57,7 @@ jobs:
           command: |
             cd BackEnd/loginmicroservices && docker build -t loginservices:latest .
 
-  test-run-container-book:
+  test-build-container-book:
     docker:
       - image: cimg/openjdk:11.0
       - image: circleci/mysql:8.0.4

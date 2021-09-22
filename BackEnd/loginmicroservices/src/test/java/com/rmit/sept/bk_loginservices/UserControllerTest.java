@@ -35,11 +35,7 @@ public class UserControllerTest {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private UserController userController;
-
-
 
 
     @Test

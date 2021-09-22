@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 
 @SpringBootTest
-public class copyController_test {
+public class copyControllerTest {
 
     private MockMvc mvc;
     @Autowired

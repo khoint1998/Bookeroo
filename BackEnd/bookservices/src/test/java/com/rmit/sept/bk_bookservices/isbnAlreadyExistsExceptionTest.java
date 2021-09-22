@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class isbnAlreadyExistsException_test {
+public class isbnAlreadyExistsExceptionTest {
 
     @Test
     public void should_match_isbnAlreadyExistsException() {

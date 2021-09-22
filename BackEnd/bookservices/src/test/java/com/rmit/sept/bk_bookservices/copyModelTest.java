@@ -9,7 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class copyModel_test {
+public class copyModelTest {
 
     @Test
     @Rollback

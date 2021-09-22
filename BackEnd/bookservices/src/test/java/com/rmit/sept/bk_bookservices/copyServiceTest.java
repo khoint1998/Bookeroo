@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class copyService_test {
+public class copyServiceTest {
 
     @Autowired
     private CopyService copyService;

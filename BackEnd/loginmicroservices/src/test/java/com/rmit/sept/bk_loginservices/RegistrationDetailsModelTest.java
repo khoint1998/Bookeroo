@@ -11,7 +11,7 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class RegistrationDetailsModel_test {
+public class RegistrationDetailsModelTest {
 
     @Test
     @Rollback

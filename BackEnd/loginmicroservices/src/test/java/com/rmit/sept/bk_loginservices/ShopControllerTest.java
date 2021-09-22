@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 
 @SpringBootTest
-public class ShopController_test {
+public class ShopControllerTest {
     private MockMvc mvc;
     @Autowired
     private WebApplicationContext wac;

@@ -21,7 +21,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class ShopService_test {
+public class ShopServiceTest {
     @Autowired
     private UserRepository userRepository;
     @Autowired

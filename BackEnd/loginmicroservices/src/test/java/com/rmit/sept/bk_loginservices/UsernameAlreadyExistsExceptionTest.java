@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class UsernameAlreadyExistsException_test {
+public class UsernameAlreadyExistsExceptionTest {
     @Test
     public void should_match_BookNotFoundException() {
         UsernameAlreadyExistsException usernameAlreadyExistsException = new UsernameAlreadyExistsException("This user name already exists");

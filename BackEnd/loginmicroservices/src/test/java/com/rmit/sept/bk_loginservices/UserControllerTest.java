@@ -9,6 +9,7 @@ import com.rmit.sept.bk_loginservices.model.UserDTO;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.web.UserController;
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,12 @@ public class UserControllerTest {
     @Autowired
     private WebApplicationContext wac;
     @Autowired
-    private UserService userService;
-    @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserController userController;
 
 
-    @BeforeEach
+    @Before
     void clean_database() {
         userRepository.deleteAll();
     }
@@ -80,7 +79,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userService.saveUser(user);
+        userRepository.save(user);
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("williamquq");
@@ -111,15 +110,14 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userService.saveUser(user);
+        userRepository.save(user);
 
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
         RequestBuilder request = get("http://localhost:8081/bookeroo/users/get/user/id/1");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
             String expected_id = "\"id\":1";
-            String expected_email = "1353664988@qq.com";
-            assertThat(response).contains(expected_id,expected_email);
+            assertThat(response).contains(expected_id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,7 +134,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userService.saveUser(user);
+        userRepository.save(user);
 
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
         RequestBuilder request = get("http://localhost:8081/bookeroo/users/get/user/username?username=williamquq");
@@ -160,7 +158,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userService.saveUser(user);
+        userRepository.save(user);
 
         UserDTO userDTO = new UserDTO();
         userDTO.setRole("admin");
@@ -195,7 +193,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userService.saveUser(user);
+        userRepository.save(user);
 
         PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
         purchaseDetailsDTO.setSellerFullName("chenwang");

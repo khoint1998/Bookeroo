@@ -114,8 +114,8 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/books/title?title=JAVA");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "[{\"bookId\":1,\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]},{\"bookId\":2,\"isbn\":\"isbn2\",\"title\":\"java\",\"author\":\"author2\",\"description\":\"description2\",\"category\":\"category2\",\"publisher\":\"publisher2\",\"copies\":[]}]";
-            assertThat(response).isEqualTo(expected);
+            String expected = "\"title\":\"java\"";
+            assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,8 +148,8 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/books/author?author=chen");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "[{\"bookId\":1,\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]},{\"bookId\":2,\"isbn\":\"isbn2\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description2\",\"category\":\"category2\",\"publisher\":\"publisher2\",\"copies\":[]}]";
-            assertThat(response).isEqualTo(expected);
+            String expected = "\"author\":\"chen\"";
+            assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
         }

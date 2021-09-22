@@ -33,15 +33,14 @@ public class UserControllerTest {
     @Autowired
     private WebApplicationContext wac;
     @Autowired
+    private UserService userService;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserController userController;
 
 
-    @Before
-    void clean_database() {
-        userRepository.deleteAll();
-    }
+
 
     @Test
     void registerUser() {
@@ -79,7 +78,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userRepository.save(user);
+        userService.saveUser(user);
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("williamquq");
@@ -110,8 +109,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userRepository.save(user);
-
+        userService.saveUser(user);
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
         RequestBuilder request = get("http://localhost:8081/bookeroo/users/get/user/id/1");
         try {
@@ -134,8 +132,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userRepository.save(user);
-
+        userService.saveUser(user);
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
         RequestBuilder request = get("http://localhost:8081/bookeroo/users/get/user/username?username=williamquq");
         try {
@@ -158,7 +155,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userRepository.save(user);
+        userService.saveUser(user);
 
         UserDTO userDTO = new UserDTO();
         userDTO.setRole("admin");
@@ -193,7 +190,7 @@ public class UserControllerTest {
         user.setCreate_At(new Date());
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
-        userRepository.save(user);
+        userService.saveUser(user);
 
         PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
         purchaseDetailsDTO.setSellerFullName("chenwang");

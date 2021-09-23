@@ -88,7 +88,7 @@ jobs:
 workflows:
   sample:
     jobs:
-      - test-build-container-node
+      # - test-build-container-node
 
       # - test-build-container-login
 
@@ -96,12 +96,12 @@ workflows:
 
       # Envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
       - aws-ecr/build-and-push-image:
-          repo: sept-front
+          repo: sept
           tag: "latest,front-prod-v0.1.${CIRCLE_BUILD_NUM}"
           dockerfile: Dockerfile.prod
           path: ./FrontEnd/myfirstapp
-          requires:
-            - test-build-container-node
+          # requires:
+          #   - test-build-container-node
           # filters:
           #   branches:
           #     only:

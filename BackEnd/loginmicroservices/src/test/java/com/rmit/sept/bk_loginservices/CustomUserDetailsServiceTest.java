@@ -54,8 +54,6 @@ public class CustomUserDetailsServiceTest {
     @Rollback
     public void should_match_loadUserById() {
         User user = new User();
-        Long expected_id = 2L;
-        user.setId(expected_id);
         user.setUsername("chen wang1");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -64,6 +62,7 @@ public class CustomUserDetailsServiceTest {
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
         userService.saveUser(user);
+        Long expected_id = user.getId();
         User testcase = customUserDetailsService.loadUserById(expected_id);
         assertThat(testcase.getId()).isEqualTo(expected_id);
     }
@@ -73,7 +72,6 @@ public class CustomUserDetailsServiceTest {
     public void should_match_updateUserDetails() {
 
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -88,7 +86,7 @@ public class CustomUserDetailsServiceTest {
         userDTO.setEmail("12345678@qq.com");
         userDTO.setFullName("William Wang");
         userDTO.setRole("User");
-        User testcase = customUserDetailsService.updateUserDetails(1L,userDTO);
+        User testcase = customUserDetailsService.updateUserDetails(user.getId(),userDTO);
         assertThat(testcase.getFullName()).isEqualTo("William Wang");
     }
 
@@ -97,7 +95,6 @@ public class CustomUserDetailsServiceTest {
     public void should_match_updateUserPurchaseHistory() {
 
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -120,7 +117,7 @@ public class CustomUserDetailsServiceTest {
         purchaseDetailsDTO.setCopyId("1");
         purchaseDetailsDTO.setTitle("title");
         purchaseDetailsDTO.setSellerFullName("chen");
-        User testcase = customUserDetailsService.updateUserPurchaseHistory(1L,purchaseDetailsDTO);
+        User testcase = customUserDetailsService.updateUserPurchaseHistory(user.getId(),purchaseDetailsDTO);
         assertThat(testcase.getPurchaseDetailsList().get(0).getSellerFullName()).isEqualTo("chen");
     }
 
@@ -129,7 +126,6 @@ public class CustomUserDetailsServiceTest {
     public void should_match_addAShopForUser() {
 
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -139,8 +135,8 @@ public class CustomUserDetailsServiceTest {
         user.setRole("Admin");
         userService.saveUser(user);
 
-        customUserDetailsService.addAShopForUser(1L, "super shop");
-        User testcase = userRepository.getById(1L);
+        customUserDetailsService.addAShopForUser(user.getId(), "super shop");
+        User testcase = userRepository.getById(user.getId());
         assertThat(testcase.getShops().get(1).getShopName()).isEqualTo("super shop");
     }
 
@@ -149,7 +145,6 @@ public class CustomUserDetailsServiceTest {
     public void should_match_deleteAShop() {
 
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -159,8 +154,8 @@ public class CustomUserDetailsServiceTest {
         user.setRole("Admin");
         userService.saveUser(user);
 
-        customUserDetailsService.addAShopForUser(1L,"good");
-        customUserDetailsService.deleteAShop(1L);
+        customUserDetailsService.addAShopForUser(user.getId(),"good");
+        customUserDetailsService.deleteAShop(user.getShops().get(0).getShopId());
         assertThat(user.getShops()).size().isEqualTo(1);
     }
 }

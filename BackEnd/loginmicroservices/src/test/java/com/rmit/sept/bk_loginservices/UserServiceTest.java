@@ -33,7 +33,7 @@ public class UserServiceTest {
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
         userService.saveUser(user);
-        User testcase = userRepository.getById(1L);
+        User testcase = userRepository.getById(user.getId());
         assertThat(testcase.getUsername()).isEqualTo("chen wang");
     }
 

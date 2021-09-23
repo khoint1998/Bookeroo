@@ -44,8 +44,6 @@ public class UserRepositoryTest {
     @Rollback
     public void should_match_getById() {
         User user = new User();
-        Long expected_Id = 1L;
-        user.setId(expected_Id);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -54,6 +52,7 @@ public class UserRepositoryTest {
         user.setEmail("1353664988@qq.com");
         user.setRole("Admin");
         userRepository.save(user);
+        Long expected_Id = user.getId();
 
         User testcase = userRepository.getById(expected_Id);
         assertThat(testcase.getId()).isEqualTo(expected_Id);

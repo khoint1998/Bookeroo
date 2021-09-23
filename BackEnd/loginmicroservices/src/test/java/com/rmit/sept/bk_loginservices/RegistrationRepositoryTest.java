@@ -39,7 +39,6 @@ public class RegistrationRepositoryTest {
     @Rollback
     public void should_match_getByRegistrationId() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -50,15 +49,12 @@ public class RegistrationRepositoryTest {
         userRepository.save(user);
 
         Shop shop = new Shop();
-        shop.setShopId(1L);
         shop.setShopName("Chen's shop");
         shop.setShopOpen(true);
         shop.setUser(user);
         shopRepository.save(shop);
 
         RegistrationDetails registrationDetails = new RegistrationDetails();
-        Long expected_RegistrationId = 1L;
-        registrationDetails.setRegistrationId(expected_RegistrationId);
         registrationDetails.setStatus("approved");
         registrationDetails.setCopyId(1L);
         registrationDetails.setBookTitle("Chen's book");
@@ -69,6 +65,7 @@ public class RegistrationRepositoryTest {
         registrationDetails.setBookId(1L);
         registrationDetails.setShop(shop);
         registrationRepository.save(registrationDetails);
+        Long expected_RegistrationId = registrationDetails.getRegistrationId();
 
         RegistrationDetails testcase = registrationRepository.getByRegistrationId(expected_RegistrationId);
         assertThat(testcase.getRegistrationId()).isEqualTo(expected_RegistrationId);
@@ -78,7 +75,6 @@ public class RegistrationRepositoryTest {
     @Rollback
     public void should_match_findAll() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -89,35 +85,32 @@ public class RegistrationRepositoryTest {
         userRepository.save(user);
 
         Shop shop = new Shop();
-        shop.setShopId(1L);
         shop.setShopName("Chen's shop");
         shop.setShopOpen(true);
         shop.setUser(user);
         shopRepository.save(shop);
 
         RegistrationDetails registrationDetails1 = new RegistrationDetails();
-        registrationDetails1.setRegistrationId(1L);
         registrationDetails1.setStatus("approved");
         registrationDetails1.setCopyId(1L);
         registrationDetails1.setBookTitle("Chen's book1");
         registrationDetails1.setPrice(1.1f);
         registrationDetails1.setCreate_At(new Date());
         registrationDetails1.setNewBook(true);
-        registrationDetails1.setUserId(1L);
-        registrationDetails1.setBookId(1L);
+        registrationDetails1.setUserId(user.getId());
+        registrationDetails1.setBookId(user.getId());
         registrationDetails1.setShop(shop);
         registrationRepository.save(registrationDetails1);
 
         RegistrationDetails registrationDetails2 = new RegistrationDetails();
-        registrationDetails2.setRegistrationId(2L);
         registrationDetails2.setStatus("approved");
         registrationDetails2.setCopyId(1L);
         registrationDetails2.setBookTitle("Chen's book2");
         registrationDetails2.setPrice(1.1f);
         registrationDetails2.setCreate_At(new Date());
         registrationDetails2.setNewBook(true);
-        registrationDetails2.setUserId(1L);
-        registrationDetails2.setBookId(1L);
+        registrationDetails2.setUserId(user.getId());
+        registrationDetails2.setBookId(user.getId());
         registrationDetails2.setShop(shop);
         registrationRepository.save(registrationDetails2);
 

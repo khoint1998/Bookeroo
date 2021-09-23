@@ -102,7 +102,6 @@ public class UserControllerTest {
     @Test
     void getUserByUserId() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("williamquq");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -112,10 +111,12 @@ public class UserControllerTest {
         user.setRole("Admin");
         userService.saveUser(user);
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        RequestBuilder request = get("http://localhost:8081/bookeroo/users/get/user/id/1");
+        String user_id = user.getId().toString();
+        String url = "http://localhost:8081/bookeroo/users/get/user/id/" + user_id;
+        RequestBuilder request = get(url);
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected_id = "\"id\":1";
+            String expected_id = "\"id\":" + user_id;
             assertThat(response).contains(expected_id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,7 +215,5 @@ public class UserControllerTest {
             e.printStackTrace();
         }
     }
-
-
 
 }

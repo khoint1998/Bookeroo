@@ -55,7 +55,6 @@ public class ShopControllerTest {
     @Test
     void applyForSellingRegistration() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("williamquq");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -81,7 +80,7 @@ public class ShopControllerTest {
         try {
             mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
                     .content(objectWriter.writeValueAsString(registrationDetailsDTO)));
-            User testcase = userController.getUserByUserId(1L);
+            User testcase = userController.getUserByUserId(user.getId());
             String actual_status = testcase.getShops().get(0).getOnSellCopyList().get(0).getStatus();
             assertThat(actual_status).isEqualTo(expected_status);
         } catch (Exception e) {
@@ -92,7 +91,6 @@ public class ShopControllerTest {
     @Test
     void getAllSellingRegistrations() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -103,7 +101,6 @@ public class ShopControllerTest {
         userService.saveUser(user);
 
         Shop shop = new Shop();
-        shop.setShopId(1L);
         shop.setShopName("Chen's shop");
         shop.setShopOpen(true);
         shop.setUser(user);
@@ -112,9 +109,8 @@ public class ShopControllerTest {
         shopRepository.save(shop);
         registrationRepository.deleteAll();
         RegistrationDetails registrationDetails = new RegistrationDetails();
-        registrationDetails.setRegistrationId(1L);
         registrationDetails.setBookId(1L);
-        registrationDetails.setUserId(1L);
+        registrationDetails.setUserId(user.getId());
         registrationDetails.setShop(shop);
         registrationDetails.setBookTitle("Chen's book");
         registrationDetails.setStatus("approved");

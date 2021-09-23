@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
 import com.rmit.sept.bk_bookservices.services.BookService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,10 @@ public class bookControllerTest {
 
     @BeforeEach
     void clean_database() {
+        bookRepository.deleteAll();
+    }
+    @AfterEach
+    void clean_database_after() {
         bookRepository.deleteAll();
     }
 
@@ -80,8 +85,8 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-isbn?title=java&isbn=isbn");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "{\"bookId\":1,\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]}";
-            assertThat(response).isEqualTo(expected);
+            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+            assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -172,8 +177,8 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/isbn?isbn=isbn");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "{\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]}";
-            assertThat(response).isEqualTo(expected);
+            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+            assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -233,8 +238,8 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-author-isbn?searchResult=isbn");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "[{\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]}]";
-            assertThat(response).isEqualTo(expected);
+            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+            assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
         }

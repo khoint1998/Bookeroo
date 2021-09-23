@@ -27,7 +27,6 @@ public class ShopRepositoryTest {
         shopRepository.deleteAll();
         userRepository.deleteAll();
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -38,12 +37,11 @@ public class ShopRepositoryTest {
         userRepository.save(user);
 
         Shop shop = new Shop();
-        Long expected_ShopId = 1L;
-        shop.setShopId(expected_ShopId);
         shop.setShopName("Chen's shop");
         shop.setShopOpen(true);
         shop.setUser(user);
         shopRepository.save(shop);
+        Long expected_ShopId = shop.getShopId();
 
         Shop testcase = shopRepository.getByShopId(expected_ShopId);
         assertThat(testcase.getShopId()).isEqualTo(expected_ShopId);

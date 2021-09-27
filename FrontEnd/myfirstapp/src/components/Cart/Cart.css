@@ -11,6 +11,9 @@
     border-radius: 15px;
     width: fit-content;
     padding: 10px 30px 10px 30px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .Cart_empty{
     text-align: center;
@@ -22,11 +25,6 @@
 .Cart_empty h3{
     color: black;
     font-size: 24px;
-}
-.Cart_empty_btn{
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
 }
 .Cart_empty_image{
     width: 100px;

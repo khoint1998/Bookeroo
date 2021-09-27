@@ -1,0 +1,15 @@
+.NotificationPage{
+    padding: 10px;
+    padding-top: 50px;
+}
+
+.NotificationPage hr{
+    width: 900px;
+    float: left;
+}
+
+.Notification_heading h2{
+    color: #0066f0;
+    font-weight: bolder;
+    font-size: 24px;
+}

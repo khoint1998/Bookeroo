@@ -24,6 +24,7 @@ import BookSearch from "./components/SearchResult/BookSearch/BookSearch";
 import BookDescription from "./components/BookDescription/BookDescription";
 import Cart from "./components/Cart/Cart";
 import OrderComplete from "./components/OrderComplete/OrderComplete";
+import NotificationPage from "./components/Notification/NotificationPage";
 
 const guestValue = {};
 
@@ -85,6 +86,7 @@ const App = () => {
             <Route exact path="/book-description" component={BookDescription} />
             <Route exact path="/cart" component={Cart}/>
             <Route exact path="/order-complete" component={OrderComplete}/>
+            <Route exact path="/notification" component={NotificationPage}/>
             
 
           </div>

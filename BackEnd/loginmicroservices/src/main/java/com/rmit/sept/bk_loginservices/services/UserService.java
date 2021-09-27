@@ -1,14 +1,19 @@
 package com.rmit.sept.bk_loginservices.services;
 
+import com.rmit.sept.bk_loginservices.Repositories.NotificationRepository;
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
 import com.rmit.sept.bk_loginservices.exceptions.UsernameAlreadyExistsException;
+import com.rmit.sept.bk_loginservices.model.Notification;
 import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class UserService {
@@ -50,4 +55,14 @@ public class UserService {
             throw new UsernameAlreadyExistsException("Something is wrong. Cannot create the user");
         }
     }
+
+    public void addNotificationForUser(Long userId,Notification notification) {
+        User user = userRepository.getById(userId);
+        if (user == null) throw new UserNotFoundException("User not found");
+
+        notification.setUser(user);
+        user.getNotifications().add(notification);
+        userRepository.save(user);
+    }
+
 }

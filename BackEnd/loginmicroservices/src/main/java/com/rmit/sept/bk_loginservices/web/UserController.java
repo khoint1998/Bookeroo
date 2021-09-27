@@ -1,9 +1,6 @@
 package com.rmit.sept.bk_loginservices.web;
 
-import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.RegistrationDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.User;
-import com.rmit.sept.bk_loginservices.model.UserDTO;
+import com.rmit.sept.bk_loginservices.model.*;
 import com.rmit.sept.bk_loginservices.payload.JWTLoginSucessReponse;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
@@ -40,6 +37,8 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
@@ -101,5 +100,16 @@ public class UserController {
     public void updateUserPurchaseHistory(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetailsDTO purchaseDetails){
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
     }
+
+    @PatchMapping("/AddNotification/{id}")
+    public void addANotificationForUser(@PathVariable(value="id") Long userId, @Valid @RequestBody Notification notification) {
+        userService.addNotificationForUser(userId, notification);
+    }
+
+    @PatchMapping("/add/purchasedCopyDetail/{id}")
+    public void addPurchasedCopyDetailForUser(@PathVariable(value="id") Long userId,@Valid @RequestParam Long copyId, @RequestParam boolean newBook){
+        customUserDetailsService.addPurchasedCopyDetailsForUser(userId,copyId,newBook);
+    }
+
 
 }

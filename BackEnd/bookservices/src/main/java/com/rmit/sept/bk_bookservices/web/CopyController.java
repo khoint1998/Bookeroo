@@ -50,4 +50,9 @@ public class CopyController {
         return copyService.getCopiesByBookId(bookId);
     }
 
+    @PatchMapping("/changeOwnerId/{copyId}")
+    public void changeOwnerId(@PathVariable Long copyId, @RequestParam Long userId){
+        copyService.changeOwnerId(copyId,userId);
+    }
+
 }

@@ -12,7 +12,7 @@ export const CreateCopy = async (copyDto) => {
     return req;
 }
 
-export const CopiesByBookID = async (BookId) => {
+export const GetCopiesByBookID = async (BookId) => {
     const req = await userAxios().get('copys/get/copy/bookId/' + BookId, {
         headers: {
             'Authorization': `${localStorage.jwtToken}` 
@@ -20,4 +20,5 @@ export const CopiesByBookID = async (BookId) => {
     })
     .then(res => res.data)
     .catch(error => error.response.data.errorMessage)
+    return req;
 }

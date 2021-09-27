@@ -34,4 +34,5 @@ export const GetShopsByCopyId = async() => {
     })
     .then(res => res)
     .catch(error => error.message);
+    return req;
 }

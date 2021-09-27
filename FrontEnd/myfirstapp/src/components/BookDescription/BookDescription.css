@@ -24,6 +24,7 @@
 .hr_line{
     margin-top: -5px;
     border: 1px solid #0066ff;
+    background-color: #0066ff;
 }
 .BookDescription_h4{
     font-size: 20px;

@@ -22,6 +22,7 @@ import Shop from "./components/Shop/Shop";
 import IncomingRegistrations from "./components/IncomingRegistration/IncomingRegistration";
 import BookSearch from "./components/SearchResult/BookSearch/BookSearch";
 import BookDescription from "./components/BookDescription/BookDescription";
+import Cart from "./components/Cart/Cart";
 
 const guestValue = {};
 
@@ -80,7 +81,9 @@ const App = () => {
             <Route exact path="/addPerson" component={AddPerson} />
             <Route exact path="/incoming-reg" component={IncomingRegistrations} />
             <Route exact path="/book-search" component={BookSearch} />
-            <Route exact path="/book-description" component={BookDescription}/>
+            <Route exact path="/book-description" component={BookDescription} />
+            <Route exact path="/cart" component={Cart}/>
+            
 
           </div>
         </Router>

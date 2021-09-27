@@ -26,6 +26,10 @@
     border: 1px solid #0066ff;
     background-color: #0066ff;
 }
+.BookDescription_scrollable{
+    height: 150px;
+    overflow-y: auto;
+}
 .BookDescription_h4{
     font-size: 20px;
     color: black;
@@ -73,6 +77,13 @@
     height: 90px;
     object-fit:cover;
     border-radius: 50%;
+}
+.BookDescription_chapters_row{
+    padding: 8px;
+    font-size: 20px;
+    width: 350px;
+    opacity: 60%;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.6);
 }
 
 .BookDescription_author_profile{

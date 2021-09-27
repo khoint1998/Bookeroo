@@ -35,6 +35,75 @@ function BookDescription(props) {
                     <h4 class="BookDescription_h4">{props.BookDescription_description}“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”</h4>
 
                 </div>
+                <div id="BookDescription_chapters">
+                    <h2 id="text_blue">Table of Content</h2>
+                    <hr class="hr_line"></hr>
+                    <div class="BookDescription_scrollable">
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Introduction
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 1: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 2: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 3: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 4: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 5: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 6: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 7: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 8: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 9: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 10: Hello World
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="BookDescription_chapters_row">
+                                Chapter 11: Hello World
+                            </td>
+                        </tr>
+                        
+
+                    </div>
+                </div>
+
             </div>
 
 
@@ -52,7 +121,7 @@ function BookDescription(props) {
                     <hr class="hr_line"></hr>
                     <div className="BookDescription_author_profile">
                         <div className="BookDescription_display">
-                                <img src="avt-2.jpg" alt="profile_image" ></img>
+                            <img src="avt-2.jpg" alt="profile_image" ></img>
                         </div>
                         <div className="BookDescription_author_name">
                             <h2> {props.BookDescription_author_name} </h2>
@@ -61,8 +130,8 @@ function BookDescription(props) {
                     <div className="BookDescription_author_about">
                         <p>{props.BookDescription_author_about}He has been awarded an Australian Society of Authors Emerging Writers' and Illustrators' Mentorship</p>
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </div>

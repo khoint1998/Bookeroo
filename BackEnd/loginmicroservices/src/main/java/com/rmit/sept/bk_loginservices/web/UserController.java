@@ -101,15 +101,4 @@ public class UserController {
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
     }
 
-    @PatchMapping("/AddNotification/{id}")
-    public void addANotificationForUser(@PathVariable(value="id") Long userId, @Valid @RequestBody Notification notification) {
-        userService.addNotificationForUser(userId, notification);
-    }
-
-    @PatchMapping("/add/purchasedCopyDetail/{id}")
-    public void addPurchasedCopyDetailForUser(@PathVariable(value="id") Long userId,@Valid @RequestParam Long copyId, @RequestParam boolean newBook){
-        customUserDetailsService.addPurchasedCopyDetailsForUser(userId,copyId,newBook);
-    }
-
-
 }

@@ -56,13 +56,4 @@ public class UserService {
         }
     }
 
-    public void addNotificationForUser(Long userId,Notification notification) {
-        User user = userRepository.getById(userId);
-        if (user == null) throw new UserNotFoundException("User not found");
-
-        notification.setUser(user);
-        user.getNotifications().add(notification);
-        userRepository.save(user);
-    }
-
 }

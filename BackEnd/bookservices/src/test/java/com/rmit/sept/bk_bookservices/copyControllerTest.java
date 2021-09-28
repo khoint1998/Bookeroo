@@ -25,8 +25,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 public class copyControllerTest {
@@ -156,6 +155,37 @@ public class copyControllerTest {
             String expected_2 = "\"copyId\":" + copy2.getCopyId().toString() + ",\"ownerId\":2,\"newBook\":true";
             assertThat(response).contains(expected_1, expected_2);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void changeOwnerId() {
+        Book book = new Book();
+        book.setTitle("java");
+        book.setIsbn("isbn");
+        book.setCategory("category");
+        book.setDescription("description");
+        book.setAuthor("author");
+        book.setPublisher("publisher");
+        bookService.createABook(book);
+
+        Copy copy = new Copy();
+        copy.setBook(book);
+        copy.setOwnerId(1L);
+        copy.setNewBook(true);
+        copyRepository.save(copy);
+
+        String copy_id = copy.getCopyId().toString();
+        String url = "http://localhost:8081/bookeroo/copys/changeOwnerId/" + copy_id + "?userId=666";
+        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        try {
+            mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON));
+            Copy testcase = copyRepository.getByCopyId(copy.getCopyId());
+            Long expect_ownerId = 666L;
+            Long actual_ownerId = testcase.getOwnerId();
+            assertThat(actual_ownerId).isEqualTo(expect_ownerId);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,9 +1,6 @@
 package com.rmit.sept.bk_loginservices.web;
 
-import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.RegistrationDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.User;
-import com.rmit.sept.bk_loginservices.model.UserDTO;
+import com.rmit.sept.bk_loginservices.model.*;
 import com.rmit.sept.bk_loginservices.payload.JWTLoginSucessReponse;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
@@ -40,6 +37,8 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @GetMapping("/")
     public ResponseEntity<String> awsHealthCheck() {

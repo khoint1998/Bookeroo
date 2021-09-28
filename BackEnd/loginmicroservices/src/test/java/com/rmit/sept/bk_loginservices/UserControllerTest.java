@@ -9,7 +9,6 @@ import com.rmit.sept.bk_loginservices.model.UserDTO;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.web.UserController;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,7 @@ public class UserControllerTest {
     void clean_database() {
         userRepository.deleteAll();
     }
+
     @Test
     void registerUser() {
         User user = new User();
@@ -149,7 +149,6 @@ public class UserControllerTest {
     @Test
     void updateUserDetails() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("williamquq");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -166,14 +165,15 @@ public class UserControllerTest {
         userDTO.setUsername(expected_username);
         userDTO.setEmail("1353664988@qq.com");
 
+        String userId = user.getId().toString();
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        String url = "http://localhost:8081/bookeroo/users/update/user/details/1";
+        String url = "http://localhost:8081/bookeroo/users/update/user/details/" + userId;
 
         try {
             mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
                     .content(objectWriter.writeValueAsString(userDTO)));
-            User testcase = userController.getUserByUserId(1L);
+            User testcase = userController.getUserByUserId(user.getId());
             String actual_username = testcase.getUsername();
             assertThat(actual_username).isEqualTo(expected_username);
         } catch (Exception e) {
@@ -184,7 +184,6 @@ public class UserControllerTest {
     @Test
     void updateUserPurchaseHistory() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("williamquq");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -194,6 +193,7 @@ public class UserControllerTest {
         user.setRole("Admin");
         userService.saveUser(user);
 
+        String userId = user.getId().toString();
         PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
         purchaseDetailsDTO.setSellerFullName("chenwang");
         purchaseDetailsDTO.setPrice("666.6");
@@ -203,12 +203,12 @@ public class UserControllerTest {
 
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        String url = "http://localhost:8081/bookeroo/users/update/user/history/1";
+        String url = "http://localhost:8081/bookeroo/users/update/user/history/" + userId;
 
         try {
             mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
                     .content(objectWriter.writeValueAsString(purchaseDetailsDTO)));
-            User testcase = userController.getUserByUserId(1L);
+            User testcase = userController.getUserByUserId(user.getId());
             String actual_title = testcase.getPurchaseDetailsList().get(0).getTitle();
             assertThat(actual_title).isEqualTo(expected_title);
         } catch (Exception e) {

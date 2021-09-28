@@ -19,8 +19,6 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
-    private Long copyId;
-
     @NotBlank(message = "Content is required")
     private String content;
 

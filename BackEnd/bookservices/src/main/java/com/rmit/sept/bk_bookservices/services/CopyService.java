@@ -72,4 +72,14 @@ public class CopyService {
             throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
         }
     }
+
+    public void changeOwnerId(Long copyId, Long userId) {
+        try {
+            Copy copy = copyRepository.getByCopyId(copyId);
+            copy.setOwnerId(userId);
+            copyRepository.save(copy);
+        } catch (Exception e) {
+            throw new CopyNotFoundException("Change owner Id failed");
+        }
+    }
 }

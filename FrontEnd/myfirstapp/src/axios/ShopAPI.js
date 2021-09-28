@@ -27,7 +27,7 @@ export const CreateShop = async (userId,shopName) => {
 }
 
 export const GetShopsByCopyId = async() => {
-    const req = await userAxios().get('shops/registration/get-shops-by-copyId-list', {
+    const req = await userAxios().get('shops/get-shops-by-copyId-list', {
         headers: {
             'Authorization': `${localStorage.jwtToken}` 
         }

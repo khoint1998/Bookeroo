@@ -55,7 +55,8 @@ public class User implements UserDetails {
 
     //Store all copyIds of all pruchased copyies
     @JsonManagedReference(value="user-purchasedCopy")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PurchasedCopyDetails> myLibrary = new ArrayList<PurchasedCopyDetails>();
 
     //list of owned shop, cannot be expanded for other roles except Shop Owner
@@ -63,6 +64,12 @@ public class User implements UserDetails {
     @Fetch(FetchMode.SELECT)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Shop> shops;
+
+    //Store all notifications of this user
+    @JsonManagedReference(value="user-notification")
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notification> notifications = new ArrayList<Notification>();
 
     private Date create_At;
     private Date update_At;

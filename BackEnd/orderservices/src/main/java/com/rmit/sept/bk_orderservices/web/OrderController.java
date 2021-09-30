@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-153244410.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/orders")
 public class OrderController {
 
@@ -22,6 +22,11 @@ public class OrderController {
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
+
+    @GetMapping("/")
+    public ResponseEntity<String> awsHealthCheck() {
+        return new ResponseEntity<String>("Status: OK", HttpStatus.OK);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createOrder(@Valid @RequestBody Order order, BindingResult result) {

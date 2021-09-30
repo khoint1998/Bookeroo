@@ -13,11 +13,14 @@ public class NotificationService {
     @Autowired
     private UserRepository userRepository;
 
-    public void addNotificationForUser(Long userId, Notification notification) {
+    public void addNotificationForUser(Long userId, String msg) {
         User user = userRepository.getById(userId);
         if (user == null) throw new UserNotFoundException("User not found");
 
+        Notification notification = new Notification();
+        notification.setContent(msg);
         notification.setUser(user);
+
         user.getNotifications().add(notification);
         userRepository.save(user);
     }

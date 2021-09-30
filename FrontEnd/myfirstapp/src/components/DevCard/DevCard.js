@@ -9,7 +9,7 @@ function DevCard(props){
                 <div className="devDetails">{props.role}</div>
                 <div className="devDetails">{props.id}</div>
             </div>
-            <div className="col">
+            <div className="col" id="devCard_img">
                 <img src={props.profile} alt="avt"></img>
                 
             </div>

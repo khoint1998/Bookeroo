@@ -1,0 +1,6 @@
+FROM mysql:latest
+ENV MYSQL_DATABASE=bookeroo \
+    MYSQL_ROOT_PASSWORD=pass \
+    MYSQL_USER=user \
+    MYSQL_PASSWORD=pass
+EXPOSE 3306

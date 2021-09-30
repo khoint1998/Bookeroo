@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-153244410.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/shops")
 public class ShopController {
 
@@ -37,7 +37,7 @@ public class ShopController {
         return shopService.getAllSellingRegistrations();
     }
 
-    @GetMapping("/registration/get-shops-by-copyId-list")
+    @GetMapping("/get-shops-by-copyId-list")
     public List<Shop> getShopsByCopyIdList(@RequestBody List<Long> copyIdList){
         return shopService.getShopsByCopyIdList(copyIdList);
     }

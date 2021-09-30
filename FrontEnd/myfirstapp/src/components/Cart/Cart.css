@@ -1,0 +1,35 @@
+#Cart_col{
+    width: 70%;
+}
+#Cart_col2{
+    width: 30%;
+}
+.Cart_empty_btn{
+    background-color: #0066FF;
+    color: #FFF;
+    border-style: hidden;
+    border-radius: 15px;
+    width: fit-content;
+    padding: 10px 30px 10px 30px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Cart_empty{
+    text-align: center;
+    padding: auto;
+    width: 100%;
+    height: 400px;
+    background: rgba(104, 126, 202, 0.3);
+}
+.Cart_empty h3{
+    color: black;
+    font-size: 24px;
+}
+.Cart_empty_image{
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 80px;
+    margin-bottom: 20px;
+}

@@ -11,3 +11,14 @@ export const CreateCopy = async (copyDto) => {
         .catch(error => error.message);
     return req;
 }
+
+export const GetCopiesByBookID = async (BookId) => {
+    const req = await userAxios().get('copys/get/copy/bookId/' + BookId, {
+        headers: {
+            'Authorization': `${localStorage.jwtToken}` 
+        }
+    })
+    .then(res => res.data)
+    .catch(error => error.response.data.errorMessage)
+    return req;
+}

@@ -35,7 +35,7 @@ jobs:
       - image: circleci/mysql:8.0.4
         environment:
           MYSQL_ROOT_PASSWORD: pass
-          MYSQL_DATABASE: user
+          MYSQL_DATABASE: bookeroo
 
     executor: docker/docker
     working_directory: ~/app
@@ -63,7 +63,7 @@ jobs:
       - image: circleci/mysql:8.0.4
         environment:
           MYSQL_ROOT_PASSWORD: pass
-          MYSQL_DATABASE: book
+          MYSQL_DATABASE: bookeroo
 
     executor: docker/docker
     working_directory: ~/app

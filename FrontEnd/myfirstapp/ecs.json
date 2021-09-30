@@ -1,0 +1,119 @@
+{
+    "ipcMode": null,
+    "executionRoleArn": null,
+    "containerDefinitions": [
+        {
+            "dnsSearchDomains": null,
+            "environmentFiles": null,
+            "logConfiguration": null,
+            "entryPoint": null,
+            "portMappings": [
+                {
+                    "hostPort": 3306,
+                    "protocol": "tcp",
+                    "containerPort": 3306
+                }
+            ],
+            "command": null,
+            "linuxParameters": null,
+            "cpu": 0,
+            "environment": [],
+            "resourceRequirements": null,
+            "ulimits": null,
+            "dnsServers": null,
+            "mountPoints": [],
+            "workingDirectory": null,
+            "secrets": null,
+            "dockerSecurityOptions": null,
+            "memory": null,
+            "memoryReservation": null,
+            "volumesFrom": [],
+            "stopTimeout": null,
+            "image": "933438216369.dkr.ecr.ap-southeast-1.amazonaws.com/bookeroodb:latest",
+            "startTimeout": null,
+            "firelensConfiguration": null,
+            "dependsOn": null,
+            "disableNetworking": null,
+            "interactive": null,
+            "healthCheck": null,
+            "essential": true,
+            "links": null,
+            "hostname": null,
+            "extraHosts": null,
+            "pseudoTerminal": null,
+            "user": null,
+            "readonlyRootFilesystem": null,
+            "dockerLabels": null,
+            "systemControls": null,
+            "privileged": null,
+            "name": "bookeroodb"
+        },
+        {
+            "dnsSearchDomains": null,
+            "environmentFiles": null,
+            "logConfiguration": null,
+            "entryPoint": null,
+            "portMappings": [
+                {
+                    "hostPort": 8080,
+                    "protocol": "tcp",
+                    "containerPort": 8080
+                }
+            ],
+            "command": null,
+            "linuxParameters": null,
+            "cpu": 0,
+            "environment": [],
+            "resourceRequirements": null,
+            "ulimits": null,
+            "dnsServers": null,
+            "mountPoints": [],
+            "workingDirectory": null,
+            "secrets": null,
+            "dockerSecurityOptions": null,
+            "memory": null,
+            "memoryReservation": null,
+            "volumesFrom": [],
+            "stopTimeout": null,
+            "image": "933438216369.dkr.ecr.ap-southeast-1.amazonaws.com/loginservices:latest",
+            "startTimeout": null,
+            "firelensConfiguration": null,
+            "disableNetworking": null,
+            "interactive": null,
+            "healthCheck": null,
+            "essential": true,
+            "dependsOn": [
+                {
+                    "containerName": "bookeroodb",
+                    "condition": "START"
+                }
+            ],
+            "links": [
+                "bookeroodb:bookeroodb"
+            ],
+            "hostname": null,
+            "extraHosts": null,
+            "pseudoTerminal": null,
+            "user": null,
+            "readonlyRootFilesystem": null,
+            "dockerLabels": null,
+            "systemControls": null,
+            "privileged": null,
+            "name": "login"
+        }
+    ],
+    "memory": "4096",
+    "taskRoleArn": null,
+    "family": "run-login-db",
+    "pidMode": null,
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "networkMode": "bridge",
+    "cpu": "2048",
+    "inferenceAccelerators": null,
+    "proxyConfiguration": null,
+    "volumes": [],
+    "placementConstraints": [],
+    "tags": []
+}

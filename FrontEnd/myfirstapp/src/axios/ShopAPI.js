@@ -25,3 +25,14 @@ export const CreateShop = async (userId,shopName) => {
         .catch(error => error.message);
     return req;
 }
+
+export const GetShopsByCopyId = async() => {
+    const req = await userAxios().get('shops/get-shops-by-copyId-list', {
+        headers: {
+            'Authorization': `${localStorage.jwtToken}` 
+        }
+    })
+    .then(res => res)
+    .catch(error => error.message);
+    return req;
+}

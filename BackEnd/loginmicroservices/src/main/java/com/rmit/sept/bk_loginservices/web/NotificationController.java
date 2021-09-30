@@ -8,16 +8,16 @@ import javax.validation.Valid;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-153244410.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/notifications")
 public class NotificationController {
 
     @Autowired
     private NotificationService notificationService;
 
-    @PatchMapping("/AddNotification/{id}")
-    public void addANotificationForUser(@PathVariable(value="id") Long userId, @Valid @RequestBody Notification notification) {
-        notificationService.addNotificationForUser(userId, notification);
+    @PatchMapping("/getNotification/{id}")
+    public void getNotificationById(@PathVariable(value="id") Long notificationId) {
+//        notificationService.getNotificationById(notificationId);
     }
 
 }

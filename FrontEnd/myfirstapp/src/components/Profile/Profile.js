@@ -1,8 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import "./Profile.css";
+import { GetUserInfo } from "../../axios/UserAPI";
+import { UserContext } from "../../App";
 
-class Profile extends Component {
-    render(props) {
+
+function Profile(){
+    const currentUser = useContext(UserContext);
+
+    const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
+
         return (
             <div className="profile_page">
 
@@ -11,7 +17,7 @@ class Profile extends Component {
                         <div className="profile_display">
                             <img src="avt-2.jpg" alt="profile_image" ></img>
                             <div className="profile_role">
-                                Publisher
+                                {user.role}
                             </div>
                         </div>
                     </div>
@@ -22,28 +28,28 @@ class Profile extends Component {
                                 <h3 className="profile_page_text_primary">Name:
                                 </h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">Khoi Nguyen</small>
+                                    <small className="text-muted">{user.fullName}</small>
                                 </h4>
                             </div>
 
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Email:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">s3678755@rmit.edu.vn</small>
+                                    <small className="text-muted">{user.email}</small>
                                 </h4>
                             </div>
 
-                            <div className="form_component">
+                            {/* <div className="form_component">
                                 <h3 className="profile_page_text_primary">Password:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">*********</small>
+                                    <small className="text-muted">{user.string}</small>
                                 </h4>
-                            </div>
+                            </div> */}
 
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Username:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">admin12345</small>
+                                    <small className="text-muted">{user.username}</small>
                                 </h4>
                             </div>
 
@@ -75,6 +81,6 @@ class Profile extends Component {
             </div>
         );
     }
-}
+
 
 export default Profile;

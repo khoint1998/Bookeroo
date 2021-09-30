@@ -2,9 +2,10 @@ import React, { Component, useContext } from "react";
 import "./Profile.css";
 import { GetUserInfo } from "../../axios/UserAPI";
 import { UserContext } from "../../App";
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
-function Profile(){
+function ProfileEdit(){
     const currentUser = useContext(UserContext);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
@@ -28,55 +29,54 @@ function Profile(){
                                 <h3 className="profile_page_text_primary">Name:
                                 </h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.fullName}</small>
+                                <small className="text-muted">
+                                <input className="profile--fields" id="fullname" name="fullname" placeholder={user.fullName}/>
+                                </small>
                                 </h4>
                             </div>
 
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Email:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.email}</small>
+                                    <small className="text-muted">
+                                    <input className="profile--fields" id="email" name="email" placeholder={user.email}/>
+                                    </small>
                                 </h4>
                             </div>
 
                             {/* <div className="form_component">
                                 <h3 className="profile_page_text_primary">Password:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.string}</small>
+                                    <small className="text-muted">
+                                        <input className="profile--fields" id="fullname" name="fullname" placeholder={user.string}/>
+                                    </small>
                                 </h4>
                             </div> */}
 
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Username:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.username}</small>
+                                    <small className="text-muted">
+                                        <input className="profile--fields" id="username" name="username" placeholder={user.username}/>
+                                    </small>
                                 </h4>
                             </div>
 
                         </div>
                     </div>
                     <div className="profile_col" id="profile_edit">
-
-                        <div className="profile_button">
-                            <div className="profile_button_image">
-                                <img src="/pics/icon_setting.png" alt="setting-icon"></img>
-                            </div>
-                            <Link className="updateDetails_btn" to="/profile-edit">
-                            Request to change account type
-                            </Link>
+                        <div className="update_profile_button">
+                            <Button className="update_profile_button" type="submit">
+                                <span className="update_profile_btn">Update Details</span>
+                            </Button>
+                            {/* updates with new details */}
                         </div>
 
-                        <div className="profile_button">
-                            <div className="profile_button_image">
-                                <img src="/pics/icon_history.png" alt="history-icon"></img>
-                            </div>
-                            
-                            <a>Transaction History</a>
+                        <div className="cancel_profile_button">
+                            <Button className="update_profile_button" type="submit">
+                                <Link className="updateDetails_btn" to="/profile">Cancel</Link>
+                            </Button>
                         </div>
-                        <div className="profile_imageContainer">
-                            <img src="bookstore-clipart-lg.png" alt="footer_image" ></img>
-                        </div>
-
 
                     </div>
                 </div>
@@ -85,4 +85,4 @@ function Profile(){
     }
 
 
-export default Profile;
+export default ProfileEdit;

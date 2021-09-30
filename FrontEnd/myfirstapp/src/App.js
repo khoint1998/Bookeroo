@@ -13,6 +13,7 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Homepage from "./components/Homepage/Homepage";
 import Profile from "./components/Profile/Profile";
+import ProfileEdit from "./components/Profile/ProfileEdit";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 import jwt_decode from "jwt-decode";
@@ -77,6 +78,7 @@ const App = () => {
             <Route exact path="/contact" component={ContactUs} />
             <Route exact path="/purchaseHistory" component={PurchaseHistory}/>
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile-edit" component={ProfileEdit} />
             <Route exact path="/my-shops" component={MyShops} />
             <Route exact path="/shop" component={Shop} />
             <Route exact path="/my-registration" component={MyRegistration} />

@@ -140,4 +140,29 @@ public class ShopServiceTest {
         RegistrationDetails testcase = registrationRepository.getByRegistrationId(registrationDetails.getRegistrationId());
         assertThat(testcase.getStatus()).isEqualTo("approved");
     }
+
+    @Test
+    public void should_match_increaseSold() {
+        User user = new User();
+        user.setUsername("chen wang");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setConfirmPassword("123456");
+        user.setCreate_At(new Date());
+        user.setEmail("1353664988@qq.com");
+        user.setRole("Admin");
+        userService.saveUser(user);
+
+        Shop shop = new Shop();
+        shop.setShopName("Chen's shop");
+        shop.setShopOpen(true);
+        shop.setHasSold(0);// after we use increaseSold, the result should be 1
+        shop.setUser(user);
+        shopRepository.save(shop);
+        Long shopId = shop.getShopId();
+        shopService.increaseSold(shopId);
+        Shop testcase = shopRepository.getByShopId(shopId);
+
+        assertThat(testcase.getHasSold()).isEqualTo(1);
+    }
 }

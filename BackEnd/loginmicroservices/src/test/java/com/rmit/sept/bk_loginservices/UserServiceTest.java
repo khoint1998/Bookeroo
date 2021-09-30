@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_loginservices;
 
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.services.UserService;
 import org.junit.jupiter.api.Test;

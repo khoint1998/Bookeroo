@@ -84,4 +84,11 @@ public class ShopService {
         Long copyid = registrationDetails.getCopyId();
         return copyid;
     }
+
+    public void increaseSold(Long shopId) {
+        Shop selectedShop = shopRepository.getByShopId(shopId);
+        int hasSold = selectedShop.getHasSold() + 1;
+        selectedShop.setHasSold(hasSold);
+        shopRepository.save(selectedShop);
+    }
 }

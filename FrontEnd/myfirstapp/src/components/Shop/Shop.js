@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import { UserContext } from "../../App";
+import { UserContext, CartContext } from "../../App";
 import { GetUserInfo } from "../../axios/UserAPI";
 import { SearchForABook } from "../../axios/BookAPI";
 import { DeleteRegistration, CreateRegistration } from "../../axios/RegistrationAPI";
@@ -33,6 +33,8 @@ const Shop = (props) => {
     const {selectedShopId} = props.location.state;
 
     const currentUser = useContext(UserContext);
+    const cart = useContext(CartContext);
+    
     const [openDialog, setOpenDialog] = useState(false);
     const [openCreateRegDialog, setOpenCreateRegDialog] = useState(false);
     const [selectedTitle, setSelectedTitle] = useState('');
@@ -93,6 +95,7 @@ const Shop = (props) => {
 
     const removeRegistration = (regId) => {
         DeleteRegistration(regId);
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 
@@ -118,6 +121,7 @@ const Shop = (props) => {
 
         CreateRegistration(registrationDetails);
         handleCloseCreateRegDialog();
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 

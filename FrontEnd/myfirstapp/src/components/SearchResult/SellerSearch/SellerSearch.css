@@ -1,0 +1,36 @@
+.sellerSearch--search-section {
+  display: flex;
+  margin: 4vh 0 0 4vw;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sellerSearch--search-section-bar {
+  margin-right: 2vw;
+  width: 30%;
+}
+
+.sellerSearch--search-section-result {
+  font-weight: bolder;
+  font-size: 135%;
+}
+
+.sellerSearch--search-section-result-text {
+  color: #0066ff;
+}
+
+.sellerSearch--search-option {
+  display: flex;
+  margin: 2vh 0 0 4vw;
+  justify-content: flex-start;
+}
+
+.sellerSearch--table {
+  max-height: 70vh;
+  margin: 1vh 3vw 0 3vw;
+  overflow: auto;
+}
+
+.sellerSearch--logo {
+  width: 5vw;
+}

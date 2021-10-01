@@ -37,7 +37,7 @@ public class ShopController {
         return shopService.getAllSellingRegistrations();
     }
 
-    @GetMapping("/get-shops-by-copyId-list")
+    @PutMapping("/get-shops-by-copyId-list")
     public List<Shop> getShopsByCopyIdList(@RequestBody List<Long> copyIdList){
         return shopService.getShopsByCopyIdList(copyIdList);
     }

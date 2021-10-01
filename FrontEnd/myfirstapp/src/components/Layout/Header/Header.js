@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import './Header.css';
-import { UserContext } from "../../../App";
+import { UserContext, CartContext } from "../../../App";
 import { GetUserInfo } from "../../../axios/UserAPI";
 import { SearchBookAsResult } from "../../../axios/BookAPI";
 import Avatar from '@material-ui/core/Avatar';
@@ -18,8 +18,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
 import { Redirect } from "react-router-dom";
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const Header = () => {
+
+    const cart = useContext(CartContext);
 
     const [searchResults, setSearchResults] = useState("");
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,6 +46,7 @@ const Header = () => {
             await SearchBookAsResult(searchResults).then(data => setSearchedBooks(data));
             if (searchedBooks !== 'Books not found') {
                 setToRoute("/book-search");
+                localStorage.setItem("cart", JSON.stringify(cart.cartState));
                 window.location.reload();
             } else {
                 //throw error message for the user
@@ -49,7 +54,7 @@ const Header = () => {
         }
     }
 
-    if (toRoute) {
+    if (toRoute === '/book-search') {
         return (
           <div>
             <Header/>
@@ -64,6 +69,15 @@ const Header = () => {
             />
           </div>
         );
+    }
+
+    if (toRoute) {
+        return (
+            <div>
+              <Header/>
+              <Redirect to={toRoute}/>
+            </div>
+          );
     }
 
     return (
@@ -151,6 +165,14 @@ const Header = () => {
                                     <ListItemIcon style={{
                                         minWidth: '25px'
                                     }}>
+                                        <SupervisorAccountIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Admin Workspace"/>
+                                </MenuItem>
+                                <MenuItem>
+                                    <ListItemIcon style={{
+                                        minWidth: '25px'
+                                    }}>
                                         <ListIcon fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="My Selling Registration" onClick={() => setToRoute("/my-registration")}/>
@@ -164,6 +186,14 @@ const Header = () => {
                                 <NewReleasesIcon fontSize="small" />
                             </ListItemIcon>
                             <ListItemText primary="Notifications"/>
+                        </MenuItem>
+                        <MenuItem>
+                            <ListItemIcon style={{
+                                minWidth: '25px'
+                            }}>
+                                <ShoppingCartIcon fontSize="small"/>
+                            </ListItemIcon>
+                            <ListItemText primary="My Cart" onClick={() => setToRoute("/cart")}/>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon style={{

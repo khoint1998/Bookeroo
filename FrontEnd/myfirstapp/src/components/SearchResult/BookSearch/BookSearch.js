@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState,useContext} from 'react';
 import SearchBar from "material-ui-search-bar";
 import { Redirect } from "react-router-dom";
-import Header from "../../Layout/Header/Header";
 import './BookSearch.css';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -17,16 +16,18 @@ import Button from '@material-ui/core/Button';
 import StoreIcon from '@material-ui/icons/Store';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { SearchBookWithSelectedOptions } from "../../../axios/BookAPI";
+import { CartContext } from "../../../App";
 
 const BookSearch = (props) => {
 
     const {searchedBooks, searchedTitle} = props.location.state;
+    const cart = useContext(CartContext);
 
     const [searchResults, setSearchResults] = useState(searchedTitle);
     const [toRoute,setToRoute] = useState(null);
-    const [selectedBook,setSelectededBook] = useState(null);
-    const [resultList, setResultList] = useState(searchedBooks);
-    const [searchTitle, setSearchTitle] = useState(searchedTitle);
+    const [selectedBookId,setSelectededBookId] = useState(null);
+    const [resultList,setResultList] = useState(searchedBooks);
+    const [searchTitle,setSearchTitle] = useState(searchedTitle);
 
     //HOC
     const StyledTableCell = withStyles(() => ({
@@ -63,6 +64,7 @@ const BookSearch = (props) => {
             await SearchBookWithSelectedOptions(searchResults,options).then(data => setResultList(data));
             if (resultList !== 'Books not found') {
                 setToRoute("/book-search");
+                localStorage.setItem("cart", JSON.stringify(cart.cartState));
                 window.location.reload();
             } else {
                 //throw error message for the user
@@ -71,11 +73,12 @@ const BookSearch = (props) => {
     }
 
     const seeSellers = (bookId) => {
-
+        setSelectededBookId(bookId);
+        setToRoute("/seller-search");
     }
 
-    const openBookDesc = () => {
-
+    const seeBookDesc = (bookId) => {
+        setSelectededBookId(bookId);
     }
 
     if (toRoute === "/book-search") {
@@ -94,13 +97,32 @@ const BookSearch = (props) => {
         );
     }
 
+    if (toRoute === "/seller-search") {
+        return (
+          <div>
+            <Redirect 
+                to={{
+                    pathname: toRoute,
+                    state: {
+                        selectedBookId: selectedBookId,
+                        //title on search bar
+                        searchedTitle: searchResults
+                    }
+                }} 
+            />
+          </div>
+        );
+    }
+
     if (toRoute === '/book-desc') {
         return (
           <div>
             <Redirect 
                 to={{
                     pathname: toRoute,
-                    state: { selectedBook: selectedBook }
+                    state: { 
+                        selectedBookId: selectedBookId
+                    }
                 }} 
             />
           </div>
@@ -120,7 +142,6 @@ const BookSearch = (props) => {
                         onChange={(value) => setSearchResults(value)}
                         placeholder="Search for a Book Title, Author or ISBN."
                         onCancelSearch={() => setSearchResults("")}
-                        // disabled
                         onRequestSearch={() => SearchFor(searchResults)}
                     />
                 </div>
@@ -153,12 +174,12 @@ const BookSearch = (props) => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>ID</StyledTableCell>
-                                <StyledTableCell>Cover</StyledTableCell>
-                                <StyledTableCell>Title</StyledTableCell>
-                                <StyledTableCell>ISBN</StyledTableCell>
+                                <StyledTableCell width="5%">ID</StyledTableCell>
+                                <StyledTableCell width="10%">Cover</StyledTableCell>
+                                <StyledTableCell width="30%">Title</StyledTableCell>
+                                <StyledTableCell width="10%">ISBN</StyledTableCell>
                                 <StyledTableCell>Author</StyledTableCell>
-                                <StyledTableCell>Actions</StyledTableCell>
+                                <StyledTableCell width="30%">Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -185,8 +206,7 @@ const BookSearch = (props) => {
                                                 outline: 'none'
                                             }}
                                             onClick={() => {
-                                                setSelectededBook(row.bookdId);
-                                                openBookDesc();
+                                                seeBookDesc(row.bookId);
                                             }}
                                         >Book Description</Button>
                                         <Button 

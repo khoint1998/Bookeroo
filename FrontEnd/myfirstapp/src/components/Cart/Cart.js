@@ -12,7 +12,7 @@ function Cart() {
         <div className="Cart_Page">
             <div id="Cart_col" className="col">
                 <h2 id="text_blue">Your Cart</h2>
-                <hr class="hr_line"></hr>
+                <hr className="hr_line"></hr>
                 <div className="Cart_empty">
                     <div className="Cart_empty_image">
                         <img src="/pics/cart.png" alt="Cart"></img>
@@ -26,7 +26,7 @@ function Cart() {
             </div>
             <div id="Cart_col2" className="col">
                 <h2 id="text_blue">Buyer details</h2>
-                <hr class="hr_line"></hr>
+                <hr className="hr_line"></hr>
                 <h3>{user && user.fullname}</h3>
                 <h3> email id </h3>
             </div>

@@ -13,7 +13,7 @@ function NotificationItem(props){
             </div>
 
             <div className="NotificationDelete">
-                <img src="/pics/bin_red.png"></img>
+                <img src="/pics/bin_red.png" alt="bin"></img>
             </div>
         </div>
     )

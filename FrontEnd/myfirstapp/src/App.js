@@ -22,6 +22,7 @@ import BookDescription from "./components/BookDescription/BookDescription";
 import Cart from "./components/Cart/Cart";
 import OrderComplete from "./components/OrderComplete/OrderComplete";
 import NotificationPage from "./components/Notification/NotificationPage";
+import MyLibrary from "./components/MyLibrary/MyLibrary";
 import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
 
 const guestValue = {};
@@ -101,6 +102,7 @@ const App = () => {
             <Route exact path="/cart" component={Cart}/>
             <Route exact path="/order-complete" component={OrderComplete}/>
             <Route exact path="/notification" component={NotificationPage}/>
+            <Route exact path="/library" component={MyLibrary}/>
             <Route exact path="/seller-search" component={SellerSearch}/>
 
           </div>

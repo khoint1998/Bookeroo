@@ -1,0 +1,24 @@
+.MyLibraryPage{
+    padding: 10px;
+    padding-top: 50px;
+}
+
+.MyLibraryPage hr{
+    width: 250px;
+}
+
+.Library_heading h2{
+    color: #0066f0;
+    font-weight: bolder;
+    font-size: 24px;
+    text-align: center;
+}
+.MyLibrary_itemList{
+    height: 400px;
+    overflow-y: auto;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 550px 550px;
+}

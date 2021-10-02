@@ -14,15 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NotificationModelTest {
 
     @Test
-    public void setcopyId_test() {
-        Notification notification = new Notification();
-        Long expected_copyId = 100L;
-        notification.setCopyId(expected_copyId);
-        Long actual_copyId = notification.getCopyId();
-        assertThat(actual_copyId).isEqualTo(expected_copyId);
-    }
-
-    @Test
     public void setcontent_test() {
         Notification notification = new Notification();
         String expected_content = "hello world";
@@ -50,16 +41,6 @@ public class NotificationModelTest {
         User actual_user = notification.getUser();
         Long actual_userId = actual_user.getId();
         assertThat(actual_userId).isEqualTo(expected_userId);
-    }
-
-
-    @Test
-    public void getcopyId_test() {
-        Notification notification = new Notification();
-        Long expected_copyId = 100L;
-        notification.setCopyId(expected_copyId);
-        Long actual_copyId = notification.getCopyId();
-        assertThat(actual_copyId).isEqualTo(expected_copyId);
     }
 
     @Test

@@ -80,4 +80,19 @@ public class CustomUserDetailsService implements UserDetailsService {
         shopRepository.delete(selectedShop);
     }
 
+    public User addPurchasedCopyDetailsForUser(Long userId, Long copyId, boolean newBook) {
+        User selectedUser = userRepository.getById(userId);
+        if(selectedUser==null) throw new UserNotFoundException("User not found");
+
+        PurchasedCopyDetails purchasedCopyDetails = new PurchasedCopyDetails();
+        purchasedCopyDetails.setPurchasedCopyId(copyId);
+        purchasedCopyDetails.setUserId(userId);
+        purchasedCopyDetails.setNewBook(newBook);
+        purchasedCopyDetails.setUser(selectedUser);
+
+        selectedUser.getMyLibrary().add(purchasedCopyDetails);
+        userRepository.save(selectedUser);
+        return selectedUser;
+    }
+
 }

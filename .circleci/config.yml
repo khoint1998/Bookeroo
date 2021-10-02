@@ -5,10 +5,10 @@ orbs:
   maven: circleci/maven@1.2.0
   docker: circleci/docker@1.7.0
   # https://circleci.com/developer/orbs/orb/circleci/aws-ecr
-  # aws-ecr: circleci/aws-ecr@7.2.0
+  aws-ecr: circleci/aws-ecr@7.2.0
 
 jobs:
-  test-run-container-node:
+  test-build-container-node:
     docker:
       - image: cimg/node:12.19.0
 
@@ -28,14 +28,14 @@ jobs:
           command: |
             cd FrontEnd/myfirstapp && docker-compose -f docker-compose.dev.yml build
 
-  test-run-container-login:
+  test-build-container-login:
     docker:
       - image: cimg/openjdk:11.0
 
       - image: circleci/mysql:8.0.4
         environment:
           MYSQL_ROOT_PASSWORD: pass
-          MYSQL_DATABASE: user
+          MYSQL_DATABASE: bookeroo
 
     executor: docker/docker
     working_directory: ~/app
@@ -57,13 +57,13 @@ jobs:
           command: |
             cd BackEnd/loginmicroservices && docker build -t loginservices:latest .
 
-  test-run-container-book:
+  test-build-container-book:
     docker:
       - image: cimg/openjdk:11.0
       - image: circleci/mysql:8.0.4
         environment:
           MYSQL_ROOT_PASSWORD: pass
-          MYSQL_DATABASE: book
+          MYSQL_DATABASE: bookeroo
 
     executor: docker/docker
     working_directory: ~/app
@@ -88,17 +88,21 @@ jobs:
 workflows:
   sample:
     jobs:
-      - test-run-container-node
+      - test-build-container-node
 
-      - test-run-container-login
+      - test-build-container-login
 
-      - test-run-container-book
+      - test-build-container-book
 
       # Envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
-      # - aws-ecr/build-and-push-image:
-      #     repo: sept
-      #     tag: "latest,v0.1.${CIRCLE_BUILD_NUM}"
-      #     dockerfile: FrontEnd/myfirstapp/Dockerfile
-      #     path: .
-      #     requires:
-      #       - test-run-container-node
+      - aws-ecr/build-and-push-image:
+          repo: sept
+          tag: "latest,front-prod-v0.1.${CIRCLE_BUILD_NUM}"
+          dockerfile: Dockerfile.prod
+          path: ./FrontEnd/myfirstapp
+          requires:
+            - test-build-container-node
+          filters:
+            branches:
+              only:
+                - master

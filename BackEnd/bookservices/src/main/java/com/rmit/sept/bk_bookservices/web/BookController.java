@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_bookservices.web;
 
 import com.rmit.sept.bk_bookservices.model.Book;
+import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import com.rmit.sept.bk_bookservices.services.BookService;
 import com.rmit.sept.bk_bookservices.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-153244410.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/books")
 public class BookController {
 
@@ -23,6 +24,11 @@ public class BookController {
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
+
+    @GetMapping("/")
+    public ResponseEntity<String> awsHealthCheck() {
+        return new ResponseEntity<String>("Status: OK", HttpStatus.OK);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createBook(@Valid @RequestBody Book book, BindingResult result) {

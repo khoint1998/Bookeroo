@@ -76,4 +76,12 @@ public class ShopService {
         selectedReg.setStatus("approved");
         registrationRepository.save(selectedReg);
     }
+
+    public Long changeStatusToSold(Long registrationId) {
+        RegistrationDetails registrationDetails = registrationRepository.getByRegistrationId(registrationId);
+        registrationDetails.setStatus("sold");
+        registrationRepository.save(registrationDetails);
+        Long copyid = registrationDetails.getCopyId();
+        return copyid;
+    }
 }

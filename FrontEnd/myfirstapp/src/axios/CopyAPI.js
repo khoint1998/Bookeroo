@@ -1,4 +1,5 @@
 import { userAxios } from "./axiosClient";
+import useSWR from 'swr';
 
 export const CreateCopy = async (copyDto) => {
     const req = await userAxios('book').post('copys/create', copyDto,
@@ -12,12 +13,16 @@ export const CreateCopy = async (copyDto) => {
     return req;
 }
 
-export const CopiesByBookID = async (BookId) => {
-    const req = await userAxios().get('copys/get/copy/bookId/' + BookId, {
-        headers: {
-            'Authorization': `${localStorage.jwtToken}` 
-        }
-    })
-    .then(res => res.data)
-    .catch(error => error.response.data.errorMessage)
+const fetcher = (url) => userAxios('book')
+.get(url, { headers: { Authorization: `${localStorage.jwtToken}` } })
+.then((res) => res.data);
+
+export const GetCopiesByBookId = (bookId) => {
+    const { data, error } = useSWR('copys/get/copy/bookId/' + bookId, fetcher)
+  
+    return {
+      data: data,
+      isLoading: !error && !data,
+      isError: error
+    }
 }

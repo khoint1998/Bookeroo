@@ -53,7 +53,6 @@ function Cart(props) {
                     <h3>{user && user.fullname}</h3>
                     <h3> email id </h3>
                 </div>
-
             </div>
         )
     }

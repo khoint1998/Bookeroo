@@ -73,11 +73,15 @@ const BookSearch = (props) => {
     }
 
     const seeSellers = (bookId) => {
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {setToRoute('/login')}
         setSelectededBookId(bookId);
         setToRoute("/seller-search");
     }
 
     const seeBookDesc = (bookId) => {
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {setToRoute('/login')}
         setSelectededBookId(bookId);
     }
 
@@ -105,7 +109,6 @@ const BookSearch = (props) => {
                     pathname: toRoute,
                     state: {
                         selectedBookId: selectedBookId,
-                        //title on search bar
                         searchedTitle: searchResults
                     }
                 }} 
@@ -127,6 +130,10 @@ const BookSearch = (props) => {
             />
           </div>
         );
+    }
+
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
     }
 
     return (
@@ -179,7 +186,7 @@ const BookSearch = (props) => {
                                 <StyledTableCell width="30%">Title</StyledTableCell>
                                 <StyledTableCell width="10%">ISBN</StyledTableCell>
                                 <StyledTableCell>Author</StyledTableCell>
-                                <StyledTableCell width="30%">Actions</StyledTableCell>
+                                <StyledTableCell>Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

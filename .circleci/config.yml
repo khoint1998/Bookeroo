@@ -85,6 +85,34 @@ jobs:
           command: |
             cd BackEnd/bookservices && docker build -t bookservices:latest .
 
+  test-build-container-order:
+    docker:
+      - image: cimg/openjdk:11.0
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: pass
+          MYSQL_DATABASE: bookeroo
+
+    executor: docker/docker
+    working_directory: ~/app
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: cd BackEnd/orderservices && mvn -B -DskipTests clean package
+      - run:
+          name: Test Backend - orderservices
+          command: |
+            cd BackEnd/orderservices && mvn test
+      - run:
+          name: Wait for Database service on the TCP protocol
+          command: |
+            dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run:
+          name: Build Backend-Book Docker Image
+          command: |
+            cd BackEnd/orderservices && docker build -t bookservices:latest .
+
 workflows:
   sample:
     jobs:
@@ -93,6 +121,8 @@ workflows:
       - test-build-container-login
 
       - test-build-container-book
+
+      - test-build-container-order
 
       # Envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
       - aws-ecr/build-and-push-image:

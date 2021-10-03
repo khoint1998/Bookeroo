@@ -22,6 +22,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DoneIcon from '@material-ui/icons/Done';
 import { CartContext } from "../../App";
+import { Redirect } from "react-router-dom";
 
 const IncomingRegistrations = () => {
 
@@ -31,6 +32,7 @@ const IncomingRegistrations = () => {
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
     const [selectedRegId, setSelectedRegId] = useState(null);
     const [selectedReg, setSelectedReg] = useState(null);
+    const [toRoute,setToRoute] = useState(null);
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -94,6 +96,10 @@ const IncomingRegistrations = () => {
         window.location.reload();
     }
 
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
+    }
+
     return (
         <div className="inreg--page">
             <div className="inreg--header">
@@ -124,7 +130,9 @@ const IncomingRegistrations = () => {
                             fontWeight: 'bolder',
                             outline: 'none'
                         }}
-                        
+                        onClick={() => {
+                            setToRoute('/admin-home')
+                        }}
                     >Admin Page</Button>
                 </div>
             </div>

@@ -24,6 +24,8 @@ import OrderComplete from "./components/OrderComplete/OrderComplete";
 import NotificationPage from "./components/Notification/NotificationPage";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
 import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
+import AdminHomePage from "./components/AdminPage/AdminHomePage/AdminHomePage";
+import AdminSearchPage from "./components/AdminPage/AdminSearchPage/AdminSearchPage";
 
 const guestValue = {};
 const defaultCart = [];
@@ -104,6 +106,8 @@ const App = () => {
             <Route exact path="/notification" component={NotificationPage}/>
             <Route exact path="/library" component={MyLibrary}/>
             <Route exact path="/seller-search" component={SellerSearch}/>
+            <Route exact path="/admin-home" component={AdminHomePage}/>
+            <Route exact path="/admin-search" component={AdminSearchPage}/>
 
           </div>
         </Router>

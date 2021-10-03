@@ -1,0 +1,47 @@
+.adminHome--page-title {
+  color: #06f;
+  font-size: 2.5vh;
+  font-weight: bolder;
+}
+
+.adminHome--submitBtn {
+  color: #06f;
+  width: 20%;
+  padding: 0 3%;
+  box-shadow: 0 3px 5px 2px rgba(111, 132, 248, 0.3);
+}
+
+.adminHome--btn-text {
+  font-size: 2vh;
+  font-weight: bolder;
+  color: #06f;
+}
+
+.adminHome--page-indent {
+  margin: 3vh 0 0 4vw;
+  display: flex;
+}
+
+.adminHome--main-screen {
+  width: 70vw;
+  overflow: visible;
+}
+
+.adminHome--sub-screen {
+  margin: 6vh 0 0 4vw;
+  flex: 1;
+}
+
+.adminHome--btns {
+  margin-bottom: 3vh;
+}
+
+.adminHome--table-title {
+  margin: 3vh 0 2vh 0;
+}
+
+.adminHome--search-book-dialog-title {
+  font-size: 1.5vw;
+  font-weight: bolder;
+  color: #0066ff;
+}

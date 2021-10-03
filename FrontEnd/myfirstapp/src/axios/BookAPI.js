@@ -1,4 +1,5 @@
 import { userAxios } from "./axiosClient";
+import useSWR from 'swr';
 
 export const SearchForABook = async (title,isbn) => {
 
@@ -89,4 +90,18 @@ export const SearchBookWithSelectedOptions = async (searchResult, options) => {
     };
 
     return finalReq;
+}
+
+const fetcher = (url) => userAxios('book')
+.get(url, { headers: { Authorization: `${localStorage.jwtToken}` } })
+.then((res) => res.data);
+
+export const GetAllBooks = () => {
+    const { data, error } = useSWR('books/get/all', fetcher)
+  
+    return {
+      data: data,
+      isLoading: !error && !data,
+      isError: error
+    }
 }

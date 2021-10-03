@@ -20,6 +20,8 @@ import { Redirect } from "react-router-dom";
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import Fab from '@material-ui/core/Fab';
 
 const Header = () => {
 
@@ -82,7 +84,7 @@ const Header = () => {
 
     return (
         <div className="header--header">
-            <div className="header--logo-space"><img className="header--logo" src="/pics/logo.png" alt="logo"/></div>
+            <div className="header--logo-space" onClick={() => {setToRoute('/')}}><img className="header--logo" src="/pics/logo.png" alt="logo"/></div>
             <div className="header--pages">
                 <Link className="header--link" to="/">Home</Link>
                 <Link className="header--link" to="/about">Our Work</Link>
@@ -94,14 +96,14 @@ const Header = () => {
                     value={searchResults}
                     style={{ 
                         height: '5vh',
+                        width: '20vw',
                     }} 
                     onChange={(value) => setSearchResults(value)}
-                    placeholder="Book title, Author, etc."
+                    placeholder="Search for a Book Title, Author or ISBN"
                     onCancelSearch={() => setSearchResults("")}
                     onRequestSearch={() => searchFor(searchResults)}
                 />
-            </div>
-            
+            </div>        
             {
                 !user ? 
                 <div className="header--btns">
@@ -114,7 +116,7 @@ const Header = () => {
                 </div> : 
                 <div className="header--hiMsg-box">
                     <span className="header--hiMsg">Hello {user.fullName}</span>
-                    <Avatar className="header--avt" alt="avatar" aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
+                    <Avatar className="header--avt" alt="avatar" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
                     <Menu
                         id="customized-menu"
                         anchorEl={anchorEl}
@@ -134,6 +136,14 @@ const Header = () => {
                                 <AccountCircleOutlinedIcon fontSize="small" />
                             </ListItemIcon>
                             <ListItemText primary="My Profile" onClick={() => setToRoute("/profile")}/>
+                        </MenuItem >
+                        <MenuItem>
+                            <ListItemIcon style={{
+                                minWidth: '25px'
+                            }}>
+                                <MenuBookIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="My Library" onClick={() => setToRoute("/library")}/>
                         </MenuItem >
                         { user.role === "PU" || user.role === "P" ?
                             <MenuItem>
@@ -167,7 +177,7 @@ const Header = () => {
                                     }}>
                                         <SupervisorAccountIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText primary="Admin Workspace"/>
+                                    <ListItemText primary="Admin Workspace" onClick={() => setToRoute("/admin-home")}/>
                                 </MenuItem>
                                 <MenuItem>
                                     <ListItemIcon style={{
@@ -185,7 +195,7 @@ const Header = () => {
                             }}>
                                 <NewReleasesIcon fontSize="small" />
                             </ListItemIcon>
-                            <ListItemText primary="Notifications"/>
+                            <ListItemText primary="Notifications" onClick={() => setToRoute("/notification")}/>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon style={{
@@ -208,9 +218,20 @@ const Header = () => {
                             }}/>
                         </MenuItem >
                     </Menu>
+                    <Fab 
+                        variant="extended"
+                        color="primary" 
+                        className="header--float-btn" 
+                        style={{width: '10vw', height: '6vh', backgroundColor:'#B542EB'}}
+                        onClick={() => {
+                            setToRoute('/cart');
+                        }}
+                    >
+                        <ShoppingCartIcon className="header--cart-icon"/>
+                        My Cart
+                    </Fab>
                 </div>
             }
-            
         </div>
     )
 }

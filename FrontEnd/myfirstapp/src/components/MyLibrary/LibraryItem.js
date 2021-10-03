@@ -5,7 +5,7 @@ function LibraryItem(props) {
     return (
         <div className="libraryItem">
             <div className="libraryItem_col" id="libraryItem_img">
-                <img src="/pics/book-1.jpg"></img>
+                <img src="/pics/book-1.jpg" alt="book"></img>
             </div>
             <div className="libraryItem_col" id="libraryItem_text">
                 <div className="libraryItem_row" id="libraryItem_name">

@@ -74,7 +74,7 @@
 }
 
 .header--float-btn {
-  position: absolute;
+  position: fixed;
   top: 88vh;
   right: 2vw;
 }

@@ -12,10 +12,33 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Redirect } from "react-router-dom";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { GetAllBooks } from '../../../axios/BookAPI';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import BlockIcon from '@material-ui/icons/Block';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import { Formik, Field, Form } from 'formik';
 
-const AdminHomePage = (props) => {
-    
+
+const AdminHomePage = () => {
+
     const [toRoute,setToRoute] = useState(null);
+    const [searchResults, setSearchResults] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const {data} = GetAllBooks();
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
 
     //HOC
     const StyledTableCell = withStyles(() => ({
@@ -43,6 +66,10 @@ const AdminHomePage = (props) => {
         return <Redirect to={toRoute}/>;
     }
 
+    const SearchFoUser = (searchResults) => {
+
+    }
+
     return (
         <div className="adminHome--page-indent">
             <div className="adminHome--main-screen">
@@ -55,15 +82,15 @@ const AdminHomePage = (props) => {
                 />
                 <SearchBar
                     className="header--searchBar"
-                    // value={searchResults}
+                    value={searchResults}
                     style={{ 
                         height: '5vh',
                         width: '25vw'
                     }} 
-                    // onChange={(value) => setSearchResults(value)}
+                    onChange={(value) => setSearchResults(value)}
                     placeholder="Search for User ID, Username on BOKEROO."
-                    // onCancelSearch={() => setSearchResults("")}
-                    // onRequestSearch={() => SearchFor(searchResults)}
+                    onCancelSearch={() => setSearchResults("")}
+                    onRequestSearch={() => SearchFoUser(searchResults)}
                 />
                 <div className="adminHome--table-title">
                     <span className="adminHome--page-title">Books are now on Sale</span>
@@ -82,8 +109,7 @@ const AdminHomePage = (props) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {/* Books not found is for the first render, searchedBooks is for self rerender */}
-                                {/* {searchedBooks &&  searchedBooks !== 'Books not found' && searchedBooks.map(row => (
+                                {data && data.map(row => (
                                     <StyledTableRow key={row.bookId}>
                                         <StyledTableCell component="th" scope="row">
                                             {row.bookId}
@@ -105,12 +131,12 @@ const AdminHomePage = (props) => {
                                                     outline: 'none'
                                                 }}
                                                 onClick={() => {
-                                                    seeBookDesc(row.bookId);
+                                                    // seeBookDesc(row.bookId);
                                                 }}
                                             >Edit Book Description</Button>
                                             <Button 
                                                 variant="contained" 
-                                                endIcon={<StoreIcon/>}
+                                                endIcon={<BlockIcon/>}
                                                 style={{ 
                                                     backgroundColor: '#FD0707',
                                                     borderRadius:'2vh',
@@ -118,11 +144,11 @@ const AdminHomePage = (props) => {
                                                     color: 'white',
                                                     outline: 'none'
                                                 }}
-                                                onClick={() => seeSellers(row.bookId)}
+                                                // onClick={() => seeSellers(row.bookId)}
                                             >Block</Button>
                                         </StyledTableCell>
                                     </StyledTableRow>))
-                                } */}
+                                }
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -140,6 +166,7 @@ const AdminHomePage = (props) => {
                             color: 'white',
                             outline: 'none'
                         }}
+                        onClick={handleOpenDialog}
                     >
                         <span className="adminHome--btn-text">Upload new Book to BOOKEROO</span>
                     </Button>
@@ -153,6 +180,9 @@ const AdminHomePage = (props) => {
                             width: '17vw',
                             color: 'white',
                             outline: 'none'
+                        }}
+                        onClick={() => {
+                            setToRoute('/incoming-reg')
                         }}
                     >
                         <span className="adminHome--btn-text">View Incoming Registration</span>
@@ -169,10 +199,90 @@ const AdminHomePage = (props) => {
                             outline: 'none'
                         }}
                     >
-                        <span className="adminHome--btn-text">Download BOOKEROO Monthly Sales</span>
+                        <span className="adminHome--btn-text">View BOOKEROO Monthly Sales</span>
                     </Button>
                 </div>
             </div>
+
+            {/* Dialog for Upload new Book */}
+
+            <Dialog open={openDialog} onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title"><span className="myreg--search-book-dialog-title">Upload a new Book</span></DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Before uploading a new book to BOOKEROO, please make sure you have read BOOKEROO Terms & Conditions for admin uses.
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Enter ISBN"
+                    fullWidth
+                    style={{
+                        margin: '2vh 0 3vh 0'
+                    }}
+                />
+                <TextField
+                    margin="dense"
+                    id="name"
+                    label="Enter Book Title"
+                    fullWidth
+                    style={{
+                        margin: '2vh 0 3vh 0'
+                    }}
+                />
+                <TextField
+                    margin="dense"
+                    id="name"
+                    label="Enter Author"
+                    fullWidth
+                    style={{
+                        margin: '2vh 0 3vh 0'
+                    }}
+                />
+                <TextField
+                    margin="dense"
+                    id="name"
+                    label="Brief Description about the Book"
+                    fullWidth
+                    style={{
+                        margin: '2vh 0 3vh 0'
+                    }}
+                />
+                <TextField
+                    margin="dense"
+                    id="name"
+                    label="Enter Category"
+                    fullWidth
+                    style={{
+                        margin: '2vh 0 3vh 0'
+                    }}
+                />
+                <TextField
+                    margin="dense"
+                    id="name"
+                    label="Enter Publisher Name"
+                    fullWidth
+                    style={{
+                        marginBottom: '10vh'
+                    }}
+                />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleCloseDialog} color="primary">
+                    Cancel
+                </Button>
+                <Button 
+                    onClick={() => {
+                        // searchForTheBook(selectedTitle,selectedISBN);
+                        handleCloseDialog();
+                    }} 
+                    color="primary"
+                >
+                    Next
+                </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

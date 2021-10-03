@@ -84,7 +84,7 @@ const Header = () => {
 
     return (
         <div className="header--header">
-            <div className="header--logo-space"><img className="header--logo" src="/pics/logo.png" alt="logo"/></div>
+            <div className="header--logo-space" onClick={() => {setToRoute('/')}}><img className="header--logo" src="/pics/logo.png" alt="logo"/></div>
             <div className="header--pages">
                 <Link className="header--link" to="/">Home</Link>
                 <Link className="header--link" to="/about">Our Work</Link>
@@ -116,7 +116,7 @@ const Header = () => {
                 </div> : 
                 <div className="header--hiMsg-box">
                     <span className="header--hiMsg">Hello {user.fullName}</span>
-                    <Avatar className="header--avt" alt="avatar" aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
+                    <Avatar className="header--avt" alt="avatar" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
                     <Menu
                         id="customized-menu"
                         anchorEl={anchorEl}
@@ -177,7 +177,7 @@ const Header = () => {
                                     }}>
                                         <SupervisorAccountIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText primary="Admin Workspace"/>
+                                    <ListItemText primary="Admin Workspace" onClick={() => setToRoute("/admin-home")}/>
                                 </MenuItem>
                                 <MenuItem>
                                     <ListItemIcon style={{

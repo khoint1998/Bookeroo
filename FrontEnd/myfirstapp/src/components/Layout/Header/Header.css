@@ -10,6 +10,7 @@
 
 .header--logo-space {
   margin: 1vh 7vw 0 3vw;
+  cursor: pointer;
 }
 
 .header--pages {

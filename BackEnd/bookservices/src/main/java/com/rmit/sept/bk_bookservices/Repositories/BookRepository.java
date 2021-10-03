@@ -13,6 +13,8 @@ public interface BookRepository extends CrudRepository <Book, Long> {
     Book getByBookId(Long id);
     Book getByIsbn(String isbn);
 
+    List<Book> findAll();
+
     List<Book> getByTitleContainingIgnoreCase(String title);
 
     List<Book> getByAuthorContainingIgnoreCase(String author);

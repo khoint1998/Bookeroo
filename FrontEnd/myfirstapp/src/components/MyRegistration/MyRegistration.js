@@ -225,7 +225,6 @@ const MyRegistration = () => {
                     margin="dense"
                     id="name"
                     label="Search for Book Title"
-                    type="email"
                     fullWidth
                     style={{
                         margin: '2vh 0 3vh 0'
@@ -236,7 +235,6 @@ const MyRegistration = () => {
                     margin="dense"
                     id="name"
                     label="Enter ISBN"
-                    type="email"
                     fullWidth
                     style={{
                         marginBottom: '10vh'

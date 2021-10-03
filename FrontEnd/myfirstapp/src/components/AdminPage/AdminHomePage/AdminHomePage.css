@@ -39,3 +39,9 @@
 .adminHome--table-title {
   margin: 3vh 0 2vh 0;
 }
+
+.adminHome--search-book-dialog-title {
+  font-size: 1.5vw;
+  font-weight: bolder;
+  color: #0066ff;
+}

@@ -79,7 +79,7 @@ const SellerSearch = (props) => {
         setAlreadyAddedRow([...alreadyAddedRow,shopId])
     }
 
-    const SearchForAnotherBook = async(searchResults) => {
+    const SearchForAnotherBook = async (searchResults) => {
         
     }
 

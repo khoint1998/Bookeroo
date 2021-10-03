@@ -8,7 +8,7 @@ function CartItem(props) {
     return (
         <div className="cartitem_row" style={{ backgroundColor: props.even? "#EDF0F1" : "#FBFBFB"}}>
             <div className="cartitem_image">
-                <img src="/pics/book-4.jpg"></img>
+                <img src="/pics/book-4.jpg" alt="book"></img>
             </div>
             <div className="cartitem_name">
                 Hello Goodbye

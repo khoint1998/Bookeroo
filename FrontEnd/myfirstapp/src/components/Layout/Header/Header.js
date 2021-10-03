@@ -20,6 +20,8 @@ import { Redirect } from "react-router-dom";
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import Fab from '@material-ui/core/Fab';
 
 const Header = () => {
 
@@ -101,8 +103,7 @@ const Header = () => {
                     onCancelSearch={() => setSearchResults("")}
                     onRequestSearch={() => searchFor(searchResults)}
                 />
-            </div>
-            
+            </div>        
             {
                 !user ? 
                 <div className="header--btns">
@@ -135,6 +136,14 @@ const Header = () => {
                                 <AccountCircleOutlinedIcon fontSize="small" />
                             </ListItemIcon>
                             <ListItemText primary="My Profile" onClick={() => setToRoute("/profile")}/>
+                        </MenuItem >
+                        <MenuItem>
+                            <ListItemIcon style={{
+                                minWidth: '25px'
+                            }}>
+                                <MenuBookIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="My Library" onClick={() => setToRoute("/library")}/>
                         </MenuItem >
                         { user.role === "PU" || user.role === "P" ?
                             <MenuItem>
@@ -211,7 +220,18 @@ const Header = () => {
                     </Menu>
                 </div>
             }
-            
+            <Fab 
+                variant="extended"
+                color="primary" 
+                className="header--float-btn" 
+                style={{width: '10vw', height: '6vh', backgroundColor:'#B542EB'}}
+                onClick={() => {
+                    setToRoute('/cart');
+                }}
+            >
+                <ShoppingCartIcon className="header--cart-icon"/>
+                My Cart
+            </Fab>
         </div>
     )
 }

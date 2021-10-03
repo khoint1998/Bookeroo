@@ -25,7 +25,7 @@ const SellerSearch = (props) => {
 
     const [searchResults, setSearchResults] = useState(searchedTitle);
     const [toRoute,setToRoute] = useState(null);
-    // const [searchTitle,setSearchTitle] = useState(searchResults);
+    const [alreadyAddedRow,setAlreadyAddedRow] = useState([]);
 
     const cart = useContext(CartContext);
 
@@ -73,6 +73,10 @@ const SellerSearch = (props) => {
     const getToCartPage= (shop) => {
         selectShop(shop);
         setToRoute('/cart');
+    }
+
+    const disableThisRow = (shopId) => {
+        setAlreadyAddedRow([...alreadyAddedRow,shopId])
     }
 
     const SearchForAnotherBook = async(searchResults) => {
@@ -130,8 +134,8 @@ const SellerSearch = (props) => {
                             <TableRow>
                                 <StyledTableCell width="5%">ID</StyledTableCell>
                                 <StyledTableCell width="10%">Logo</StyledTableCell>
-                                <StyledTableCell width="35%">Name</StyledTableCell>
-                                <StyledTableCell width="15%">Reputation</StyledTableCell>
+                                <StyledTableCell width="30%">Name</StyledTableCell>
+                                <StyledTableCell width="10%">Reputation</StyledTableCell>
                                 <StyledTableCell>Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
@@ -164,6 +168,7 @@ const SellerSearch = (props) => {
                                         <Button 
                                             variant="contained"
                                             endIcon={<ShoppingCartIcon/>}
+                                            disabled={console.log(alreadyAddedRow.includes(1))}
                                             style={{ 
                                                 backgroundColor: '#0066FF',
                                                 borderRadius:'2vh',
@@ -174,7 +179,7 @@ const SellerSearch = (props) => {
                                             }}
                                             onClick={() => {
                                                 selectShop(row);
-                                                // TODO: disableThisRow();
+                                                disableThisRow(row.shopId);
                                             }}
                                         >Add to cart</Button>
                                         <Button 

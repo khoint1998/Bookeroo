@@ -85,10 +85,6 @@ const BookSearch = (props) => {
         setSelectededBookId(bookId);
     }
 
-    if (toRoute) {
-        return <Redirect to={toRoute}/>
-    }
-
     if (toRoute === "/book-search") {
         return (
           <div>
@@ -113,7 +109,6 @@ const BookSearch = (props) => {
                     pathname: toRoute,
                     state: {
                         selectedBookId: selectedBookId,
-                        //title on search bar
                         searchedTitle: searchResults
                     }
                 }} 
@@ -135,6 +130,10 @@ const BookSearch = (props) => {
             />
           </div>
         );
+    }
+
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
     }
 
     return (
@@ -187,7 +186,7 @@ const BookSearch = (props) => {
                                 <StyledTableCell width="30%">Title</StyledTableCell>
                                 <StyledTableCell width="10%">ISBN</StyledTableCell>
                                 <StyledTableCell>Author</StyledTableCell>
-                                <StyledTableCell width="30%">Actions</StyledTableCell>
+                                <StyledTableCell>Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

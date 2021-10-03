@@ -72,3 +72,13 @@
 .header--avt:hover {
   cursor: pointer;
 }
+
+.header--float-btn {
+  position: absolute;
+  top: 88vh;
+  right: 2vw;
+}
+
+.header--cart-icon {
+  margin-right: 1vw;
+}

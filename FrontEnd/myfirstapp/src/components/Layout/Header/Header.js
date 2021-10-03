@@ -96,10 +96,10 @@ const Header = () => {
                     value={searchResults}
                     style={{ 
                         height: '5vh',
-                        width: '25vw',
+                        width: '20vw',
                     }} 
                     onChange={(value) => setSearchResults(value)}
-                    placeholder="Search for a Book Title, Author or ISBN etc."
+                    placeholder="Search for a Book Title, Author or ISBN"
                     onCancelSearch={() => setSearchResults("")}
                     onRequestSearch={() => searchFor(searchResults)}
                 />
@@ -218,20 +218,20 @@ const Header = () => {
                             }}/>
                         </MenuItem >
                     </Menu>
+                    <Fab 
+                        variant="extended"
+                        color="primary" 
+                        className="header--float-btn" 
+                        style={{width: '10vw', height: '6vh', backgroundColor:'#B542EB'}}
+                        onClick={() => {
+                            setToRoute('/cart');
+                        }}
+                    >
+                        <ShoppingCartIcon className="header--cart-icon"/>
+                        My Cart
+                    </Fab>
                 </div>
             }
-            <Fab 
-                variant="extended"
-                color="primary" 
-                className="header--float-btn" 
-                style={{width: '10vw', height: '6vh', backgroundColor:'#B542EB'}}
-                onClick={() => {
-                    setToRoute('/cart');
-                }}
-            >
-                <ShoppingCartIcon className="header--cart-icon"/>
-                My Cart
-            </Fab>
         </div>
     )
 }

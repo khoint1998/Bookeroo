@@ -162,8 +162,4 @@ public class ShopModelTest {
         assertThat(testcase).isEqualTo("Admin");
     }
 
-
-
-
-
 }

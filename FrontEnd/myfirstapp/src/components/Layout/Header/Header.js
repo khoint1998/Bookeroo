@@ -94,9 +94,10 @@ const Header = () => {
                     value={searchResults}
                     style={{ 
                         height: '5vh',
+                        width: '25vw',
                     }} 
                     onChange={(value) => setSearchResults(value)}
-                    placeholder="Book title, Author, etc."
+                    placeholder="Search for a Book Title, Author or ISBN etc."
                     onCancelSearch={() => setSearchResults("")}
                     onRequestSearch={() => searchFor(searchResults)}
                 />
@@ -185,7 +186,7 @@ const Header = () => {
                             }}>
                                 <NewReleasesIcon fontSize="small" />
                             </ListItemIcon>
-                            <ListItemText primary="Notifications"/>
+                            <ListItemText primary="Notifications" onClick={() => setToRoute("/notification")}/>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon style={{

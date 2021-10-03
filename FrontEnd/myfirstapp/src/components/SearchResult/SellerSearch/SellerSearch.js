@@ -29,8 +29,6 @@ const SellerSearch = (props) => {
 
     const cart = useContext(CartContext);
 
-    console.log(cart.cartState);
-
     //HOC
     const StyledTableCell = withStyles(() => ({
         head: {
@@ -174,7 +172,10 @@ const SellerSearch = (props) => {
                                                 color: 'white',
                                                 outline: 'none'
                                             }}
-                                            onClick={() => selectShop(row)}
+                                            onClick={() => {
+                                                selectShop(row);
+                                                // TODO: disableThisRow();
+                                            }}
                                         >Add to cart</Button>
                                         <Button 
                                             variant="contained" 

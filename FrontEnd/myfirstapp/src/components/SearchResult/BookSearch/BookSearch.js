@@ -73,12 +73,20 @@ const BookSearch = (props) => {
     }
 
     const seeSellers = (bookId) => {
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {setToRoute('/login')}
         setSelectededBookId(bookId);
         setToRoute("/seller-search");
     }
 
     const seeBookDesc = (bookId) => {
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {setToRoute('/login')}
         setSelectededBookId(bookId);
+    }
+
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
     }
 
     if (toRoute === "/book-search") {

@@ -106,4 +106,9 @@ public class UserController {
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
     }
 
+    @PatchMapping("/change/password/{email}")
+    public void changePassword(@PathVariable(value = "email") String email, @RequestParam String password) {
+        userService.changePassword(email,password);
+    }
+
 }

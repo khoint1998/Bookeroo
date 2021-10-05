@@ -43,7 +43,6 @@ const fetcher = (url) => userAxios()
 .then((res) => res.data);
 
 export const GetAllRegistrations = () => {
-    // const header = {headers: {'Authorization': `${localStorage.jwtToken}` }}
     const { data, error } = useSWR('shops/registration/get-all', fetcher)
   
     return {

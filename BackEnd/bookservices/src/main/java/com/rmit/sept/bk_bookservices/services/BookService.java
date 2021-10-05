@@ -30,6 +30,10 @@ public class BookService {
         return book;
     }
 
+    public List<Book> getAllBooks () {
+        return bookRepository.findAll();
+    }
+
     public List<Book> getBooksByIdList (List<Long> bookIdList) {
         try {
             List<Book> bookList = new ArrayList<Book>();

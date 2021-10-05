@@ -10,6 +10,7 @@
 
 .header--logo-space {
   margin: 1vh 7vw 0 3vw;
+  cursor: pointer;
 }
 
 .header--pages {
@@ -71,4 +72,14 @@
 
 .header--avt:hover {
   cursor: pointer;
+}
+
+.header--float-btn {
+  position: fixed;
+  top: 88vh;
+  right: -3vw;
+}
+
+.header--cart-icon {
+  margin-right: 1vw;
 }

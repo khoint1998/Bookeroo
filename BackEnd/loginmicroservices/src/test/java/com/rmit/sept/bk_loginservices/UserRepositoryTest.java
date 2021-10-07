@@ -57,4 +57,23 @@ public class UserRepositoryTest {
         User testcase = userRepository.getById(expected_Id);
         assertThat(testcase.getId()).isEqualTo(expected_Id);
     }
+
+    @Test
+    @Rollback
+    public void should_match_getByEmail() {
+        User user = new User();
+        user.setUsername("chen wang");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setConfirmPassword("123456");
+        user.setCreate_At(new Date());
+        String email = "1353664988@qq.com";
+        user.setEmail(email);
+        user.setRole("Admin");
+        userRepository.save(user);
+        Long expected_Id = user.getId();
+
+        User testcase = userRepository.getByEmail(email);
+        assertThat(testcase.getId()).isEqualTo(expected_Id);
+    }
 }

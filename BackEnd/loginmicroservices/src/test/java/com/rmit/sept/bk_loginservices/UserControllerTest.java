@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -37,6 +38,8 @@ public class UserControllerTest {
     private UserController userController;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @BeforeEach
     void clean_database() {
@@ -211,6 +214,31 @@ public class UserControllerTest {
             User testcase = userController.getUserByUserId(user.getId());
             String actual_title = testcase.getPurchaseDetailsList().get(0).getTitle();
             assertThat(actual_title).isEqualTo(expected_title);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void changePassword() {
+        User user = new User();
+        user.setUsername("williamquq");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setConfirmPassword("123456");
+        user.setCreate_At(new Date());
+        user.setEmail("1353664988@qq.com");
+        user.setRole("Admin");
+        userService.saveUser(user);
+        String email = user.getEmail();
+
+        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        String url = "http://localhost:8080/bookeroo/users/change/password/" + email + "?password=testpassword";
+        try {
+            mvc.perform(patch(url));
+            User testcase = userController.getUserByUserId(user.getId());
+            Boolean actual = bCryptPasswordEncoder.matches("testpassword", testcase.getPassword());
+            assertThat(actual).isTrue();
         } catch (Exception e) {
             e.printStackTrace();
         }

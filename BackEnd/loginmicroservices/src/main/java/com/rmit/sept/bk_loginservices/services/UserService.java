@@ -56,4 +56,12 @@ public class UserService {
         }
     }
 
+    public void changePassword(String email,String newPassword) {
+        User selectedUser = userRepository.getByEmail(email);
+        System.out.println(selectedUser.getEmail());
+        if (selectedUser == null) throw new UserNotFoundException("User not found");
+        selectedUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(selectedUser);
+    }
+
 }

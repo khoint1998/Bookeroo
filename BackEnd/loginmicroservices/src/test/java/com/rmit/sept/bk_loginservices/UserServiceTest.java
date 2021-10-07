@@ -7,6 +7,7 @@ import com.rmit.sept.bk_loginservices.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
@@ -19,6 +20,8 @@ public class UserServiceTest {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     @Rollback
@@ -38,4 +41,22 @@ public class UserServiceTest {
         assertThat(testcase.getUsername()).isEqualTo("chen wang");
     }
 
+    @Test
+    @Rollback
+    public void should_match_changePassword() {
+        userRepository.deleteAll();
+        User user = new User();
+        user.setUsername("williamquq");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setCreate_At(new Date());
+        user.setEmail("1353664988@qq.com");
+        user.setRole("Admin");
+        userService.saveUser(user);
+        userService.changePassword(user.getEmail(),"testpassword");
+
+        User testcase = userRepository.getById(user.getId());
+        Boolean actual = bCryptPasswordEncoder.matches("testpassword",testcase.getPassword());
+        assertThat(actual).isTrue();
+    }
 }

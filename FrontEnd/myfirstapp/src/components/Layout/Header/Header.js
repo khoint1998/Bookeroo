@@ -162,7 +162,7 @@ const Header = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="My Shop" onClick={() => setToRoute("/my-shops")}/>
                             </MenuItem> : 
-                            <>
+                            <div>
                                 <MenuItem>
                                     <ListItemIcon style={{
                                         minWidth: '25px'
@@ -187,7 +187,7 @@ const Header = () => {
                                     </ListItemIcon>
                                     <ListItemText primary="My Selling Registration" onClick={() => setToRoute("/my-registration")}/>
                                 </MenuItem>
-                            </>
+                            </div>
                         }
                         <MenuItem>
                             <ListItemIcon style={{

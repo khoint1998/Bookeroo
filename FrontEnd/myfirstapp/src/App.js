@@ -24,6 +24,7 @@ import OrderComplete from "./components/OrderComplete/OrderComplete";
 import NotificationPage from "./components/Notification/NotificationPage";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
 import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
+import Payment from "./components/Payment/Payment";
 
 const guestValue = {};
 const defaultCart = [];
@@ -104,6 +105,7 @@ const App = () => {
             <Route exact path="/notification" component={NotificationPage}/>
             <Route exact path="/library" component={MyLibrary}/>
             <Route exact path="/seller-search" component={SellerSearch}/>
+            <Route exact path="/payment" component={Payment}/>
 
           </div>
         </Router>

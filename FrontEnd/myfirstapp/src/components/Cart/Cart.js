@@ -19,6 +19,7 @@ function Cart(props) {
                     <hr class="hr_line"></hr>
                     <CartItem even={false}></CartItem>
                     <CartItem even={true}></CartItem>
+                    
                 </div>
                 <div id="Cart_col2" className="col">
                     <h2 id="text_blue">Buyer details</h2>

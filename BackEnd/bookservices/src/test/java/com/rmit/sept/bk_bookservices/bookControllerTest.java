@@ -69,28 +69,28 @@ public class bookControllerTest {
         }
     }
 
-    @Test
-    void getBookByTitleAndISBN() {
-        Book book = new Book();
-        book.setBookId(1L);
-        book.setTitle("java");
-        book.setIsbn("isbn");
-        book.setCategory("category");
-        book.setDescription("description");
-        book.setAuthor("author");
-        book.setPublisher("publisher");
-        bookService.createABook(book);
-
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-isbn?title=java&isbn=isbn");
-        try {
-            String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
-            assertThat(response).contains(expected);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    void getBookByTitleAndISBN() {
+//        Book book = new Book();
+//        book.setBookId(1L);
+//        book.setTitle("java");
+//        book.setIsbn("isbn");
+//        book.setCategory("category");
+//        book.setDescription("description");
+//        book.setAuthor("author");
+//        book.setPublisher("publisher");
+//        bookService.createABook(book);
+//
+//        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+//        RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-isbn?title=java&isbn=isbn");
+//        try {
+//            String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
+//            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+//            assertThat(response).contains(expected);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Test
     void getBooksByTitle() {
@@ -160,29 +160,29 @@ public class bookControllerTest {
         }
     }
 
-    @Test
-    void getBookByIsbn() {
-
-        Book book = new Book();
-        book.setBookId(1L);
-        book.setTitle("java");
-        book.setIsbn("isbn");
-        book.setCategory("category");
-        book.setDescription("description");
-        book.setAuthor("author");
-        book.setPublisher("publisher");
-        bookService.createABook(book);
-
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/isbn?isbn=isbn");
-        try {
-            String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
-            assertThat(response).contains(expected);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    void getBookByIsbn() {
+//
+//        Book book = new Book();
+//        book.setBookId(1L);
+//        book.setTitle("java");
+//        book.setIsbn("isbn");
+//        book.setCategory("category");
+//        book.setDescription("description");
+//        book.setAuthor("author");
+//        book.setPublisher("publisher");
+//        bookService.createABook(book);
+//
+//        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+//        RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/isbn?isbn=isbn");
+//        try {
+//            String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
+//            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+//            assertThat(response).contains(expected);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Test
     void getBooksByIdList() {
@@ -222,26 +222,26 @@ public class bookControllerTest {
         }
     }
 
-    @Test
-    void getBooksByTitleAuthorISBN() {
-        Book book = new Book();
-        book.setBookId(1L);
-        book.setTitle("java");
-        book.setIsbn("isbn");
-        book.setCategory("category");
-        book.setDescription("description");
-        book.setAuthor("chen");
-        book.setPublisher("publisher");
-        bookService.createABook(book);
-
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-author-isbn?searchResult=isbn");
-        try {
-            String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
-            assertThat(response).contains(expected);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    void getBooksByTitleAuthorISBN() {
+//        Book book = new Book();
+//        book.setBookId(1L);
+//        book.setTitle("java");
+//        book.setIsbn("isbn");
+//        book.setCategory("category");
+//        book.setDescription("description");
+//        book.setAuthor("chen");
+//        book.setPublisher("publisher");
+//        bookService.createABook(book);
+//
+//        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+//        RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-author-isbn?searchResult=isbn");
+//        try {
+//            String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
+//            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+//            assertThat(response).contains(expected);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

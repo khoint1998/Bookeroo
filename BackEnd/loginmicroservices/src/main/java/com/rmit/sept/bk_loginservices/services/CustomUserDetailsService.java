@@ -2,6 +2,7 @@ package com.rmit.sept.bk_loginservices.services;
 
 import com.rmit.sept.bk_loginservices.Repositories.ShopRepository;
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.exceptions.ShopException;
 import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
 import com.rmit.sept.bk_loginservices.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public void deleteAShop(Long shopId) {
         Shop selectedShop = shopRepository.getByShopId(shopId);
+        if(selectedShop==null) throw new ShopException("Shop not found");
         shopRepository.delete(selectedShop);
     }
 

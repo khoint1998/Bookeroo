@@ -34,7 +34,9 @@ const BookSearch = (props) => {
        return <Redirect to='/'/>
     }
 
-    const uniqueBooksSearched = Array.from(new Set(searchedBooks.map(b => b.bookId)))
+    let uniqueBooksSearched = [];
+
+     uniqueBooksSearched = searchedBooks !== 'Books not found' && Array.from(new Set(searchedBooks.map(b => b.bookId)))
     .map(id => {
     return searchedBooks.find(a => a.bookId === id)
     })

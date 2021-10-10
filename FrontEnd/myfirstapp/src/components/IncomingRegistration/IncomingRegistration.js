@@ -160,7 +160,7 @@ const IncomingRegistrations = () => {
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="inreg--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="inreg--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
                                     <StyledTableCell>{row.status === "approved" ? <span className="inreg--approved-text">Approved</span> : row.status === "pending" ? <span className="inreg--pending-text">Awaiting Approval</span> : <span className="inreg--sold-text">Sold</span>}</StyledTableCell>

@@ -114,6 +114,7 @@ const MyRegistration = () => {
             bookTitle: prefetchedBook.title,
             price: values.price,
             bookId: prefetchedBook && prefetchedBook.bookId,
+            coverPage: prefetchedBook && prefetchedBook.coverPage
         };
 
         CreateRegistration(registrationDetails);
@@ -175,7 +176,7 @@ const MyRegistration = () => {
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="myreg--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="myreg--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
                                     <StyledTableCell>{row.status === "approved" ? <span className="myreg--approved-text">Approved</span> : row.status === "pending" ? <span className="myreg--pending-text">Awaiting Approval</span> : <span className="myreg--pending-text">Sold</span>}</StyledTableCell>

@@ -62,7 +62,7 @@
   width: 15vw;
 }
 
-.BookDescription_title h1 {
+.BookDescription_title h2 {
   text-align: center;
   margin-top: 8px;
   font-weight: bolder;
@@ -70,7 +70,8 @@
 
 .BookDescription_title h3 {
   text-align: center;
-  font-size: 22px;
+  font-size: 1.25vw;
+  color: #0066ff;
 }
 
 #BookDescription_about_author {

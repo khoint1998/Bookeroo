@@ -23,7 +23,7 @@ const BookDescription = (props) => {
 
     const copyData = GetCopiesByBookId(preSelectedBookId);
     const copyIdList = copyData && copyData.data && copyData.data.map(copy => copy.copyId);
-    const shopsData = GetShopsByCopyIdList(copyIdList);
+    const shopsData = GetShopsByCopyIdList(copyIdList && copyIdList.length > 0 && copyIdList);
 
     const seeSellers = (bookId) => {
         const jwtToken = localStorage.jwtToken;
@@ -59,7 +59,7 @@ const BookDescription = (props) => {
                     <img src={(bookData && bookData.coverPage) || "/pics/book-2.jpg"} alt="book_3"></img>
                 </div>
                 <div className="BookDescription_title">
-                    <h1>{bookData && bookData.title}</h1>
+                    <h2>{bookData && bookData.title}</h2>
                     <h3>{bookData && bookData.author}</h3>
                 </div>
                 <Button 
@@ -159,10 +159,10 @@ const BookDescription = (props) => {
                 <div>
                     <div className="bookDesc--title">Book Details</div>
                     <hr className="hr_line"></hr>
-                    <div className="BookDescription_h4">Title: {bookData && bookData.title}</div>
-                    <div className="BookDescription_h4">Author: {bookData && bookData.author}</div>
-                    <div className="BookDescription_h4">Publisher: {bookData && bookData.publisher}</div>
-                    <div className="BookDescription_h4">Language: English</div>
+                    <div className="BookDescription_h4"><span className="BookDescription_blue">Title</span>: {bookData && bookData.title}</div>
+                    <div className="BookDescription_h4"><span className="BookDescription_blue">Author</span>: {bookData && bookData.author}</div>
+                    <div className="BookDescription_h4"><span className="BookDescription_blue">Publisher</span>: {bookData && bookData.publisher}</div>
+                    <div className="BookDescription_h4"><span className="BookDescription_blue">Language</span>: English</div>
                 </div>
                 <div id="BookDescription_about_author">
                     <div className="bookDesc--title">About the Author</div>

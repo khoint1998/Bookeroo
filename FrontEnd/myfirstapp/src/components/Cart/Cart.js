@@ -32,8 +32,6 @@ function Cart() {
         return totalPrice;
     }
 
-    console.log(calculatePrice());
-
     if (toRoute) {
         return <Redirect to={toRoute}/>
     }

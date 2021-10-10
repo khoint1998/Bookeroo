@@ -217,7 +217,7 @@ const Header = () => {
                                 setToRoute("/");
                                 currentUser.userDispatch({ type: 'logout' });
                                 cart.cartDispatch({ type: 'clear cart' });
-                                setTimeout(() => window.location.reload(), 100);
+                                setTimeout(() => window.location.reload(), 200);
                             }}/>
                         </MenuItem >
                     </Menu>

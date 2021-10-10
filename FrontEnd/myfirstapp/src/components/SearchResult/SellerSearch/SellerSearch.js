@@ -60,7 +60,7 @@ const SellerSearch = (props) => {
     
     const copyData = GetCopiesByBookId(selectedBookId);
     const copyIdList = copyData && copyData.data && copyData.data.map(copy => copy.copyId);
-    const shopsData = GetShopsByCopyIdList(copyIdList);
+    const shopsData = GetShopsByCopyIdList(copyIdList && copyIdList.length > 0 && copyIdList);
 
     const selectShop = (shop) => {
         let selectedCopy = {};
@@ -72,6 +72,7 @@ const SellerSearch = (props) => {
                         bookId: reg.bookId,
                         bookTitle: reg.bookTitle,
                         bookPrice: reg.price,
+                        coverPage: reg.coverPage
                     }
                 }
                 return null;

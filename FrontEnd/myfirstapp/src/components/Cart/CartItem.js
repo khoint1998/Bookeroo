@@ -1,33 +1,60 @@
 import React from "react";
-import './CartItem.css'
+import './CartItem.css';
+import Button from '@material-ui/core/Button';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 function CartItem(props) {
 
-
+    const {book, even, removeFromCart} = props;
 
     return (
-        <div className="cartitem_row" style={{ backgroundColor: props.even? "#EDF0F1" : "#FBFBFB"}}>
+        <div className="cartitem_row" style={{ backgroundColor: even? "#EDF0F1" : "#FBFBFB"}}>
             <div className="cartitem_image">
                 <img src="/pics/book-4.jpg" alt="book"></img>
             </div>
             <div className="cartitem_name">
-                Hello Goodbye
+                {book.bookTitle}
             </div>
-            <div className="cartitem_price1">
-                $12
+            <div className="cartitem_price">
+                ${book.bookPrice}
             </div>
-            <div className="cartitem_price2">
-                $43
+            <div className="cartitem_price">
+                ${book.bookPrice * 1.3}
             </div>
-            <div className="cartitem_book_detail">
-                <div className="cartitem_btn">
-                    Book Details
-                </div>
+            <div className="cartitem_btn">
+                <Button 
+                    variant="contained"
+                    endIcon={<MoreHorizIcon/>}
+                    style={{ 
+                        backgroundColor: '#0066FF',
+                        borderRadius:'2vh',
+                        height: '5vh',
+                        marginRight: '1.5vw',
+                        color: 'white',
+                        outline: 'none'
+                    }}
+                    onClick={() => {
+                        //See detail -> book desc page
+                    }}
+                >Details</Button>
             </div>
-            <div className="cartitem_delete">
-                <div className="cartitem_btn" id="cartitem_red">
-                    Delete
-                </div>
+            <div className="cartitem_btn">
+                <Button 
+                    variant="contained"
+                    endIcon={<HighlightOffIcon/>}
+                    style={{ 
+                        backgroundColor: '#FD0707',
+                        borderRadius:'2vh',
+                        height: '5vh',
+                        marginRight: '1.5vw',
+                        color: 'white',
+                        outline: 'none'
+                    }}
+                    onClick={() => {
+                        removeFromCart(book)
+                    }}
+                >Delete</Button>
             </div>
         </div>
     )

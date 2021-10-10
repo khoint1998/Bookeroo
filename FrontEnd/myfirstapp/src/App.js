@@ -26,6 +26,7 @@ import MyLibrary from "./components/MyLibrary/MyLibrary";
 import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
 import AdminHomePage from "./components/AdminPage/AdminHomePage/AdminHomePage";
 import AdminSearchPage from "./components/AdminPage/AdminSearchPage/AdminSearchPage";
+import ForgotPassword from "./components/UserManagement/ForgotPassword/ForgotPassword";
 
 const guestValue = {};
 const defaultCart = [];
@@ -53,7 +54,7 @@ const cartReducer = (cart, action) => {
     case 'remove from cart':
       return cart.filter(data => data !== action.selectedCopy)
     case 'clear cart':
-      return cart;
+      return defaultCart;
     default:
       throw new Error()
   }
@@ -81,6 +82,10 @@ const App = () => {
     }
   }
 
+  window.onbeforeunload = (e) => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
+
   return (
     <UserContext.Provider value={{userState: user, userDispatch: dispatch}}>
       <CartContext.Provider value={{cartState: cart, cartDispatch: cartDispatch}}>
@@ -95,19 +100,20 @@ const App = () => {
             <Route exact path="/contact" component={ContactUs} />
             <Route exact path="/purchaseHistory" component={PurchaseHistory}/>
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/my-shops" component={MyShops} />
-            <Route exact path="/shop" component={Shop} />
-            <Route exact path="/my-registration" component={MyRegistration} />
+            <Route exact path="/my-shops" component={MyShops} /> {/*Role SO only*/}
+            <Route exact path="/shop" component={Shop} /> {/*Role SO only*/}
+            <Route exact path="/my-registration" component={MyRegistration} /> {/*Any Roles except SO*/}
             <Route exact path="/incoming-reg" component={IncomingRegistrations} />
-            <Route exact path="/book-search" component={BookSearch} />
-            <Route exact path="/book-description" component={BookDescription} />
+            <Route exact path="/book-search" component={BookSearch} /> {/*Check again*/}
+            <Route exact path="/book-desc" component={BookDescription} />
             <Route exact path="/cart" component={Cart}/>
             <Route exact path="/order-complete" component={OrderComplete}/>
             <Route exact path="/notification" component={NotificationPage}/>
             <Route exact path="/library" component={MyLibrary}/>
-            <Route exact path="/seller-search" component={SellerSearch}/>
+            <Route exact path="/seller-search" component={SellerSearch}/> {/*Check again*/}
             <Route exact path="/admin-home" component={AdminHomePage}/>
             <Route exact path="/admin-search" component={AdminSearchPage}/>
+            <Route exact path="/forgot-password" component={ForgotPassword}/>
 
           </div>
         </Router>

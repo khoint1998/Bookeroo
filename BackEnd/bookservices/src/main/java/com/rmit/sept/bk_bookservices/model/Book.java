@@ -31,6 +31,7 @@ public class Book {
     private String author;
 
     @NotBlank(message = "Description of book is required")
+    @Lob
     private String description;
 
     @NotBlank(message = "Book must have a Category")
@@ -41,7 +42,8 @@ public class Book {
     @NotBlank(message = "Book must have a Publisher")
     private String publisher;
 
-//    private Image cover_Page;
+    @Lob
+    private String coverPage;
 
     @JsonManagedReference(value="book-copy")
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)

@@ -44,6 +44,11 @@ const Shop = (props) => {
     const [selectedReg, setSelectedReg] = useState(null);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };

@@ -25,6 +25,13 @@ export const loginAsUser = async (user) => {
     return req;
 }
 
+export const resetPassword = async (data) => {
+  const req = await userAxios().patch('users/change-password', data)
+    .then(res => res.data)
+    .catch(error => error.response);
+  return req;
+}
+
 const fetcher = (...args) => userAxios().get(...args).then((res) => res.data)
 
 export const GetUserInfo = (id) => {

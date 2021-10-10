@@ -1,7 +1,14 @@
 import React from "react";
-import './OrderComplete.css'
+import './OrderComplete.css';
+import { Redirect } from "react-router-dom";
 
-function OrderComplete() {
+const OrderComplete = () => {
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     return (
         <div className="OrderComplete_page">
             <h1>Order confirmed #055130223DFE124. We are <span class="OrderComplete_blue">processing</span> your order!</h1>

@@ -1,134 +1,182 @@
-import React from "react";
+import React, {useState} from "react";
 import './BookDescription.css';
+import Button from '@material-ui/core/Button';
+import StoreIcon from '@material-ui/icons/Store';
+import { Redirect } from "react-router-dom";
+import { GetBookById } from "../../axios/BookAPI";
+import { GetCopiesByBookId } from "../../axios/CopyAPI";
+import { GetShopsByCopyIdList } from "../../axios/ShopAPI";
 
-function BookDescription(props) {
+const BookDescription = (props) => {
+
+    const [toRoute,setToRoute] = useState(null);
+    const [selectedBookId,setSelectededBookId] = useState(null);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
+    const {preSelectedBookId} = props.location.state;
+
+    const {bookData} = GetBookById(preSelectedBookId);
+
+    const copyData = GetCopiesByBookId(preSelectedBookId);
+    const copyIdList = copyData && copyData.data && copyData.data.map(copy => copy.copyId);
+    const shopsData = GetShopsByCopyIdList(copyIdList);
+
+    const seeSellers = (bookId) => {
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {setToRoute('/login')}
+        setSelectededBookId(bookId);
+        setToRoute("/seller-search");
+    }
+
+    if (toRoute === "/seller-search") {
+        return (
+          <div>
+            <Redirect 
+                to={{
+                    pathname: toRoute,
+                    state: {
+                        selectedBookId: selectedBookId,
+                        searchedTitle: bookData && bookData.title
+                    }
+                }} 
+            />
+          </div>
+        );
+    }
+
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
+    }
+
     return (
-        <div className="page">
-            <div className="col" id="BookDescription_image_col">
+        <div className="bookDesc--page">
+            <div className="bookDesc--col1">
                 <div className="image_box">
-                    <img className="book_1" src="./pics/book-3.jpg" alt="book_3"></img>
+                    <img src={(bookData && bookData.coverPage) || "/pics/book-2.jpg"} alt="book_3"></img>
                 </div>
                 <div className="BookDescription_title">
-                    <h1> {props.BookDescription_title} </h1>
-                    <h3> {props.BookDescription_author} </h3>
+                    <h1>{bookData && bookData.title}</h1>
+                    <h3>{bookData && bookData.author}</h3>
                 </div>
+                <Button 
+                    variant="contained" 
+                    endIcon={<StoreIcon/>}
+                    style={{ 
+                        backgroundColor: '#B542EB',
+                        borderRadius:'2vh',
+                        height: '5vh',
+                        color: 'white',
+                        outline: 'none'
+                    }}
+                    onClick={() => {
+                        seeSellers(bookData && bookData.bookId)
+                    }}
+                >See Your Sellers</Button>
             </div>
 
-            <div className="col" id="BookDescription_wide_col">
+            <div className="bookDesc--col2">
                 <div>
-                    <h2 id="text_blue">Availaiblity</h2>
-                    <hr class="hr_line"></hr>
+                    <div className="bookDesc--title">Availaiblity</div>
+                    <hr className="hr_line"></hr>
                     <div className="col_row">
-                        <h4 class="BookDescription_h4"> <span className="BookDescription_blue"> Download </span> Book Cover</h4>
-                        <h4 class="BookDescription_h4" id="BookDescription_float_right"> <span className="BookDescription_red">{props.BookDescription_copies} Copies</span> on sale</h4>
+                        <div className="BookDescription_h4-align"> <span className="BookDescription_blue"> Download </span> Book Cover</div>
+                        <div className="BookDescription_h4-align" id="BookDescription_float_right"> <span className="BookDescription_red">{bookData && bookData.copies.length} Copies</span> are now on sales</div>
                     </div>
                     <div className="col_row">
-                        <h4 class="BookDescription_h4"> <span className="BookDescription_orange">{props.BookDescription_shops} Shops </span> are selling this book</h4>
-                        <h4 class="BookDescription_h4" id="BookDescription_float_right"> <span className="BookDescription_green">{props.BookDescription_chapters} chapters </span>  total</h4>
+                        <div className="BookDescription_h4-align"> <span className="BookDescription_orange">{shopsData && shopsData.data ? shopsData.data.length : '0'} Shops</span> are selling this book</div>
+                        <div className="BookDescription_h4-align" id="BookDescription_float_right"> <span className="BookDescription_green">{bookData && bookData.chapters.length} Chapters </span>in total</div>
                     </div>
-
                 </div>
 
                 <div id="BookDescription_description">
-                    <h2 id="text_blue">Description</h2>
-                    <hr class="hr_line"></hr>
-                    <h4 class="BookDescription_h4">{props.BookDescription_description}“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”</h4>
+                    <div className="bookDesc--title">Description</div>
+                    <hr className="hr_line"></hr>
+                    <div className="BookDescription_h4">{bookData && bookData.description}</div>
 
                 </div>
                 <div id="BookDescription_chapters">
-                    <h2 id="text_blue">Table of Content</h2>
-                    <hr class="hr_line"></hr>
-                    <div class="BookDescription_scrollable">
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Introduction
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 1: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 2: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 3: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 4: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 5: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 6: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 7: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 8: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 9: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 10: Hello World
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="BookDescription_chapters_row">
-                                Chapter 11: Hello World
-                            </td>
-                        </tr>
-                        
-
+                    <div className="bookDesc--title">Table of Content</div>
+                    <hr className="hr_line"></hr>
+                    <div className="BookDescription_scrollable">
+                        <div className="BookDescription_chapters_row">
+                            Introduction
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 1: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 2: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 3: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 4: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 5: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 6: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 7: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 8: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 9: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 10: Hello World
+                        </div>
+                    
+                        <div className="BookDescription_chapters_row">
+                            Chapter 11: Hello World
+                        </div>
                     </div>
                 </div>
 
             </div>
 
 
-            <div className="col" id="BookDescription_details_col">
+            <div className="bookDesc--col3">
                 <div>
-                    <h2 id="text_blue">Book Details</h2>
-                    <hr class="hr_line"></hr>
-                    <h4 class="BookDescription_h4">Title: {props.BookDescription_title}</h4>
-                    <h4 class="BookDescription_h4">Author: {props.BookDescription_author}</h4>
-                    <h4 class="BookDescription_h4">Publisher: {props.BookDescription_publisher}</h4>
-                    <h4 class="BookDescription_h4">Language: {props.BookDescription_language}</h4>
+                    <div className="bookDesc--title">Book Details</div>
+                    <hr className="hr_line"></hr>
+                    <div className="BookDescription_h4">Title: {bookData && bookData.title}</div>
+                    <div className="BookDescription_h4">Author: {bookData && bookData.author}</div>
+                    <div className="BookDescription_h4">Publisher: {bookData && bookData.publisher}</div>
+                    <div className="BookDescription_h4">Language: English</div>
                 </div>
                 <div id="BookDescription_about_author">
-                    <h2 id="text_blue">About the Author</h2>
-                    <hr class="hr_line"></hr>
+                    <div className="bookDesc--title">About the Author</div>
+                    <hr className="hr_line"></hr>
                     <div className="BookDescription_author_profile">
                         <div className="BookDescription_display">
                             <img src="avt-2.jpg" alt="profile_image" ></img>
                         </div>
                         <div className="BookDescription_author_name">
-                            <h2> {props.BookDescription_author_name} </h2>
+                            <div className="BookDescription_blue">{bookData && bookData.author}</div>
                         </div>
                     </div>
                     <div className="BookDescription_author_about">
-                        <p>{props.BookDescription_author_about}He has been awarded an Australian Society of Authors Emerging Writers' and Illustrators' Mentorship</p>
+                        <p>He has been awarded an Australian Society of Authors Emerging Writers' and Illustrators' Mentorship</p>
                     </div>
 
 

@@ -1,6 +1,20 @@
 import { userAxios } from "./axiosClient";
 import useSWR from 'swr';
 
+
+export const CreateABook = async (bookDetails) => {
+
+    const req = await userAxios('book').post('books/create', bookDetails,
+        {
+            headers: {
+                'Authorization': `${localStorage.jwtToken}` 
+            }
+        })
+        .then(res => res.data)
+        .catch(error => error.response.data.errorMessage);
+    return req;
+}
+
 export const SearchForABook = async (title,isbn) => {
 
     //GET dont have Body at the middle of the func
@@ -101,6 +115,20 @@ export const GetAllBooks = () => {
   
     return {
       data: data,
+      isLoading: !error && !data,
+      isError: error
+    }
+}
+
+const getBookByIdFetcher = (url) => userAxios('book')
+.get(url, { headers: { Authorization: `${localStorage.jwtToken}` } })
+.then((res) => res.data);
+
+export const GetBookById = (bookId) => {
+    const { data, error } = useSWR('books/get/book/id/'+ bookId, getBookByIdFetcher)
+  
+    return {
+      bookData: data,
       isLoading: !error && !data,
       isError: error
     }

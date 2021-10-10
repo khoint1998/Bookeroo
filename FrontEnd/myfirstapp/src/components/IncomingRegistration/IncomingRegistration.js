@@ -34,6 +34,11 @@ const IncomingRegistrations = () => {
     const [selectedReg, setSelectedReg] = useState(null);
     const [toRoute,setToRoute] = useState(null);
 
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };

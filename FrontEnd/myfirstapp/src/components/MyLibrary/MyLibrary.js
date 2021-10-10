@@ -1,8 +1,15 @@
 import React from "react";
 import LibraryItem from "./LibraryItem";
 import './MyLibrary.css';
+import { Redirect } from "react-router-dom";
 
-function MyLibrary() {
+const MyLibrary = () => {
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     return (
         <div className="MyLibraryPage">
             <div className="Library_heading">

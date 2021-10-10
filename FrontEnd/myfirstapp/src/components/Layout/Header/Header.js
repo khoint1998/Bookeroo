@@ -213,22 +213,23 @@ const Header = () => {
                             </ListItemIcon>
                             <ListItemText primary="Logout" onClick={() => {
                                 localStorage.removeItem("jwtToken");
-                                currentUser.userDispatch({ type: 'logout' });
+                                localStorage.removeItem("cart");
                                 setToRoute("/");
+                                currentUser.userDispatch({ type: 'logout' });
+                                cart.cartDispatch({ type: 'clear cart' });
+                                setTimeout(() => window.location.reload(), 100);
                             }}/>
                         </MenuItem >
                     </Menu>
                     <Fab 
-                        variant="extended"
                         color="primary" 
                         className="header--float-btn" 
-                        style={{width: '10vw', height: '6vh', backgroundColor:'#B542EB'}}
+                        style={{backgroundColor:'#B542EB'}}
                         onClick={() => {
                             setToRoute('/cart');
                         }}
                     >
-                        <ShoppingCartIcon className="header--cart-icon"/>
-                        My Cart
+                        <ShoppingCartIcon/>
                     </Fab>
                 </div>
             }

@@ -1,8 +1,15 @@
 import React from "react";
 import NotificationItem from "./NotificationItem";
-import './NotificationPage.css'
+import './NotificationPage.css';
+import { Redirect } from "react-router-dom";
 
-function NotificationPage(){
+const NotificationPage = () => {
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     return(
         <div className="NotificationPage">
             <div className="Notification_heading">

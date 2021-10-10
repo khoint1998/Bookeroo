@@ -77,9 +77,5 @@
 .header--float-btn {
   position: fixed;
   top: 88vh;
-  right: -3vw;
-}
-
-.header--cart-icon {
-  margin-right: 1vw;
+  right: -11vw;
 }

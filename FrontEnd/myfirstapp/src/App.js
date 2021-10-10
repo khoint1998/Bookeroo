@@ -27,6 +27,7 @@ import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
 import AdminHomePage from "./components/AdminPage/AdminHomePage/AdminHomePage";
 import AdminSearchPage from "./components/AdminPage/AdminSearchPage/AdminSearchPage";
 import ForgotPassword from "./components/UserManagement/ForgotPassword/ForgotPassword";
+import Payment from "./components/Payment/Payment";
 
 const guestValue = {};
 const defaultCart = [];
@@ -114,6 +115,7 @@ const App = () => {
             <Route exact path="/admin-home" component={AdminHomePage}/>
             <Route exact path="/admin-search" component={AdminSearchPage}/>
             <Route exact path="/forgot-password" component={ForgotPassword}/>
+            <Route exact path="/payment" component={Payment}/>
 
           </div>
         </Router>

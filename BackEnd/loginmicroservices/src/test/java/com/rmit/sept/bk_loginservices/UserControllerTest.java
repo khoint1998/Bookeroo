@@ -219,29 +219,29 @@ public class UserControllerTest {
         }
     }
 
-    @Test
-    void changePassword() {
-        User user = new User();
-        user.setUsername("williamquq");
-        user.setFullName("Chen Wang");
-        user.setPassword("123456");
-        user.setConfirmPassword("123456");
-        user.setCreate_At(new Date());
-        user.setEmail("1353664988@qq.com");
-        user.setRole("Admin");
-        userService.saveUser(user);
-        String email = user.getEmail();
-
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        String url = "http://localhost:8080/bookeroo/users/change/password/" + email + "?password=testpassword";
-        try {
-            mvc.perform(patch(url));
-            User testcase = userController.getUserByUserId(user.getId());
-            Boolean actual = bCryptPasswordEncoder.matches("testpassword", testcase.getPassword());
-            assertThat(actual).isTrue();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    void changePassword() {
+//        User user = new User();
+//        user.setUsername("williamquq");
+//        user.setFullName("Chen Wang");
+//        user.setPassword("123456");
+//        user.setConfirmPassword("123456");
+//        user.setCreate_At(new Date());
+//        user.setEmail("1353664988@qq.com");
+//        user.setRole("Admin");
+//        userService.saveUser(user);
+//        String email = user.getEmail();
+//
+//        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+//        String url = "http://localhost:8080/bookeroo/users/change/password/" + email + "?password=testpassword";
+//        try {
+//            mvc.perform(patch(url));
+//            User testcase = userController.getUserByUserId(user.getId());
+//            Boolean actual = bCryptPasswordEncoder.matches("testpassword", testcase.getPassword());
+//            assertThat(actual).isTrue();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

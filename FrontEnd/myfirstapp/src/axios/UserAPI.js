@@ -9,6 +9,13 @@ export const createUser = async (newUser) => {
     return req;
 }
 
+export const editUser = async (edittedUser, userId) => {
+  const req = await userAxios().patch('users/update/user/details/' + userId, edittedUser)
+    .then(res => res.data)
+    .catch(error => error.message);
+  return req; 
+}
+
 export const loginAsUser = async (user) => {
     const req = await userAxios().post('users/login', user)
       .then(res => {
@@ -32,7 +39,7 @@ export const GetUserInfo = (id) => {
       //Check if id is there first, then do the request
       if(id) {
         return 'users/get/user/id/' + id
-      }
+      } 
     }
     , fetcher)
   

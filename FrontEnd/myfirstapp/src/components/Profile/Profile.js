@@ -17,7 +17,7 @@ function Profile(){
                         <div className="profile_display">
                             <img src="avt-2.jpg" alt="profile_image" ></img>
                             <div className="profile_role">
-                                {user.role}
+                                {user && user.role}
                             </div>
                         </div>
                     </div>
@@ -28,14 +28,14 @@ function Profile(){
                                 <h3 className="profile_page_text_primary">Name:
                                 </h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.fullName}</small>
+                                    <small className="text-muted">{user && user.fullName}</small>
                                 </h4>
                             </div>
 
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Email:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.email}</small>
+                                    <small className="text-muted">{user && user.email}</small>
                                 </h4>
                             </div>
 
@@ -49,7 +49,7 @@ function Profile(){
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Username:</h3>
                                 <h4 className="col-sm">
-                                    <small className="text-muted">{user.username}</small>
+                                    <small className="text-muted">{user && user.username}</small>
                                 </h4>
                             </div>
 

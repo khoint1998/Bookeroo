@@ -26,3 +26,28 @@ export const GetCopiesByBookId = (bookId) => {
       isError: error
     }
 }
+
+export const ChangeCopyOwnerId = async (userId,copyId) => {
+    const req = await userAxios('book').patch('copys/changeOwnerId/' + copyId, null,
+            {
+                params: { userId: userId },
+                headers: {
+                'Authorization': `${localStorage.jwtToken}` 
+            }
+        })
+        .then(res => res)
+        .catch(error => error.message);
+    return req;
+}
+
+export const GetCopyByCopyIdList = async (copyIdList) => {
+    const req = await userAxios('book').patch('copys/get/copy/copyIdList', copyIdList,
+            {
+                headers: {
+                'Authorization': `${localStorage.jwtToken}` 
+            }
+        })
+        .then(res => res)
+        .catch(error => error.message);
+    return req;
+}

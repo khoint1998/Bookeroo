@@ -25,6 +25,7 @@
   margin: 0 2.5vw 0 0;
   font-size: 2.5vh;
   font-weight: bolder;
+  outline: none;
   color: rgba(0, 0, 0, 0.6);
 }
 
@@ -72,14 +73,4 @@
 
 .header--avt:hover {
   cursor: pointer;
-}
-
-.header--float-btn {
-  position: fixed;
-  top: 88vh;
-  right: -3vw;
-}
-
-.header--cart-icon {
-  margin-right: 1vw;
 }

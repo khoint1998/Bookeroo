@@ -1,24 +1,30 @@
-.MyLibraryPage{
-    padding: 10px;
-    padding-top: 50px;
+.MyLibraryPage {
+  padding: 5vh 0 0 4vw;
 }
 
-.MyLibraryPage hr{
-    width: 250px;
+.MyLibraryPage hr {
+  width: 58vw;
+  float: left;
 }
 
-.Library_heading h2{
-    color: #0066f0;
-    font-weight: bolder;
-    font-size: 24px;
-    text-align: center;
+.Library_heading h2 {
+  color: #0066f0;
+  font-weight: bolder;
 }
-.MyLibrary_itemList{
-    height: 400px;
-    overflow-y: auto;
+.MyLibrary_itemList {
+  max-height: 75vh;
+  overflow: auto;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+@media only screen and (max-width: 1366px) {
+  .MyLibrary_itemList {
+    max-height: 65vh;
+    overflow: auto;
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
     display: grid;
-    grid-template-columns: 550px 550px;
+    grid-template-columns: auto auto;
+  }
 }

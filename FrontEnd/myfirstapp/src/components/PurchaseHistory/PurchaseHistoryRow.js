@@ -17,7 +17,7 @@ function PurchaseHistoryRow(props) {
             </div>
 
             <div className="PurchaseCol" id="price">
-                {props.price}
+                {props.price *1.3}
             </div>
 
             <div className="PurchaseCol" id="date">

@@ -29,6 +29,18 @@ const BookSearch = (props) => {
     const [resultList,setResultList] = useState(searchedBooks);
     const [searchTitle,setSearchTitle] = useState(searchedTitle);
 
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
+    let uniqueBooksSearched = [];
+
+     uniqueBooksSearched = searchedBooks !== 'Books not found' && Array.from(new Set(searchedBooks.map(b => b.bookId)))
+    .map(id => {
+    return searchedBooks.find(a => a.bookId === id)
+    })
+
     //HOC
     const StyledTableCell = withStyles(() => ({
         head: {
@@ -74,15 +86,22 @@ const BookSearch = (props) => {
 
     const seeSellers = (bookId) => {
         const jwtToken = localStorage.jwtToken;
-        if (!jwtToken) {setToRoute('/login')}
-        setSelectededBookId(bookId);
-        setToRoute("/seller-search");
+        if (!jwtToken) {
+            setToRoute('/login')
+        } else {
+            setSelectededBookId(bookId);
+            setToRoute("/seller-search");
+        }
     }
 
     const seeBookDesc = (bookId) => {
         const jwtToken = localStorage.jwtToken;
-        if (!jwtToken) {setToRoute('/login')}
-        setSelectededBookId(bookId);
+        if (!jwtToken) {
+            setToRoute('/login')
+        } else {
+            setSelectededBookId(bookId);
+            setToRoute('/book-desc');
+        }
     }
 
     if (toRoute === "/book-search") {
@@ -124,7 +143,7 @@ const BookSearch = (props) => {
                 to={{
                     pathname: toRoute,
                     state: { 
-                        selectedBookId: selectedBookId
+                        preSelectedBookId: selectedBookId
                     }
                 }} 
             />
@@ -153,7 +172,7 @@ const BookSearch = (props) => {
                     />
                 </div>
                 <div className="bookSearch--search-section-result">
-                    Found {searchedBooks && searchedBooks !== 'Books not found' ? searchedBooks.length : '0'} result(s) with <span className="bookSearch--search-section-result-text">{searchTitle}</span>
+                    Found {uniqueBooksSearched && uniqueBooksSearched !== 'Books not found' ? uniqueBooksSearched.length : '0'} result(s) with <span className="bookSearch--search-section-result-text">{searchTitle}</span>
                 </div>
             </div>
             <div className="bookSearch--search-option">
@@ -191,12 +210,12 @@ const BookSearch = (props) => {
                         </TableHead>
                         <TableBody>
                             {/* Books not found is for the first render, searchedBooks is for self rerender */}
-                            {searchedBooks &&  searchedBooks !== 'Books not found' && searchedBooks.map(row => (
+                            {uniqueBooksSearched &&  uniqueBooksSearched !== 'Books not found' && uniqueBooksSearched.map(row => (
                                 <StyledTableRow key={row.bookId}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.bookId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="bookSearch--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="bookSearch--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.title}</StyledTableCell>
                                     <StyledTableCell>{row.isbn}</StyledTableCell>
                                     <StyledTableCell>{row.author}</StyledTableCell>

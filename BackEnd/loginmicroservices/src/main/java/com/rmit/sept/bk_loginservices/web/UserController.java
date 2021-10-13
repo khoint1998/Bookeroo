@@ -106,4 +106,9 @@ public class UserController {
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
     }
 
+    @PatchMapping("/change-password")
+    public void changePassword(@Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
+        userService.checkAndChangePassword(changePasswordDTO);
+    }
+
 }

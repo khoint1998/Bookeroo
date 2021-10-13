@@ -28,8 +28,8 @@ public class RegistrationDetails {
     @NotBlank(message = "Book title is required")
     private String bookTitle;
 
-//    Will implement later
-//    private String bookCover;
+    @Lob
+    private String coverPage;
 
     private float price;
 

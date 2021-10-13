@@ -3,12 +3,19 @@ import './PurchaseHistory.css'
 import PurchaseHistoryRow from './PurchaseHistoryRow'
 import { GetUserInfo } from "../../axios/UserAPI";
 import { UserContext } from "../../App";
+import { Redirect } from "react-router-dom";
 
 
 function PurchaseHistory() {
+
     const currentUser = useContext(UserContext);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
     
-    const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id); 
+    const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
 
     return (
         <div className="purchase_history--page">

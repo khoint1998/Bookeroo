@@ -82,12 +82,12 @@ const Register = () => {
 
                   <div className="register--align-label-and-field">
                     <label className="register--label">Password:</label>
-                    <Field className="register--fields" id="password" name="password" />
+                    <Field type='password' className="register--fields" id="password" name="password" />
                   </div>
 
                   <div className="register--align-label-and-field">
                     <label className="register--label">Confirm Password:</label>
-                    <Field className="register--fields" id="confirmPassword" name="confirmPassword" />
+                    <Field type='password' className="register--fields" id="confirmPassword" name="confirmPassword" />
                   </div>
 
                   <div className="register--align-label-and-field">

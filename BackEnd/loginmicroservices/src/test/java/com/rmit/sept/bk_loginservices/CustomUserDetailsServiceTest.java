@@ -117,6 +117,7 @@ public class CustomUserDetailsServiceTest {
         purchaseDetailsDTO.setCopyId("1");
         purchaseDetailsDTO.setTitle("title");
         purchaseDetailsDTO.setSellerFullName("chen");
+        purchaseDetailsDTO.setSellerId("1");
         User testcase = customUserDetailsService.updateUserPurchaseHistory(user.getId(),purchaseDetailsDTO);
         assertThat(testcase.getPurchaseDetailsList().get(0).getSellerFullName()).isEqualTo("chen");
     }

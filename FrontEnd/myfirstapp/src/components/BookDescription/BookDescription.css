@@ -1,114 +1,123 @@
-.page{
-    font-family: "Poppins";
-    margin-top: -20px;
-    padding: 0px;
-}
-.col {
-    text-align: left;
-    width: 33.33%;
-    margin: 0;
-    margin: 0 0 0 0;
-}
-#BookDescription_image_col{
-    width: 20%;
-}
-#BookDescription_wide_col{
-    width: 50%;
-}
-#BookDescription_details_col{
-    width:30%
-}
-#text_blue{
-    color: #0066ff;
-}
-.hr_line{
-    margin-top: -5px;
-    border: 1px solid #0066ff;
-    background-color: #0066ff;
-}
-.BookDescription_scrollable{
-    height: 150px;
-    overflow-y: auto;
-}
-.BookDescription_h4{
-    font-size: 20px;
-    color: black;
-    font-weight: lighter;
-    text-decoration: none;
-    margin-top: 20px;
-    padding-bottom: 20px;
-}
-.col_row{
-    width: 100%;
+.bookDesc--page {
+  font-family: "Poppins";
+  display: flex;
+  justify-content: space-between;
+  margin: 5vh 0 0 0;
 }
 
-#BookDescription_float_right{
-    float: right;
-    text-align: right;
-    margin-top: -32px;
+.bookDesc--col2 {
+  width: 50%;
+  height: 80vh;
+  padding-right: 2vw;
+  overflow: auto;
+  margin: 0 3vw 0 3vw;
 }
 
-#BookDescription_description{
-    margin-top: 30px;
+.bookDesc--col1 {
+  width: 20%;
+  margin: 3vh 0 0 3vw;
+  text-align: center;
 }
 
-.image_box img{
-    width: 110%;
+.bookDesc--col3 {
+  width: 20%;
+  margin: 0 3vw 0 0;
 }
 
-.BookDescription_title h1{
-    text-align: center;
-    margin-top: 8px;
-    font-weight: bolder;
+.bookDesc--title {
+  font-size: 1.5vw;
+  color: #0066ff;
 }
 
-.BookDescription_title h3{
-    text-align: center;
-    font-size: 22px;
-    
+.hr_line {
+  margin-top: -5px;
+  background-color: #06f;
+  height: 0;
 }
 
-#BookDescription_about_author{
-    margin-top: 40px;
+.BookDescription_h4 {
+  font-size: 1.1vw;
+  text-decoration: none;
+  margin: 2vh 0 2vh 0;
 }
 
-.BookDescription_display img{
-    width: 90px;
-    height: 90px;
-    object-fit:cover;
-    border-radius: 50%;
-}
-.BookDescription_chapters_row{
-    padding: 8px;
-    font-size: 20px;
-    width: 350px;
-    opacity: 60%;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.6);
+.BookDescription_h4-align {
+  font-size: 1.1vw;
+  text-decoration: none;
+  margin: 2vh 0 2vh 0;
+  width: 25vw;
 }
 
-.BookDescription_author_profile{
-    display: flex;
+.col_row {
+  margin: 0 10vw 0 0.5vw;
+  display: flex;
+  justify-content: space-between;
 }
-.BookDescription_author_name{
-    padding-top: 20px;
-    padding-left: 20px;
+
+#BookDescription_float_right {
+  text-align: start;
 }
-.BookDescription_author_about p{
-    font-size: 20px;
-    color: black;
-    font-weight: lighter;
-    text-decoration: none;
-    margin-top: 20px;
+
+.image_box img {
+  width: 15vw;
 }
-.BookDescription_blue{
-    color: #0066ff;
+
+.BookDescription_title h2 {
+  text-align: center;
+  margin-top: 8px;
+  font-weight: bolder;
 }
-.BookDescription_orange{
-    color: #EB9D42;
+
+.BookDescription_title h3 {
+  text-align: center;
+  font-size: 1.25vw;
+  color: #0066ff;
 }
-.BookDescription_red{
-    color: #DF0707;
+
+#BookDescription_about_author {
+  margin-top: 40px;
 }
-.BookDescription_green{
-    color: #397230;
+
+.BookDescription_display img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.BookDescription_chapters_row {
+  padding: 8px;
+  font-size: 1.25vw;
+  width: 350px;
+  opacity: 60%;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.6);
+}
+
+.BookDescription_author_profile {
+  display: flex;
+}
+.BookDescription_author_name {
+  padding-top: 20px;
+  font-size: 1.25vw;
+  color: #0066ff;
+  font-weight: bolder;
+  padding-left: 20px;
+}
+.BookDescription_author_about p {
+  font-size: 1vw;
+  color: black;
+  font-weight: lighter;
+  text-decoration: none;
+  margin-top: 20px;
+}
+.BookDescription_blue {
+  color: #0066ff;
+}
+.BookDescription_orange {
+  color: #eb9d42;
+}
+.BookDescription_red {
+  color: #df0707;
+}
+.BookDescription_green {
+  color: #397230;
 }

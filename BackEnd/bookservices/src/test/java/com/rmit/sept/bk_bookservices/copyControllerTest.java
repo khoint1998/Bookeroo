@@ -148,7 +148,7 @@ public class copyControllerTest {
         String url = "http://localhost:8081/bookeroo/copys/get/copy/copyIdList";
         try {
             String response = mvc
-                    .perform(get(url).contentType(MediaType.APPLICATION_JSON)
+                    .perform(patch(url).contentType(MediaType.APPLICATION_JSON)
                             .content(objectWriter.writeValueAsString(copyIdList)))
                     .andReturn().getResponse().getContentAsString();
             String expected_1 = "\"copyId\":" + copy.getCopyId().toString() + ",\"ownerId\":1,\"newBook\":true";

@@ -34,6 +34,11 @@ const MyShops = () => {
     const [toRoute,setToRoute] = useState(null);
     const [selectedShopId,setSelectedShopId] = useState(0);
 
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };

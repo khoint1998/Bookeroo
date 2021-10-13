@@ -44,6 +44,11 @@ const Shop = (props) => {
     const [selectedReg, setSelectedReg] = useState(null);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
@@ -117,6 +122,7 @@ const Shop = (props) => {
             bookTitle: prefetchedBook.title,
             price: values.price,
             bookId: prefetchedBook && prefetchedBook.bookId,
+            coverPage: prefetchedBook && prefetchedBook.coverPage
         };
 
         CreateRegistration(registrationDetails);
@@ -196,10 +202,10 @@ const Shop = (props) => {
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="shop--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="shop--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--pending-text">Sold</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--sold-text">Sold</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -297,7 +303,7 @@ const Shop = (props) => {
                 </DialogContentText>
                 <div className="shop--dialog-2-content">
                     <div className="shop--dialog-2-content-pic">
-                        <img className="shop--book-cover" src="/pics/book-2.jpg" alt="book"/>
+                        <img className="shop--book-cover" src={prefetchedBook.coverPage ||"/pics/book-2.jpg"} alt="book"/>
                         <div className="shop--book">
                             <div className="shop--book-details">Book Title:</div>
                             <div className="shop--book-info">{prefetchedBook.title}</div>

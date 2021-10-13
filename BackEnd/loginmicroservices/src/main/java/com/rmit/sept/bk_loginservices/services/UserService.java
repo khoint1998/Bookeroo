@@ -2,8 +2,10 @@ package com.rmit.sept.bk_loginservices.services;
 
 import com.rmit.sept.bk_loginservices.Repositories.NotificationRepository;
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.exceptions.PasswordException;
 import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
 import com.rmit.sept.bk_loginservices.exceptions.UsernameAlreadyExistsException;
+import com.rmit.sept.bk_loginservices.model.ChangePasswordDTO;
 import com.rmit.sept.bk_loginservices.model.Notification;
 import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
@@ -53,6 +55,23 @@ public class UserService {
 
         } catch (Exception e){
             throw new UsernameAlreadyExistsException("Something is wrong. Cannot create the user");
+        }
+    }
+
+    public void changePassword(String email,String newPassword) throws UserNotFoundException {
+        User selectedUser = userRepository.getByEmail(email);
+        if (selectedUser == null) throw new UserNotFoundException("User not found");
+        selectedUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(selectedUser);
+    }
+
+    public void checkAndChangePassword(ChangePasswordDTO changePasswordDTO) {
+        if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getConfirmPassword())) throw new PasswordException("Confirmation not match. Please try again");
+        if (changePasswordDTO.getPassword().length() < 6) throw new PasswordException("Password must be at least 6 characters");
+        try {
+            changePassword(changePasswordDTO.getEmail(),changePasswordDTO.getPassword());
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException("Email not not found. Please try again");
         }
     }
 

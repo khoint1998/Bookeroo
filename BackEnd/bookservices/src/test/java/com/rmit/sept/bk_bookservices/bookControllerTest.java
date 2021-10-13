@@ -85,7 +85,7 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-isbn?title=java&isbn=isbn");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\"";
             assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
@@ -177,7 +177,7 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/isbn?isbn=isbn");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"author\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\"";
             assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();
@@ -238,7 +238,7 @@ public class bookControllerTest {
         RequestBuilder request = get("http://localhost:8081/bookeroo/books/get/book/title-author-isbn?searchResult=isbn");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
-            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\",\"copies\":[]";
+            String expected = "\"isbn\":\"isbn\",\"title\":\"java\",\"author\":\"chen\",\"description\":\"description\",\"category\":\"category\",\"publisher\":\"publisher\"";
             assertThat(response).contains(expected);
         } catch (Exception e) {
             e.printStackTrace();

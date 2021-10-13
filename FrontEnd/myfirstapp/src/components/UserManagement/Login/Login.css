@@ -78,6 +78,14 @@
   color: #06f;
 }
 
+.login--change-password {
+  text-align: center;
+  margin: 5% 0 0 0;
+  font-weight: bolder;
+  font-size: 120%;
+  font-weight: bolder;
+}
+
 .login--align-label-and-field {
   display: flex;
   margin: 4% 0;
@@ -115,5 +123,5 @@
 }
 
 .login--login-form {
-  margin: 20% 0 40% 0;
+  margin: 20% 0 30% 0;
 }

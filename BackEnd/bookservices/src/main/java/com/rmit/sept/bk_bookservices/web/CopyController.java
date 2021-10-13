@@ -40,8 +40,8 @@ public class CopyController {
         return copyService.getCopyById(id);
     }
 
-    @GetMapping("get/copy/copyIdList")
-    public List<Copy> getCopiesById(@RequestBody List<Long> copyIdList) {
+    @PatchMapping("get/copy/copyIdList")
+    public List<Copy> getCopiesByCopyIdList(@RequestBody List<Long> copyIdList) {
         return copyService.getCopiesByCopyIdList(copyIdList);
     }
 

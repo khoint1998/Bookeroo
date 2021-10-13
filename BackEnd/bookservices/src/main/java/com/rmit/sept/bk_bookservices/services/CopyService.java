@@ -62,12 +62,7 @@ public class CopyService {
 
     public List<Copy> getCopiesByBookId (Long bookId) {
         try {
-            List<Copy> copyList = copyRepository.getByBook_BookId(bookId);
-            if (!copyList.isEmpty()){
-                return copyList;
-            } else {
-                throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
-            }
+            return copyRepository.getByBook_BookId(bookId);
         } catch (Exception e) {
             throw new CopyNotFoundException("Copies not found. This book id is invalid or the book id is wrong");
         }

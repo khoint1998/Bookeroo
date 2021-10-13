@@ -25,6 +25,13 @@ export const loginAsUser = async (user) => {
     return req;
 }
 
+export const resetPassword = async (data) => {
+  const req = await userAxios().patch('users/change-password', data)
+    .then(res => res.data)
+    .catch(error => error.response);
+  return req;
+}
+
 const fetcher = (...args) => userAxios().get(...args).then((res) => res.data)
 
 export const GetUserInfo = (id) => {
@@ -41,4 +48,41 @@ export const GetUserInfo = (id) => {
       isLoading: !error && !data,
       isError: error
     }
+}
+
+export const axiosGetUserInfo = async (userId) => {
+  const req = await userAxios().get('users/get/user/id/' + userId,
+          {
+              headers: {
+              'Authorization': `${localStorage.jwtToken}` 
+          }
+      })
+      .then(res => res)
+      .catch(error => error.message);
+  return req;
+}
+
+export const AddNewCopyToMyLibrary = async (userId,copyId,newBook) => {
+  const req = await userAxios().patch('purchasedCopyDetails/add/forUser/' + userId, null,
+          {
+              params: { copyId: copyId, newBook: newBook },
+              headers: {
+              'Authorization': `${localStorage.jwtToken}` 
+          }
+      })
+      .then(res => res)
+      .catch(error => error.message);
+  return req;
+}
+
+export const CreatePurchaseHistoryDetails = async (userId, historyDTO) => {
+  const req = await userAxios().patch('users/update/user/history/' + userId, historyDTO,
+          {
+              headers: {
+              'Authorization': `${localStorage.jwtToken}` 
+          }
+      })
+      .then(res => res)
+      .catch(error => error.message);
+  return req;
 }

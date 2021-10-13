@@ -21,7 +21,7 @@ import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 
 const Header = () => {
 
@@ -116,7 +116,17 @@ const Header = () => {
                 </div> : 
                 <div className="header--hiMsg-box">
                     <span className="header--hiMsg">Hello {user.fullName}</span>
-                    <Avatar className="header--avt" alt="avatar" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
+                    <Avatar 
+                        className="header--avt" 
+                        alt="avatar"
+                        style={{
+                            width: '2vw',
+                            fontSize: '1vw',
+                            height: '4vh'
+                        }}
+                        onClick={openMenu}>
+                            {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                    </Avatar>
                     <Menu
                         id="customized-menu"
                         anchorEl={anchorEl}
@@ -162,7 +172,7 @@ const Header = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="My Shop" onClick={() => setToRoute("/my-shops")}/>
                             </MenuItem> : 
-                            <>
+                            <div>
                                 <MenuItem>
                                     <ListItemIcon style={{
                                         minWidth: '25px'
@@ -187,7 +197,7 @@ const Header = () => {
                                     </ListItemIcon>
                                     <ListItemText primary="My Selling Registration" onClick={() => setToRoute("/my-registration")}/>
                                 </MenuItem>
-                            </>
+                            </div>
                         }
                         <MenuItem>
                             <ListItemIcon style={{
@@ -213,23 +223,27 @@ const Header = () => {
                             </ListItemIcon>
                             <ListItemText primary="Logout" onClick={() => {
                                 localStorage.removeItem("jwtToken");
-                                currentUser.userDispatch({ type: 'logout' });
+                                localStorage.removeItem("cart");
                                 setToRoute("/");
+                                currentUser.userDispatch({ type: 'logout' });
+                                cart.cartDispatch({ type: 'clear cart' });
+                                setTimeout(() => window.location.reload(), 200);
                             }}/>
                         </MenuItem >
                     </Menu>
-                    <Fab 
-                        variant="extended"
-                        color="primary" 
-                        className="header--float-btn" 
-                        style={{width: '10vw', height: '6vh', backgroundColor:'#B542EB'}}
-                        onClick={() => {
-                            setToRoute('/cart');
+                    <Button 
+                        variant="text"
+                        startIcon={<ShoppingCartIcon/>}
+                        style={{ 
+                            fontWeight: 'bolder',
+                            fontSize: '1vw',
+                            borderRadius:'2vh',
+                            marginLeft: '2.5vw',
+                            color: '#0066ff',
+                            outline: 'none'
                         }}
-                    >
-                        <ShoppingCartIcon className="header--cart-icon"/>
-                        My Cart
-                    </Fab>
+                        onClick={() => setToRoute('/cart')}
+                    >My Cart</Button>
                 </div>
             }
         </div>

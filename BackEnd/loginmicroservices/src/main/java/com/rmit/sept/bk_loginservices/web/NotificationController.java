@@ -5,6 +5,7 @@ import com.rmit.sept.bk_loginservices.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -15,9 +16,9 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @PatchMapping("/getNotification/{id}")
-    public void getNotificationById(@PathVariable(value="id") Long notificationId) {
-//        notificationService.getNotificationById(notificationId);
+    @GetMapping("/getNotification/{id}")
+    public List<Notification> getNotificationByUserId(@PathVariable(value="id") Long userId) {
+        return notificationService.getNotificationByUserId(userId);
     }
 
 }

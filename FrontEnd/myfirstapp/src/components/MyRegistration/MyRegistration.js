@@ -24,6 +24,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Formik, Field, Form } from 'formik';
+import { Redirect } from "react-router-dom";
 
 const MyRegistration = () => {
 
@@ -37,6 +38,11 @@ const MyRegistration = () => {
     const [prefetchedBook,setPrefetchedBook] = useState({});
     const [selectedReg, setSelectedReg] = useState(null);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -108,6 +114,7 @@ const MyRegistration = () => {
             bookTitle: prefetchedBook.title,
             price: values.price,
             bookId: prefetchedBook && prefetchedBook.bookId,
+            coverPage: prefetchedBook && prefetchedBook.coverPage
         };
 
         CreateRegistration(registrationDetails);
@@ -169,10 +176,10 @@ const MyRegistration = () => {
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="myreg--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="myreg--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="myreg--approved-text">Approved</span> : row.status === "pending" ? <span className="myreg--pending-text">Awaiting Approval</span> : <span className="myreg--pending-text">Sold</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.status === "approved" ? <span className="myreg--approved-text">Approved</span> : row.status === "pending" ? <span className="myreg--pending-text">Awaiting Approval</span> : <span className="myreg--sold-text">Sold</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -268,7 +275,7 @@ const MyRegistration = () => {
                 </DialogContentText>
                 <div className="myreg--dialog-2-content">
                     <div className="myreg--dialog-2-content-pic">
-                        <img className="myreg--book-cover" src="/pics/book-2.jpg" alt="book"/>
+                        <img className="myreg--book-cover" src={prefetchedBook.coverPage || "/pics/book-2.jpg"} alt="book"/>
                         <div className="myreg--book">
                             <div className="myreg--book-details">Book Title:</div>
                             <div className="myreg--book-info">{prefetchedBook.title}</div>
@@ -297,7 +304,7 @@ const MyRegistration = () => {
                                 <div className="myreg--inputFields">
                                     <div className="myreg--dialog-form">
                                         <div className="myreg--align-label-and-field">
-                                            <label className="myreg--label">Enter your Price (A$):</label>
+                                            <label className="myreg--label">Enter your desired Price (A$):</label>
                                             <Field className="myreg--fields" id="price" name="price" />
                                         </div>
 

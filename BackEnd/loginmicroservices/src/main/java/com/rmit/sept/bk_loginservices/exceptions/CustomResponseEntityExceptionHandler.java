@@ -31,5 +31,17 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handlePasswordException(PasswordException ex, WebRequest request){
+        ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleShopException(ShopException ex, WebRequest request){
+        ErrorResponse exceptionResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }
 

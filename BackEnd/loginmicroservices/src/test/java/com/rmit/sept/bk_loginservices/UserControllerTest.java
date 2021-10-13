@@ -3,6 +3,7 @@ package com.rmit.sept.bk_loginservices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.model.ChangePasswordDTO;
 import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.model.UserDTO;
@@ -11,15 +12,24 @@ import com.rmit.sept.bk_loginservices.services.UserService;
 import com.rmit.sept.bk_loginservices.web.UserController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.beans.PropertyEditor;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -37,6 +47,8 @@ public class UserControllerTest {
     private UserController userController;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @BeforeEach
     void clean_database() {
@@ -211,6 +223,37 @@ public class UserControllerTest {
             User testcase = userController.getUserByUserId(user.getId());
             String actual_title = testcase.getPurchaseDetailsList().get(0).getTitle();
             assertThat(actual_title).isEqualTo(expected_title);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void changePassword() {
+        User user = new User();
+        user.setUsername("williamquq");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setConfirmPassword("123456");
+        user.setCreate_At(new Date());
+        user.setEmail("1353664988@qq.com");
+        user.setRole("Admin");
+        userService.saveUser(user);
+
+        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO();
+        changePasswordDTO.setPassword("testpassword");
+        changePasswordDTO.setConfirmPassword("testpassword");
+        changePasswordDTO.setEmail("1353664988@qq.com");
+
+        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String url = "http://localhost:8080/bookeroo/users/change-password";
+        try {
+            mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
+                    .content(objectWriter.writeValueAsString(changePasswordDTO)));
+            User testcase = userController.getUserByUserId(user.getId());
+            Boolean actual = bCryptPasswordEncoder.matches("testpassword",testcase.getPassword());
+            assertThat(actual).isTrue();
         } catch (Exception e) {
             e.printStackTrace();
         }

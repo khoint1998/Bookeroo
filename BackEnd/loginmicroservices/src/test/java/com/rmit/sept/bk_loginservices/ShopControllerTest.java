@@ -64,8 +64,16 @@ public class ShopControllerTest {
         user.setRole("Admin");
         userService.saveUser(user);
 
+        Shop shop = new Shop();
+        shop.setShopName("Chen's shop");
+        shop.setShopOpen(true);
+        shop.setUser(user);
+        List<RegistrationDetails> onSellCopyList = new ArrayList<>();
+        shop.setOnSellCopyList(onSellCopyList);
+        shopRepository.save(shop);
+
         RegistrationDetailsDTO registrationDetailsDTO = new RegistrationDetailsDTO();
-        registrationDetailsDTO.setShopId("1");
+        registrationDetailsDTO.setShopId(shop.getShopId().toString());
         registrationDetailsDTO.setBookId("1");
         registrationDetailsDTO.setNewBook(true);
         String expected_status = "approved";
@@ -76,12 +84,13 @@ public class ShopControllerTest {
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
-        String url = "http://localhost:8081/bookeroo/shops/shop/registration/apply";
+        String url = "http://localhost:8080/bookeroo/shops/shop/registration/apply";
         try {
             mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
                     .content(objectWriter.writeValueAsString(registrationDetailsDTO)));
-            User testcase = userController.getUserByUserId(user.getId());
-            String actual_status = testcase.getShops().get(0).getOnSellCopyList().get(0).getStatus();
+            shopRepository.getByShopId(shop.getShopId());
+            Shop testcase = shopRepository.getByShopId(shop.getShopId());
+            String actual_status = testcase.getOnSellCopyList().get(0).getStatus();
             assertThat(actual_status).isEqualTo(expected_status);
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +127,7 @@ public class ShopControllerTest {
         shopRepository.save(shop);
 
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        RequestBuilder request = get("http://localhost:8081/bookeroo/shops/registration/get-all");
+        RequestBuilder request = get("http://localhost:8080/bookeroo/shops/registration/get-all");
         try {
             String response = mvc.perform(request).andReturn().getResponse().getContentAsString();
             String expected_Booktitle = "\"bookTitle\":\"Chen's book\"";
@@ -131,7 +140,6 @@ public class ShopControllerTest {
     @Test
     void addAShopForUser() {
         User user = new User();
-        user.setId(1L);
         user.setUsername("chen wang");
         user.setFullName("Chen Wang");
         user.setPassword("123456");
@@ -141,13 +149,15 @@ public class ShopControllerTest {
         user.setRole("Admin");
         userService.saveUser(user);
 
+        String userId = user.getId().toString();
+
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
-        String url = "http://localhost:8081/bookeroo/shops/shop/create/user/1?shopName=william";
+        String url = "http://localhost:8080/bookeroo/shops/shop/create/user/" + userId + "?shopName=william";
         try {
             mvc.perform(patch(url));
-            User testcase = userController.getUserByUserId(1L);
+            User testcase = userController.getUserByUserId(user.getId());
             String actual_shopList = objectWriter.writeValueAsString(testcase.getShops());
             String expected_shopName = "\"shopName\" : \"william\"";
             assertThat(actual_shopList).contains(expected_shopName);

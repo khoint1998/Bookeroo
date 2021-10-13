@@ -133,3 +133,28 @@ export const GetBookById = (bookId) => {
       isError: error
     }
 }
+
+
+export const getBookByCopyIdList = (copyIdList) => userAxios('book')
+.put('books/get/book/copyIdList', copyIdList, { headers: { Authorization: `${localStorage.jwtToken}` } })
+.then((res) => res.data);
+
+const bookFetcher = async (url,copyIdList) => await userAxios('book')
+.put(url, copyIdList, { headers: { Authorization: `${localStorage.jwtToken}` } })
+.then((res) => res.data);
+
+export const GetBookByCopyIdList = (copyIdList) => {
+
+    const { data, error } = useSWR(() => {
+        //Check if copyIdList is there first, then do the request
+        if(copyIdList) {
+            return 'books/get/book/copyIdList'
+        }
+    }, url => bookFetcher(url,copyIdList))
+  
+    return {
+      data: data,
+      isLoading: !error && !data,
+      isError: error
+    }
+}

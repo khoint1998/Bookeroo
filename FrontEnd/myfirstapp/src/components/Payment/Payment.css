@@ -1,31 +1,26 @@
-#PaymentPageCol1{
-    width: 70%;
+.payment--options {
+  font-size: 1.15vw;
+  margin-right: 2vw;
 }
-#PaymentPageCol2{
-    width: 30%;
+
+.payment--img {
+  margin: 0 0.5vw 0 0;
+  width: 30px;
 }
-.PaymentCart_scrollable{
-    height: 302px;
-    overflow-y: auto;
+
+.payment--radio-grp {
+  margin: 2vh 0 2vh 0;
 }
-.PaymentMethods{
-    overflow-y: auto;
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    grid-template-columns: 300px 250px;
+
+.payment--tnc {
+  font-size: 0.8vw;
 }
-.PaymentBill{
-    margin-top: 75px;
+
+.payment--btn {
+  text-align: center;
 }
-.Payment_btn{
-    background-color: #0066FF;
-    color: #FFF;
-    border-style: hidden;
-    border-radius: 15px;
-    width: fit-content;
-    padding: 10px 30px 10px 30px;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+
+.payment--col {
+  margin: -25px 0 0 0;
+  float: left;
 }

@@ -54,7 +54,7 @@ public class ShopService {
             List<RegistrationDetails> selectedRegs = new ArrayList<RegistrationDetails>();
             for (Long copyId : copyIdList) {
                 RegistrationDetails selectedReg = registrationRepository.getByCopyId(copyId);
-                selectedRegs.add(selectedReg);
+                if(selectedReg.getStatus().equals("approved")) selectedRegs.add(selectedReg);
             }
             if (!selectedRegs.isEmpty()) {
                 List<Shop> selectedShops = new ArrayList<Shop>();
@@ -64,7 +64,7 @@ public class ShopService {
                 }
                 return selectedShops;
             } else {
-                throw new RegistrationNotFoundException("Something wrong. Cannot retrieve the shops requested");
+                return new ArrayList<Shop>();
             }
         } catch (Exception e) {
             throw new RegistrationNotFoundException("Something wrong. Cannot retrieve the shops requested");
@@ -78,12 +78,18 @@ public class ShopService {
         registrationRepository.save(selectedReg);
     }
 
-    public Long changeStatusToSold(Long registrationId) {
-        RegistrationDetails registrationDetails = registrationRepository.getByRegistrationId(registrationId);
-        registrationDetails.setStatus("sold");
-        registrationRepository.save(registrationDetails);
-        Long copyid = registrationDetails.getCopyId();
-        return copyid;
+    public List<Long> changeStatusToSold(List<Long> registrationIdList) {
+        RegistrationDetails registrationDetails;
+        List<Long> copyIdList = new ArrayList<>();
+        for (Long i : registrationIdList) {
+            registrationDetails = registrationRepository.getByRegistrationId(i);
+            if(registrationDetails == null) throw new RegistrationNotFoundException("Something wrong. Cannot retrieve the registration requested" + i);
+            registrationDetails.setStatus("sold");
+            registrationRepository.save(registrationDetails);
+            Long copyid = registrationDetails.getCopyId();
+            copyIdList.add(copyid);
+        }
+        return copyIdList;
     }
 
     public void increaseSold(Long shopId) {

@@ -81,4 +81,9 @@ public class BookController {
         return bookService.getBooksByTitleAuthorISBN(searchResult);
     }
 
+    @PutMapping("get/book/copyIdList")
+    public List<Book> getBookByCopyIdList(@RequestBody List<Long> copyIdList) {
+        return bookService.getBookByCopyIdList(copyIdList);
+    }
+
 }

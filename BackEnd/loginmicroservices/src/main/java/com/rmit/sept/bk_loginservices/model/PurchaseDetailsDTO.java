@@ -10,6 +10,8 @@ public class PurchaseDetailsDTO {
 
     private String title;
 
+    private String sellerId;
+
     private String sellerFullName;
 
     private String price;

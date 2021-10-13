@@ -4,12 +4,12 @@ import Button from '@material-ui/core/Button';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-function CartItem(props) {
+const CartItem = (props) => {
 
     const {book, even, removeFromCart} = props;
 
     return (
-        <div className="cartitem_row" style={{ backgroundColor: even? "#EDF0F1" : "#FBFBFB"}}>
+        <div className="cartitem_row" style={{ borderRadius:'2vw', backgroundColor: even? "#EDF0F1" : "#e8effa"}}>
             <div className="cartitem_image">
                 <img src={book.coverPage || "/pics/book-4.jpg"} alt="book"></img>
             </div>
@@ -20,7 +20,7 @@ function CartItem(props) {
                 ${book.bookPrice}
             </div>
             <div className="cartitem_price">
-                ${book.bookPrice * 1.3}
+                ${(book.bookPrice * 1.3).toFixed(2)} (+30%)
             </div>
             <div className="cartitem_btn">
                 <Button 
@@ -30,7 +30,6 @@ function CartItem(props) {
                         backgroundColor: '#0066FF',
                         borderRadius:'2vh',
                         height: '5vh',
-                        marginRight: '1.5vw',
                         color: 'white',
                         outline: 'none'
                     }}

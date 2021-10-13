@@ -21,7 +21,7 @@ import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 
 const Header = () => {
 
@@ -116,7 +116,17 @@ const Header = () => {
                 </div> : 
                 <div className="header--hiMsg-box">
                     <span className="header--hiMsg">Hello {user.fullName}</span>
-                    <Avatar className="header--avt" alt="avatar" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
+                    <Avatar 
+                        className="header--avt" 
+                        alt="avatar"
+                        style={{
+                            width: '2vw',
+                            fontSize: '1vw',
+                            height: '4vh'
+                        }}
+                        onClick={openMenu}>
+                            {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                    </Avatar>
                     <Menu
                         id="customized-menu"
                         anchorEl={anchorEl}
@@ -221,16 +231,19 @@ const Header = () => {
                             }}/>
                         </MenuItem >
                     </Menu>
-                    <Fab 
-                        color="primary" 
-                        className="header--float-btn" 
-                        style={{backgroundColor:'#B542EB'}}
-                        onClick={() => {
-                            setToRoute('/cart');
+                    <Button 
+                        variant="text"
+                        startIcon={<ShoppingCartIcon/>}
+                        style={{ 
+                            fontWeight: 'bolder',
+                            fontSize: '1vw',
+                            borderRadius:'2vh',
+                            marginLeft: '2.5vw',
+                            color: '#0066ff',
+                            outline: 'none'
                         }}
-                    >
-                        <ShoppingCartIcon/>
-                    </Fab>
+                        onClick={() => setToRoute('/cart')}
+                    >My Cart</Button>
                 </div>
             }
         </div>

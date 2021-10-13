@@ -84,7 +84,7 @@ const BookDescription = (props) => {
                     <hr className="hr_line"></hr>
                     <div className="col_row">
                         <div className="BookDescription_h4-align"> <span className="BookDescription_blue"> Download </span> Book Cover</div>
-                        <div className="BookDescription_h4-align" id="BookDescription_float_right"> <span className="BookDescription_red">{bookData && bookData.copies.length} Copies</span> are now on sales</div>
+                        <div className="BookDescription_h4-align" id="BookDescription_float_right"> <span className="BookDescription_red">{bookData && bookData.copies.length} Copies</span> on BOOKEROO</div>
                     </div>
                     <div className="col_row">
                         <div className="BookDescription_h4-align"> <span className="BookDescription_orange">{shopsData && shopsData.data ? shopsData.data.length : '0'} Shops</span> are selling this book</div>

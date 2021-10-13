@@ -15,6 +15,7 @@
   padding: auto;
   width: 100%;
   height: 400px;
+  border-radius: 2vw;
   background: rgba(104, 126, 202, 0.3);
 }
 .Cart_empty h3 {
@@ -40,7 +41,7 @@
 }
 
 .cartItem--title {
-  font-size: 2vw;
+  font-size: 1.5vw;
   color: #0066ff;
 }
 
@@ -48,6 +49,7 @@
   display: flex;
   font-size: 1.25vw;
   justify-content: space-between;
+  margin: 0 0 2vh 0;
 }
 
 .cart--text-blue {

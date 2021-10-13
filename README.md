@@ -15,16 +15,14 @@
 * Google Docs: https://drive.google.com/drive/u/1/folders/1ZEfl9JwN2qGaZRTaq6omftYSNP_KagGN
   
 ## To run the application locally for development:
-1) Pull the MySQL Docker Image and run:
-2) docker run --name septdb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass -d mysql:latest
-3) Open MySQL CLI by type in:
-4) winpty docker exec -it septdb bash (winpty for windows/ -it for MacOS)
-5) Added 2 required schemas: book and user
-6) cd into each and every microservice (loginmicroservices, bookservices) and run:
-7) mvn spring-boot:run
-8) cd into FrontEnd/myfirstapp
-9) run "npm install"
-10) run "npm start"
+1) cd into FrontEnd/myfirstapp and run "docker build -f Dockerfile.mysql -t bookeroodb:latest ."
+2) run the created MySQL image
+3) cd into each and every microservices (loginmicroservices, bookservices, orderservices)
+4) run "mvn -B -DskipTests clean package"
+5) run "mvn spring-boot:run"
+6) cd into FrontEnd/myfirstapp
+7) run "npm install"
+8) run "npm start"
 
 
 

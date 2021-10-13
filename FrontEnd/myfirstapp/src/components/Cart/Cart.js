@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button';
 import { Redirect } from "react-router-dom";
 
-function Cart() { 
+const Cart = () => { 
 
     const currentUser = useContext(UserContext);
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
@@ -85,6 +85,23 @@ function Cart() {
                     <div className="cart--summary"><div className="cart--text-blue">Price:</div> <div>${calculatePrice()}</div></div>
                     <div className="cart--summary"><div className="cart--text-blue">Discount:</div> <div>${discount}</div></div>
                     <div className="cart--summary"><div className="cart--text-blue">Total:</div> <div>${calculatePrice() - discount}</div></div>
+                    <div className="payment--btn">
+                        <Button 
+                            variant="contained"
+                            endIcon={<ShoppingCartIcon/>}
+                            style={{ 
+                                backgroundColor: '#0066FF',
+                                borderRadius:'2vh',
+                                height: '5vh',
+                                margin: '5vh 0 4vh 0',
+                                color: 'white',
+                                outline: 'none'
+                            }}
+                            onClick={() => {
+                                setToRoute('/payment');
+                            }}
+                        >Go To Payment</Button>
+                    </div>
                 </div> : <div></div>
             }
         </div>

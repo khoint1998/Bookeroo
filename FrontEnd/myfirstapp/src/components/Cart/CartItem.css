@@ -17,20 +17,19 @@
   display: flex;
   align-items: center;
   font-size: 1vw;
-  justify-content: center;
 }
 
 .cartitem_price {
   color: #0066ff;
-  width: 8%;
+  width: 15%;
   display: flex;
   font-size: 1vw;
   align-items: center;
 }
 
 .cartitem_btn {
-  width: 10vw;
-  padding: 7vh 0 0 2vw;
+  width: 7vw;
+  padding: 7vh 2vw 0 0;
 }
 
 .cartitem_image img {

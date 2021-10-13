@@ -205,7 +205,7 @@ const Shop = (props) => {
                                     <StyledTableCell><img className="shop--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--pending-text">Sold</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--sold-text">Sold</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"

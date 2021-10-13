@@ -1,5 +1,7 @@
 import React from "react";
-import './NotificationItem.css'
+import './NotificationItem.css';
+import Button from '@material-ui/core/Button';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 function NotificationItem(props){
     return(
@@ -13,7 +15,20 @@ function NotificationItem(props){
             </div>
 
             <div className="NotificationDelete">
-                <img src="/pics/bin_red.png" alt="bin"></img>
+                {props.removeNotification && 
+                    <Button 
+                        variant="text"
+                        endIcon={<HighlightOffIcon/>}
+                        style={{ 
+                            fontWeight: 'bolder',
+                            borderRadius:'2vh',
+                            marginRight: '1.5vw',
+                            color: 'red',
+                            outline: 'none'
+                        }}
+                        onClick={props.removeNotification}
+                    >Delete</Button>
+                }
             </div>
         </div>
     )

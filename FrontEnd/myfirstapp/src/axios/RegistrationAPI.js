@@ -51,3 +51,15 @@ export const GetAllRegistrations = () => {
       isError: error
     }
 }
+
+export const UpdateStatusToSoldFromRegList = async (regIdList) => {
+    const req = await userAxios().patch('registrations/update/status/to-sold', regIdList,
+            {
+                headers: {
+                'Authorization': `${localStorage.jwtToken}` 
+            }
+        })
+        .then(res => res)
+        .catch(error => error.message);
+    return req;
+}

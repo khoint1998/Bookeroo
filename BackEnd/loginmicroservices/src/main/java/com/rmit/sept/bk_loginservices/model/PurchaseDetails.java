@@ -23,6 +23,8 @@ public class PurchaseDetails {
     @NotBlank(message = "Book title is required")
     private String title;
 
+    private Long sellerId;
+
     @NotBlank(message = "Seller name is required")
     private String sellerFullName;
 

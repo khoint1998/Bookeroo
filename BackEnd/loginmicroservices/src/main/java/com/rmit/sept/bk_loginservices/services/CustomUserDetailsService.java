@@ -43,6 +43,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return selectedUser;
     }
+
+    @Autowired
+    private NotificationService notificationService;
+
     public User updateUserPurchaseHistory(Long id, PurchaseDetailsDTO purchaseDetailsDto) {
         User selectedUser = userRepository.getById(id);
         if(selectedUser==null) throw new UserNotFoundException("User name not found");
@@ -52,10 +56,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         purchaseDetails.setTitle(purchaseDetailsDto.getTitle());
         purchaseDetails.setPrice(Float.parseFloat(purchaseDetailsDto.getPrice()));
         purchaseDetails.setSellerFullName(purchaseDetailsDto.getSellerFullName());
+        purchaseDetails.setSellerId(Long.parseLong(purchaseDetailsDto.getSellerId()));
         purchaseDetails.setUser(selectedUser);
 
         selectedUser.getPurchaseDetailsList().add(purchaseDetails);
         userRepository.save(selectedUser);
+
+        notificationService.addNotificationForUser(id, "You got a new book :) Check them out in My Library!");
 
         return selectedUser;
     }

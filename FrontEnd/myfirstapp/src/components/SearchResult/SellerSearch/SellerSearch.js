@@ -68,10 +68,12 @@ const SellerSearch = (props) => {
             copyData && copyData.data && copyData.data.find(copy => {
                 if (copy.copyId === reg.copyId) {
                     selectedCopy = {
+                        regId: reg.registrationId,
                         copyId: reg.copyId,
                         bookId: reg.bookId,
                         bookTitle: reg.bookTitle,
                         bookPrice: reg.price,
+                        sellerId: reg.userId,
                         coverPage: reg.coverPage
                     }
                 }

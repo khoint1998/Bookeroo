@@ -32,6 +32,16 @@ public class PurchaseDetailsDTOTest {
 
     @Test
     @Rollback
+    public void setSellerId_test() {
+        PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
+        String expect = "1";
+        purchaseDetailsDTO.setSellerId(expect);
+        String actual = purchaseDetailsDTO.getSellerId();
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    @Test
+    @Rollback
     public void setSellerFullName_test() {
         PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
         String expect = "chen wang";
@@ -67,6 +77,16 @@ public class PurchaseDetailsDTOTest {
         String expect = "java concept";
         purchaseDetailsDTO.setTitle(expect);
         String actual = purchaseDetailsDTO.getTitle();
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    @Test
+    @Rollback
+    public void getSellerId_test() {
+        PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
+        String expect = "1";
+        purchaseDetailsDTO.setSellerId(expect);
+        String actual = purchaseDetailsDTO.getSellerId();
         assertThat(actual).isEqualTo(expect);
     }
 

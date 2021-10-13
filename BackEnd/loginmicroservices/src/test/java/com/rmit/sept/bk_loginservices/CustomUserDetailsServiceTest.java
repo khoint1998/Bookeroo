@@ -90,36 +90,36 @@ public class CustomUserDetailsServiceTest {
         assertThat(testcase.getFullName()).isEqualTo("William Wang");
     }
 
-    @Test
-    @Rollback
-    public void should_match_updateUserPurchaseHistory() {
-
-        User user = new User();
-        user.setUsername("chen wang");
-        user.setFullName("Chen Wang");
-        user.setPassword("123456");
-        user.setConfirmPassword("123456");
-        user.setCreate_At(new Date());
-        user.setEmail("1353664988@qq.com");
-        user.setRole("Admin");
-        userService.saveUser(user);
-
-        PurchaseDetails purchaseDetails = new PurchaseDetails();
-        purchaseDetails.setPurchaseId(1L);
-        purchaseDetails.setUser(user);
-        purchaseDetails.setPrice(1.1f);
-        purchaseDetails.setCreate_At(new Date());
-        purchaseDetails.setCopyId(1L);
-        purchaseDetails.setSellerFullName("william");
-
-        PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
-        purchaseDetailsDTO.setPrice("1.1");
-        purchaseDetailsDTO.setCopyId("1");
-        purchaseDetailsDTO.setTitle("title");
-        purchaseDetailsDTO.setSellerFullName("chen");
-        User testcase = customUserDetailsService.updateUserPurchaseHistory(user.getId(),purchaseDetailsDTO);
-        assertThat(testcase.getPurchaseDetailsList().get(0).getSellerFullName()).isEqualTo("chen");
-    }
+//    @Test
+//    @Rollback
+//    public void should_match_updateUserPurchaseHistory() {
+//
+//        User user = new User();
+//        user.setUsername("chen wang");
+//        user.setFullName("Chen Wang");
+//        user.setPassword("123456");
+//        user.setConfirmPassword("123456");
+//        user.setCreate_At(new Date());
+//        user.setEmail("1353664988@qq.com");
+//        user.setRole("Admin");
+//        userService.saveUser(user);
+//
+//        PurchaseDetails purchaseDetails = new PurchaseDetails();
+//        purchaseDetails.setPurchaseId(1L);
+//        purchaseDetails.setUser(user);
+//        purchaseDetails.setPrice(1.1f);
+//        purchaseDetails.setCreate_At(new Date());
+//        purchaseDetails.setCopyId(1L);
+//        purchaseDetails.setSellerFullName("william");
+//
+//        PurchaseDetailsDTO purchaseDetailsDTO = new PurchaseDetailsDTO();
+//        purchaseDetailsDTO.setPrice("1.1");
+//        purchaseDetailsDTO.setCopyId("1");
+//        purchaseDetailsDTO.setTitle("title");
+//        purchaseDetailsDTO.setSellerFullName("chen");
+//        User testcase = customUserDetailsService.updateUserPurchaseHistory(user.getId(),purchaseDetailsDTO);
+//        assertThat(testcase.getPurchaseDetailsList().get(0).getSellerFullName()).isEqualTo("chen");
+//    }
 
     @Test
     @Rollback

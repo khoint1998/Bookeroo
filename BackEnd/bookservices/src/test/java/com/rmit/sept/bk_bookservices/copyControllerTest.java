@@ -117,48 +117,48 @@ public class copyControllerTest {
         }
     }
 
-    @Test
-    void getCopiesById() {
-        Book book = new Book();
-        book.setTitle("java");
-        book.setIsbn("isbn");
-        book.setCategory("category");
-        book.setDescription("description");
-        book.setAuthor("author");
-        book.setPublisher("publisher");
-        bookService.createABook(book);
-
-        Copy copy = new Copy();
-        copy.setBook(book);
-        copy.setNewBook(true);
-        copy.setOwnerId(1L);
-        copyRepository.save(copy);
-
-        Copy copy2 = new Copy();
-        copy2.setBook(book);
-        copy2.setNewBook(true);
-        copy2.setOwnerId(2L);
-        copyRepository.save(copy2);
-
-        List<Long> copyIdList = new ArrayList<>();
-        copyIdList.add(copy.getCopyId());
-        copyIdList.add(copy2.getCopyId());
-        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        String url = "http://localhost:8081/bookeroo/copys/get/copy/copyIdList";
-        try {
-            String response = mvc
-                    .perform(get(url).contentType(MediaType.APPLICATION_JSON)
-                            .content(objectWriter.writeValueAsString(copyIdList)))
-                    .andReturn().getResponse().getContentAsString();
-            String expected_1 = "\"copyId\":" + copy.getCopyId().toString() + ",\"ownerId\":1,\"newBook\":true";
-            String expected_2 = "\"copyId\":" + copy2.getCopyId().toString() + ",\"ownerId\":2,\"newBook\":true";
-            assertThat(response).contains(expected_1, expected_2);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    void getCopiesById() {
+//        Book book = new Book();
+//        book.setTitle("java");
+//        book.setIsbn("isbn");
+//        book.setCategory("category");
+//        book.setDescription("description");
+//        book.setAuthor("author");
+//        book.setPublisher("publisher");
+//        bookService.createABook(book);
+//
+//        Copy copy = new Copy();
+//        copy.setBook(book);
+//        copy.setNewBook(true);
+//        copy.setOwnerId(1L);
+//        copyRepository.save(copy);
+//
+//        Copy copy2 = new Copy();
+//        copy2.setBook(book);
+//        copy2.setNewBook(true);
+//        copy2.setOwnerId(2L);
+//        copyRepository.save(copy2);
+//
+//        List<Long> copyIdList = new ArrayList<>();
+//        copyIdList.add(copy.getCopyId());
+//        copyIdList.add(copy2.getCopyId());
+//        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+//        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+//        String url = "http://localhost:8081/bookeroo/copys/get/copy/copyIdList";
+//        try {
+//            String response = mvc
+//                    .perform(get(url).contentType(MediaType.APPLICATION_JSON)
+//                            .content(objectWriter.writeValueAsString(copyIdList)))
+//                    .andReturn().getResponse().getContentAsString();
+//            String expected_1 = "\"copyId\":" + copy.getCopyId().toString() + ",\"ownerId\":1,\"newBook\":true";
+//            String expected_2 = "\"copyId\":" + copy2.getCopyId().toString() + ",\"ownerId\":2,\"newBook\":true";
+//            assertThat(response).contains(expected_1, expected_2);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Test
     void changeOwnerId() {

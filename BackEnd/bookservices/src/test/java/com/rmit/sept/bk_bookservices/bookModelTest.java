@@ -96,6 +96,18 @@ public class bookModelTest {
     }
 
     @Test
+    @Rollback
+    public void setCoverPage_test() {
+
+        Book book = new Book();
+        String expected  = "this is cover page";
+        book.setCoverPage(expected);
+        String testcase = book.getCoverPage();
+        assertThat(testcase).isEqualTo(expected);
+
+    }
+
+    @Test
     public void getBook_title() {
         Book book = new Book();
         book.setBookId(1L);
@@ -196,5 +208,23 @@ public class bookModelTest {
 
         Long testcase = book.getBookId();
         assertThat(testcase).isEqualTo(1);
+    }
+
+    @Test
+    @Rollback
+    public void getCoverPage_test() {
+
+        Book book = new Book();
+        book.setBookId(1L);
+        book.setIsbn("123456");
+        book.setAuthor("chen");
+        book.setTitle("java");
+        book.setCategory("children");
+        book.setDescription("good");
+        book.setPublisher("chen");
+        book.setCoverPage("this is cover page");
+
+        String testcase = book.getCoverPage();
+        assertThat(testcase).isEqualTo("this is cover page");
     }
 }

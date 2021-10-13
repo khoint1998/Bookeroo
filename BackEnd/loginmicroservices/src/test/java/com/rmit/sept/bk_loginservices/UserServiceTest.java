@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_loginservices;
 
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.model.ChangePasswordDTO;
 import com.rmit.sept.bk_loginservices.model.Shop;
 import com.rmit.sept.bk_loginservices.model.User;
 import com.rmit.sept.bk_loginservices.services.UserService;
@@ -59,4 +60,30 @@ public class UserServiceTest {
         Boolean actual = bCryptPasswordEncoder.matches("testpassword",testcase.getPassword());
         assertThat(actual).isTrue();
     }
+
+    @Test
+    @Rollback
+    public void should_match_checkAndChangePassword() {
+        userRepository.deleteAll();
+        User user = new User();
+        user.setUsername("williamquq");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setCreate_At(new Date());
+        String email = "1353664988@qq.com";
+        user.setEmail(email);
+        user.setRole("Admin");
+        userService.saveUser(user);
+
+        ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO();
+        changePasswordDTO.setPassword("testpassword");
+        changePasswordDTO.setConfirmPassword("testpassword");
+        changePasswordDTO.setEmail(email);
+        userService.checkAndChangePassword(changePasswordDTO);
+
+        User testcase = userRepository.getById(user.getId());
+        Boolean actual = bCryptPasswordEncoder.matches("testpassword",testcase.getPassword());
+        assertThat(actual).isTrue();
+    }
+
 }

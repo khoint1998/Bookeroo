@@ -112,8 +112,7 @@ const App = () => {
             <Route exact path="/notification" component={NotificationPage}/>
             <Route exact path="/library" component={MyLibrary}/>
             <Route exact path="/seller-search" component={SellerSearch}/> {/*Check again*/}
-            <Route exact path="/admin-home" component={AdminHomePage}/>
-            <Route exact path="/admin-search" component={AdminSearchPage}/>
+            <Route exact path="/admin-home" component={AdminHomePage}/> {/*Admin only*/}
             <Route exact path="/forgot-password" component={ForgotPassword}/>
             <Route exact path="/payment" component={Payment}/>
 

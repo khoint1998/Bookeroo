@@ -30,7 +30,7 @@ import { Redirect } from "react-router-dom";
 
 const Shop = (props) => {
 
-    const {selectedShopId} = props.location.state;
+    const {selectedShopId} = props.location.state || {};
 
     const currentUser = useContext(UserContext);
     const cart = useContext(CartContext);
@@ -46,8 +46,12 @@ const Shop = (props) => {
 
     const jwtToken = localStorage.jwtToken;
     if (!jwtToken) {
-       return <Redirect to='/'/>
+        return <Redirect to='/'/>
     }
+
+    if (currentUser.userState.user.role !== 'SO') {
+        return <Redirect to='/'/>
+    } 
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -197,7 +201,7 @@ const Shop = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody> 
-                            {onSellCopyList && onSellCopyList.map(row => (
+                            {onSellCopyList && onSellCopyList.reverse().map(row => (
                                 <StyledTableRow key={row.registrationId}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}

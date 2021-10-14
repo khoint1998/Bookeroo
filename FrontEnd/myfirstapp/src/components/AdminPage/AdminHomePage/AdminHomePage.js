@@ -20,7 +20,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Formik, Field, Form } from 'formik';
-import { CartContext } from "../../../App";
+import { CartContext, UserContext } from "../../../App";
 
 
 const AdminHomePage = () => {
@@ -30,11 +30,16 @@ const AdminHomePage = () => {
     const [openDialog, setOpenDialog] = useState(false);
 
     const cart = useContext(CartContext);
+    const currentUser = useContext(UserContext);
 
     const jwtToken = localStorage.jwtToken;
     if (!jwtToken) {
-       return <Redirect to='/'/>
+        return <Redirect to='/'/>
     }
+
+    if (currentUser.userState.user.role !== 'A') {
+        return <Redirect to='/'/>
+    } 
 
     const {data} = GetAllBooks();
 
@@ -133,7 +138,7 @@ const AdminHomePage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data && data.map(row => (
+                                {data && data.reverse().map(row => (
                                     <StyledTableRow key={row.bookId}>
                                         <StyledTableCell component="th" scope="row">
                                             {row.bookId}

@@ -52,7 +52,7 @@ const MyLibrary = () => {
             
             <div className="MyLibrary_itemList">
                 {
-                   bookList.data && bookList.data.map(data => <LibraryItem key={data.bookId} book={data} seeBookDetails={seeBookDetails}/>)
+                   bookList.data && bookList.data.reverse().map(data => <LibraryItem key={data.bookId} book={data} seeBookDetails={seeBookDetails}/>)
                 }
             </div>
         </div>

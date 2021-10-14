@@ -23,7 +23,7 @@ import FlashOnIcon from '@material-ui/icons/FlashOn';
 
 const SellerSearch = (props) => {
 
-    const {selectedBookId,searchedTitle} = props.location.state;
+    const {selectedBookId,searchedTitle} = props.location.state || {};
 
     const [searchResults, setSearchResults] = useState(searchedTitle);
     const [toRoute,setToRoute] = useState(null);

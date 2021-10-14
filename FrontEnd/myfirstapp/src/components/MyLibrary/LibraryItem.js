@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 
 function LibraryItem(props) {
     const {seeBookDetails, book} = props;
+    const truncatedTitle = book.title.substring(0,45);
 
     return (
         <div className="libraryItem">
@@ -12,7 +13,7 @@ function LibraryItem(props) {
             </div>
             <div className="libraryItem_col" id="libraryItem_text">
                 <div className="libraryItem_row" id="libraryItem_name">
-                    {book.title}
+                    {book.title.length > 45 ? truncatedTitle + "...": book.title} 
                 </div>
                 <div className="libraryItem_row" id="libraryItem_seller">
                     {book.author}

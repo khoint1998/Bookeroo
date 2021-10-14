@@ -41,8 +41,12 @@ const MyRegistration = () => {
 
     const jwtToken = localStorage.jwtToken;
     if (!jwtToken) {
-       return <Redirect to='/'/>
+        return <Redirect to='/'/>
     }
+
+    if (currentUser.userState.user.role === 'SO') {
+        return <Redirect to='/'/>
+    } 
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -171,7 +175,7 @@ const MyRegistration = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody> 
-                            {onSellCopyList && onSellCopyList.map(row => (
+                            {onSellCopyList && onSellCopyList.reverse().map(row => (
                                 <StyledTableRow key={row.registrationId}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}

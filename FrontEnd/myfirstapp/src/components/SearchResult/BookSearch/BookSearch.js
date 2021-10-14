@@ -20,7 +20,7 @@ import { CartContext } from "../../../App";
 
 const BookSearch = (props) => {
 
-    const {searchedBooks, searchedTitle} = props.location.state;
+    const {searchedBooks, searchedTitle} = props.location.state || {};
     const cart = useContext(CartContext);
 
     const [searchResults, setSearchResults] = useState(searchedTitle);
@@ -36,7 +36,7 @@ const BookSearch = (props) => {
 
     let uniqueBooksSearched = [];
 
-     uniqueBooksSearched = searchedBooks !== 'Books not found' && Array.from(new Set(searchedBooks.map(b => b.bookId)))
+     uniqueBooksSearched = searchedBooks && searchedBooks !== 'Books not found' && Array.from(new Set(searchedBooks.map(b => b.bookId)))
     .map(id => {
     return searchedBooks.find(a => a.bookId === id)
     })

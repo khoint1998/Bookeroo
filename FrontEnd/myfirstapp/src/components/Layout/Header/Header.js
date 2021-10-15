@@ -115,7 +115,7 @@ const Header = () => {
                     </Link>
                 </div> : 
                 <div className="header--hiMsg-box">
-                    <span className="header--hiMsg">Hello {user.fullName}</span>
+                    <span className="header--hiMsg">Hello {user.fullName.length > 13 ? user.fullName.substring(0,12)+'...' : user.fullName}</span>
                     <Avatar 
                         className="header--avt" 
                         alt="avatar"

@@ -10,6 +10,7 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Homepage from "./components/Homepage/Homepage";
 import Profile from "./components/Profile/Profile";
+import ProfileEdit from "./components/Profile/ProfileEdit";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 import jwt_decode from "jwt-decode";
@@ -25,7 +26,6 @@ import NotificationPage from "./components/Notification/NotificationPage";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
 import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
 import AdminHomePage from "./components/AdminPage/AdminHomePage/AdminHomePage";
-import AdminSearchPage from "./components/AdminPage/AdminSearchPage/AdminSearchPage";
 import ForgotPassword from "./components/UserManagement/ForgotPassword/ForgotPassword";
 import Payment from "./components/Payment/Payment";
 
@@ -104,6 +104,7 @@ const App = () => {
             <Route exact path="/my-shops" component={MyShops} /> {/*Role SO only*/}
             <Route exact path="/shop" component={Shop} /> {/*Role SO only*/}
             <Route exact path="/my-registration" component={MyRegistration} /> {/*Any Roles except SO*/}
+            <Route exact path="/profile-edit" component={ProfileEdit} />
             <Route exact path="/incoming-reg" component={IncomingRegistrations} />
             <Route exact path="/book-search" component={BookSearch} /> {/*Check again*/}
             <Route exact path="/book-desc" component={BookDescription} />

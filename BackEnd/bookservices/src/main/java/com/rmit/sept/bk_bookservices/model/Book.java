@@ -46,7 +46,7 @@ public class Book {
     private String coverPage;
 
     @JsonManagedReference(value="book-copy")
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Copy> copies;
 
     @JsonManagedReference(value="book-chapter")

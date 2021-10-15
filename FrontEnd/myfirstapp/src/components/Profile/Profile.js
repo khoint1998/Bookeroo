@@ -27,29 +27,22 @@ function Profile(){
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Name:
                                 </h3>
-                                <h4 className="col-sm">
-                                    <small className="text-muted">{user && user.fullName}</small>
+                                <h4 className="col-sm text-muted">
+                                    {user && user.fullName}
                                 </h4>
                             </div>
 
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Email:</h3>
-                                <h4 className="col-sm">
-                                    <small className="text-muted">{user && user.email}</small>
+                                <h4 className="col-sm text-muted">
+                                   {user && user.email}
                                 </h4>
                             </div>
 
-                            {/* <div className="form_component">
-                                <h3 className="profile_page_text_primary">Password:</h3>
-                                <h4 className="col-sm">
-                                    <small className="text-muted">{user.string}</small>
-                                </h4>
-                            </div> */}
-
                             <div className="form_component">
                                 <h3 className="profile_page_text_primary">Username:</h3>
-                                <h4 className="col-sm">
-                                    <small className="text-muted">{user && user.username}</small>
+                                <h4 className="col-sm text-muted">
+                                    {user && user.username}
                                 </h4>
                             </div>
 
@@ -71,7 +64,10 @@ function Profile(){
                                 <img src="/pics/icon_history.png" alt="history-icon"></img>
                             </div>
                             
-                            <a>Transaction History</a>
+                            <Link className="updateDetails_btn" to="/purchaseHistory">
+                            Transaction History
+                            </Link>
+                            
                         </div>
                         <div className="profile_imageContainer">
                             <img src="bookstore-clipart-lg.png" alt="footer_image" ></img>

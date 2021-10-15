@@ -99,3 +99,17 @@
         margin-bottom: 40px;
 }
 
+.profile_fields {
+        width: 70%;
+        background-color: #edf0f1;
+        padding: 5px 5px;
+        margin: 5px 0 5px 15px;
+        display: inline-block;
+        border-bottom: 2px solid #06f;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        outline: none;
+        box-sizing: border-box;
+}
+

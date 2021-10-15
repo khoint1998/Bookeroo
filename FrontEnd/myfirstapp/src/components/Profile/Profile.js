@@ -4,20 +4,19 @@ import { GetUserInfo } from "../../axios/UserAPI";
 import { UserContext } from "../../App";
 import { Link } from 'react-router-dom';
 
-function Profile(){
+const Profile = () => {
     const currentUser = useContext(UserContext);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
 
         return (
             <div className="profile_page">
-
                 <div className="profile_row">
                     <div className="profile_col" id="profile_img_col">
                         <div className="profile_display">
                             <img src="avt-2.jpg" alt="profile_image" ></img>
                             <div className="profile_role">
-                                {user && user.role}
+                                {user && user.role === 'SO' ? 'Shop Owner' : user.role === 'PU' ? 'Public User' : user.role === 'P' ? 'Publisher' : 'Admin'}
                             </div>
                         </div>
                     </div>
@@ -72,8 +71,6 @@ function Profile(){
                         <div className="profile_imageContainer">
                             <img src="bookstore-clipart-lg.png" alt="footer_image" ></img>
                         </div>
-
-
                     </div>
                 </div>
             </div>

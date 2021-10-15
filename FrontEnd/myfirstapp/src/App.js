@@ -26,7 +26,6 @@ import NotificationPage from "./components/Notification/NotificationPage";
 import MyLibrary from "./components/MyLibrary/MyLibrary";
 import SellerSearch from "./components/SearchResult/SellerSearch/SellerSearch";
 import AdminHomePage from "./components/AdminPage/AdminHomePage/AdminHomePage";
-import AdminSearchPage from "./components/AdminPage/AdminSearchPage/AdminSearchPage";
 import ForgotPassword from "./components/UserManagement/ForgotPassword/ForgotPassword";
 import Payment from "./components/Payment/Payment";
 
@@ -106,7 +105,6 @@ const App = () => {
             <Route exact path="/shop" component={Shop} /> {/*Role SO only*/}
             <Route exact path="/my-registration" component={MyRegistration} /> {/*Any Roles except SO*/}
             <Route exact path="/profile-edit" component={ProfileEdit} />
-            <Route exact path="/addPerson" component={AddPerson} />
             <Route exact path="/incoming-reg" component={IncomingRegistrations} />
             <Route exact path="/book-search" component={BookSearch} /> {/*Check again*/}
             <Route exact path="/book-desc" component={BookDescription} />

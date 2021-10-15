@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Redirect } from "react-router-dom";
 import { Formik, Field, Form } from 'formik';
 
-function ProfileEdit() {
+const ProfileEdit = () => {
     const currentUser = useContext(UserContext);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
@@ -59,7 +59,7 @@ function ProfileEdit() {
                             <div className="profile_display">
                                 <img src="avt-2.jpg" alt="profile_image" ></img>
                                 <div className="profile_role">
-                                    {user && user.role}
+                                    {user && user.role === 'SO' ? 'Shop Owner' : user.role === 'PU' ? 'Public User' : user.role === 'P' ? 'Publisher' : 'Admin'}
                                 </div>
                             </div>
                         </div>

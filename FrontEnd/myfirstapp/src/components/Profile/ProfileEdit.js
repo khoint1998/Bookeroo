@@ -37,7 +37,7 @@ const ProfileEdit = () => {
 
     return (
         <div className="profile_page">
-            
+            {user ? 
                 <Formik
                     enableReinitialize
                     initialValues={{
@@ -54,55 +54,56 @@ const ProfileEdit = () => {
                     }
                 >
                     <Form>
-                    <div className="profile_row">
-                        <div className="profile_col" id="profile_img_col">
-                            <div className="profile_display">
-                                <img src="avt-2.jpg" alt="profile_image" ></img>
-                                <div className="profile_role">
-                                    {user && user.role === 'SO' ? 'Shop Owner' : user.role === 'PU' ? 'Public User' : user.role === 'P' ? 'Publisher' : 'Admin'}
+                        <div className="profile_row">
+                            <div className="profile_col" id="profile_img_col">
+                                <div className="profile_display">
+                                    <img src="avt-2.jpg" alt="profile_image" ></img>
+                                    <div className="profile_role">
+                                        {user.role === 'SO' ? 'Shop Owner' : user.role === 'PU' ? 'Public User' : user.role === 'P' ? 'Publisher' : 'Admin'}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="profile_col">
-                            <div className="form-group">
-                                <div className="form_component">
-                                    <h3 className="profile_page_text_primary">Fullname:
-                                    </h3>
-                                    <h4 className="col-sm text-muted">
-                                        <Field className="profile_fields" id="fullName" name="fullName" placeholder={user && user.fullName} />
-                                    </h4>
-                                </div>
+                            <div className="profile_col">
+                                <div className="form-group">
+                                    <div className="form_component">
+                                        <h3 className="profile_page_text_primary">Fullname:
+                                        </h3>
+                                        <h4 className="col-sm text-muted">
+                                            <Field className="profile_fields" id="fullName" name="fullName" placeholder={user.fullName} />
+                                        </h4>
+                                    </div>
 
-                                <div className="form_component">
-                                    <h3 className="profile_page_text_primary">Email:</h3>
-                                    <h4 className="col-sm text-muted">
-                                        <Field className="profile_fields" id="email" name="email" placeholder={user && user.email} />
-                                    </h4>
-                                </div>
+                                    <div className="form_component">
+                                        <h3 className="profile_page_text_primary">Email:</h3>
+                                        <h4 className="col-sm text-muted">
+                                            <Field className="profile_fields" id="email" name="email" placeholder={user.email} />
+                                        </h4>
+                                    </div>
 
-                                <div className="form_component">
-                                    <h3 className="profile_page_text_primary">Username:</h3>
-                                    <h4 className="col-sm text-muted">
-                                        <Field className="profile_fields" id="username" name="username" placeholder={user && user.username} />
-                                    </h4>
+                                    <div className="form_component">
+                                        <h3 className="profile_page_text_primary">Username:</h3>
+                                        <h4 className="col-sm text-muted">
+                                            <Field className="profile_fields" id="username" name="username" placeholder={user.username} />
+                                        </h4>
+                                    </div>
+
                                 </div>
+                            </div>
+                            <div className="profile_col" id="profile_edit">
+                                    <Button type="submit">
+                                        <span className="profile_button">Update Details</span>
+                                    </Button>
+                                <br></br>
+                                    <Button className="update_profile_button" type="submit">
+                                        <Link className="profile_button" to="/profile">Cancel</Link>
+                                    </Button>
 
                             </div>
-                        </div>
-                        <div className="profile_col" id="profile_edit">
-                                <Button type="submit">
-                                    <span className="profile_button">Update Details</span>
-                                </Button>
-                            <br></br>
-                                <Button className="update_profile_button" type="submit">
-                                    <Link className="profile_button" to="/profile">Cancel</Link>
-                                </Button>
-
-                        </div>
                         </div>
                     </Form>
                 </Formik>
-            </div>
+            :<div></div>}
+        </div>
         
     );
 }

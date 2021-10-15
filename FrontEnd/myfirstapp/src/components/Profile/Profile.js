@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, {useContext } from "react";
 import "./Profile.css";
 import { GetUserInfo } from "../../axios/UserAPI";
 import { UserContext } from "../../App";

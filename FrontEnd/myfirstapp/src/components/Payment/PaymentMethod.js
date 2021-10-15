@@ -5,7 +5,7 @@ function PaymentMethod(props){
     return(
         <div className="PaymentMethod">
             <input type="checkbox"/>
-            <img className="PaymentMethodImg" src={props.imagesource}></img>
+            <img className="PaymentMethodImg" src={props.imagesource} alt={props.text}></img>
             <h3>{props.text}</h3>
         </div>
     )

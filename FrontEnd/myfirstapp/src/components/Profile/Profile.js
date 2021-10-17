@@ -9,6 +9,11 @@ const Profile = () => {
     const currentUser = useContext(UserContext);
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
 
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
     return (
         <div className="profile_page">
             {user ? 

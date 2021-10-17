@@ -8,11 +8,16 @@ import { Redirect } from "react-router-dom";
 import { Formik, Field, Form } from 'formik';
 
 const ProfileEdit = () => {
+
     const currentUser = useContext(UserContext);
 
     const { user } = GetUserInfo(currentUser.userState.user && currentUser.userState.user.id);
-
     const [toRoute, setToRoute] = useState(null);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
 
     const onSubmit = async (values) => {
         const edittedUser = {

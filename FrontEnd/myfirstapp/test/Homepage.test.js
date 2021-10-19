@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React from 'react';
-import Homepage from './Homepage';
+import Homepage from '../src/components/Homepage/Homepage';
 
 test('Render_text', () => {
     const {getByText} = render(<Homepage/>);

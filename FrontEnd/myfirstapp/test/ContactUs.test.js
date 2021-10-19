@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React from 'react';
-import ContactUs from './ContactUs';
+import ContactUs from '../src/components/ContactUs/ContactUs';
 
 test('Render_text', () => {
     const {getByText} = render(<ContactUs/>);

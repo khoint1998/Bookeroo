@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React from 'react';
-import AboutUs from '../src/components/AboutUs/AboutUs';
+import AboutUs from '../components/AboutUs/AboutUs';
 
 test('Render_text', () => {
     const {getByText} = render(<AboutUs/>);

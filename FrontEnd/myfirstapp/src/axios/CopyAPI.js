@@ -40,6 +40,7 @@ export const ChangeCopyOwnerId = async (userId,copyId) => {
     return req;
 }
 
+//Get multiple copies by copy id list
 export const GetCopyByCopyIdList = async (copyIdList) => {
     const req = await userAxios('book').patch('copys/get/copy/copyIdList', copyIdList,
             {

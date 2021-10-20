@@ -69,6 +69,7 @@ export const axiosGetUserInfo = async (userId) => {
   return req;
 }
 
+//Add copy to user my library
 export const AddNewCopyToMyLibrary = async (userId,copyId,newBook) => {
   const req = await userAxios().patch('purchasedCopyDetails/add/forUser/' + userId, null,
           {
@@ -82,6 +83,7 @@ export const AddNewCopyToMyLibrary = async (userId,copyId,newBook) => {
   return req;
 }
 
+//create user purchase hstory for user when finish buy process
 export const CreatePurchaseHistoryDetails = async (userId, historyDTO) => {
   const req = await userAxios().patch('users/update/user/history/' + userId, historyDTO,
           {

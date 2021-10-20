@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000","http://front-153244410.ap-southeast-1.elb.amazonaws.com"})
+@CrossOrigin(origins = {"http://localhost:3000","http://front-1499221.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/orders")
 public class OrderController {
 

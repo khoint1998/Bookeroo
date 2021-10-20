@@ -1,7 +1,7 @@
 import { userAxios } from "./axiosClient";
 import useSWR from 'swr';
 
-
+//Create a book by book details, sent as DTO to backend
 export const CreateABook = async (bookDetails) => {
 
     const req = await userAxios('book').post('books/create', bookDetails,
@@ -15,6 +15,7 @@ export const CreateABook = async (bookDetails) => {
     return req;
 }
 
+//Search for a book, sent title and isbn
 export const SearchForABook = async (title,isbn) => {
 
     //GET dont have Body at the middle of the func
@@ -30,6 +31,7 @@ export const SearchForABook = async (title,isbn) => {
     return req;
 }
 
+//Search for a book, use all options (title,author,isbn)
 export const SearchBookAsResult = async (searchResult) => {
 
     //GET dont have Body at the middle of the func
@@ -45,6 +47,7 @@ export const SearchBookAsResult = async (searchResult) => {
     return req;
 }
 
+//Search for a book, optionals (title or/and author or/and isbn)
 export const SearchBookWithSelectedOptions = async (searchResult, options) => {
 
     let finalReq = [];
@@ -134,7 +137,7 @@ export const GetBookById = (bookId) => {
     }
 }
 
-
+//Get book by copy id list (for seller search)
 export const getBookByCopyIdList = (copyIdList) => userAxios('book')
 .put('books/get/book/copyIdList', copyIdList, { headers: { Authorization: `${localStorage.jwtToken}` } })
 .then((res) => res.data);
@@ -143,6 +146,7 @@ const bookFetcher = async (url,copyIdList) => await userAxios('book')
 .put(url, copyIdList, { headers: { Authorization: `${localStorage.jwtToken}` } })
 .then((res) => res.data);
 
+//Get book by copy id list (for seller search) (axios ver)
 export const GetBookByCopyIdList = (copyIdList) => {
 
     const { data, error } = useSWR(() => {

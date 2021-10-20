@@ -32,6 +32,7 @@ const AdminHomePage = () => {
     const cart = useContext(CartContext);
     const currentUser = useContext(UserContext);
 
+    //Safe guard to take un logged in user back to home
     const jwtToken = localStorage.jwtToken;
     if (!jwtToken) {
         return <Redirect to='/'/>
@@ -82,7 +83,6 @@ const AdminHomePage = () => {
     }
 
     const onSubmit = async (values) => {
-    
         const bookDetails = {
             isbn: values.isbn,
             title: values.title,
@@ -138,7 +138,7 @@ const AdminHomePage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data && data.reverse().map(row => (
+                                {data && data.map(row => (
                                     <StyledTableRow key={row.bookId}>
                                         <StyledTableCell component="th" scope="row">
                                             {row.bookId}

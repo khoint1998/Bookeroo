@@ -1,8 +1,6 @@
 This project is a demo for Basecode SEPT2021 assignment for the front-end. It has been integrated with back-end
 
-Please send your questions to amirhomayoon.ashrafzadeh@rmit.edu.au  
-
-
+Please send your questions to s3678755@rmit.edu.vn
 
 ## Run Scripts
 
@@ -20,7 +18,6 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br />
 
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
@@ -30,4 +27,3 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-

@@ -6,6 +6,7 @@ function AboutUs() {
         <div className="page">
             <div className="row">
                 <div className="col_1">
+                    {/* slogan */}
                     <div className="about-slogan">
                         <h4>Best Sellings? Contact us~~</h4>
                         <h2>We got you</h2>
@@ -17,15 +18,15 @@ function AboutUs() {
                     </div>
                 </div>
                 <div className="vertical_line"></div>
+                {/* comment from user */}
                 <div className="col">
-                    <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”
-
-                    </p>
+                    <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”</p>
                 </div>
             </div>
 
 
             <div className="row">
+                {/* picture listing */}
                 <div className="image_container">
                         <div className="image_box_huge">
                             <img className="book_1" src="./pics/book-5.jpg" alt="book"></img>

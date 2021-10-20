@@ -21,6 +21,7 @@ const BookDescription = (props) => {
 
     const {bookData} = GetBookById(preSelectedBookId);
 
+    //Get shop from copy they sell
     const copyData = GetCopiesByBookId(preSelectedBookId);
     const copyIdList = copyData && copyData.data && copyData.data.map(copy => copy.copyId);
     const shopsData = GetShopsByCopyIdList(copyIdList && copyIdList.length > 0 && copyIdList);

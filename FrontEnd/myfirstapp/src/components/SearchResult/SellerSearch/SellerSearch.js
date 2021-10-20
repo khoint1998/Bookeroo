@@ -58,6 +58,7 @@ const SellerSearch = (props) => {
         },
     }))(TableRow);
     
+    //Get shop from copy they sell
     const copyData = GetCopiesByBookId(selectedBookId);
     const copyIdList = copyData && copyData.data && copyData.data.map(copy => copy.copyId);
     const shopsData = GetShopsByCopyIdList(copyIdList && copyIdList.length > 0 && copyIdList);
@@ -67,6 +68,7 @@ const SellerSearch = (props) => {
         shop.onSellCopyList.map(reg => {
             copyData && copyData.data && copyData.data.find(copy => {
                 if (copy.copyId === reg.copyId) {
+                    //Construct a custom object to hold relevant items
                     selectedCopy = {
                         regId: reg.registrationId,
                         copyId: reg.copyId,

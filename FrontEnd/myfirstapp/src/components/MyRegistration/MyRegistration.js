@@ -175,7 +175,7 @@ const MyRegistration = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody> 
-                            {onSellCopyList && onSellCopyList.reverse().map(row => (
+                            {onSellCopyList && onSellCopyList.map(row => (
                                 <StyledTableRow key={row.registrationId}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}

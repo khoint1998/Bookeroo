@@ -3,6 +3,7 @@ import "./Profile.css";
 import { GetUserInfo } from "../../axios/UserAPI";
 import { UserContext } from "../../App";
 import { Link } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 const Profile = () => {
 

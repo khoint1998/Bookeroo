@@ -1,0 +1,46 @@
+.libraryItem {
+  width: 32vw;
+  height: 20vh;
+  background-color: rgb(0, 0, 0, 0.15);
+  display: flex;
+  margin: 0 1vw 1vh 0;
+}
+.libraryItem_col {
+  display: flex;
+  align-items: center;
+}
+
+#libraryItem_img {
+  width: 30%;
+}
+#libraryItem_img img {
+  width: 5vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#libraryItem_text {
+  width: 40%;
+  display: inline;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#libraryItem_text div {
+  padding: 6px;
+}
+
+#libraryItem_btn {
+  width: 40%;
+}
+
+.libraryItem_col img {
+  width: 72px;
+}
+
+#libraryItem_name {
+  font-weight: bolder;
+  color: #0066ff;
+  margin-bottom: 5px;
+  font-size: 18px;
+}

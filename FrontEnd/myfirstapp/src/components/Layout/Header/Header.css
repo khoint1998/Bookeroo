@@ -10,6 +10,7 @@
 
 .header--logo-space {
   margin: 1vh 7vw 0 3vw;
+  cursor: pointer;
 }
 
 .header--pages {
@@ -24,6 +25,7 @@
   margin: 0 2.5vw 0 0;
   font-size: 2.5vh;
   font-weight: bolder;
+  outline: none;
   color: rgba(0, 0, 0, 0.6);
 }
 

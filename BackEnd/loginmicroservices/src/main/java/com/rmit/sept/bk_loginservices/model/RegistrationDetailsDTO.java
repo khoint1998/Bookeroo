@@ -17,4 +17,6 @@ public class RegistrationDetailsDTO {
     private String bookId;
 
     private String bookTitle;
+
+    private String coverPage;
 }

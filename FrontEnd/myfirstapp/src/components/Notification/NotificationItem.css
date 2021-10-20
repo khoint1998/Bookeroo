@@ -1,0 +1,20 @@
+.NotificationRow {
+  display: flex;
+  height: 40px;
+  width: 100%;
+}
+
+.NotificationDesc {
+  width: 55vw;
+  font-size: 18px;
+}
+
+.NotificationTime {
+  width: 20vw;
+  font-size: 18px;
+  color: #0066f0;
+}
+
+.NotificationDelete img {
+  width: 25px;
+}

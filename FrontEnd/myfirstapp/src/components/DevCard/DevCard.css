@@ -17,6 +17,15 @@
     width: 50%;
 }
 
+#devCard_img{
+    padding: 0px;
+    margin: 0px;
+}
+
+#devCard_img img{
+    width: 50px;
+}
+
 .devName{
     font-family: "Poppins";
     font-weight: bold;

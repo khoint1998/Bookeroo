@@ -2,6 +2,7 @@ package com.rmit.sept.bk_loginservices.services;
 
 import com.rmit.sept.bk_loginservices.Repositories.ShopRepository;
 import com.rmit.sept.bk_loginservices.Repositories.UserRepository;
+import com.rmit.sept.bk_loginservices.exceptions.ShopException;
 import com.rmit.sept.bk_loginservices.exceptions.UserNotFoundException;
 import com.rmit.sept.bk_loginservices.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return selectedUser;
     }
+
+    @Autowired
+    private NotificationService notificationService;
+
     public User updateUserPurchaseHistory(Long id, PurchaseDetailsDTO purchaseDetailsDto) {
         User selectedUser = userRepository.getById(id);
         if(selectedUser==null) throw new UserNotFoundException("User name not found");
@@ -51,10 +56,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         purchaseDetails.setTitle(purchaseDetailsDto.getTitle());
         purchaseDetails.setPrice(Float.parseFloat(purchaseDetailsDto.getPrice()));
         purchaseDetails.setSellerFullName(purchaseDetailsDto.getSellerFullName());
+        purchaseDetails.setSellerId(Long.parseLong(purchaseDetailsDto.getSellerId()));
         purchaseDetails.setUser(selectedUser);
 
         selectedUser.getPurchaseDetailsList().add(purchaseDetails);
         userRepository.save(selectedUser);
+
+        notificationService.addNotificationForUser(id, "You got a new book :) Check them out in My Library!");
 
         return selectedUser;
     }
@@ -70,13 +78,30 @@ public class CustomUserDetailsService implements UserDetailsService {
         newShop.setShopName(shopName);
         newShop.setUser(selectedUser);
         newShop.setShopOpen(true);
+        newShop.setHasSold(0);
 
         shopRepository.save(newShop);
     }
 
     public void deleteAShop(Long shopId) {
         Shop selectedShop = shopRepository.getByShopId(shopId);
+        if(selectedShop==null) throw new ShopException("Shop not found");
         shopRepository.delete(selectedShop);
+    }
+
+    public User addPurchasedCopyDetailsForUser(Long userId, Long copyId, boolean newBook) {
+        User selectedUser = userRepository.getById(userId);
+        if(selectedUser==null) throw new UserNotFoundException("User not found");
+
+        PurchasedCopyDetails purchasedCopyDetails = new PurchasedCopyDetails();
+        purchasedCopyDetails.setPurchasedCopyId(copyId);
+        purchasedCopyDetails.setUserId(userId);
+        purchasedCopyDetails.setNewBook(newBook);
+        purchasedCopyDetails.setUser(selectedUser);
+
+        selectedUser.getMyLibrary().add(purchasedCopyDetails);
+        userRepository.save(selectedUser);
+        return selectedUser;
     }
 
 }

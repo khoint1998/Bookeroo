@@ -1,9 +1,6 @@
 package com.rmit.sept.bk_loginservices.web;
 
-import com.rmit.sept.bk_loginservices.model.PurchaseDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.RegistrationDetailsDTO;
-import com.rmit.sept.bk_loginservices.model.User;
-import com.rmit.sept.bk_loginservices.model.UserDTO;
+import com.rmit.sept.bk_loginservices.model.*;
 import com.rmit.sept.bk_loginservices.payload.JWTLoginSucessReponse;
 import com.rmit.sept.bk_loginservices.payload.LoginRequest;
 import com.rmit.sept.bk_loginservices.security.JwtTokenProvider;
@@ -28,7 +25,7 @@ import static com.rmit.sept.bk_loginservices.security.SecurityConstant.TOKEN_PRE
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-1499221.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/users")
 public class UserController {
 
@@ -40,6 +37,13 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
+    @GetMapping("/")
+    public ResponseEntity<String> awsHealthCheck() {
+        return new ResponseEntity<String>("Status: OK", HttpStatus.OK);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
@@ -100,6 +104,11 @@ public class UserController {
     @PatchMapping("/update/user/history/{id}")
     public void updateUserPurchaseHistory(@PathVariable(value="id") Long userId, @Valid @RequestBody PurchaseDetailsDTO purchaseDetails){
         userDetailsService.updateUserPurchaseHistory(userId,purchaseDetails);
+    }
+
+    @PatchMapping("/change-password")
+    public void changePassword(@Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
+        userService.checkAndChangePassword(changePasswordDTO);
     }
 
 }

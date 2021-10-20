@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import { UserContext } from "../../App";
+import { UserContext,CartContext } from "../../App";
 import { GetUserInfo } from "../../axios/UserAPI";
 import "./MyShops.css";
 import { withStyles } from '@material-ui/core/styles';
@@ -26,11 +26,23 @@ import { Redirect } from "react-router-dom";
 
 const MyShops = () => {
 
+    const cart = useContext(CartContext);
     const currentUser = useContext(UserContext);
+
     const [openDialog, setOpenDialog] = useState(false);
     const [shopName, setShopName] = useState('');
     const [toRoute,setToRoute] = useState(null);
     const [selectedShopId,setSelectedShopId] = useState(0);
+
+    const jwtToken = localStorage.jwtToken;
+
+    if (!jwtToken) {
+        return <Redirect to='/'/>
+    }
+
+    if (currentUser.userState.user.role !== 'SO') {
+        return <Redirect to='/'/>
+    } 
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -66,11 +78,13 @@ const MyShops = () => {
 
     const removeShop = (shopId) => {
         DeleteShop(shopId);
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 
     const createAShop = (shopName) => {
         CreateShop(user && user.id,shopName);
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 

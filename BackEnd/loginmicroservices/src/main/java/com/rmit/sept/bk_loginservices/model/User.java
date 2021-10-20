@@ -50,19 +50,26 @@ public class User implements UserDetails {
     //User Purchase History (A concrete record, not for querying)
     @JsonManagedReference(value="user-history")
     @Fetch(FetchMode.SELECT)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseDetails> purchaseDetailsList = new ArrayList<PurchaseDetails>();
 
     //Store all copyIds of all pruchased copyies
     @JsonManagedReference(value="user-purchasedCopy")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchasedCopyDetails> myLibrary = new ArrayList<PurchasedCopyDetails>();
 
     //list of owned shop, cannot be expanded for other roles except Shop Owner
     @JsonManagedReference(value="user-shop")
     @Fetch(FetchMode.SELECT)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Shop> shops;
+
+    //Store all notifications of this user
+    @JsonManagedReference(value="user-notification")
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications = new ArrayList<Notification>();
 
     private Date create_At;
     private Date update_At;

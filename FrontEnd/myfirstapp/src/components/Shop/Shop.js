@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import { UserContext } from "../../App";
+import { UserContext, CartContext } from "../../App";
 import { GetUserInfo } from "../../axios/UserAPI";
 import { SearchForABook } from "../../axios/BookAPI";
 import { DeleteRegistration, CreateRegistration } from "../../axios/RegistrationAPI";
@@ -30,9 +30,11 @@ import { Redirect } from "react-router-dom";
 
 const Shop = (props) => {
 
-    const {selectedShopId} = props.location.state;
+    const {selectedShopId} = props.location.state || {};
 
     const currentUser = useContext(UserContext);
+    const cart = useContext(CartContext);
+    
     const [openDialog, setOpenDialog] = useState(false);
     const [openCreateRegDialog, setOpenCreateRegDialog] = useState(false);
     const [selectedTitle, setSelectedTitle] = useState('');
@@ -41,6 +43,15 @@ const Shop = (props) => {
     const [toRoute,setToRoute] = useState(null);
     const [selectedReg, setSelectedReg] = useState(null);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+        return <Redirect to='/'/>
+    }
+
+    if (currentUser.userState.user.role !== 'SO') {
+        return <Redirect to='/'/>
+    } 
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -93,6 +104,7 @@ const Shop = (props) => {
 
     const removeRegistration = (regId) => {
         DeleteRegistration(regId);
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 
@@ -114,10 +126,12 @@ const Shop = (props) => {
             bookTitle: prefetchedBook.title,
             price: values.price,
             bookId: prefetchedBook && prefetchedBook.bookId,
+            coverPage: prefetchedBook && prefetchedBook.coverPage
         };
 
         CreateRegistration(registrationDetails);
         handleCloseCreateRegDialog();
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 
@@ -192,10 +206,10 @@ const Shop = (props) => {
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="shop--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="shop--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
-                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--pending-text">Sold</span>}</StyledTableCell>
+                                    <StyledTableCell>{row.status === "approved" ? <span className="shop--approved-text">Approved</span> : row.status === "pending" ? <span className="shop--pending-text">Awaiting Approval</span> : <span className="shop--sold-text">Sold</span>}</StyledTableCell>
                                     <StyledTableCell>
                                         <Button 
                                             variant="contained"
@@ -293,7 +307,7 @@ const Shop = (props) => {
                 </DialogContentText>
                 <div className="shop--dialog-2-content">
                     <div className="shop--dialog-2-content-pic">
-                        <img className="shop--book-cover" src="/pics/book-2.jpg" alt="book"/>
+                        <img className="shop--book-cover" src={prefetchedBook.coverPage ||"/pics/book-2.jpg"} alt="book"/>
                         <div className="shop--book">
                             <div className="shop--book-details">Book Title:</div>
                             <div className="shop--book-info">{prefetchedBook.title}</div>

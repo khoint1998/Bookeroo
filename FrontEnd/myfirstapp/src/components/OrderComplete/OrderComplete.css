@@ -1,0 +1,22 @@
+.OrderComplete_page {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.OrderComplete_page h1 {
+  font-size: 36;
+  font-weight: bolder;
+  margin-bottom: 25px;
+}
+.OrderComplete_page h2 {
+  font-size: 24;
+  margin-bottom: 25px;
+}
+.OrderComplete_page img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
+.OrderComplete_blue {
+  color: #0066ff;
+}

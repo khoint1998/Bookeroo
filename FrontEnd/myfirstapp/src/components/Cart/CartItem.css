@@ -1,0 +1,37 @@
+.cartitem_row {
+  display: flex;
+  height: 20vh;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.cartitem_image {
+  padding-left: 2vw;
+  width: 15%;
+  display: flex;
+  align-items: center;
+}
+
+.cartitem_name {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  font-size: 1vw;
+}
+
+.cartitem_price {
+  color: #0066ff;
+  width: 15%;
+  display: flex;
+  font-size: 1vw;
+  align-items: center;
+}
+
+.cartitem_btn {
+  width: 7vw;
+  padding: 7vh 2vw 0 0;
+}
+
+.cartitem_image img {
+  width: 6vw;
+}

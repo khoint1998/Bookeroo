@@ -21,30 +21,30 @@ public class ShopRepositoryTest {
     @Autowired
     private ShopRepository shopRepository;
 
-//    @Test
-//    @Rollback
-//    public void should_match_getByShopId() {
-//        User user = new User();
-//        user.setId(1L);
-//        user.setUsername("chen wang");
-//        user.setFullName("Chen Wang");
-//        user.setPassword("123456");
-//        user.setConfirmPassword("123456");
-//        user.setCreate_At(new Date());
-//        user.setEmail("1353664988@qq.com");
-//        user.setRole("Admin");
-//        userRepository.save(user);
-//
-//        Shop shop = new Shop();
-//        Long expected_ShopId = 1L;
-//        shop.setShopId(expected_ShopId);
-//        shop.setShopName("Chen's shop");
-//        shop.setShopOpen(true);
-//        shop.setUser(user);
-//        shopRepository.save(shop);
-//
-//        Shop testcase = shopRepository.getByShopId(expected_ShopId);
-//        assertThat(testcase.getShopId()).isEqualTo(expected_ShopId);
-//    }
+    @Test
+    @Rollback
+    public void should_match_getByShopId() {
+        shopRepository.deleteAll();
+        userRepository.deleteAll();
+        User user = new User();
+        user.setUsername("chen wang");
+        user.setFullName("Chen Wang");
+        user.setPassword("123456");
+        user.setConfirmPassword("123456");
+        user.setCreate_At(new Date());
+        user.setEmail("1353664988@qq.com");
+        user.setRole("Admin");
+        userRepository.save(user);
+
+        Shop shop = new Shop();
+        shop.setShopName("Chen's shop");
+        shop.setShopOpen(true);
+        shop.setUser(user);
+        shopRepository.save(shop);
+        Long expected_ShopId = shop.getShopId();
+
+        Shop testcase = shopRepository.getByShopId(expected_ShopId);
+        assertThat(testcase.getShopId()).isEqualTo(expected_ShopId);
+    }
 
 }

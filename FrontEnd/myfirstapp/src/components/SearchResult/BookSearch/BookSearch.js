@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState,useContext} from 'react';
 import SearchBar from "material-ui-search-bar";
 import { Redirect } from "react-router-dom";
-import Header from "../../Layout/Header/Header";
 import './BookSearch.css';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -17,16 +16,30 @@ import Button from '@material-ui/core/Button';
 import StoreIcon from '@material-ui/icons/Store';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { SearchBookWithSelectedOptions } from "../../../axios/BookAPI";
+import { CartContext } from "../../../App";
 
 const BookSearch = (props) => {
 
-    const {searchedBooks, searchedTitle} = props.location.state;
+    const {searchedBooks, searchedTitle} = props.location.state || {};
+    const cart = useContext(CartContext);
 
     const [searchResults, setSearchResults] = useState(searchedTitle);
     const [toRoute,setToRoute] = useState(null);
-    const [selectedBook,setSelectededBook] = useState(null);
-    const [resultList, setResultList] = useState(searchedBooks);
-    const [searchTitle, setSearchTitle] = useState(searchedTitle);
+    const [selectedBookId,setSelectededBookId] = useState(null);
+    const [resultList,setResultList] = useState(searchedBooks);
+    const [searchTitle,setSearchTitle] = useState(searchedTitle);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
+
+    let uniqueBooksSearched = [];
+
+     uniqueBooksSearched = searchedBooks && searchedBooks !== 'Books not found' && Array.from(new Set(searchedBooks.map(b => b.bookId)))
+    .map(id => {
+    return searchedBooks.find(a => a.bookId === id)
+    })
 
     //HOC
     const StyledTableCell = withStyles(() => ({
@@ -63,6 +76,7 @@ const BookSearch = (props) => {
             await SearchBookWithSelectedOptions(searchResults,options).then(data => setResultList(data));
             if (resultList !== 'Books not found') {
                 setToRoute("/book-search");
+                localStorage.setItem("cart", JSON.stringify(cart.cartState));
                 window.location.reload();
             } else {
                 //throw error message for the user
@@ -71,11 +85,23 @@ const BookSearch = (props) => {
     }
 
     const seeSellers = (bookId) => {
-
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {
+            setToRoute('/login')
+        } else {
+            setSelectededBookId(bookId);
+            setToRoute("/seller-search");
+        }
     }
 
-    const openBookDesc = () => {
-
+    const seeBookDesc = (bookId) => {
+        const jwtToken = localStorage.jwtToken;
+        if (!jwtToken) {
+            setToRoute('/login')
+        } else {
+            setSelectededBookId(bookId);
+            setToRoute('/book-desc');
+        }
     }
 
     if (toRoute === "/book-search") {
@@ -94,17 +120,39 @@ const BookSearch = (props) => {
         );
     }
 
+    if (toRoute === "/seller-search") {
+        return (
+          <div>
+            <Redirect 
+                to={{
+                    pathname: toRoute,
+                    state: {
+                        selectedBookId: selectedBookId,
+                        searchedTitle: searchResults
+                    }
+                }} 
+            />
+          </div>
+        );
+    }
+
     if (toRoute === '/book-desc') {
         return (
           <div>
             <Redirect 
                 to={{
                     pathname: toRoute,
-                    state: { selectedBook: selectedBook }
+                    state: { 
+                        preSelectedBookId: selectedBookId
+                    }
                 }} 
             />
           </div>
         );
+    }
+
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
     }
 
     return (
@@ -120,12 +168,11 @@ const BookSearch = (props) => {
                         onChange={(value) => setSearchResults(value)}
                         placeholder="Search for a Book Title, Author or ISBN."
                         onCancelSearch={() => setSearchResults("")}
-                        // disabled
                         onRequestSearch={() => SearchFor(searchResults)}
                     />
                 </div>
                 <div className="bookSearch--search-section-result">
-                    Found {searchedBooks && searchedBooks !== 'Books not found' ? searchedBooks.length : '0'} result(s) with <span className="bookSearch--search-section-result-text">{searchTitle}</span>
+                    Found {uniqueBooksSearched && uniqueBooksSearched !== 'Books not found' ? uniqueBooksSearched.length : '0'} result(s) with <span className="bookSearch--search-section-result-text">{searchTitle}</span>
                 </div>
             </div>
             <div className="bookSearch--search-option">
@@ -153,22 +200,22 @@ const BookSearch = (props) => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>ID</StyledTableCell>
-                                <StyledTableCell>Cover</StyledTableCell>
-                                <StyledTableCell>Title</StyledTableCell>
-                                <StyledTableCell>ISBN</StyledTableCell>
+                                <StyledTableCell width="5%">ID</StyledTableCell>
+                                <StyledTableCell width="10%">Cover</StyledTableCell>
+                                <StyledTableCell width="30%">Title</StyledTableCell>
+                                <StyledTableCell width="10%">ISBN</StyledTableCell>
                                 <StyledTableCell>Author</StyledTableCell>
                                 <StyledTableCell>Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {/* Books not found is for the first render, searchedBooks is for self rerender */}
-                            {searchedBooks &&  searchedBooks !== 'Books not found' && searchedBooks.map(row => (
+                            {uniqueBooksSearched &&  uniqueBooksSearched !== 'Books not found' && uniqueBooksSearched.map(row => (
                                 <StyledTableRow key={row.bookId}>
                                     <StyledTableCell component="th" scope="row">
                                         {row.bookId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="bookSearch--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="bookSearch--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.title}</StyledTableCell>
                                     <StyledTableCell>{row.isbn}</StyledTableCell>
                                     <StyledTableCell>{row.author}</StyledTableCell>
@@ -185,8 +232,7 @@ const BookSearch = (props) => {
                                                 outline: 'none'
                                             }}
                                             onClick={() => {
-                                                setSelectededBook(row.bookdId);
-                                                openBookDesc();
+                                                seeBookDesc(row.bookId);
                                             }}
                                         >Book Description</Button>
                                         <Button 

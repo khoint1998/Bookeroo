@@ -2,6 +2,8 @@ package com.rmit.sept.bk_bookservices;
 
 import com.rmit.sept.bk_bookservices.Repositories.BookRepository;
 import com.rmit.sept.bk_bookservices.model.Book;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,19 +18,26 @@ public class bookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
 
+    @BeforeEach
+    void clean_database() {
+        bookRepository.deleteAll();
+    }
 
+    @AfterEach
+    void clean_database_after() {
+        bookRepository.deleteAll();
+    }
     @Test
     public void getByBookId() {
         Book book = new Book();
         book.setTitle("title");
-        book.setBookId(1L);
         book.setIsbn("isbn");
         book.setCategory("category");
         book.setDescription("description");
         book.setAuthor("author");
         book.setPublisher("publisher");
         bookRepository.save(book);
-        Book testcase = bookRepository.getByBookId(1L);
+        Book testcase = bookRepository.getByBookId(book.getBookId());
         assertThat(testcase.getTitle()).isEqualTo("title");
     }
     @Test

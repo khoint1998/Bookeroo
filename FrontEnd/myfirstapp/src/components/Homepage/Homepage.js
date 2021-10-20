@@ -8,9 +8,9 @@ function Homepage() {
         <div className="homepage--page">
             <div className="homepage--row">
                 <div className="homepage--col_1_1">
-                    <div className="homepage--header_s">Shop your favoraite books, all in one place</div>
+                    <div className="homepage--header_s">Shop your favorite books, all in one place</div>
                     <div className="homepage--header_l">Your best Bookstore</div>
-                    <div className="homepage--header_l">in the town</div>
+                    <div className="homepage--header_l">in the <span className="homepage--blue">town</span></div>
                     <div id="homepage--green_line_container">
                             <img src="/pics/green_line.png" alt="book"></img>
                     </div>

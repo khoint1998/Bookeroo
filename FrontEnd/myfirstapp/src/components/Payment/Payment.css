@@ -1,0 +1,26 @@
+.payment--options {
+  font-size: 1.15vw;
+  margin-right: 2vw;
+}
+
+.payment--img {
+  margin: 0 0.5vw 0 0;
+  width: 30px;
+}
+
+.payment--radio-grp {
+  margin: 2vh 0 2vh 0;
+}
+
+.payment--tnc {
+  font-size: 0.8vw;
+}
+
+.payment--btn {
+  text-align: center;
+}
+
+.payment--col {
+  margin: -25px 0 0 0;
+  float: left;
+}

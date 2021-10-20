@@ -1,6 +1,7 @@
 package com.rmit.sept.bk_bookservices.web;
 
 import com.rmit.sept.bk_bookservices.model.Book;
+import com.rmit.sept.bk_bookservices.model.CopyDTO;
 import com.rmit.sept.bk_bookservices.services.BookService;
 import com.rmit.sept.bk_bookservices.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-1499221.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/books")
 public class BookController {
 
@@ -23,6 +24,11 @@ public class BookController {
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
+
+    @GetMapping("/")
+    public ResponseEntity<String> awsHealthCheck() {
+        return new ResponseEntity<String>("Status: OK", HttpStatus.OK);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createBook(@Valid @RequestBody Book book, BindingResult result) {
@@ -38,6 +44,11 @@ public class BookController {
     @GetMapping("/get/book/id/{id}")
     public Book getBookById(@PathVariable(value="id") Long id) {
         return bookService.getBookById(id);
+    }
+
+    @GetMapping("/get/all")
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
     @GetMapping("/get/book/title-isbn")
@@ -68,6 +79,11 @@ public class BookController {
     @GetMapping("get/book/title-author-isbn")
     public List<Book> getBooksByTitleAuthorISBN(@RequestParam String searchResult) {
         return bookService.getBooksByTitleAuthorISBN(searchResult);
+    }
+
+    @PutMapping("get/book/copyIdList")
+    public List<Book> getBookByCopyIdList(@RequestBody List<Long> copyIdList) {
+        return bookService.getBookByCopyIdList(copyIdList);
     }
 
 }

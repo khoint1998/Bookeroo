@@ -1,0 +1,30 @@
+.MyLibraryPage {
+  padding: 5vh 0 0 4vw;
+}
+
+.MyLibraryPage hr {
+  width: 58vw;
+  float: left;
+}
+
+.Library_heading h2 {
+  color: #0066f0;
+  font-weight: bolder;
+}
+.MyLibrary_itemList {
+  max-height: 75vh;
+  overflow: auto;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+@media only screen and (max-width: 1366px) {
+  .MyLibrary_itemList {
+    max-height: 65vh;
+    overflow: auto;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}

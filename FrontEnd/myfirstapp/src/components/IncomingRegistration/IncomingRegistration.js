@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,14 +21,23 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DoneIcon from '@material-ui/icons/Done';
-
+import { CartContext } from "../../App";
+import { Redirect } from "react-router-dom";
 
 const IncomingRegistrations = () => {
+
+    const cart = useContext(CartContext);
 
     const [openDialog, setOpenDialog] = useState(false);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
     const [selectedRegId, setSelectedRegId] = useState(null);
     const [selectedReg, setSelectedReg] = useState(null);
+    const [toRoute,setToRoute] = useState(null);
+
+    const jwtToken = localStorage.jwtToken;
+    if (!jwtToken) {
+       return <Redirect to='/'/>
+    }
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -72,6 +81,7 @@ const IncomingRegistrations = () => {
 
     const removeRegistration = (regId) => {
         DeleteRegistration(regId);
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
     }
 
@@ -87,7 +97,12 @@ const IncomingRegistrations = () => {
         await CreateCopy(copyDto).then(data => 
             UpdateCopyIdAndStatusForRegistration(selectedRegId,data.data.copyId)
         );
+        localStorage.setItem("cart", JSON.stringify(cart.cartState));
         window.location.reload();
+    }
+
+    if (toRoute) {
+        return <Redirect to={toRoute}/>
     }
 
     return (
@@ -120,7 +135,9 @@ const IncomingRegistrations = () => {
                             fontWeight: 'bolder',
                             outline: 'none'
                         }}
-                        
+                        onClick={() => {
+                            setToRoute('/admin-home')
+                        }}
                     >Admin Page</Button>
                 </div>
             </div>
@@ -143,7 +160,7 @@ const IncomingRegistrations = () => {
                                     <StyledTableCell component="th" scope="row">
                                         {row.registrationId}
                                     </StyledTableCell>
-                                    <StyledTableCell><img className="inreg--cover" src="/pics/book-2.jpg" alt="book"/></StyledTableCell>
+                                    <StyledTableCell><img className="inreg--cover" src={row.coverPage || "/pics/book-2.jpg"} alt="book"/></StyledTableCell>
                                     <StyledTableCell>{row.bookTitle}</StyledTableCell>
                                     <StyledTableCell>${row.price}</StyledTableCell>
                                     <StyledTableCell>{row.status === "approved" ? <span className="inreg--approved-text">Approved</span> : row.status === "pending" ? <span className="inreg--pending-text">Awaiting Approval</span> : <span className="inreg--sold-text">Sold</span>}</StyledTableCell>

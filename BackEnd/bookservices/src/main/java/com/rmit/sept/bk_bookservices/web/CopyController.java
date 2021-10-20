@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://front-1499221.ap-southeast-1.elb.amazonaws.com"})
 @RequestMapping("/bookeroo/copys")
 public class CopyController {
 
@@ -40,14 +40,19 @@ public class CopyController {
         return copyService.getCopyById(id);
     }
 
-    @GetMapping("get/copy/copyIdList")
-    public List<Copy> getCopiesById(@RequestBody List<Long> copyIdList) {
+    @PatchMapping("get/copy/copyIdList")
+    public List<Copy> getCopiesByCopyIdList(@RequestBody List<Long> copyIdList) {
         return copyService.getCopiesByCopyIdList(copyIdList);
     }
 
     @GetMapping("get/copy/bookId/{id}")
     public List<Copy> getCopiesByBookId(@PathVariable(value="id") Long bookId) {
         return copyService.getCopiesByBookId(bookId);
+    }
+
+    @PatchMapping("/changeOwnerId/{copyId}")
+    public void changeOwnerId(@PathVariable Long copyId, @RequestParam Long userId){
+        copyService.changeOwnerId(copyId,userId);
     }
 
 }

@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from "material-ui-search-bar";
 import './Header.css';
-import { UserContext } from "../../../App";
+import { UserContext, CartContext } from "../../../App";
 import { GetUserInfo } from "../../../axios/UserAPI";
 import { SearchBookAsResult } from "../../../axios/BookAPI";
 import Avatar from '@material-ui/core/Avatar';
@@ -18,8 +18,14 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
 import { Redirect } from "react-router-dom";
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import Button from '@material-ui/core/Button';
 
 const Header = () => {
+
+    const cart = useContext(CartContext);
 
     const [searchResults, setSearchResults] = useState("");
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,6 +48,7 @@ const Header = () => {
             await SearchBookAsResult(searchResults).then(data => setSearchedBooks(data));
             if (searchedBooks !== 'Books not found') {
                 setToRoute("/book-search");
+                localStorage.setItem("cart", JSON.stringify(cart.cartState));
                 window.location.reload();
             } else {
                 //throw error message for the user
@@ -49,7 +56,7 @@ const Header = () => {
         }
     }
 
-    if (toRoute) {
+    if (toRoute === '/book-search') {
         return (
           <div>
             <Header/>
@@ -66,9 +73,18 @@ const Header = () => {
         );
     }
 
+    if (toRoute) {
+        return (
+            <div>
+              <Header/>
+              <Redirect to={toRoute}/>
+            </div>
+          );
+    }
+
     return (
         <div className="header--header">
-            <div className="header--logo-space"><img className="header--logo" src="/pics/logo.png" alt="logo"/></div>
+            <div className="header--logo-space" onClick={() => {setToRoute('/')}}><img className="header--logo" src="/pics/logo.png" alt="logo"/></div>
             <div className="header--pages">
                 <Link className="header--link" to="/">Home</Link>
                 <Link className="header--link" to="/about">Our Work</Link>
@@ -80,14 +96,14 @@ const Header = () => {
                     value={searchResults}
                     style={{ 
                         height: '5vh',
+                        width: '20vw',
                     }} 
                     onChange={(value) => setSearchResults(value)}
-                    placeholder="Book title, Author, etc."
+                    placeholder="Search for a Book Title, Author or ISBN"
                     onCancelSearch={() => setSearchResults("")}
                     onRequestSearch={() => searchFor(searchResults)}
                 />
-            </div>
-            
+            </div>        
             {
                 !user ? 
                 <div className="header--btns">
@@ -99,8 +115,18 @@ const Header = () => {
                     </Link>
                 </div> : 
                 <div className="header--hiMsg-box">
-                    <span className="header--hiMsg">Hello {user.fullName}</span>
-                    <Avatar className="header--avt" alt="avatar" aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu}>{user.fullName && user.fullName.charAt(0).toUpperCase()}</Avatar>
+                    <span className="header--hiMsg">Hello {user.fullName.length > 13 ? user.fullName.substring(0,12)+'...' : user.fullName}</span>
+                    <Avatar 
+                        className="header--avt" 
+                        alt="avatar"
+                        style={{
+                            width: '2vw',
+                            fontSize: '1vw',
+                            height: '4vh'
+                        }}
+                        onClick={openMenu}>
+                            {user.fullName && user.fullName.charAt(0).toUpperCase()}
+                    </Avatar>
                     <Menu
                         id="customized-menu"
                         anchorEl={anchorEl}
@@ -121,6 +147,14 @@ const Header = () => {
                             </ListItemIcon>
                             <ListItemText primary="My Profile" onClick={() => setToRoute("/profile")}/>
                         </MenuItem >
+                        <MenuItem>
+                            <ListItemIcon style={{
+                                minWidth: '25px'
+                            }}>
+                                <MenuBookIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="My Library" onClick={() => setToRoute("/library")}/>
+                        </MenuItem >
                         { user.role === "PU" || user.role === "P" ?
                             <MenuItem>
                                 <ListItemIcon style={{
@@ -138,7 +172,7 @@ const Header = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="My Shop" onClick={() => setToRoute("/my-shops")}/>
                             </MenuItem> : 
-                            <>
+                            <div>
                                 <MenuItem>
                                     <ListItemIcon style={{
                                         minWidth: '25px'
@@ -151,11 +185,19 @@ const Header = () => {
                                     <ListItemIcon style={{
                                         minWidth: '25px'
                                     }}>
+                                        <SupervisorAccountIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Admin Workspace" onClick={() => setToRoute("/admin-home")}/>
+                                </MenuItem>
+                                <MenuItem>
+                                    <ListItemIcon style={{
+                                        minWidth: '25px'
+                                    }}>
                                         <ListIcon fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="My Selling Registration" onClick={() => setToRoute("/my-registration")}/>
                                 </MenuItem>
-                            </>
+                            </div>
                         }
                         <MenuItem>
                             <ListItemIcon style={{
@@ -163,7 +205,15 @@ const Header = () => {
                             }}>
                                 <NewReleasesIcon fontSize="small" />
                             </ListItemIcon>
-                            <ListItemText primary="Notifications"/>
+                            <ListItemText primary="Notifications" onClick={() => setToRoute("/notification")}/>
+                        </MenuItem>
+                        <MenuItem>
+                            <ListItemIcon style={{
+                                minWidth: '25px'
+                            }}>
+                                <ShoppingCartIcon fontSize="small"/>
+                            </ListItemIcon>
+                            <ListItemText primary="My Cart" onClick={() => setToRoute("/cart")}/>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon style={{
@@ -173,14 +223,29 @@ const Header = () => {
                             </ListItemIcon>
                             <ListItemText primary="Logout" onClick={() => {
                                 localStorage.removeItem("jwtToken");
-                                currentUser.userDispatch({ type: 'logout' });
+                                localStorage.removeItem("cart");
                                 setToRoute("/");
+                                currentUser.userDispatch({ type: 'logout' });
+                                cart.cartDispatch({ type: 'clear cart' });
+                                setTimeout(() => window.location.reload(), 200);
                             }}/>
                         </MenuItem >
                     </Menu>
+                    <Button 
+                        variant="text"
+                        startIcon={<ShoppingCartIcon/>}
+                        style={{ 
+                            fontWeight: 'bolder',
+                            fontSize: '1vw',
+                            borderRadius:'2vh',
+                            marginLeft: '2.5vw',
+                            color: '#0066ff',
+                            outline: 'none'
+                        }}
+                        onClick={() => setToRoute('/cart')}
+                    >My Cart</Button>
                 </div>
             }
-            
         </div>
     )
 }

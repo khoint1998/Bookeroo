@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Formik, Field, Form } from 'formik';
 import Button from '@material-ui/core/Button';
 import './Login.css';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { loginAsUser } from "../../../axios/UserAPI";
 
@@ -59,7 +59,7 @@ const Login = () => {
 
                     <div className="login--align-label-and-field">
                       <label className="login--label">Password:</label>
-                      <Field className="login--fields" id="password" name="password" />
+                      <Field type='password' className="login--fields" id="password" name="password" />
                     </div>
                   </div>
         
@@ -82,6 +82,7 @@ const Login = () => {
               </Form>
             </Formik>
           </div>
+          <div className="login--change-password">Forget your password? <Link to="/forgot-password">Click here</Link></div>
           <div className="login--end-quote">Shop your favourite books, all in one place</div>
         </div>
       </div>
